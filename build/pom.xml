@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.fastpix</groupId>
+  <artifactId>sdk</artifactId>
+  <version>0.1.0</version>
+  <name>My Company Java SDK</name>
+  <description>SDK enabling Java developers to easily integrate with the My Company API.</description>
+  <url>https://github.com/owner/repo</url>
+  <organization>
+    <name>My Company</name>
+    <url>www.mycompany.com</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>https://mit-license.org/</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>My Company</name>
+      <email>info@mycompany.com</email>
+      <organization>My Company</organization>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:ssh://git@github.com/owner/repo.git</connection>
+    <url>github.com/owner/repo</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.18.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>0.2.6</version>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.18.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.18.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jdk8</artifactId>
+      <version>2.18.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.18.0</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>

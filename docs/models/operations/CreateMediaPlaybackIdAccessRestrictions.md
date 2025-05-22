@@ -1,0 +1,9 @@
+# CreateMediaPlaybackIdAccessRestrictions
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `domains`                                                                                                | [Optional\<CreateMediaPlaybackIdDomains>](../../models/operations/CreateMediaPlaybackIdDomains.md)       | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+| `userAgents`                                                                                             | [Optional\<CreateMediaPlaybackIdUserAgents>](../../models/operations/CreateMediaPlaybackIdUserAgents.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

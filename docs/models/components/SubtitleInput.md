@@ -1,0 +1,13 @@
+# SubtitleInput
+
+Generates subtitle files for audio/video files.
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `type`                                                                            | *String*                                                                          | :heavy_check_mark:                                                                | Defines the type of input.<br/>                                                   | subtitle                                                                          |
+| `url`                                                                             | *String*                                                                          | :heavy_check_mark:                                                                | The direct URL of the subtitle file.                                              | http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/thrust.vtt  |
+| `languageName`                                                                    | *String*                                                                          | :heavy_check_mark:                                                                | Name of the language in which the subtitles will be generated.                    | english                                                                           |
+| `languageCode`                                                                    | [SubtitleInputLanguageCode](../../models/components/SubtitleInputLanguageCode.md) | :heavy_check_mark:                                                                | The BCP 47 language code representing the language of the generated track.<br/>   | en-US                                                                             |
