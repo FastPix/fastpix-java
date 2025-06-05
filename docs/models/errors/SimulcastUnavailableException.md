@@ -1,0 +1,9 @@
+# SimulcastUnavailableException
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `success`                                                                                | *Optional\<Boolean>*                                                                     | :heavy_minus_sign:                                                                       | It demonstrates whether the request is successful or not.                                | false                                                                                    |
+| `error`                                                                                  | [Optional\<SimulcastUnavailableError>](../../models/errors/SimulcastUnavailableError.md) | :heavy_minus_sign:                                                                       | Returns the problem that has occured.<br/>                                               |                                                                                          |
