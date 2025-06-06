@@ -96,12 +96,12 @@ publishing {
             from components.java
 
             pom {
-                name = 'My Company Java SDK'
+                name = 'FastPix Java SDK'
                 description = 'SDK enabling Java developers to easily integrate with the My Company API.'
-                url = 'https://github.com/owner/repo'
+                url = 'https://github.com/FastPix/fastpix-java'
                 scm {
-                    url = 'github.com/owner/repo'
-                    connection = 'scm:git:ssh://git@github.com/owner/repo.git'
+                    url = 'https://github.com/FastPix/fastpix-java'
+                    connection = 'https://github.com/FastPix/fastpix-java.git'
                 }
                 licenses {
                     license {
@@ -111,14 +111,14 @@ publishing {
                 }
                 developers {
                     developer {
-                        name = 'My Company'
-                        organization = 'My Company'
-                        email = 'info@mycompany.com'
+                        name = 'FastPix'
+                        organization = 'FastPix'
+                        email = 'devs@fastpix.io'
                     }
                 }
                 organization {
-                    name = 'My Company'
-                    url = 'www.mycompany.com'
+                    name = 'FastPix'
+                    url = 'https://fastpix.io'
                 }
             }
         }
