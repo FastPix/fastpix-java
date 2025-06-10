@@ -34,6 +34,7 @@ To get started with the **FastPix Java SDK**, ensure you have the following:
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+
 <!-- $toc-max-depth=2 -->
 * [FastPixSDK](#openapi)
   * [SDK Installation](#sdk-installation)
