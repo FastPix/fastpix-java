@@ -72,23 +72,8 @@ javadocJar {
 
 
 publishing {
-    repositories {
-        maven {
-            name = "OSSRH"
-            url = version.endsWith('SNAPSHOT') 
-                ? "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                : "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            credentials {
-                username = project.findProperty("mavenCentralUsername")
-                password = project.findProperty("mavenCentralPassword")
-            }
-        }
-    }
-
     publications {
         maven(MavenPublication) {
-            // note that properties can't yet be used below!
-            // https://github.com/gradle/gradle/issues/18619
             groupId = "io.fastpix"
             artifactId = "sdk"
             version = "0.1.0"
@@ -127,10 +112,11 @@ publishing {
 
 if (!project.hasProperty('skip.signing')) {
     signing {
-        def signingKey = findProperty("signingKey")
-        def signingPassphrase = findProperty("signingPassphrase")
-        useInMemoryPgpKeys(signingKey, signingPassphrase)
-        sign publishing.publications.maven
+        useInMemoryPgpKeys(
+            findProperty("signingKey"),
+            findProperty("signingPassphrase")
+        )
+        sign publishing.publications
     }
 }
 
