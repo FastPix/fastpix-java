@@ -33,3 +33,8 @@ Thumbs.db
 
 # Misc
 *.class
+
+# Maven settings files
+settings.xml
+**/settings.xml
+.m2/settings.xml
