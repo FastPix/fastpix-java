@@ -70,14 +70,12 @@ javadocJar {
     archiveBaseName = "${artifactId}"
 }
 
-
 publishing {
     publications {
         maven(MavenPublication) {
             groupId = "io.fastpix"
             artifactId = "sdk"
             version = "0.1.0"
-
             from components.java
 
             pom {
@@ -119,8 +117,6 @@ if (!project.hasProperty('skip.signing')) {
         sign publishing.publications
     }
 }
-
-
 
 dependencies {
     api 'com.fasterxml.jackson.core:jackson-annotations:2.18.2'
