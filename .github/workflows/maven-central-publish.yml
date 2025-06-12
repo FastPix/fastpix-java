@@ -26,11 +26,24 @@ jobs:
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
-      - name: Build artifacts
+      - name: Build and publish to local Maven repo
         env:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassphrase: ${{ secrets.GPG_PASSPHRASE }}
         run: ./gradlew clean build publishToMavenLocal
+
+      - name: List build outputs
+        run: |
+          find build -type f
+          find ~/.m2/repository/io/fastpix/sdk/0.1.0 -type f || true
+
+      - name: Prepare artifacts for upload
+        run: |
+          mkdir -p upload
+          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0.jar upload/
+          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0.pom upload/
+          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0-sources.jar upload/ || true
+          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0-javadoc.jar upload/ || true
 
       - name: Upload to Central Publishing Portal
         env:
@@ -38,6 +51,8 @@ jobs:
           CPP_USER_TOKEN_PASSWORD: ${{ secrets.CPP_USER_TOKEN_PASSWORD }}
         run: |
           curl -u "$CPP_USER_TOKEN_USERNAME:$CPP_USER_TOKEN_PASSWORD" \
-            -F "file=@build/publications/maven/sdk-0.1.0.jar" \
-            -F "file=@build/publications/maven/sdk-0.1.0.pom" \
+            -F "file=@upload/sdk-0.1.0.jar" \
+            -F "file=@upload/sdk-0.1.0.pom" \
+            -F "file=@upload/sdk-0.1.0-sources.jar" \
+            -F "file=@upload/sdk-0.1.0-javadoc.jar" \
             https://central.sonatype.com/api/v1/publish
