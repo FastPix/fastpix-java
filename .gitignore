@@ -2,25 +2,63 @@
 /build/
 /out/
 /target/
+*.class
 
 # Gradle files
 .gradle/
 /**/build/
+gradle-app.setting
+.gradletasknamecache
+
+# Gradle local properties (keep gradle.properties, ignore local overrides)
+gradle.properties.local
+local.properties
 
 # IDE files
+## IntelliJ IDEA
 .idea/
 *.iml
 *.ipr
 *.iws
+out/
+
+## Eclipse
+.classpath
+.project
+.settings/
+bin/
+.metadata
+
+## VS Code
 .vscode/
+*.code-workspace
+
+## NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+## Vim
 *.swp
+*.swo
+*~
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+Desktop.ini
 
 # Logs
 *.log
+*.log.*
 
 # Generated docs
 /build/docs/
@@ -28,13 +66,48 @@ Thumbs.db
 
 # JARs and other artifacts
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.war
 *.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
 
-# Misc
-*.class
+# Keep Gradle wrapper files (must come after patterns that might ignore them)
+!gradle/wrapper/gradle-wrapper.properties
 
-# Maven settings files
+# Test output
+/test-output/
+/test-results/
+/.test/
+*.test
+
+# Coverage reports
+.nyc_output/
+coverage/
+*.lcov
+*.coverage
+*.coverage.*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+*~
+
+# Maven settings files (local overrides)
 settings.xml
 **/settings.xml
 .m2/settings.xml
+
+# POM files in build directory
+build/pom.xml
+**/build/pom.xml
+
+# Reports
+build/reports/
+build/test-results/

@@ -1,0 +1,11 @@
+# ListErrorsData
+
+Displays the result of the request.
+
+
+## Fields
+
+| Field                                                                                                                                 | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `errors`                                                                                                                              | List\<[ErrorDetails](../../models/components/ErrorDetails.md)>                                                                        | :heavy_minus_sign:                                                                                                                    | The endpoint retrieves a comprehensive list of errors that have occurred by providing detailed information about each error instance. |
+| `topErrors`                                                                                                                           | List\<[TopErrorDetails](../../models/components/TopErrorDetails.md)>                                                                  | :heavy_minus_sign:                                                                                                                    | Retrieves a list of errors that have occurred most frequently in the system, ranked by their count of occurrences.                    |

@@ -9,13 +9,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.fastpix</groupId>
   <artifactId>sdk</artifactId>
-  <version>0.1.0</version>
-  <name>My Company Java SDK</name>
-  <description>SDK enabling Java developers to easily integrate with the My Company API.</description>
-  <url>https://github.com/owner/repo</url>
+  <version>1.0.0</version>
+  <name>FastPix Java SDK</name>
+  <description>SDK enabling Java developers to easily integrate with the FastPix API.</description>
+  <url>https://github.com/FastPix/fastpix-java</url>
   <organization>
-    <name>My Company</name>
-    <url>www.mycompany.com</url>
+    <name>FastPix</name>
+    <url>https://fastpix.io</url>
   </organization>
   <licenses>
     <license>
@@ -25,15 +25,19 @@
   </licenses>
   <developers>
     <developer>
-      <name>My Company</name>
-      <email>info@mycompany.com</email>
-      <organization>My Company</organization>
+      <name>FastPix</name>
+      <email>devs@fastpix.io</email>
+      <organization>FastPix</organization>
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:ssh://git@github.com/owner/repo.git</connection>
-    <url>github.com/owner/repo</url>
+    <connection>https://github.com/FastPix/fastpix-java.git</connection>
+    <url>https://github.com/FastPix/fastpix-java</url>
   </scm>
+  <properties>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -52,6 +56,18 @@
           <artifactId>jackson-databind</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.9</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.reactivestreams</groupId>
+      <artifactId>reactive-streams</artifactId>
+      <version>1.0.4</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -75,6 +91,12 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>2.18.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <version>3.0.0</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>

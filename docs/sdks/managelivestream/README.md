@@ -1,101 +1,45 @@
 # ManageLiveStream
-(*manageLiveStream()*)
 
 ## Overview
 
 ### Available Operations
 
-* [getAllStreams](#getallstreams) - Get all live streams
-* [getLiveStreamById](#getlivestreambyid) - Get stream by ID
-* [deleteLiveStream](#deletelivestream) - Delete a stream
-* [updateLiveStream](#updatelivestream) - Update a stream
+* [get](#get) - Get stream by ID
+* [update](#update) - Update a stream
 
-## getAllStreams
+## get
 
-Retrieves a list of all live streams associated with the user’s account (workspace). It provides an overview of both current and past live streams, including details like streamId, title, status, and creation time. 
+This endpoint retrieves details about a specific live stream by its unique `streamId`. It includes data such as the stream’s `status` (idle, preparing, active, disabled), `metadata` (title, description), and more. 
+#### Example
 
-### Example Usage
+  Suppose a news agency is broadcasting a live event and wants to track the configurations set for the live stream while also checking the stream's status.
 
-```java
-package hello.world;
 
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.GetAllStreamsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws UnauthorizedException, InvalidPermissionException, ValidationErrorResponse, Exception {
-
-        FastPixSDK sdk = FastPixSDK.builder()
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        GetAllStreamsResponse res = sdk.manageLiveStream().getAllStreams()
-                .call();
-
-        if (res.getStreamsResponse().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                           | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         | Example                                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `limit`                                                                                                                             | *Optional\<String>*                                                                                                                 | :heavy_minus_sign:                                                                                                                  | Limit specifies the maximum number of items to display per page.                                                                    | 20                                                                                                                                  |
-| `offset`                                                                                                                            | *Optional\<String>*                                                                                                                 | :heavy_minus_sign:                                                                                                                  | Offset determines the starting point for data retrieval within a paginated list.                                                    | 1                                                                                                                                   |
-| `orderBy`                                                                                                                           | [Optional\<GetAllStreamsOrderBy>](../../models/operations/GetAllStreamsOrderBy.md)                                                  | :heavy_minus_sign:                                                                                                                  | The list of value can be order in two ways DESC (Descending) or ASC (Ascending). In case not specified, by default it will be DESC. | desc                                                                                                                                |
-
-### Response
-
-**[GetAllStreamsResponse](../../models/operations/GetAllStreamsResponse.md)**
-
-### Errors
-
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UnauthorizedException      | 401                                      | application/json                         |
-| models/errors/InvalidPermissionException | 403                                      | application/json                         |
-| models/errors/ValidationErrorResponse    | 422                                      | application/json                         |
-| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
-
-## getLiveStreamById
-
-This endpoint retrieves detailed information about a specific live stream by its unique streamId. It includes data such as the stream’s status (idle, preparing, active, disabled), metadata (title, description), and more. 
-
-  **Practical example:** Suppose a news agency is broadcasting a live event and wants to track the configurations set for the live stream while also checking the stream's status.
+Related guide: <a href="https://docs.fastpix.io/docs/manage-streams">Manage streams</a>
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-live-stream-by-id" method="get" path="/live/streams/{streamId}" -->
 ```java
 package hello.world;
 
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.GetLiveStreamByIdResponse;
 import java.lang.Exception;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.GetLiveStreamByIdResponse;
 
 public class Application {
 
-    public static void main(String[] args) throws UnauthorizedException, InvalidPermissionException, NotFoundError, ValidationErrorResponse, Exception {
+    public static void main(String[] args) throws Exception {
 
-        FastPixSDK sdk = FastPixSDK.builder()
+        Fastpix sdk = Fastpix.builder()
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username("your-access-token")
+                    .password("your-secret-key")
                     .build())
             .build();
 
-        GetLiveStreamByIdResponse res = sdk.manageLiveStream().getLiveStreamById()
+        GetLiveStreamByIdResponse res = sdk.manageLiveStream().get()
                 .streamId("61a264dcc447b63da6fb79ef925cd76d")
                 .call();
 
@@ -118,110 +62,55 @@ public class Application {
 
 ### Errors
 
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UnauthorizedException      | 401                                      | application/json                         |
-| models/errors/InvalidPermissionException | 403                                      | application/json                         |
-| models/errors/NotFoundError              | 404                                      | application/json                         |
-| models/errors/ValidationErrorResponse    | 422                                      | application/json                         |
-| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## deleteLiveStream
+## update
 
-Permanently removes a specified live stream from the workspace. If the stream is still active, the encoder will be disconnected, and the ingestion will stop. This action cannot be undone, and any future playback attempts will fail. 
-
-  By providing the streamId, the API will terminate any active connections to the stream and remove it from the list of available live streams. You can further look for video.live_stream.deleted webhook to notify your system about the status. 
-
-  **Example:** For an online concert platform, a trial stream was mistakenly made public. The event manager deletes the stream before the concert begins to avoid confusion among viewers. 
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.DeleteLiveStreamResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws UnauthorizedException, InvalidPermissionException, NotFoundError, ValidationErrorResponse, Exception {
-
-        FastPixSDK sdk = FastPixSDK.builder()
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        DeleteLiveStreamResponse res = sdk.manageLiveStream().deleteLiveStream()
-                .streamId("8717422d89288ad5958d4a86e9afe2a2")
-                .call();
-
-        if (res.liveStreamDeleteResponse().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `streamId`                                                                          | *String*                                                                            | :heavy_check_mark:                                                                  | Upon creating a new live stream, FastPix assigns a unique identifier to the stream. | 8717422d89288ad5958d4a86e9afe2a2                                                    |
-
-### Response
-
-**[DeleteLiveStreamResponse](../../models/operations/DeleteLiveStreamResponse.md)**
-
-### Errors
-
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UnauthorizedException      | 401                                      | application/json                         |
-| models/errors/InvalidPermissionException | 403                                      | application/json                         |
-| models/errors/NotFoundError              | 404                                      | application/json                         |
-| models/errors/ValidationErrorResponse    | 422                                      | application/json                         |
-| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
-
-## updateLiveStream
-
-This endpoint allows users to modify the parameters of an existing live stream, such as its metadata (title, description) or the reconnect window. It’s useful for making changes to a stream that has already been created but not yet ended. Once the live stream is disabled, you cannot update a stream. 
+This endpoint allows you to modify the parameters of an existing live stream, such as its `metadata` (title, description) or the `reconnectWindow`. It’s useful for making changes to a stream that has already been created but not yet ended. After the live stream is disabled, you cannot update a stream. 
 
 
-  The updated stream parameters and the streamId needs to be shared in the request, and FastPix will return the updated stream details. Once updated, video.live_stream.updated webhook event notifies your system. 
+  The updated stream parameters and the `streamId` needs to be shared in the request, and FastPix returns the updated stream details. After the update, <a href="https://docs.fastpix.io/docs/live-events#videolive_streamupdated">video.live_stream.updated</a> webhook event notifies your system.
 
-  **Practical example:** A host realizes they need to extend the reconnect window for their live stream in case they lose connection temporarily during the event. Or suppose during a multi-day online conference, the event organizers need to update the stream title to reflect the next day's session while keeping the same stream ID for continuity. 
+ #### Example
+
+ A host realizes they need to extend the reconnect window for their live stream in case they lose connection temporarily during the event. Or suppose during a multi-day online conference, the event organizers need to update the stream title to reflect the next day"s session while keeping the same stream ID for continuity. 
+
+
+
+  Related guide: <a href="https://docs.fastpix.io/docs/manage-streams">Manage streams</a>
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="update-live-stream" method="patch" path="/live/streams/{streamId}" -->
 ```java
 package hello.world;
 
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.PatchLiveStreamRequest;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.UpdateLiveStreamResponse;
 import java.lang.Exception;
+import java.util.Map;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.PatchLiveStreamRequest;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.UpdateLiveStreamResponse;
 
 public class Application {
 
-    public static void main(String[] args) throws UnauthorizedException, InvalidPermissionException, NotFoundError, ValidationErrorResponse, Exception {
+    public static void main(String[] args) throws Exception {
 
-        FastPixSDK sdk = FastPixSDK.builder()
+        Fastpix sdk = Fastpix.builder()
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username("your-access-token")
+                    .password("your-secret-key")
                     .build())
             .build();
 
-        UpdateLiveStreamResponse res = sdk.manageLiveStream().updateLiveStream()
+        UpdateLiveStreamResponse res = sdk.manageLiveStream().update()
                 .streamId("91a264dcc447b63da6fb79ef925cd76d")
-                .patchLiveStreamRequest(PatchLiveStreamRequest.builder()
+                .body(PatchLiveStreamRequest.builder()
+                    .metadata(Map.ofEntries(
+                        Map.entry("livestream_name", "Gaming_stream")))
+                    .reconnectWindow(100L)
                     .build())
                 .call();
 
@@ -234,10 +123,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `streamId`                                                                             | *String*                                                                               | :heavy_check_mark:                                                                     | Upon creating a new live stream, FastPix assigns a unique identifier to the stream.    | 91a264dcc447b63da6fb79ef925cd76d                                                       |
-| `patchLiveStreamRequest`                                                               | [Optional\<PatchLiveStreamRequest>](../../models/components/PatchLiveStreamRequest.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    | {<br/>"metadata": {<br/>"livestream_name": "Gaming_stream"<br/>},<br/>"reconnectWindow": 100<br/>} |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `streamId`                                                                           | *String*                                                                             | :heavy_check_mark:                                                                   | After creating a new live stream, FastPix assigns a unique identifier to the stream. | 91a264dcc447b63da6fb79ef925cd76d                                                     |
+| `body`                                                                               | [PatchLiveStreamRequest](../../models/components/PatchLiveStreamRequest.md)          | :heavy_check_mark:                                                                   | N/A                                                                                  | {<br/>"metadata": {<br/>"livestream_name": "Gaming_stream"<br/>},<br/>"reconnectWindow": 100<br/>} |
 
 ### Response
 
@@ -245,10 +134,6 @@ public class Application {
 
 ### Errors
 
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UnauthorizedException      | 401                                      | application/json                         |
-| models/errors/InvalidPermissionException | 403                                      | application/json                         |
-| models/errors/NotFoundError              | 404                                      | application/json                         |
-| models/errors/ValidationErrorResponse    | 422                                      | application/json                         |
-| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
