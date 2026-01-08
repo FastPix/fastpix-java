@@ -1,5 +1,9 @@
-io.fastpix.sdk
-io.fastpix.sdk.models.components
-io.fastpix.sdk.models.errors
-io.fastpix.sdk.models.operations
-io.fastpix.sdk.utils
+org.openapis.openapi
+org.openapis.openapi.hooks
+org.openapis.openapi.models.components
+org.openapis.openapi.models.errors
+org.openapis.openapi.models.operations
+org.openapis.openapi.models.operations.async
+org.openapis.openapi.operations
+org.openapis.openapi.utils
+org.openapis.openapi.utils.reactive

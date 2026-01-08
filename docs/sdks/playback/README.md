@@ -1,206 +1,21 @@
 # Playback
-(*playback()*)
 
 ## Overview
 
+Operations for video playback management
+
 ### Available Operations
 
-* [createPlaybackIdOfStream](#createplaybackidofstream) - Create a playbackId
-* [deletePlaybackIdOfStream](#deleteplaybackidofstream) - Delete a playbackId
-* [getLiveStreamPlaybackId](#getlivestreamplaybackid) - Get stream's playbackId
-* [createMediaPlaybackId](#createmediaplaybackid) - Create a playback ID
-* [deleteMediaPlaybackId](#deletemediaplaybackid) - Delete a playback ID
+* [createId](#createid) - Create a playback ID
+* [list](#list) - Get all playback IDs details for a media
+* [deleteId](#deleteid) - Delete a playback ID
+* [get](#get) - Get a playback ID
+* [updateDomainRestrictions](#updatedomainrestrictions) - Update domain restrictions for a playback ID
+* [updateUserAgentRestrictions](#updateuseragentrestrictions) - Update user-agent restrictions for a playback ID
 
-## createPlaybackIdOfStream
+## createId
 
-Generates a new playback ID for the live stream, allowing viewers to access the stream through this ID. The playback ID can be shared with viewers for direct access to the live broadcast. 
-
-  By calling this endpoint with the streamId, FastPix returns a unique playbackId, which can be used to stream the live content. 
-
-  **Use case:** A media platform needs to distribute a unique playback ID to users for an exclusive live concert. The platform can also embed the stream on various partner websites. 
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.PlaybackIdRequest;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.CreatePlaybackIdOfStreamResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws UnauthorizedException, InvalidPermissionException, NotFoundError, ValidationErrorResponse, Exception {
-
-        FastPixSDK sdk = FastPixSDK.builder()
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        CreatePlaybackIdOfStreamResponse res = sdk.playback().createPlaybackIdOfStream()
-                .streamId("8717422d89288ad5958d4a86e9afe2a2")
-                .playbackIdRequest(PlaybackIdRequest.builder()
-                    .build())
-                .call();
-
-        if (res.playbackIdResponse().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `streamId`                                                                          | *String*                                                                            | :heavy_check_mark:                                                                  | Upon creating a new live stream, FastPix assigns a unique identifier to the stream. | 8717422d89288ad5958d4a86e9afe2a2                                                    |
-| `playbackIdRequest`                                                                 | [Optional\<PlaybackIdRequest>](../../models/components/PlaybackIdRequest.md)        | :heavy_minus_sign:                                                                  | N/A                                                                                 | {<br/>"accessPolicy": "public"<br/>}                                                |
-
-### Response
-
-**[CreatePlaybackIdOfStreamResponse](../../models/operations/CreatePlaybackIdOfStreamResponse.md)**
-
-### Errors
-
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UnauthorizedException      | 401                                      | application/json                         |
-| models/errors/InvalidPermissionException | 403                                      | application/json                         |
-| models/errors/NotFoundError              | 404                                      | application/json                         |
-| models/errors/ValidationErrorResponse    | 422                                      | application/json                         |
-| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
-
-## deletePlaybackIdOfStream
-
-Deletes a previously created playback ID for a live stream. This will prevent any new viewers from accessing the stream through the playback ID, though current viewers will be able to continue watching for a limited time before being disconnected. By providing the playbackId, FastPix deletes the ID and ensures new playback requests will fail. 
-
-  **Use case:** A streaming service wants to prevent new users from joining a live stream that is nearing its end. The host can delete the playback ID to ensure no one can join the stream or replay it once it ends. 
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.DeletePlaybackIdOfStreamResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws UnauthorizedException, InvalidPermissionException, NotFoundErrorPlaybackId, ValidationErrorResponse, Exception {
-
-        FastPixSDK sdk = FastPixSDK.builder()
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        DeletePlaybackIdOfStreamResponse res = sdk.playback().deletePlaybackIdOfStream()
-                .streamId("8717422d89288ad5958d4a86e9afe2a2")
-                .playbackId("88b7ac0f-2504-4dd5-b7b4-d84ab4fee1bd")
-                .call();
-
-        if (res.liveStreamDeleteResponse().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `streamId`                                                                          | *String*                                                                            | :heavy_check_mark:                                                                  | Upon creating a new live stream, FastPix assigns a unique identifier to the stream. | 8717422d89288ad5958d4a86e9afe2a2                                                    |
-| `playbackId`                                                                        | *String*                                                                            | :heavy_check_mark:                                                                  | Unique identifier for the playbackId                                                | 88b7ac0f-2504-4dd5-b7b4-d84ab4fee1bd                                                |
-
-### Response
-
-**[DeletePlaybackIdOfStreamResponse](../../models/operations/DeletePlaybackIdOfStreamResponse.md)**
-
-### Errors
-
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UnauthorizedException      | 401                                      | application/json                         |
-| models/errors/InvalidPermissionException | 403                                      | application/json                         |
-| models/errors/NotFoundErrorPlaybackId    | 404                                      | application/json                         |
-| models/errors/ValidationErrorResponse    | 422                                      | application/json                         |
-| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
-
-## getLiveStreamPlaybackId
-
-Retrieves details about a previously created playback ID. If you provide the distinct playback ID that was given back to you in the previous stream or playbackId create request, FastPix will provide the relevant playback details such as the access policy. 
-
-  **Use case:** A developer needs to confirm the playback ID details to ensure the right stream is being accessed by viewers. 
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.GetLiveStreamPlaybackIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws UnauthorizedException, InvalidPermissionException, NotFoundErrorPlaybackId, ValidationErrorResponse, Exception {
-
-        FastPixSDK sdk = FastPixSDK.builder()
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        GetLiveStreamPlaybackIdResponse res = sdk.playback().getLiveStreamPlaybackId()
-                .streamId("61a264dcc447b63da6fb79ef925cd76d")
-                .playbackId("61a264dcc447b63da6fb79ef925cd76d")
-                .call();
-
-        if (res.playbackIdResponse().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `streamId`                                                                           | *String*                                                                             | :heavy_check_mark:                                                                   | Upon creating a new live stream, FastPix assigns a unique identifier to the stream.  | 61a264dcc447b63da6fb79ef925cd76d                                                     |
-| `playbackId`                                                                         | *String*                                                                             | :heavy_check_mark:                                                                   | Upon creating a new playbackId, FastPix assigns a unique identifier to the playback. | 61a264dcc447b63da6fb79ef925cd76d                                                     |
-
-### Response
-
-**[GetLiveStreamPlaybackIdResponse](../../models/operations/GetLiveStreamPlaybackIdResponse.md)**
-
-### Errors
-
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UnauthorizedException      | 401                                      | application/json                         |
-| models/errors/InvalidPermissionException | 403                                      | application/json                         |
-| models/errors/NotFoundErrorPlaybackId    | 404                                      | application/json                         |
-| models/errors/ValidationErrorResponse    | 422                                      | application/json                         |
-| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
-
-## createMediaPlaybackId
-
-You can create a new playback ID for a specific media asset. If you have already retrieved an existing playbackId using the "Get Media by ID" endpoint for a media asset, you can use this endpoint to generate a new playback ID with a specified access policy. 
+You can create a new playback ID for a specific media asset. If you have already retrieved an existing `playbackId` using the <a href="https://docs.fastpix.io/reference/get-media">Get Media by ID</a> endpoint for a media asset, you can use this endpoint to generate a new playback ID with a specified access policy. 
 
 
 
@@ -208,61 +23,46 @@ If you want to create a private playback ID for a media asset that already has a
 
 #### How it works
 
-1. **Make a POST request** to the **/on-demand/`<mediaId>`/playback-ids** endpoint, replacing `<mediaId>` with the uploadId or id of the media asset. 
+1. Make a `POST` request to this endpoint, replacing `<mediaId>` with the `uploadId` or `id` of the media asset. 
 
-2. Include the **access policy** in the request body to indicate whether the new playback ID should be private or public. 
+2. Include the `accessPolicy` in the request body with `private` or `public` as the value. 
 
-3. Receive a response containing the newly created playback ID with the requested access level. 
+3. You receive a response containing the newly created playback ID with the specified access level.
 
 
-**Use case:** A video streaming service generates playback IDs for each media file when users request to view specific content. The playback ID is then used by the video player to stream the video.
+#### Example
+A video streaming service generates playback IDs for each media file when users request to view specific content. The video player then uses the playback ID to stream the video.
 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="create-media-playback-id" method="post" path="/on-demand/{mediaId}/playback-ids" -->
 ```java
 package hello.world;
 
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.*;
 import java.lang.Exception;
-import java.util.List;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.AccessPolicy;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.*;
 
 public class Application {
 
-    public static void main(String[] args) throws InvalidPermissionException, ForbiddenException, MediaNotFoundException, ValidationErrorResponse, Exception {
+    public static void main(String[] args) throws Exception {
 
-        FastPixSDK sdk = FastPixSDK.builder()
+        Fastpix sdk = Fastpix.builder()
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username("your-access-token")
+                    .password("your-secret-key")
                     .build())
             .build();
 
-        CreateMediaPlaybackIdResponse res = sdk.playback().createMediaPlaybackId()
-                .mediaId("dbb8a39a-e4a5-4120-9f22-22f603f1446e")
-                .requestBody(CreateMediaPlaybackIdRequestBody.builder()
-                    .accessPolicy(CreateMediaPlaybackIdAccessPolicy.PUBLIC)
-                    .accessRestrictions(CreateMediaPlaybackIdAccessRestrictions.builder()
-                        .domains(CreateMediaPlaybackIdDomains.builder()
-                            .allow(List.of(
-                                "example.com",
-                                "trustedsite.org"))
-                            .deny(List.of(
-                                "malicioussite.io",
-                                "spamdomain.net"))
-                            .build())
-                        .userAgents(CreateMediaPlaybackIdUserAgents.builder()
-                            .allow(List.of(
-                                "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36",
-                                "curl/7.68.0"))
-                            .deny(List.of(
-                                "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
-                                "PostmanRuntime/7.29.0"))
-                            .build())
-                        .build())
+        CreateMediaPlaybackIdResponse res = sdk.playback().createId()
+                .mediaId("your-media-id")
+                .body(CreateMediaPlaybackIdRequestBody.builder()
+                    .accessPolicy(AccessPolicy.PUBLIC)
+                    .drmConfigurationId("your-drm-configuration-id")
+                    .resolution(Resolution.ONE_THOUSAND_AND_EIGHTYP)
                     .build())
                 .call();
 
@@ -275,10 +75,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       | Example                                                                                                           |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `mediaId`                                                                                                         | *String*                                                                                                          | :heavy_check_mark:                                                                                                | When creating the media, FastPix assigns a universally unique identifier with a maximum length of 255 characters. | dbb8a39a-e4a5-4120-9f22-22f603f1446e                                                                              |
-| `requestBody`                                                                                                     | [Optional\<CreateMediaPlaybackIdRequestBody>](../../models/operations/CreateMediaPlaybackIdRequestBody.md)        | :heavy_minus_sign:                                                                                                | Request body for creating playback id for an media                                                                | {<br/>"accessPolicy": "public"<br/>}                                                                              |
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                | Example                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `mediaId`                                                                                                  | *String*                                                                                                   | :heavy_check_mark:                                                                                         | The unique identifier assigned to the media when created. The value must be a valid UUID.                  | your-media-id                                                                                               |
+| `body`                                                                                                     | [Optional\<CreateMediaPlaybackIdRequestBody>](../../models/operations/CreateMediaPlaybackIdRequestBody.md) | :heavy_minus_sign:                                                                                         | Request body for creating playback id for an media                                                         |                                                                                                            |
 
 ### Response
 
@@ -286,53 +86,112 @@ public class Application {
 
 ### Errors
 
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/InvalidPermissionException | 401                                      | application/json                         |
-| models/errors/ForbiddenException         | 403                                      | application/json                         |
-| models/errors/MediaNotFoundException     | 404                                      | application/json                         |
-| models/errors/ValidationErrorResponse    | 422                                      | application/json                         |
-| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## deleteMediaPlaybackId
+## list
 
-This endpoint allows you to remove a specific playback ID associated with a media asset. Deleting a playbackId will revoke access to the media content linked to that ID. 
+Retrieves all playback IDs associated with a given media asset, including each playback ID’s access policy and detailed access restrictions such as allowed or denied domains and user agents.
 
+**How it works:**
+1. Send a `GET` request to this endpoint with the target `mediaId`.
+2. The response includes an array of playback ID records with their respective access controls.
 
-#### How it works
-
-1. Make a DELETE request to the **/on-demand/`<mediaId>`/playback-ids** endpoint, replacing `<mediaId>` with the uploadId or id of the media asset from which you want to delete the playback ID. 
-
-2. Specify the playback ID you wish to delete in the request body. 
-
-**Use case:** Your platform offers limited-time access to premium content. When the subscription expires, you can revoke access to the content by deleting the associated playback ID, preventing users from streaming the video further. 
+**Use case:**
+Useful for validating and managing playback permissions programmatically, reviewing restriction settings, or powering an access control dashboard.
 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="list-playback-ids" method="get" path="/on-demand/{mediaId}/playback-ids" -->
 ```java
 package hello.world;
 
-import io.fastpix.sdk.FastPixSDK;
-import io.fastpix.sdk.models.components.Security;
-import io.fastpix.sdk.models.errors.*;
-import io.fastpix.sdk.models.operations.DeleteMediaPlaybackIdResponse;
 import java.lang.Exception;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.ListPlaybackIdsResponse;
 
 public class Application {
 
-    public static void main(String[] args) throws InvalidPermissionException, ForbiddenException, MediaOrPlaybackNotFoundException, ValidationErrorResponse, Exception {
+    public static void main(String[] args) throws Exception {
 
-        FastPixSDK sdk = FastPixSDK.builder()
+        Fastpix sdk = Fastpix.builder()
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username("your-access-token")
+                    .password("your-secret-key")
                     .build())
             .build();
 
-        DeleteMediaPlaybackIdResponse res = sdk.playback().deleteMediaPlaybackId()
-                .mediaId("dbb8a39a-e4a5-4120-9f22-22f603f1446e")
-                .playbackId("dbb8a39a-e4a5-4120-9f22-22f603f1446e")
+        ListPlaybackIdsResponse res = sdk.playback().list()
+                .mediaId("your-media-id")
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                            | Type                                 | Required                             | Description                          | Example                              |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `mediaId`                            | *String*                             | :heavy_check_mark:                   | N/A                                  | your-media-id                        |
+
+### Response
+
+**[ListPlaybackIdsResponse](../../models/operations/ListPlaybackIdsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## deleteId
+
+This endpoint deletes a specific playback ID associated with a media asset. Deleting a `playback ID` revokes access to the media content linked to that ID.
+
+
+#### How it works
+
+1. Make a `DELETE` request to this endpoint, replacing `<mediaId>` with the unique ID of the media asset from which you want to delete the playback ID. 
+
+2. Include the `playbackId` you want to delete in the request body.
+
+#### Example
+
+Your platform offers limited-time access to premium content. When the subscription expires, you can revoke access to the content by deleting the associated playback ID, preventing users from streaming the video further.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="delete-media-playback-id" method="delete" path="/on-demand/{mediaId}/playback-ids" -->
+```java
+package hello.world;
+
+import java.lang.Exception;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.DeleteMediaPlaybackIdResponse;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Fastpix sdk = Fastpix.builder()
+                .security(Security.builder()
+                    .username("your-access-token")
+                    .password("your-secret-key")
+                    .build())
+            .build();
+
+        DeleteMediaPlaybackIdResponse res = sdk.playback().deleteId()
+                .mediaId("your-media-id")
+                .playbackId("your-playback-id")
                 .call();
 
         if (res.object().isPresent()) {
@@ -346,8 +205,8 @@ public class Application {
 
 | Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
 | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `mediaId`                                                                                             | *String*                                                                                              | :heavy_check_mark:                                                                                    | Return the universal unique identifier for media which can contain a maximum of 255 characters.       | dbb8a39a-e4a5-4120-9f22-22f603f1446e                                                                  |
-| `playbackId`                                                                                          | *String*                                                                                              | :heavy_check_mark:                                                                                    | Return the universal unique identifier for playbacks  which can contain a maximum of 255 characters.  | dbb8a39a-e4a5-4120-9f22-22f603f1446e                                                                  |
+| `mediaId`                                                                                             | *String*                                                                                              | :heavy_check_mark:                                                                                    | The unique identifier assigned to the media when created. The value must be a valid UUID.             | your-media-id                                                                                         |
+| `playbackId`                                                                                          | *String*                                                                                              | :heavy_check_mark:                                                                                    | Return the universal unique identifier for playbacks  which can contain a maximum of 255 characters.  | your-playback-id                                                                                      |
 
 ### Response
 
@@ -355,10 +214,218 @@ public class Application {
 
 ### Errors
 
-| Error Type                                     | Status Code                                    | Content Type                                   |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| models/errors/InvalidPermissionException       | 401                                            | application/json                               |
-| models/errors/ForbiddenException               | 403                                            | application/json                               |
-| models/errors/MediaOrPlaybackNotFoundException | 404                                            | application/json                               |
-| models/errors/ValidationErrorResponse          | 422                                            | application/json                               |
-| models/errors/APIException                     | 4XX, 5XX                                       | \*/\*                                          |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## get
+
+This endpoint retrieves details about a specific playback ID associated with a media asset. Use it to check the access policy for that specific playback ID, such as whether it is public or private.
+
+**How it works:**
+1. Make a GET request to the endpoint, replacing `{mediaId}` with the media ID and `{playbackId}` with the playback ID.
+2. This request is useful for auditing or validation before granting playback access in your application.
+
+**Example:**
+A media platform might use this endpoint to verify if a playback ID is public or private before embedding the video in a frontend player or allowing access to a restricted group.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-playback-id" method="get" path="/on-demand/{mediaId}/playback-ids/{playbackId}" -->
+```java
+package hello.world;
+
+import java.lang.Exception;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.GetPlaybackIdResponse;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Fastpix sdk = Fastpix.builder()
+                .security(Security.builder()
+                    .username("your-access-token")
+                    .password("your-secret-key")
+                    .build())
+            .build();
+
+        GetPlaybackIdResponse res = sdk.playback().get()
+                .mediaId("your-media-id")
+                .playbackId("your-playback-id")
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                            | Type                                 | Required                             | Description                          | Example                              |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `mediaId`                            | *String*                             | :heavy_check_mark:                   | N/A                                  | your-media-id                        |
+| `playbackId`                         | *String*                             | :heavy_check_mark:                   | N/A                                  | your-playback-id                     |
+
+### Response
+
+**[GetPlaybackIdResponse](../../models/operations/GetPlaybackIdResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## updateDomainRestrictions
+
+This endpoint updates domain-level restrictions for a specific playback ID associated with a media asset.
+It allows you to restrict playback to specific domains or block known unauthorized domains.
+
+**How it works:**
+1. Make a `PATCH` request to this endpoint with your desired domain access configuration.
+2. Set a default policy (`allow` or `deny`) and specify domain names in the `allow` or `deny` lists.
+3. This is commonly used to restrict video playback to your website or approved client domains.
+
+**Example:**
+A streaming service can allow playback only from `example.com` and deny all others by setting: `"defaultPolicy": "deny"` and `"allow": ["example.com"]`.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="update-domain-restrictions" method="patch" path="/on-demand/{mediaId}/playback-ids/{playbackId}/domains" -->
+```java
+package hello.world;
+
+import java.lang.Exception;
+import java.util.List;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.UpdateDomainRestrictionsRequestBody;
+import org.openapis.openapi.models.operations.UpdateDomainRestrictionsResponse;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Fastpix sdk = Fastpix.builder()
+                .security(Security.builder()
+                    .username("your-access-token")
+                    .password("your-secret-key")
+                    .build())
+            .build();
+
+        UpdateDomainRestrictionsResponse res = sdk.playback().updateDomainRestrictions()
+                .mediaId("your-media-id")
+                .playbackId("your-playback-id")
+                .body(UpdateDomainRestrictionsRequestBody.builder()
+                    .allow(List.of(
+                        "yourdomain.com",
+                        "sampledomain.com"))
+                    .deny(List.of(
+                        "yourworkdomain.com"))
+                    .build())
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `mediaId`                                                                                             | *String*                                                                                              | :heavy_check_mark:                                                                                    | N/A                                                                                                   | your-media-id                                                                                         |
+| `playbackId`                                                                                          | *String*                                                                                              | :heavy_check_mark:                                                                                    | N/A                                                                                                   | your-playback-id                                                                                      |
+| `body`                                                                                                | [UpdateDomainRestrictionsRequestBody](../../models/operations/UpdateDomainRestrictionsRequestBody.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |                                                                                                       |
+
+### Response
+
+**[UpdateDomainRestrictionsResponse](../../models/operations/UpdateDomainRestrictionsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## updateUserAgentRestrictions
+
+This endpoint allows updating user-agent restrictions for a specific playback ID associated with a media asset. 
+It can be used to allow or deny specific user-agents during playback request evaluation.
+
+**How it works:**
+1. Make a `PATCH` request to this endpoint with your desired user-agent access configuration.
+2. Specify a default policy (`allow` or `deny`) and provide specific `allow` or `deny` lists.
+3. Use this to restrict access to specific browsers, devices, or bots.
+
+**Example:**
+A developer may configure a playback ID to deny access from known scraping user-agents while allowing all others by default.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="update-user-agent-restrictions" method="patch" path="/on-demand/{mediaId}/playback-ids/{playbackId}/user-agents" -->
+```java
+package hello.world;
+
+import java.lang.Exception;
+import java.util.List;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.UpdateUserAgentRestrictionsRequestBody;
+import org.openapis.openapi.models.operations.UpdateUserAgentRestrictionsResponse;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Fastpix sdk = Fastpix.builder()
+                .security(Security.builder()
+                    .username("your-access-token")
+                    .password("your-secret-key")
+                    .build())
+            .build();
+
+        UpdateUserAgentRestrictionsResponse res = sdk.playback().updateUserAgentRestrictions()
+                .mediaId("your-media-id")
+                .playbackId("your-playback-id")
+                .body(UpdateUserAgentRestrictionsRequestBody.builder()
+                    .allow(List.of(
+                        "Mozilla/55.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"))
+                    .deny(List.of(
+                        "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/53745.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36"))
+                    .build())
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 | Example                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `mediaId`                                                                                                   | *String*                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         | your-media-id                                                                                               |
+| `playbackId`                                                                                                | *String*                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         | your-playback-id                                                                                             |
+| `body`                                                                                                      | [UpdateUserAgentRestrictionsRequestBody](../../models/operations/UpdateUserAgentRestrictionsRequestBody.md) | :heavy_check_mark:                                                                                          | N/A                                                                                                         |                                                                                                             |
+
+### Response
+
+**[UpdateUserAgentRestrictionsResponse](../../models/operations/UpdateUserAgentRestrictionsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |

@@ -1,0 +1,114 @@
+afterEvaluate {
+    if (!project.ext.has('publishingConfig') 
+        || !project.ext.publishingConfig instanceof Map) {
+        return
+    }
+
+    def config = project.ext.publishingConfig
+
+    publishing {
+
+        publications {
+            create("maven", MavenPublication) {
+                from(components["java"])
+
+                groupId = config.groupId
+                artifactId = config.artifactId
+                version = config.version
+
+                pom {
+                    properties = [
+                            'maven.compiler.source': '11',
+                            'maven.compiler.target': '11',
+                    ]
+                    name = config.name
+                    description = config.description
+                    url = 'https://github.com/FastPix/fastpix-java'
+                    scm {
+                        url = 'https://github.com/FastPix/fastpix-java'
+                        connection = 'https://github.com/FastPix/fastpix-java.git'
+                    }
+                    licenses {
+                        license {
+                            name = 'The MIT License (MIT)'
+                            url = 'https://mit-license.org/'
+                        }
+                    }
+                    developers {
+                        developer {
+                            name = 'FastPix'
+                            organization = 'FastPix'
+                            email = 'devs@fastpix.io'
+                        }
+                    }
+                    organization {
+                        name = 'FastPix'
+                        url = 'https://fastpix.io'
+                    }
+                }
+            }
+        }
+
+        if (!project.hasProperty('skip.signing')) {
+            signing {
+                def signingKey = findProperty("signingKey")
+                def signingPassphrase = findProperty("signingPassphrase")
+                useInMemoryPgpKeys(signingKey, signingPassphrase)
+                sign publishing.publications.getByName("maven")
+            }
+        }
+    }
+
+    
+
+    // Configure POM file generation task after publishing is configured
+    tasks.named("generatePomFileForMavenPublication") {
+        destination = file(layout.buildDirectory.file("pom.xml"))
+        jar.dependsOn('generatePomFileForMavenPublication')
+    }
+}
+
+// Debug task to log publishing properties before publish tasks
+tasks.register('logPublishingProperties') {
+    doLast {
+        if (project.ext.has('publishingConfig')) {
+            def config = project.ext.publishingConfig
+            logger.quiet("Publishing properties for project '${project.name}':")
+            logger.quiet("  groupId: ${config.groupId}")
+            logger.quiet("  artifactId: ${config.artifactId}")
+            logger.quiet("  version: ${config.version}")
+            logger.quiet("  name: ${config.name}")
+            logger.quiet("  description: ${config.description}")
+            logger.quiet("  publicationName: maven")
+            logger.quiet("  Maven Coordinates: ${config.groupId}:${config.artifactId}:${config.version}")
+        }
+    }
+}
+
+// Task to log only the main SDK configuration
+tasks.register('logMainSDKConfig') {
+    doLast {
+        if (project == rootProject && project.ext.has('publishingConfig')) {
+            def config = project.ext.publishingConfig
+            logger.quiet("")
+            logger.quiet("========================================")
+            logger.quiet("  MAIN SDK PUBLISHING CONFIGURATION")
+            logger.quiet("========================================")
+            logger.quiet("  groupId: ${config.groupId}")
+            logger.quiet("  artifactId: ${config.artifactId}")
+            logger.quiet("  version: ${config.version}")
+            logger.quiet("  name: ${config.name}")
+            logger.quiet("  description: ${config.description}")
+            logger.quiet("  Maven Coordinates: ${config.groupId}:${config.artifactId}:${config.version}")
+            logger.quiet("========================================")
+            logger.quiet("")
+        } else {
+            logger.quiet("This task should be run from the root project.")
+        }
+    }
+}
+
+// Make all publish tasks depend on POM generation
+tasks.matching { it.name.startsWith('publish') || it.name.contains('sonatypeCentralUpload') }.configureEach {
+    dependsOn 'generatePomFileForMavenPublication'
+}

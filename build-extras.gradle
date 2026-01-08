@@ -2,3 +2,23 @@
 // * is referred to in an `apply from` command in `build.gradle`
 // * can be used to customise `build.gradle`
 // * is generated once and not overwritten in SDK generation updates
+
+// Fix deprecated Gradle features for Gradle 9.0 compatibility
+// Override deprecated direct task property access (compileJava.options, compileTestJava.options)
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+    if (!name.contains("Test")) {
+        options.compilerArgs += '-Xlint:unchecked'
+    }
+}
+
+// Override deprecated archiveBaseName property assignment
+// Use base.archivesName instead (applies to sourcesJar, javadocJar, and main jar)
+base {
+    archivesName = "${artifactId}"
+}
+
+// Ensure javadoc encoding is properly configured
+tasks.withType(Javadoc).configureEach {
+    options.encoding = "UTF-8"
+}
