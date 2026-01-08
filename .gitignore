@@ -1,40 +1,23 @@
-# Build output
-/build/
-/out/
-/target/
+.gpg-keys/
 
-# Gradle files
+# Gradle build artifacts
+build/
+!build/docs/
 .gradle/
-/**/build/
+*.jar
+!gradle-wrapper.jar
 
 # IDE files
 .idea/
 *.iml
-*.ipr
-*.iws
 .vscode/
 *.swp
+*.swo
+*~
 
 # OS files
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-
-# Generated docs
-/build/docs/
-/docs/javadoc/
-
-# JARs and other artifacts
-*.jar
-*.war
-*.ear
-
-# Misc
-*.class
-
-# Maven settings files
-settings.xml
-**/settings.xml
-.m2/settings.xml
+# Maven local repository (if used)
+.m2/
