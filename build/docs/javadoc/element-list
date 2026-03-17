@@ -1,5 +1,9 @@
 io.fastpix.sdk
+io.fastpix.sdk.hooks
 io.fastpix.sdk.models.components
 io.fastpix.sdk.models.errors
 io.fastpix.sdk.models.operations
+io.fastpix.sdk.models.operations.async
+io.fastpix.sdk.operations
 io.fastpix.sdk.utils
+io.fastpix.sdk.utils.reactive

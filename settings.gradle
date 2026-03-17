@@ -7,4 +7,27 @@
  * in the user manual at https://docs.gradle.org/7.5.1/userguide/multi_project_builds.html
  */
 
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    plugins {
+        id 'io.spring.dependency-management' version '1.1.5'
+    }
+}
+
 rootProject.name = 'fastpix'
+
+include 'openapi-spring-boot-autoconfigure'
+include 'openapi-spring-boot-starter'
+
+project(':openapi-spring-boot-autoconfigure').projectDir = file('spring/openapi-spring-boot-autoconfigure')
+project(':openapi-spring-boot-starter').projectDir = file('spring/openapi-spring-boot-starter')
+
+
+
+// Apply additional settings if the file exists
+if (file('settings-extra.gradle').exists()) {
+    apply from: 'settings-extra.gradle'
+}

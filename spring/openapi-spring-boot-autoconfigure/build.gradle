@@ -1,0 +1,41 @@
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+}
+
+
+description = 'openapi Spring Boot Auto Configuration'
+
+// Publishing configuration overrides
+ext {
+    publishingConfig = [
+        groupId: rootProject.group,
+        artifactId: 'sdk-spring-boot-autoconfigure',
+        version: rootProject.version,
+        name: 'FastPix Java SDK - Spring Boot Auto Configuration',
+        description: 'Developer-friendly & type-safe Java SDK specifically designed to leverage the FastPix platform API.',
+    ]
+}
+
+dependencies {
+    api project(':')
+    implementation "org.springframework.boot:spring-boot-autoconfigure:${rootProject.springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${rootProject.springBootVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${rootProject.springBootVersion}"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+base {
+    archivesName = 'sdk-spring-boot-autoconfigure'
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}

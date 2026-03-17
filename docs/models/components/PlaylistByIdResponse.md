@@ -1,0 +1,9 @@
+# PlaylistByIdResponse
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `success`                                                                       | *boolean*                                                                       | :heavy_check_mark:                                                              | Shows the request status. Returns true for success and false for failure.       | true                                                                            |
+| `data`                                                                          | [PlaylistByIdResponseData](../../models/components/PlaylistByIdResponseData.md) | :heavy_check_mark:                                                              | N/A                                                                             |                                                                                 |

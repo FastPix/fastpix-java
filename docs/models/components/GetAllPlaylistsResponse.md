@@ -1,0 +1,10 @@
+# GetAllPlaylistsResponse
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    | Example                                                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `success`                                                                      | *boolean*                                                                      | :heavy_check_mark:                                                             | Shows the request status. Returns true for success and false for failure.      | true                                                                           |
+| `data`                                                                         | List\<[PlaylistItem](../../models/components/PlaylistItem.md)>                 | :heavy_check_mark:                                                             | N/A                                                                            |                                                                                |
+| `pagination`                                                                   | [Optional\<Pagination>](../../models/components/Pagination.md)                 | :heavy_minus_sign:                                                             | Pagination organizes content into pages for better readability and navigation. |                                                                                |

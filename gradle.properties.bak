@@ -1,0 +1,14 @@
+groupId=io.fastpix
+artifactId=sdk
+version=1.0.0
+org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g
+
+# Maven Central Publishing Credentials
+mavenCentralUsername=jGngnZ
+mavenCentralPassword=LHqHMQbs6p7GK5QmhBNWI0n0pweE4mtpN
+
+# GPG Signing Configuration
+signing.keyId=5EE74F20
+signing.password=Developer At Fastpix
+# Note: useGpgCmd() reads from ~/.gnupg/, so keyring file path not needed
+# signing.secretKeyRingFile=

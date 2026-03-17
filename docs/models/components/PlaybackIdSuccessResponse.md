@@ -1,0 +1,11 @@
+# PlaybackIdSuccessResponse
+
+Displays the result of the request.
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          | Example                                                                                              |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `success`                                                                                            | *Optional\<Boolean>*                                                                                 | :heavy_minus_sign:                                                                                   | Shows the request status. Returns true for success and false for failure.                            | true                                                                                                 |
+| `data`                                                                                               | [Optional\<PlaybackIdSuccessResponseData>](../../models/components/PlaybackIdSuccessResponseData.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |                                                                                                      |

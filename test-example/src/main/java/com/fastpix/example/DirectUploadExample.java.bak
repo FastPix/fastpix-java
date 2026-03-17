@@ -1,0 +1,35 @@
+package hello.world;
+
+import java.lang.Exception;
+import java.util.Map;
+import org.openapis.openapi.Fastpix;
+import org.openapis.openapi.models.components.Security;
+import org.openapis.openapi.models.operations.*;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Fastpix sdk = Fastpix.builder()
+                .security(Security.builder()
+                    .username(System.getenv("FASTPIX_ACCESS_TOKEN"))
+                    .password("your-secret-key")
+                    .build())
+            .build();
+
+        DirectUploadVideoMediaRequest req = DirectUploadVideoMediaRequest.builder()
+                .pushMediaSettings(PushMediaSettings.builder()
+                    .metadata(Map.ofEntries(
+                        Map.entry("key1", "value1")))
+                    .build())
+                .build();
+
+        DirectUploadVideoMediaResponse res = sdk.inputVideos().upload()
+                .request(req)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}

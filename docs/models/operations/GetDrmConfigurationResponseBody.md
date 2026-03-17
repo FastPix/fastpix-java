@@ -1,0 +1,12 @@
+# GetDrmConfigurationResponseBody
+
+DRM configuration(s) retrieved successfully
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    | Example                                                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `success`                                                                      | *Optional\<Boolean>*                                                           | :heavy_minus_sign:                                                             | Shows the request status. Returns true for success and false for failure.      | true                                                                           |
+| `data`                                                                         | List\<[DrmIdResponse](../../models/components/DrmIdResponse.md)>               | :heavy_minus_sign:                                                             | N/A                                                                            |                                                                                |
+| `pagination`                                                                   | [Optional\<Pagination>](../../models/components/Pagination.md)                 | :heavy_minus_sign:                                                             | Pagination organizes content into pages for better readability and navigation. |                                                                                |

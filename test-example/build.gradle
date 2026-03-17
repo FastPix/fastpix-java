@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.fastpix'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenLocal()  // Use local Maven repository first
+    mavenCentral()
+}
+
+dependencies {
+    // Use the locally published SDK
+    implementation 'io.fastpix:sdk:1.0.0'
+    
+    // Jackson for JSON serialization
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
+    
+    // Logging (optional)
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
+}
+
+application {
+    mainClass = 'com.fastpix.example.CreateMediaExample'
+}
+
+run {
+    // Pass environment variables to the application
+    environment 'FASTPIX_ACCESS_TOKEN', System.getenv('FASTPIX_ACCESS_TOKEN') ?: ''
+    environment 'FASTPIX_SECRET_KEY', System.getenv('FASTPIX_SECRET_KEY') ?: ''
+}
+
