@@ -64,7 +64,7 @@ Add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.fastpix:sdk:1.0.0'
+    implementation 'io.fastpix:sdk:1.0.1'
 }
 ```
 
@@ -76,7 +76,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.fastpix</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 

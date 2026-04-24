@@ -59,9 +59,9 @@ You can now use this media ID for other operations:
 ## Troubleshooting
 
 ### SDK Not Found
-If you get "Could not resolve: io.fastpix:sdk:1.0.0", make sure:
+If you get "Could not resolve: io.fastpix:sdk:1.0.1", make sure:
 - You've run `./gradlew publishToMavenLocal` in the parent directory
-- The version matches (1.0.0)
+- The version matches (1.0.1)
 
 ### Authentication Error
 If you get authentication errors:

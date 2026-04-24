@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 
 ---
+
+## [1.0.1]
+
+### Added
+- `ViewEventMapper` utility class (`io.fastpix.sdk.utils`) that maps a `Views` response into a flat JSON structure matching the FastPix API response format: `{ "success": true, "data": { ...all 122 fields..., "events": [...] } }`.
+- `EventDeserializer` (inner class of `ViewEventMapper`) — a custom `JsonDeserializer<Event>` that correctly reads the API's abbreviated wire-format keys for player events (`"pt"` → `playerPlayheadTime`, `"e"` → `eventName`, `"vt"` → `viewerTime`, `"d"` → `eventDetails`), resolving silent null deserialization caused by the mismatch between the auto-generated `Event` model's snake_case `@JsonProperty` names and the API's actual wire format.
+- `expandDetails()` method to expand abbreviated `eventDetails` field keys (`"host"` → `hostName`, `"br"` → `bitrate`, `"h"` → `height`, `"cd"` → `codec`, `"w"` → `width`, `"txt"` → `text`, `"u"` → `url`, `"err"` → `error`, `"t"` → `type`) with correct integer/double type handling.
+- `registerEventDeserializer()` method on `ViewEventMapper` — registers the custom `Event` deserializer with the shared Jackson `ObjectMapper`.
+- `numVal()` helper on `ViewEventMapper` — returns `Long` for whole-number doubles (e.g. `1.0` → `1`, `2550448.0` → `2550448`) to match the API's integer representation for integral-valued fields.
+- `VideoViewDetailsExample` in `test-example` — demonstrates calling `sdk.views().getDetails()` and printing the event-mapped response via `ViewEventMapper.map(v)`.
+
+### Changed
+- `SDKHooks.initialize(Hooks)` now calls `ViewEventMapper.registerEventDeserializer()` during SDK construction (`FastPixSDK.builder().build()`), ensuring the custom `Event` deserializer is active before any API response is deserialized.
+- `test-example/build.gradle` updated: `mainClass` changed to `VideoViewDetailsExample`, SDK dependency bumped to `1.0.1`.
+
+### Fixed
+- Player events (`events` array in `GetVideoViewDetails` response) were silently returning all-null fields due to a mismatch between the SDK `Event` model's `@JsonProperty` snake_case names and the API's abbreviated camelCase wire format. Fixed via a custom `EventDeserializer` registered at SDK initialization.
+- `fps` field in `variantChanged` event details serialized as `24.0` (double) instead of `24` (integer) due to Java's ternary-operator long→double promotion when assigning to `Object`. Fixed by using explicit `if/else` with `Long.valueOf()`.
+- Several numeric fields (`playbackScore`, `stabilityScore`, `renderQualityScore`, `averageBitrate`, `avgRequestLatency`, `bufferFrequency`, etc.) serialized with unnecessary `.0` suffix. Fixed by `numVal()` coercing whole-number doubles to `Long` before serialization.
+- `playerSourceHeight` and `playerSourceWidth` were incorrectly keyed as `videoSourceHeight`/`videoSourceWidth` in the response map.
+- Missing fields added to response map: `custom`, `propertyId`, `playerPoster`, `playerSourceDomain`.
+- `eventDetails` no longer included in event entries when `null`, matching API behaviour.
+
+---
+
 ## [1.0.0] 
 
 **Major Version Release**

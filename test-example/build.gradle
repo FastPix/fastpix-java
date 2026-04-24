@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.fastpix'
-version = '1.0.0'
+version = '1.0.1'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
     // Use the locally published SDK
-    implementation 'io.fastpix:sdk:1.0.0'
+    implementation 'io.fastpix:sdk:1.0.1'
     
     // Jackson for JSON serialization
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
@@ -30,7 +30,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'com.fastpix.example.CreateMediaExample'
+    mainClass = 'com.fastpix.example.VideoViewDetailsExample'
 }
 
 run {

@@ -1,6 +1,6 @@
 groupId=io.fastpix
 artifactId=sdk
-version=1.0.0
+version=1.0.1
 org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g
 
 # Maven Central Publishing Credentials

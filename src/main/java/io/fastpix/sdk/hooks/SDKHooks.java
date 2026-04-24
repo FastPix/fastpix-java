@@ -13,6 +13,9 @@ public final class SDKHooks {
     }
 
     public static void initialize(io.fastpix.sdk.utils.Hooks hooks) {
+        // Fix camelCase deserialization for the Event model's player event fields
+        io.fastpix.sdk.utils.ViewEventMapper.registerEventDeserializer();
+
         // register synchronous hooks here
         // hooks.registerBeforeRequest(...);
         // hooks.registerAfterSuccess(...);
