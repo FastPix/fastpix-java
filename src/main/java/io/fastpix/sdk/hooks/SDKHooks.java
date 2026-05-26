@@ -22,7 +22,7 @@ public final class SDKHooks {
         // hooks.registerAfterError(...);
 
         // for more information see
-        // https://www.fastpix.io/docs/additional-features/sdk-hooks
+        // https://fastpix.com/docs/get-started/overview
     }
 
     public static void initialize(io.fastpix.sdk.utils.AsyncHooks asyncHooks) {
@@ -39,7 +39,7 @@ public final class SDKHooks {
         // offload execution to the ForkJoinPool which can introduce overhead.
 
         // for more information see
-        // https://www.fastpix.io/docs/additional-features/sdk-hooks
+        // https://fastpix.com/docs/get-started/overview
     }
 
 }

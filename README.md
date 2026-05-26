@@ -24,7 +24,7 @@ The FastPix Java SDK simplifies integration with the FastPix platform. It provid
 To get started with the FastPix Java SDK, ensure you have the following:
 
 - The FastPix APIs are authenticated using a **Username** and a **Password**. You must generate these credentials to use the SDK.
-- Follow the steps in the [Authentication with Basic Auth](https://docs.fastpix.io/docs/basic-authentication) guide to obtain your credentials.
+- Follow the steps in the [Authentication with Basic Auth](https://fastpix.com/docs/get-started/overview) guide to obtain your credentials.
 
 ### Environment Variables (Optional)
 
@@ -64,7 +64,7 @@ Add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.fastpix:sdk:1.0.1'
+    implementation 'io.fastpix:sdk:1.0.2'
 }
 ```
 
@@ -76,7 +76,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.fastpix</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -170,7 +170,7 @@ public class Application {
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
-                        .url("https://static.fastpix.io/fp-sample-video.mp4")
+                        .url("https://static.fastpix.com/fp-sample-video.mp4")
                         .build())))
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
@@ -268,7 +268,7 @@ public class Application {
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
-                        .url("https://static.fastpix.io/fp-sample-video.mp4")
+                        .url("https://static.fastpix.com/fp-sample-video.mp4")
                         .build())))
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
@@ -300,7 +300,7 @@ Comprehensive Java SDK for FastPix platform integration with full API coverage.
 
 Upload, manage, and transform video content with comprehensive media management capabilities.
 
-For detailed documentation, see [FastPix Video on Demand Overview](https://docs.fastpix.io/docs/video-on-demand-overview).
+For detailed documentation, see [FastPix Video on Demand Overview](https://fastpix.com/docs/video-on-demand-api/overview).
 
 #### Input Video
 - [Create from URL](docs/sdks/inputvideos/README.md#create) - Upload video content from external URL
@@ -347,7 +347,7 @@ For detailed documentation, see [FastPix Video on Demand Overview](https://docs.
 
 Stream, manage, and transform live video content with real-time broadcasting capabilities.
 
-For detailed documentation, see [FastPix Live Stream Overview](https://docs.fastpix.io/docs/live-stream-overview).
+For detailed documentation, see [FastPix Live Stream Overview](https://fastpix.com/docs/get-started/live-overview).
 
 #### Start Live Stream
 - [Create Stream](docs/sdks/streams/README.md#create) - Initialize new live streaming session with DVR mode support
@@ -377,7 +377,7 @@ For detailed documentation, see [FastPix Live Stream Overview](https://docs.fast
 
 Monitor video performance and quality with comprehensive analytics and real-time metrics.
 
-For detailed documentation, see [FastPix Video Data Overview](https://docs.fastpix.io/docs/video-data-overview).
+For detailed documentation, see [FastPix Video Data Overview](https://fastpix.com/docs/concepts/what-video-data-do-we-capture).
 
 #### Metrics
 - [List Breakdown Values](docs/sdks/metrics/README.md#listbreakdown) - Get detailed breakdown of metrics by dimension
@@ -478,7 +478,7 @@ public class Application {
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
-                        .url("https://static.fastpix.io/fp-sample-video.mp4")
+                        .url("https://static.fastpix.com/fp-sample-video.mp4")
                         .build())))
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
@@ -550,7 +550,7 @@ public class Application {
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
-                        .url("https://static.fastpix.io/fp-sample-video.mp4")
+                        .url("https://static.fastpix.com/fp-sample-video.mp4")
                         .build())))
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
@@ -614,7 +614,7 @@ public class Application {
             CreateMediaRequest req = CreateMediaRequest.builder()
                     .inputs(List.of(
                         Input.of(PullVideoInput.builder()
-                            .url("https://static.fastpix.io/fp-sample-video.mp4")
+                            .url("https://static.fastpix.com/fp-sample-video.mp4")
                             .build())))
                     .metadata(Map.ofEntries(
                         Map.entry("key1", "value1")))
@@ -694,7 +694,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         FastPixSDK sdk = FastPixSDK.builder()
-                .serverURL("https://api.fastpix.io/v1/")
+                .serverURL("https://api.fastpix.com/v1/")
                 .security(Security.builder()
                     .username("your-access-token")
                     .password("your-secret-key")
@@ -704,7 +704,7 @@ public class Application {
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
-                        .url("https://static.fastpix.io/fp-sample-video.mp4")
+                        .url("https://static.fastpix.com/fp-sample-video.mp4")
                         .build())))
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
@@ -937,6 +937,6 @@ We value community contributions and feedback. Feel free to submit pull requests
 
 ## Detailed Usage
 
-For comprehensive understanding of each API's functionality, including detailed request and response specifications, parameter descriptions, and additional examples, please refer to the [FastPix API Reference](https://docs.fastpix.io/reference/signingkeys-overview).
+For comprehensive understanding of each API's functionality, including detailed request and response specifications, parameter descriptions, and additional examples, please refer to the [FastPix API Reference](https://fastpix.com/docs/video-security/secure-media-access-with-jwts).
 
 The API reference offers complete documentation for all available endpoints and features, enabling developers to integrate and leverage FastPix APIs effectively.

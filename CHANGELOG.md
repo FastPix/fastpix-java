@@ -4,6 +4,41 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.2]
+
+### ⚠️ Important — FastPix is migrating from `.io` to `.com`
+
+FastPix hosts and documentation links are moving to the `.com` TLD. This release updates every reference the SDK ships:
+
+| Old (`.io`) | New (`.com`) |
+|---|---|
+| `api.fastpix.io` | `api.fastpix.com` |
+| `stream.fastpix.io` | `stream.fastpix.com` |
+| `images.fastpix.io` | `images.fastpix.com` |
+| `static.fastpix.io` | `static.fastpix.com` |
+| `docs.fastpix.io/...` | `fastpix.com/docs/...` |
+
+The `.io` hosts continue to serve traffic during the transition, but **they are slated for deprecation soon** — please update any hard-coded references in your application. We recommend upgrading to this release (or later).
+
+What this means for users of `io.fastpix:sdk`:
+
+- **If you rely on SDK defaults**, no code change is required. The default server URL is now `https://api.fastpix.com/v1/`, so bumping to `1.0.2` and re-resolving the dependency (`./gradlew build` / `mvn`) is enough.
+- **If you have an explicit `serverURL` override** (e.g. `FastPixSDK.builder().serverURL("https://api.fastpix.io/v1/").build()`), change it to `https://api.fastpix.com/v1/`.
+- **If you reference FastPix asset URLs directly** in your app (HLS playback URLs, image CDN), update those to the `.com` equivalents before `.io` is decommissioned.
+
+### Fixed
+
+- `manageVideos().list()` (`/on-demand`): tracks now include `frameRate` (on `VideoTrackForGetAll`), which was being silently dropped by the previous SDK build.
+- `signingKeys().delete()` (`/iam/signing-keys/{signingKeyId}`): response now includes the optional `data.message` confirmation string the API returns (on `DeleteSigningKeyResponse`).
+
+### Changed
+
+- The `User-Agent` sent by the SDK no longer includes the code-generator version; it now reports `fastpix-sdk/java 1.0.2 ...`.
+
+### Docs
+
+- All README and per-service documentation links updated from `docs.fastpix.io/...` to the new `https://fastpix.com/docs/...` URL structure.
+
 ## [1.0.1]
 
 ### Added

@@ -36,12 +36,12 @@ Thank you for taking the time to report a bug with the FastPix Java SDK. To help
    <dependency>
        <groupId>com.fastpix</groupId>
        <artifactId>fastpix-java</artifactId>
-       <version>1.0.1</version>
+       <version>1.0.2</version>
    </dependency>
    ```
    ```gradle
    // Gradle
-   implementation 'com.fastpix:fastpix-java:1.0.1'
+   implementation 'com.fastpix:fastpix-java:1.0.2'
    ```
 
 2. **Code to Reproduce:**

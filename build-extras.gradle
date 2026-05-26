@@ -1,7 +1,6 @@
 // This file
 // * is referred to in an `apply from` command in `build.gradle`
 // * can be used to customise `build.gradle`
-// * is generated once and not overwritten in SDK generation updates
 
 // Fix deprecated Gradle features for Gradle 9.0 compatibility
 // Override deprecated direct task property access (compileJava.options, compileTestJava.options)
@@ -25,6 +24,17 @@ tasks.withType(Javadoc).configureEach {
 
 tasks.withType(GenerateModuleMetadata).configureEach {
     enabled = false
+}
+
+// Prints the main source set's runtime classpath (SDK classes + dependency jars)
+// on a single line. Consumed by tests/ (the TypeScript endpoint validators) to
+// compile and run the hand-written Java SDK harness against the built SDK.
+// Usage: ./gradlew -q printRuntimeClasspath
+tasks.register("printRuntimeClasspath") {
+    dependsOn("compileJava")
+    doLast {
+        println sourceSets.main.runtimeClasspath.asPath
+    }
 }
 
 

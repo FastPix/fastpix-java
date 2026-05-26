@@ -6,6 +6,13 @@ build/
 .gradle/
 *.jar
 !gradle-wrapper.jar
+*.class
+# stray compiled output / accidental tilde gradle-home
+/io/
+/~/
+
+# Backups
+*.bak
 
 # IDE files
 .idea/
@@ -21,3 +28,16 @@ Thumbs.db
 
 # Maven local repository (if used)
 .m2/
+
+# Node dev tooling
+node_modules/
+*.tsbuildinfo
+
+# tests/ validation harness — generated artifacts + reports
+tests/artifacts*/
+tests/*_REPORT.md
+tests/*_FIX_SUGGESTIONS.md
+
+# Local working files (not part of the published SDK)
+/fixed 7.yaml
+/CLAUDE.md
