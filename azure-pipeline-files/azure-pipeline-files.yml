@@ -41,18 +41,8 @@ stages:
           sonar.sourceEncoding=UTF-8
 
           sonar.sources=src/main
-          sonar.tests=src/test
 
-          sonar.java.binaries=build/classes
-
-          sonar.exclusions=**/node_modules/**,\
-                            **/dist/**,\
-                            **/build/**,\
-                            **/coverage/**,\
-                            **/.gradle/**,\
-                            **/.git/**,\
-                            **/generated/**,\
-                            **/*.min.js
+          sonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/coverage/**,**/.gradle/**,**/.git/**,**/docs/**,**/azure-pipeline-files/**,**/*.md
 
           sonar.verbose=true
 
