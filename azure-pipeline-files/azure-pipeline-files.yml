@@ -11,6 +11,13 @@ steps:
 - checkout: self
   fetchDepth: 0
 
+- task: Gradle@3
+  displayName: 'Compile Java Classes'
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'classes'
+    publishJUnitResults: false
+
 - task: SonarCloudPrepare@3
   displayName: 'Prepare SonarCloud Analysis'
   inputs:
@@ -25,7 +32,9 @@ steps:
       sonar.organization=fastpix
       sonar.projectName=java-language-sdk-server-side
       sonar.sourceEncoding=UTF-8
+
       sonar.sources=src/main
+      sonar.java.binaries=build/classes
 
       sonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/coverage/**,**/.gradle/**,**/.git/**,**/docs/**,**/azure-pipeline-files/**,**/*.md
 
