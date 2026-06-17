@@ -4,59 +4,35 @@ trigger:
 pr:
 - feature/*
 
-resources:
-- repo: self
+pool:
+  vmImage: 'ubuntu-latest'
 
-variables:
-  vmImageName: 'ubuntu-latest'
+steps:
+- checkout: self
+  fetchDepth: 0
 
-stages:
-- stage: SonarCloudAnalysis
-  displayName: SonarCloud Analysis Stage
+- task: SonarCloudPrepare@3
+  displayName: 'Prepare SonarCloud Analysis'
+  inputs:
+    SonarCloud: 'sdk_sonar'
+    organization: 'fastpix'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'FastPix_java-language-sdk-server-side'
+    cliProjectName: 'java-language-sdk-server-side'
+    extraProperties: |
+      sonar.projectKey=FastPix_java-language-sdk-server-side
+      sonar.organization=fastpix
+      sonar.projectName=java-language-sdk-server-side
+      sonar.sourceEncoding=UTF-8
+      sonar.sources=src/main
 
-  jobs:
-  - job: Analyze
-    displayName: Run SonarCloud Analysis
+      sonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/coverage/**,**/.gradle/**,**/.git/**,**/docs/**,**/azure-pipeline-files/**,**/*.md
 
-    pool:
-      vmImage: $(vmImageName)
+- task: SonarCloudAnalyze@3
+  displayName: 'Run SonarCloud Code Analysis'
 
-    steps:
-    - checkout: self
-      fetchDepth: 0
-
-    - task: SonarCloudPrepare@3
-      displayName: 'Prepare SonarCloud Analysis'
-      inputs:
-        SonarCloud: 'sdk_sonar'
-        organization: 'fastpix'
-        scannerMode: 'CLI'
-        configMode: 'manual'
-        cliProjectKey: 'FastPix_java-language-sdk-server-side'
-        cliProjectName: 'java-language-sdk-server-side'
-        extraProperties: |
-          sonar.projectKey=FastPix_java-language-sdk-server-side
-          sonar.organization=fastpix
-          sonar.projectName=java-language-sdk-server-side
-          sonar.sourceEncoding=UTF-8
-
-          sonar.sources=src/main
-
-          sonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/coverage/**,**/.gradle/**,**/.git/**,**/docs/**,**/azure-pipeline-files/**,**/*.md
-
-          sonar.verbose=true
-
-    - task: Gradle@3
-      displayName: 'Build Project'
-      inputs:
-        gradleWrapperFile: 'gradlew'
-        tasks: 'build -x test'
-        publishJUnitResults: false
-
-    - task: SonarCloudAnalyze@3
-      displayName: 'Run SonarCloud Code Analysis'
-
-    - task: SonarCloudPublish@3
-      displayName: 'Publish SonarCloud Quality Gate Results'
-      inputs:
-        pollingTimeoutSec: '300'
+- task: SonarCloudPublish@3
+  displayName: 'Publish SonarCloud Quality Gate Results'
+  inputs:
+    pollingTimeoutSec: '300'
