@@ -41,6 +41,7 @@ stages:
           sonar.sourceEncoding=UTF-8
           sonar.sources=.
           sonar.java.binaries=.
+          sonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/coverage/**
 
     - task: SonarCloudAnalyze@3
       displayName: 'Run SonarCloud Code Analysis'
