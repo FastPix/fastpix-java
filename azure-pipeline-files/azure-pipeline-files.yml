@@ -39,9 +39,29 @@ stages:
           sonar.organization=fastpix
           sonar.projectName=java-language-sdk-server-side
           sonar.sourceEncoding=UTF-8
-          sonar.sources=.
-          sonar.java.binaries=.
-          sonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/coverage/**
+
+          sonar.sources=src/main
+          sonar.tests=src/test
+
+          sonar.java.binaries=build/classes
+
+          sonar.exclusions=**/node_modules/**,\
+                            **/dist/**,\
+                            **/build/**,\
+                            **/coverage/**,\
+                            **/.gradle/**,\
+                            **/.git/**,\
+                            **/generated/**,\
+                            **/*.min.js
+
+          sonar.verbose=true
+
+    - task: Gradle@3
+      displayName: 'Build Project'
+      inputs:
+        gradleWrapperFile: 'gradlew'
+        tasks: 'build -x test'
+        publishJUnitResults: false
 
     - task: SonarCloudAnalyze@3
       displayName: 'Run SonarCloud Code Analysis'
