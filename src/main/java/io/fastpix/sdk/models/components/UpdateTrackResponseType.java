@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,19 +9,21 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * UpdateTrackResponseType
+ *
+ * <p>Specifies the type of track (audio or subtitle).
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * UpdateTrackResponseType
- * 
- * <p>Specifies the type of track (audio or subtitle).
- */
 public class UpdateTrackResponseType {
 
-    public static final UpdateTrackResponseType AUDIO = new UpdateTrackResponseType("audio");
-    public static final UpdateTrackResponseType SUBTITLE = new UpdateTrackResponseType("subtitle");
+    private static final String AUDIO_VALUE = "audio";
+    private static final String SUBTITLE_VALUE = "subtitle";
+
+    public static final UpdateTrackResponseType AUDIO = new UpdateTrackResponseType(AUDIO_VALUE);
+    public static final UpdateTrackResponseType SUBTITLE = new UpdateTrackResponseType(SUBTITLE_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -49,7 +49,7 @@ public class UpdateTrackResponseType {
     @JsonCreator
     public static UpdateTrackResponseType of(String value) {
         synchronized (UpdateTrackResponseType.class) {
-            return values.computeIfAbsent(value, v -> new UpdateTrackResponseType(v));
+            return values.computeIfAbsent(value, UpdateTrackResponseType::new);
         }
     }
 
@@ -97,23 +97,23 @@ public class UpdateTrackResponseType {
 
     private static final Map<String, UpdateTrackResponseType> createValuesMap() {
         Map<String, UpdateTrackResponseType> map = new LinkedHashMap<>();
-        map.put("audio", AUDIO);
-        map.put("subtitle", SUBTITLE);
+        map.put(AUDIO_VALUE, AUDIO);
+        map.put(SUBTITLE_VALUE, SUBTITLE);
         return map;
     }
 
     private static final Map<String, UpdateTrackResponseTypeEnum> createEnumsMap() {
         Map<String, UpdateTrackResponseTypeEnum> map = new HashMap<>();
-        map.put("audio", UpdateTrackResponseTypeEnum.AUDIO);
-        map.put("subtitle", UpdateTrackResponseTypeEnum.SUBTITLE);
+        map.put(AUDIO_VALUE, UpdateTrackResponseTypeEnum.AUDIO);
+        map.put(SUBTITLE_VALUE, UpdateTrackResponseTypeEnum.SUBTITLE);
         return map;
     }
     
     
     public enum UpdateTrackResponseTypeEnum {
 
-        AUDIO("audio"),
-        SUBTITLE("subtitle"),;
+        AUDIO(AUDIO_VALUE),
+        SUBTITLE(SUBTITLE_VALUE),;
 
         private final String value;
 

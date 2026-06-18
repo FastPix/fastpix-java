@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.LazySingletonValue;
 import io.fastpix.sdk.utils.Utils;
@@ -19,37 +17,43 @@ import io.fastpix.sdk.utils.Utils;
  * <p>Generates subtitle files for audio/video files.
  */
 public class SubtitleInput {
+
+    private static final String PROP_TYPE = "type";
+    private static final String PROP_URL = "url";
+    private static final String PROP_LANGUAGE_NAME = "languageName";
+    private static final String PROP_LANGUAGE_CODE = "languageCode";
+
     /**
      * Defines the type of input.
      */
-    @JsonProperty("type")
+    @JsonProperty(PROP_TYPE)
     private String type;
 
     /**
      * The direct URL of the subtitle file.
      */
-    @JsonProperty("url")
+    @JsonProperty(PROP_URL)
     private String url;
 
     /**
      * Name of the language in which the subtitles will be generated.
      */
-    @JsonProperty("languageName")
+    @JsonProperty(PROP_LANGUAGE_NAME)
     private String languageName;
 
     /**
      * Language code for content localization
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("languageCode")
+    @JsonProperty(PROP_LANGUAGE_CODE)
     private LanguageCode languageCode;
 
     @JsonCreator
     public SubtitleInput(
-            @JsonProperty("type") @Nonnull String type,
-            @JsonProperty("url") @Nonnull String url,
-            @JsonProperty("languageName") @Nonnull String languageName,
-            @JsonProperty("languageCode") @Nullable LanguageCode languageCode) {
+            @JsonProperty(PROP_TYPE) @Nonnull String type,
+            @JsonProperty(PROP_URL) @Nonnull String url,
+            @JsonProperty(PROP_LANGUAGE_NAME) @Nonnull String languageName,
+            @JsonProperty(PROP_LANGUAGE_CODE) @Nullable LanguageCode languageCode) {
         this.type = Optional.ofNullable(type)
             .orElseThrow(() -> new IllegalArgumentException("type cannot be null"));
         this.url = Optional.ofNullable(url)
@@ -105,7 +109,7 @@ public class SubtitleInput {
      * Defines the type of input.
      */
     public SubtitleInput withType(@Nonnull String type) {
-        this.type = Utils.checkNotNull(type, "type");
+        this.type = Utils.checkNotNull(type, PROP_TYPE);
         return this;
     }
 
@@ -114,7 +118,7 @@ public class SubtitleInput {
      * The direct URL of the subtitle file.
      */
     public SubtitleInput withUrl(@Nonnull String url) {
-        this.url = Utils.checkNotNull(url, "url");
+        this.url = Utils.checkNotNull(url, PROP_URL);
         return this;
     }
 
@@ -123,7 +127,7 @@ public class SubtitleInput {
      * Name of the language in which the subtitles will be generated.
      */
     public SubtitleInput withLanguageName(@Nonnull String languageName) {
-        this.languageName = Utils.checkNotNull(languageName, "languageName");
+        this.languageName = Utils.checkNotNull(languageName, PROP_LANGUAGE_NAME);
         return this;
     }
 
@@ -163,10 +167,10 @@ public class SubtitleInput {
     @Override
     public String toString() {
         return Utils.toString(SubtitleInput.class,
-                "type", type,
-                "url", url,
-                "languageName", languageName,
-                "languageCode", languageCode);
+                PROP_TYPE, type,
+                PROP_URL, url,
+                PROP_LANGUAGE_NAME, languageName,
+                PROP_LANGUAGE_CODE, languageCode);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +192,7 @@ public class SubtitleInput {
          * Defines the type of input.
          */
         public Builder type(@Nonnull String type) {
-            this.type = Utils.checkNotNull(type, "type");
+            this.type = Utils.checkNotNull(type, PROP_TYPE);
             return this;
         }
 
@@ -196,7 +200,7 @@ public class SubtitleInput {
          * The direct URL of the subtitle file.
          */
         public Builder url(@Nonnull String url) {
-            this.url = Utils.checkNotNull(url, "url");
+            this.url = Utils.checkNotNull(url, PROP_URL);
             return this;
         }
 
@@ -204,7 +208,7 @@ public class SubtitleInput {
          * Name of the language in which the subtitles will be generated.
          */
         public Builder languageName(@Nonnull String languageName) {
-            this.languageName = Utils.checkNotNull(languageName, "languageName");
+            this.languageName = Utils.checkNotNull(languageName, PROP_LANGUAGE_NAME);
             return this;
         }
 
@@ -225,7 +229,7 @@ public class SubtitleInput {
 
         private static final LazySingletonValue<LanguageCode> _SINGLETON_VALUE_LanguageCode =
                 new LazySingletonValue<>(
-                        "languageCode",
+                        PROP_LANGUAGE_CODE,
                         "\"en-US\"",
                         new TypeReference<LanguageCode>() {});
     }

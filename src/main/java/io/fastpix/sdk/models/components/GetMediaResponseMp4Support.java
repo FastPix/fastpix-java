@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,13 +9,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
- * without runtime errors. Instances are immutable singletons with reference equality.
- * Use {@code asEnum()} for switch expressions.
- */
-/**
  * GetMediaResponseMp4Support
- * 
+ *
  * <p>Determines the type of MP4 support for the media.
  * - **none**: Disables MP4 support.
  * - **capped_4k**: Enables MP4 downloads with resolutions up to 4K.
@@ -26,10 +19,15 @@ import java.util.Optional;
  */
 public class GetMediaResponseMp4Support {
 
-    public static final GetMediaResponseMp4Support NONE = new GetMediaResponseMp4Support("none");
-    public static final GetMediaResponseMp4Support CAPPED4K = new GetMediaResponseMp4Support("capped_4k");
-    public static final GetMediaResponseMp4Support AUDIO_ONLY = new GetMediaResponseMp4Support("audioOnly");
-    public static final GetMediaResponseMp4Support AUDIO_ONLY_CAPPED4K = new GetMediaResponseMp4Support("audioOnly,capped_4k");
+    private static final String VALUE_NONE = "none";
+    private static final String VALUE_CAPPED_4K = "capped_4k";
+    private static final String VALUE_AUDIO_ONLY = "audioOnly";
+    private static final String VALUE_AUDIO_ONLY_CAPPED_4K = "audioOnly,capped_4k";
+
+    public static final GetMediaResponseMp4Support NONE = new GetMediaResponseMp4Support(VALUE_NONE);
+    public static final GetMediaResponseMp4Support CAPPED4K = new GetMediaResponseMp4Support(VALUE_CAPPED_4K);
+    public static final GetMediaResponseMp4Support AUDIO_ONLY = new GetMediaResponseMp4Support(VALUE_AUDIO_ONLY);
+    public static final GetMediaResponseMp4Support AUDIO_ONLY_CAPPED4K = new GetMediaResponseMp4Support(VALUE_AUDIO_ONLY_CAPPED_4K);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -46,16 +44,16 @@ public class GetMediaResponseMp4Support {
     }
 
     /**
-     * Returns a GetMediaResponseMp4Support with the given value. For a specific value the 
-     * returned object will always be a singleton so reference equality 
+     * Returns a GetMediaResponseMp4Support with the given value. For a specific value the
+     * returned object will always be a singleton so reference equality
      * is satisfied when the values are the same.
-     * 
+     *
      * @param value value to be wrapped as GetMediaResponseMp4Support
-     */ 
+     */
     @JsonCreator
     public static GetMediaResponseMp4Support of(String value) {
         synchronized (GetMediaResponseMp4Support.class) {
-            return values.computeIfAbsent(value, v -> new GetMediaResponseMp4Support(v));
+            return values.computeIfAbsent(value, GetMediaResponseMp4Support::new);
         }
     }
 
@@ -103,29 +101,29 @@ public class GetMediaResponseMp4Support {
 
     private static final Map<String, GetMediaResponseMp4Support> createValuesMap() {
         Map<String, GetMediaResponseMp4Support> map = new LinkedHashMap<>();
-        map.put("none", NONE);
-        map.put("capped_4k", CAPPED4K);
-        map.put("audioOnly", AUDIO_ONLY);
-        map.put("audioOnly,capped_4k", AUDIO_ONLY_CAPPED4K);
+        map.put(VALUE_NONE, NONE);
+        map.put(VALUE_CAPPED_4K, CAPPED4K);
+        map.put(VALUE_AUDIO_ONLY, AUDIO_ONLY);
+        map.put(VALUE_AUDIO_ONLY_CAPPED_4K, AUDIO_ONLY_CAPPED4K);
         return map;
     }
 
     private static final Map<String, GetMediaResponseMp4SupportEnum> createEnumsMap() {
         Map<String, GetMediaResponseMp4SupportEnum> map = new HashMap<>();
-        map.put("none", GetMediaResponseMp4SupportEnum.NONE);
-        map.put("capped_4k", GetMediaResponseMp4SupportEnum.CAPPED4K);
-        map.put("audioOnly", GetMediaResponseMp4SupportEnum.AUDIO_ONLY);
-        map.put("audioOnly,capped_4k", GetMediaResponseMp4SupportEnum.AUDIO_ONLY_CAPPED4K);
+        map.put(VALUE_NONE, GetMediaResponseMp4SupportEnum.NONE);
+        map.put(VALUE_CAPPED_4K, GetMediaResponseMp4SupportEnum.CAPPED4K);
+        map.put(VALUE_AUDIO_ONLY, GetMediaResponseMp4SupportEnum.AUDIO_ONLY);
+        map.put(VALUE_AUDIO_ONLY_CAPPED_4K, GetMediaResponseMp4SupportEnum.AUDIO_ONLY_CAPPED4K);
         return map;
     }
-    
-    
+
+
     public enum GetMediaResponseMp4SupportEnum {
 
-        NONE("none"),
-        CAPPED4K("capped_4k"),
-        AUDIO_ONLY("audioOnly"),
-        AUDIO_ONLY_CAPPED4K("audioOnly,capped_4k"),;
+        NONE(VALUE_NONE),
+        CAPPED4K(VALUE_CAPPED_4K),
+        AUDIO_ONLY(VALUE_AUDIO_ONLY),
+        AUDIO_ONLY_CAPPED4K(VALUE_AUDIO_ONLY_CAPPED_4K),;
 
         private final String value;
 
@@ -138,4 +136,3 @@ public class GetMediaResponseMp4Support {
         }
     }
 }
-

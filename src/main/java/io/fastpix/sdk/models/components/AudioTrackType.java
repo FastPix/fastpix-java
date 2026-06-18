@@ -9,18 +9,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * AudioTrackType
+ *
+ * <p>Defines the type of input track.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * AudioTrackType
- * 
- * <p>Defines the type of input track.
- */
 public class AudioTrackType {
 
-    public static final AudioTrackType AUDIO = new AudioTrackType("audio");
+    private static final String AUDIO_VALUE = "audio";
+
+    public static final AudioTrackType AUDIO = new AudioTrackType(AUDIO_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -46,7 +47,7 @@ public class AudioTrackType {
     @JsonCreator
     public static AudioTrackType of(String value) {
         synchronized (AudioTrackType.class) {
-            return values.computeIfAbsent(value, v -> new AudioTrackType(v));
+            return values.computeIfAbsent(value, AudioTrackType::new);
         }
     }
 
@@ -94,20 +95,20 @@ public class AudioTrackType {
 
     private static final Map<String, AudioTrackType> createValuesMap() {
         Map<String, AudioTrackType> map = new LinkedHashMap<>();
-        map.put("audio", AUDIO);
+        map.put(AUDIO_VALUE, AUDIO);
         return map;
     }
 
     private static final Map<String, AudioTrackTypeEnum> createEnumsMap() {
         Map<String, AudioTrackTypeEnum> map = new HashMap<>();
-        map.put("audio", AudioTrackTypeEnum.AUDIO);
+        map.put(AUDIO_VALUE, AudioTrackTypeEnum.AUDIO);
         return map;
     }
     
     
     public enum AudioTrackTypeEnum {
 
-        AUDIO("audio"),;
+        AUDIO(AUDIO_VALUE),;
 
         private final String value;
 

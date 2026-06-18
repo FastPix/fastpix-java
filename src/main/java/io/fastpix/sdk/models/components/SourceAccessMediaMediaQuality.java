@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,20 +9,23 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * SourceAccessMediaMediaQuality
+ *
+ * <p>The quality tier applied to the media.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * SourceAccessMediaMediaQuality
- * 
- * <p>The quality tier applied to the media.
- */
 public class SourceAccessMediaMediaQuality {
 
-    public static final SourceAccessMediaMediaQuality STANDARD = new SourceAccessMediaMediaQuality("standard");
-    public static final SourceAccessMediaMediaQuality PRO = new SourceAccessMediaMediaQuality("pro");
-    public static final SourceAccessMediaMediaQuality PREMIUM = new SourceAccessMediaMediaQuality("premium");
+    private static final String STANDARD_VALUE = "standard";
+    private static final String PRO_VALUE = "pro";
+    private static final String PREMIUM_VALUE = "premium";
+
+    public static final SourceAccessMediaMediaQuality STANDARD = new SourceAccessMediaMediaQuality(STANDARD_VALUE);
+    public static final SourceAccessMediaMediaQuality PRO = new SourceAccessMediaMediaQuality(PRO_VALUE);
+    public static final SourceAccessMediaMediaQuality PREMIUM = new SourceAccessMediaMediaQuality(PREMIUM_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -50,7 +51,7 @@ public class SourceAccessMediaMediaQuality {
     @JsonCreator
     public static SourceAccessMediaMediaQuality of(String value) {
         synchronized (SourceAccessMediaMediaQuality.class) {
-            return values.computeIfAbsent(value, v -> new SourceAccessMediaMediaQuality(v));
+            return values.computeIfAbsent(value, SourceAccessMediaMediaQuality::new);
         }
     }
 
@@ -98,26 +99,26 @@ public class SourceAccessMediaMediaQuality {
 
     private static final Map<String, SourceAccessMediaMediaQuality> createValuesMap() {
         Map<String, SourceAccessMediaMediaQuality> map = new LinkedHashMap<>();
-        map.put("standard", STANDARD);
-        map.put("pro", PRO);
-        map.put("premium", PREMIUM);
+        map.put(STANDARD_VALUE, STANDARD);
+        map.put(PRO_VALUE, PRO);
+        map.put(PREMIUM_VALUE, PREMIUM);
         return map;
     }
 
     private static final Map<String, SourceAccessMediaMediaQualityEnum> createEnumsMap() {
         Map<String, SourceAccessMediaMediaQualityEnum> map = new HashMap<>();
-        map.put("standard", SourceAccessMediaMediaQualityEnum.STANDARD);
-        map.put("pro", SourceAccessMediaMediaQualityEnum.PRO);
-        map.put("premium", SourceAccessMediaMediaQualityEnum.PREMIUM);
+        map.put(STANDARD_VALUE, SourceAccessMediaMediaQualityEnum.STANDARD);
+        map.put(PRO_VALUE, SourceAccessMediaMediaQualityEnum.PRO);
+        map.put(PREMIUM_VALUE, SourceAccessMediaMediaQualityEnum.PREMIUM);
         return map;
     }
     
     
     public enum SourceAccessMediaMediaQualityEnum {
 
-        STANDARD("standard"),
-        PRO("pro"),
-        PREMIUM("premium"),;
+        STANDARD(STANDARD_VALUE),
+        PRO(PRO_VALUE),
+        PREMIUM(PREMIUM_VALUE),;
 
         private final String value;
 

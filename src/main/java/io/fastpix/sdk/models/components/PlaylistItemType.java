@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,19 +9,21 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * PlaylistItemType
+ *
+ * <p>type of the playlist, when it was created
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * PlaylistItemType
- * 
- * <p>type of the playlist, when it was created
- */
 public class PlaylistItemType {
 
-    public static final PlaylistItemType MANUAL = new PlaylistItemType("manual");
-    public static final PlaylistItemType SMART = new PlaylistItemType("smart");
+    private static final String MANUAL_VALUE = "manual";
+    private static final String SMART_VALUE = "smart";
+
+    public static final PlaylistItemType MANUAL = new PlaylistItemType(MANUAL_VALUE);
+    public static final PlaylistItemType SMART = new PlaylistItemType(SMART_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -49,7 +49,7 @@ public class PlaylistItemType {
     @JsonCreator
     public static PlaylistItemType of(String value) {
         synchronized (PlaylistItemType.class) {
-            return values.computeIfAbsent(value, v -> new PlaylistItemType(v));
+            return values.computeIfAbsent(value, PlaylistItemType::new);
         }
     }
 
@@ -97,23 +97,23 @@ public class PlaylistItemType {
 
     private static final Map<String, PlaylistItemType> createValuesMap() {
         Map<String, PlaylistItemType> map = new LinkedHashMap<>();
-        map.put("manual", MANUAL);
-        map.put("smart", SMART);
+        map.put(MANUAL_VALUE, MANUAL);
+        map.put(SMART_VALUE, SMART);
         return map;
     }
 
     private static final Map<String, PlaylistItemTypeEnum> createEnumsMap() {
         Map<String, PlaylistItemTypeEnum> map = new HashMap<>();
-        map.put("manual", PlaylistItemTypeEnum.MANUAL);
-        map.put("smart", PlaylistItemTypeEnum.SMART);
+        map.put(MANUAL_VALUE, PlaylistItemTypeEnum.MANUAL);
+        map.put(SMART_VALUE, PlaylistItemTypeEnum.SMART);
         return map;
     }
     
     
     public enum PlaylistItemTypeEnum {
 
-        MANUAL("manual"),
-        SMART("smart"),;
+        MANUAL(MANUAL_VALUE),
+        SMART(SMART_VALUE),;
 
         private final String value;
 

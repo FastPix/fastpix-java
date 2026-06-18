@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -14,8 +11,10 @@ import io.fastpix.sdk.utils.Utils.JsonShape;
 import io.fastpix.sdk.utils.Utils.TypeReferenceWithShape;
 import io.fastpix.sdk.utils.Utils;
 
-@JsonDeserialize(using = LiveMediaClipsTrack._Deserializer.class)
+@JsonDeserialize(using = LiveMediaClipsTrack.Deserializer.class)
 public class LiveMediaClipsTrack {
+
+    private static final String VALUE_FIELD = "value";
 
     @JsonValue
     private final TypedObject value;
@@ -25,17 +24,17 @@ public class LiveMediaClipsTrack {
     }
 
     public static LiveMediaClipsTrack of(VideoTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new LiveMediaClipsTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static LiveMediaClipsTrack of(AudioTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new LiveMediaClipsTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static LiveMediaClipsTrack of(SubtitleTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new LiveMediaClipsTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
@@ -108,9 +107,9 @@ public class LiveMediaClipsTrack {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<LiveMediaClipsTrack> {
+    public static final class Deserializer extends OneOfDeserializer<LiveMediaClipsTrack> {
 
-        public _Deserializer() {
+        public Deserializer() {
             super(LiveMediaClipsTrack.class, false,
                   TypeReferenceWithShape.of(new TypeReference<VideoTrack>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<AudioTrack>() {}, JsonShape.DEFAULT),
@@ -121,7 +120,7 @@ public class LiveMediaClipsTrack {
     @Override
     public String toString() {
         return Utils.toString(LiveMediaClipsTrack.class,
-                "value", value);
+                VALUE_FIELD, value);
     }
 
 }

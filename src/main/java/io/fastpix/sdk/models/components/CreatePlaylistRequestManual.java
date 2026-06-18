@@ -13,45 +13,52 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
+
+    private static final String PROP_NAME = "name";
+    private static final String PROP_REFERENCE_ID = "referenceId";
+    private static final String PROP_TYPE = "type";
+    private static final String PROP_DESCRIPTION = "description";
+    private static final String PROP_LIMIT = "limit";
+
     /**
      * Name of the playlist.
      */
-    @JsonProperty("name")
+    @JsonProperty(PROP_NAME)
     private String name;
 
     /**
      * Unique string value assigned by user to the playlist.
      */
-    @JsonProperty("referenceId")
+    @JsonProperty(PROP_REFERENCE_ID)
     private String referenceId;
 
     /**
      * Manual playlist type (no `playOrder`).
      */
-    @JsonProperty("type")
+    @JsonProperty(PROP_TYPE)
     private CreatePlaylistRequestManualType type;
 
     /**
      * Description for a playlist (Optional).
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("description")
+    @JsonProperty(PROP_DESCRIPTION)
     private String description;
 
     /**
      * Optional parameter to limit no. of media in a playlist.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("limit")
+    @JsonProperty(PROP_LIMIT)
     private Long limit;
 
     @JsonCreator
     public CreatePlaylistRequestManual(
-            @JsonProperty("name") @Nonnull String name,
-            @JsonProperty("referenceId") @Nonnull String referenceId,
-            @JsonProperty("type") @Nonnull CreatePlaylistRequestManualType type,
-            @JsonProperty("description") @Nullable String description,
-            @JsonProperty("limit") @Nullable Long limit) {
+            @JsonProperty(PROP_NAME) @Nonnull String name,
+            @JsonProperty(PROP_REFERENCE_ID) @Nonnull String referenceId,
+            @JsonProperty(PROP_TYPE) @Nonnull CreatePlaylistRequestManualType type,
+            @JsonProperty(PROP_DESCRIPTION) @Nullable String description,
+            @JsonProperty(PROP_LIMIT) @Nullable Long limit) {
         this.name = Optional.ofNullable(name)
             .orElseThrow(() -> new IllegalArgumentException("name cannot be null"));
         this.referenceId = Optional.ofNullable(referenceId)
@@ -62,7 +69,7 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
         this.limit = Optional.ofNullable(limit)
             .orElse(Builder._SINGLETON_VALUE_Limit.value());
     }
-    
+
     public CreatePlaylistRequestManual(
             @Nonnull String name,
             @Nonnull String referenceId,
@@ -116,7 +123,7 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
      * Name of the playlist.
      */
     public CreatePlaylistRequestManual withName(@Nonnull String name) {
-        this.name = Utils.checkNotNull(name, "name");
+        this.name = Utils.checkNotNull(name, PROP_NAME);
         return this;
     }
 
@@ -125,7 +132,7 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
      * Unique string value assigned by user to the playlist.
      */
     public CreatePlaylistRequestManual withReferenceId(@Nonnull String referenceId) {
-        this.referenceId = Utils.checkNotNull(referenceId, "referenceId");
+        this.referenceId = Utils.checkNotNull(referenceId, PROP_REFERENCE_ID);
         return this;
     }
 
@@ -134,7 +141,7 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
      * Manual playlist type (no `playOrder`).
      */
     public CreatePlaylistRequestManual withType(@Nonnull CreatePlaylistRequestManualType type) {
-        this.type = Utils.checkNotNull(type, "type");
+        this.type = Utils.checkNotNull(type, PROP_TYPE);
         return this;
     }
 
@@ -166,29 +173,29 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
             return false;
         }
         CreatePlaylistRequestManual other = (CreatePlaylistRequestManual) o;
-        return 
+        return
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.referenceId, other.referenceId) &&
             Utils.enhancedDeepEquals(this.type, other.type) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.limit, other.limit);
     }
-    
+
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             name, referenceId, type,
             description, limit);
     }
-    
+
     @Override
     public String toString() {
         return Utils.toString(CreatePlaylistRequestManual.class,
-                "name", name,
-                "referenceId", referenceId,
-                "type", type,
-                "description", description,
-                "limit", limit);
+                PROP_NAME, name,
+                PROP_REFERENCE_ID, referenceId,
+                PROP_TYPE, type,
+                PROP_DESCRIPTION, description,
+                PROP_LIMIT, limit);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -212,7 +219,7 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
          * Name of the playlist.
          */
         public Builder name(@Nonnull String name) {
-            this.name = Utils.checkNotNull(name, "name");
+            this.name = Utils.checkNotNull(name, PROP_NAME);
             return this;
         }
 
@@ -220,7 +227,7 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
          * Unique string value assigned by user to the playlist.
          */
         public Builder referenceId(@Nonnull String referenceId) {
-            this.referenceId = Utils.checkNotNull(referenceId, "referenceId");
+            this.referenceId = Utils.checkNotNull(referenceId, PROP_REFERENCE_ID);
             return this;
         }
 
@@ -228,7 +235,7 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
          * Manual playlist type (no `playOrder`).
          */
         public Builder type(@Nonnull CreatePlaylistRequestManualType type) {
-            this.type = Utils.checkNotNull(type, "type");
+            this.type = Utils.checkNotNull(type, PROP_TYPE);
             return this;
         }
 
@@ -257,7 +264,7 @@ public class CreatePlaylistRequestManual implements CreatePlaylistRequest {
 
         private static final LazySingletonValue<Long> _SINGLETON_VALUE_Limit =
                 new LazySingletonValue<>(
-                        "limit",
+                        PROP_LIMIT,
                         "1000",
                         new TypeReference<Long>() {});
     }

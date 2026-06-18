@@ -15,6 +15,9 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class CreateMediaRequest {
+
+    private static final String INPUTS_FIELD = "inputs";
+
     /**
      * Add one input object at a time. For example, first add a **VideoInput** object. If you also need a
      * watermark, click **Add item** again and select **WatermarkInput**.
@@ -328,7 +331,7 @@ public class CreateMediaRequest {
      * Overview</a>.
      */
     public CreateMediaRequest withInputs(@Nonnull List<Input> inputs) {
-        this.inputs = Utils.checkNotNull(inputs, "inputs");
+        this.inputs = Utils.checkNotNull(inputs, INPUTS_FIELD);
         return this;
     }
 
@@ -517,7 +520,7 @@ public class CreateMediaRequest {
     @Override
     public String toString() {
         return Utils.toString(CreateMediaRequest.class,
-                "inputs", inputs,
+                INPUTS_FIELD, inputs,
                 "metadata", metadata,
                 "drmConfigurationId", drmConfigurationId,
                 "title", title,
@@ -587,7 +590,7 @@ public class CreateMediaRequest {
          * Overview</a>.
          */
         public Builder inputs(@Nonnull List<Input> inputs) {
-            this.inputs = Utils.checkNotNull(inputs, "inputs");
+            this.inputs = Utils.checkNotNull(inputs, INPUTS_FIELD);
             return this;
         }
 

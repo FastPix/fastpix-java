@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,25 +9,29 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
- * without runtime errors. Instances are immutable singletons with reference equality.
- * Use {@code asEnum()} for switch expressions.
- */
-/**
  * MediaMp4Support
- * 
+ *
  * <p>Determines the type of MP4 support for the media.
  * - **none**: Disables MP4 support.
  * - **capped_4k**: Enables MP4 downloads with resolutions up to 4K.
  * - **audioOnly**: Provides an MP4 stream containing only the audio.
  * - **audioOnly,capped_4k**: Enables both MP4 video downloads (up to 4K) and an audio-only stream.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
  */
 public class MediaMp4Support {
 
-    public static final MediaMp4Support NONE = new MediaMp4Support("none");
-    public static final MediaMp4Support CAPPED4K = new MediaMp4Support("capped_4k");
-    public static final MediaMp4Support AUDIO_ONLY = new MediaMp4Support("audioOnly");
-    public static final MediaMp4Support AUDIO_ONLY_CAPPED4K = new MediaMp4Support("audioOnly,capped_4k");
+    private static final String NONE_VALUE = "none";
+    private static final String CAPPED_4K_VALUE = "capped_4k";
+    private static final String AUDIO_ONLY_VALUE = "audioOnly";
+    private static final String AUDIO_ONLY_CAPPED_4K_VALUE = "audioOnly,capped_4k";
+
+    public static final MediaMp4Support NONE = new MediaMp4Support(NONE_VALUE);
+    public static final MediaMp4Support CAPPED4K = new MediaMp4Support(CAPPED_4K_VALUE);
+    public static final MediaMp4Support AUDIO_ONLY = new MediaMp4Support(AUDIO_ONLY_VALUE);
+    public static final MediaMp4Support AUDIO_ONLY_CAPPED4K = new MediaMp4Support(AUDIO_ONLY_CAPPED_4K_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -55,7 +57,7 @@ public class MediaMp4Support {
     @JsonCreator
     public static MediaMp4Support of(String value) {
         synchronized (MediaMp4Support.class) {
-            return values.computeIfAbsent(value, v -> new MediaMp4Support(v));
+            return values.computeIfAbsent(value, MediaMp4Support::new);
         }
     }
 
@@ -103,29 +105,29 @@ public class MediaMp4Support {
 
     private static final Map<String, MediaMp4Support> createValuesMap() {
         Map<String, MediaMp4Support> map = new LinkedHashMap<>();
-        map.put("none", NONE);
-        map.put("capped_4k", CAPPED4K);
-        map.put("audioOnly", AUDIO_ONLY);
-        map.put("audioOnly,capped_4k", AUDIO_ONLY_CAPPED4K);
+        map.put(NONE_VALUE, NONE);
+        map.put(CAPPED_4K_VALUE, CAPPED4K);
+        map.put(AUDIO_ONLY_VALUE, AUDIO_ONLY);
+        map.put(AUDIO_ONLY_CAPPED_4K_VALUE, AUDIO_ONLY_CAPPED4K);
         return map;
     }
 
     private static final Map<String, MediaMp4SupportEnum> createEnumsMap() {
         Map<String, MediaMp4SupportEnum> map = new HashMap<>();
-        map.put("none", MediaMp4SupportEnum.NONE);
-        map.put("capped_4k", MediaMp4SupportEnum.CAPPED4K);
-        map.put("audioOnly", MediaMp4SupportEnum.AUDIO_ONLY);
-        map.put("audioOnly,capped_4k", MediaMp4SupportEnum.AUDIO_ONLY_CAPPED4K);
+        map.put(NONE_VALUE, MediaMp4SupportEnum.NONE);
+        map.put(CAPPED_4K_VALUE, MediaMp4SupportEnum.CAPPED4K);
+        map.put(AUDIO_ONLY_VALUE, MediaMp4SupportEnum.AUDIO_ONLY);
+        map.put(AUDIO_ONLY_CAPPED_4K_VALUE, MediaMp4SupportEnum.AUDIO_ONLY_CAPPED4K);
         return map;
     }
     
     
     public enum MediaMp4SupportEnum {
 
-        NONE("none"),
-        CAPPED4K("capped_4k"),
-        AUDIO_ONLY("audioOnly"),
-        AUDIO_ONLY_CAPPED4K("audioOnly,capped_4k"),;
+        NONE(NONE_VALUE),
+        CAPPED4K(CAPPED_4K_VALUE),
+        AUDIO_ONLY(AUDIO_ONLY_VALUE),
+        AUDIO_ONLY_CAPPED4K(AUDIO_ONLY_CAPPED_4K_VALUE),;
 
         private final String value;
 

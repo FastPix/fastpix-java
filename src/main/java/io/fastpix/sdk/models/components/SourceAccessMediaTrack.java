@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -14,8 +11,10 @@ import io.fastpix.sdk.utils.Utils.JsonShape;
 import io.fastpix.sdk.utils.Utils.TypeReferenceWithShape;
 import io.fastpix.sdk.utils.Utils;
 
-@JsonDeserialize(using = SourceAccessMediaTrack._Deserializer.class)
+@JsonDeserialize(using = SourceAccessMediaTrack.Deserializer.class)
 public class SourceAccessMediaTrack {
+
+    private static final String VALUE_FIELD = "value";
 
     @JsonValue
     private final TypedObject value;
@@ -25,17 +24,17 @@ public class SourceAccessMediaTrack {
     }
 
     public static SourceAccessMediaTrack of(VideoTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new SourceAccessMediaTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static SourceAccessMediaTrack of(AudioTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new SourceAccessMediaTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static SourceAccessMediaTrack of(SubtitleTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new SourceAccessMediaTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
@@ -108,9 +107,9 @@ public class SourceAccessMediaTrack {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<SourceAccessMediaTrack> {
+    public static final class Deserializer extends OneOfDeserializer<SourceAccessMediaTrack> {
 
-        public _Deserializer() {
+        public Deserializer() {
             super(SourceAccessMediaTrack.class, false,
                   TypeReferenceWithShape.of(new TypeReference<VideoTrack>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<AudioTrack>() {}, JsonShape.DEFAULT),
@@ -121,7 +120,7 @@ public class SourceAccessMediaTrack {
     @Override
     public String toString() {
         return Utils.toString(SourceAccessMediaTrack.class,
-                "value", value);
+                VALUE_FIELD, value);
     }
 
 }

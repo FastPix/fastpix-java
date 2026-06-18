@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -14,8 +11,10 @@ import io.fastpix.sdk.utils.Utils.JsonShape;
 import io.fastpix.sdk.utils.Utils.TypeReferenceWithShape;
 import io.fastpix.sdk.utils.Utils;
 
-@JsonDeserialize(using = VideoInputSegmentUnion._Deserializer.class)
+@JsonDeserialize(using = VideoInputSegmentUnion.Deserializer.class)
 public class VideoInputSegmentUnion {
+
+    private static final String VALUE_FIELD = "value";
 
     @JsonValue
     private final TypedObject value;
@@ -25,12 +24,12 @@ public class VideoInputSegmentUnion {
     }
 
     public static VideoInputSegmentUnion of(VideoInputSegment1 value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new VideoInputSegmentUnion(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static VideoInputSegmentUnion of(VideoInputSegment2 value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new VideoInputSegmentUnion(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
@@ -90,9 +89,9 @@ public class VideoInputSegmentUnion {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<VideoInputSegmentUnion> {
+    public static final class Deserializer extends OneOfDeserializer<VideoInputSegmentUnion> {
 
-        public _Deserializer() {
+        public Deserializer() {
             super(VideoInputSegmentUnion.class, false,
                   TypeReferenceWithShape.of(new TypeReference<VideoInputSegment1>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<VideoInputSegment2>() {}, JsonShape.DEFAULT));
@@ -102,7 +101,7 @@ public class VideoInputSegmentUnion {
     @Override
     public String toString() {
         return Utils.toString(VideoInputSegmentUnion.class,
-                "value", value);
+                VALUE_FIELD, value);
     }
 
 }

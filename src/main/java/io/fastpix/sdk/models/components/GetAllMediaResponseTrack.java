@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -17,6 +14,8 @@ import io.fastpix.sdk.utils.Utils;
 @JsonDeserialize(using = GetAllMediaResponseTrack._Deserializer.class)
 public class GetAllMediaResponseTrack {
 
+    private static final String PROP_VALUE = "value";
+
     @JsonValue
     private final TypedObject value;
     
@@ -25,17 +24,17 @@ public class GetAllMediaResponseTrack {
     }
 
     public static GetAllMediaResponseTrack of(VideoTrackForGetAll value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, PROP_VALUE);
         return new GetAllMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static GetAllMediaResponseTrack of(AudioTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, PROP_VALUE);
         return new GetAllMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static GetAllMediaResponseTrack of(SubtitleTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, PROP_VALUE);
         return new GetAllMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
@@ -107,7 +106,10 @@ public class GetAllMediaResponseTrack {
         return Utils.enhancedHash(value.value());
     }
     
-    @SuppressWarnings("serial")
+    // Leading-underscore name is an intentional SDK-wide convention marking internal
+    // Jackson deserializer machinery (referenced only via @JsonDeserialize); renaming
+    // would be inconsistent with the rest of the generated union types.
+    @SuppressWarnings({"serial", "java:S101"})
     public static final class _Deserializer extends OneOfDeserializer<GetAllMediaResponseTrack> {
 
         public _Deserializer() {
@@ -121,7 +123,7 @@ public class GetAllMediaResponseTrack {
     @Override
     public String toString() {
         return Utils.toString(GetAllMediaResponseTrack.class,
-                "value", value);
+                PROP_VALUE, value);
     }
 
 }

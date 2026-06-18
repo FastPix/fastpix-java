@@ -3,13 +3,15 @@ package io.fastpix.sdk.models.components;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class UpdatePlaylistRequest {
+
+    private static final String NAME_FIELD = "name";
+    private static final String DESCRIPTION_FIELD = "description";
+
     /**
      * New name to the playlist.
      */
@@ -55,7 +57,7 @@ public class UpdatePlaylistRequest {
      * New name to the playlist.
      */
     public UpdatePlaylistRequest withName(@Nonnull String name) {
-        this.name = Utils.checkNotNull(name, "name");
+        this.name = Utils.checkNotNull(name, NAME_FIELD);
         return this;
     }
 
@@ -64,7 +66,7 @@ public class UpdatePlaylistRequest {
      * Updated description to the playlist.
      */
     public UpdatePlaylistRequest withDescription(@Nonnull String description) {
-        this.description = Utils.checkNotNull(description, "description");
+        this.description = Utils.checkNotNull(description, DESCRIPTION_FIELD);
         return this;
     }
 
@@ -92,8 +94,8 @@ public class UpdatePlaylistRequest {
     @Override
     public String toString() {
         return Utils.toString(UpdatePlaylistRequest.class,
-                "name", name,
-                "description", description);
+                NAME_FIELD, name,
+                DESCRIPTION_FIELD, description);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -111,7 +113,7 @@ public class UpdatePlaylistRequest {
          * New name to the playlist.
          */
         public Builder name(@Nonnull String name) {
-            this.name = Utils.checkNotNull(name, "name");
+            this.name = Utils.checkNotNull(name, NAME_FIELD);
             return this;
         }
 
@@ -119,7 +121,7 @@ public class UpdatePlaylistRequest {
          * Updated description to the playlist.
          */
         public Builder description(@Nonnull String description) {
-            this.description = Utils.checkNotNull(description, "description");
+            this.description = Utils.checkNotNull(description, DESCRIPTION_FIELD);
             return this;
         }
 

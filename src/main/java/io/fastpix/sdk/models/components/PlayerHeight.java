@@ -4,10 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Long;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -95,7 +91,10 @@ public class PlayerHeight {
         return Utils.enhancedHash(value.value());
     }
     
-    @SuppressWarnings("serial")
+    // Leading-underscore name is an intentional SDK-wide convention marking internal
+    // Jackson deserializer machinery (referenced only via @JsonDeserialize); renaming
+    // would be inconsistent with the rest of the generated union types.
+    @SuppressWarnings({"serial", "java:S101"})
     public static final class _Deserializer extends OneOfDeserializer<PlayerHeight> {
 
         public _Deserializer() {

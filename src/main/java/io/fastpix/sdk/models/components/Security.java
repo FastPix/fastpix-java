@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.HasSecurity;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -11,6 +9,9 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class Security implements HasSecurity {
+
+    private static final String USERNAME_NAME = "username";
+    private static final String PASSWORD_NAME = "password";
 
     @FastpixMetadata("security:scheme=true,type=http,subtype=basic,name=username")
     private String username;
@@ -43,13 +44,13 @@ public class Security implements HasSecurity {
 
 
     public Security withUsername(@Nonnull String username) {
-        this.username = Utils.checkNotNull(username, "username");
+        this.username = Utils.checkNotNull(username, USERNAME_NAME);
         return this;
     }
 
 
     public Security withPassword(@Nonnull String password) {
-        this.password = Utils.checkNotNull(password, "password");
+        this.password = Utils.checkNotNull(password, PASSWORD_NAME);
         return this;
     }
 
@@ -77,8 +78,8 @@ public class Security implements HasSecurity {
     @Override
     public String toString() {
         return Utils.toString(Security.class,
-                "username", username,
-                "password", password);
+                USERNAME_NAME, username,
+                PASSWORD_NAME, password);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -93,12 +94,12 @@ public class Security implements HasSecurity {
         }
 
         public Builder username(@Nonnull String username) {
-            this.username = Utils.checkNotNull(username, "username");
+            this.username = Utils.checkNotNull(username, USERNAME_NAME);
             return this;
         }
 
         public Builder password(@Nonnull String password) {
-            this.password = Utils.checkNotNull(password, "password");
+            this.password = Utils.checkNotNull(password, PASSWORD_NAME);
             return this;
         }
 

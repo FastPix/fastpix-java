@@ -1,9 +1,5 @@
 package io.fastpix.sdk.models.components;
 
-import java.lang.IllegalArgumentException;
-import java.lang.Object;
-import java.lang.Override;
-import java.lang.String;
 import io.fastpix.sdk.utils.GenericTypeIdResolver;
 
 

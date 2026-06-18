@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,20 +9,23 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * GetMediaResponseMediaQuality
+ *
+ * <p>The quality tier applied to the media.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * GetMediaResponseMediaQuality
- * 
- * <p>The quality tier applied to the media.
- */
 public class GetMediaResponseMediaQuality {
 
-    public static final GetMediaResponseMediaQuality STANDARD = new GetMediaResponseMediaQuality("standard");
-    public static final GetMediaResponseMediaQuality PRO = new GetMediaResponseMediaQuality("pro");
-    public static final GetMediaResponseMediaQuality PREMIUM = new GetMediaResponseMediaQuality("premium");
+    private static final String STANDARD_VALUE = "standard";
+    private static final String PRO_VALUE = "pro";
+    private static final String PREMIUM_VALUE = "premium";
+
+    public static final GetMediaResponseMediaQuality STANDARD = new GetMediaResponseMediaQuality(STANDARD_VALUE);
+    public static final GetMediaResponseMediaQuality PRO = new GetMediaResponseMediaQuality(PRO_VALUE);
+    public static final GetMediaResponseMediaQuality PREMIUM = new GetMediaResponseMediaQuality(PREMIUM_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -50,7 +51,7 @@ public class GetMediaResponseMediaQuality {
     @JsonCreator
     public static GetMediaResponseMediaQuality of(String value) {
         synchronized (GetMediaResponseMediaQuality.class) {
-            return values.computeIfAbsent(value, v -> new GetMediaResponseMediaQuality(v));
+            return values.computeIfAbsent(value, GetMediaResponseMediaQuality::new);
         }
     }
 
@@ -98,26 +99,26 @@ public class GetMediaResponseMediaQuality {
 
     private static final Map<String, GetMediaResponseMediaQuality> createValuesMap() {
         Map<String, GetMediaResponseMediaQuality> map = new LinkedHashMap<>();
-        map.put("standard", STANDARD);
-        map.put("pro", PRO);
-        map.put("premium", PREMIUM);
+        map.put(STANDARD_VALUE, STANDARD);
+        map.put(PRO_VALUE, PRO);
+        map.put(PREMIUM_VALUE, PREMIUM);
         return map;
     }
 
     private static final Map<String, GetMediaResponseMediaQualityEnum> createEnumsMap() {
         Map<String, GetMediaResponseMediaQualityEnum> map = new HashMap<>();
-        map.put("standard", GetMediaResponseMediaQualityEnum.STANDARD);
-        map.put("pro", GetMediaResponseMediaQualityEnum.PRO);
-        map.put("premium", GetMediaResponseMediaQualityEnum.PREMIUM);
+        map.put(STANDARD_VALUE, GetMediaResponseMediaQualityEnum.STANDARD);
+        map.put(PRO_VALUE, GetMediaResponseMediaQualityEnum.PRO);
+        map.put(PREMIUM_VALUE, GetMediaResponseMediaQualityEnum.PREMIUM);
         return map;
     }
     
     
     public enum GetMediaResponseMediaQualityEnum {
 
-        STANDARD("standard"),
-        PRO("pro"),
-        PREMIUM("premium"),;
+        STANDARD(STANDARD_VALUE),
+        PRO(PRO_VALUE),
+        PREMIUM(PREMIUM_VALUE),;
 
         private final String value;
 

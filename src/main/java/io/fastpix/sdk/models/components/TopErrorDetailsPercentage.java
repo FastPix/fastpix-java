@@ -4,11 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Double;
-import java.lang.Long;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -21,7 +16,7 @@ import io.fastpix.sdk.utils.Utils;
  * 
  * <p>views affected by the specific errors.
  */
-@JsonDeserialize(using = TopErrorDetailsPercentage._Deserializer.class)
+@JsonDeserialize(using = TopErrorDetailsPercentage.Deserializer.class)
 public class TopErrorDetailsPercentage {
 
     @JsonValue
@@ -95,9 +90,9 @@ public class TopErrorDetailsPercentage {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<TopErrorDetailsPercentage> {
+    public static final class Deserializer extends OneOfDeserializer<TopErrorDetailsPercentage> {
 
-        public _Deserializer() {
+        public Deserializer() {
             super(TopErrorDetailsPercentage.class, false,
                   TypeReferenceWithShape.of(new TypeReference<Long>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<Double>() {}, JsonShape.DEFAULT));

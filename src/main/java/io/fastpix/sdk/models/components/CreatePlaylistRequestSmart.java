@@ -13,6 +13,13 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
+
+    private static final String NAME_FIELD = "name";
+    private static final String REFERENCE_ID_FIELD = "referenceId";
+    private static final String TYPE_FIELD = "type";
+    private static final String PLAY_ORDER_FIELD = "playOrder";
+    private static final String METADATA_FIELD = "metadata";
+
     /**
      * Name of the playlist.
      */
@@ -153,7 +160,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
      * Name of the playlist.
      */
     public CreatePlaylistRequestSmart withName(@Nonnull String name) {
-        this.name = Utils.checkNotNull(name, "name");
+        this.name = Utils.checkNotNull(name, NAME_FIELD);
         return this;
     }
 
@@ -162,7 +169,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
      * Unique string value assigned by user to the playlist.
      */
     public CreatePlaylistRequestSmart withReferenceId(@Nonnull String referenceId) {
-        this.referenceId = Utils.checkNotNull(referenceId, "referenceId");
+        this.referenceId = Utils.checkNotNull(referenceId, REFERENCE_ID_FIELD);
         return this;
     }
 
@@ -171,7 +178,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
      * For a smart playlist metadata is required.
      */
     public CreatePlaylistRequestSmart withType(@Nonnull CreatePlaylistRequestSmartType type) {
-        this.type = Utils.checkNotNull(type, "type");
+        this.type = Utils.checkNotNull(type, TYPE_FIELD);
         return this;
     }
 
@@ -189,7 +196,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
      * Determines the insertion order of media into playlist.
      */
     public CreatePlaylistRequestSmart withPlayOrder(@Nonnull PlaylistOrder playOrder) {
-        this.playOrder = Utils.checkNotNull(playOrder, "playOrder");
+        this.playOrder = Utils.checkNotNull(playOrder, PLAY_ORDER_FIELD);
         return this;
     }
 
@@ -208,7 +215,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
      * `createdDate` is added. Optionally, you can include media based on `updatedDate`.
      */
     public CreatePlaylistRequestSmart withMetadata(@Nonnull Metadata metadata) {
-        this.metadata = Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Utils.checkNotNull(metadata, METADATA_FIELD);
         return this;
     }
 
@@ -243,13 +250,13 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
     @Override
     public String toString() {
         return Utils.toString(CreatePlaylistRequestSmart.class,
-                "name", name,
-                "referenceId", referenceId,
-                "type", type,
+                NAME_FIELD, name,
+                REFERENCE_ID_FIELD, referenceId,
+                TYPE_FIELD, type,
                 "description", description,
-                "playOrder", playOrder,
+                PLAY_ORDER_FIELD, playOrder,
                 "limit", limit,
-                "metadata", metadata);
+                METADATA_FIELD, metadata);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -277,7 +284,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
          * Name of the playlist.
          */
         public Builder name(@Nonnull String name) {
-            this.name = Utils.checkNotNull(name, "name");
+            this.name = Utils.checkNotNull(name, NAME_FIELD);
             return this;
         }
 
@@ -285,7 +292,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
          * Unique string value assigned by user to the playlist.
          */
         public Builder referenceId(@Nonnull String referenceId) {
-            this.referenceId = Utils.checkNotNull(referenceId, "referenceId");
+            this.referenceId = Utils.checkNotNull(referenceId, REFERENCE_ID_FIELD);
             return this;
         }
 
@@ -293,7 +300,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
          * For a smart playlist metadata is required.
          */
         public Builder type(@Nonnull CreatePlaylistRequestSmartType type) {
-            this.type = Utils.checkNotNull(type, "type");
+            this.type = Utils.checkNotNull(type, TYPE_FIELD);
             return this;
         }
 
@@ -309,7 +316,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
          * Determines the insertion order of media into playlist.
          */
         public Builder playOrder(@Nonnull PlaylistOrder playOrder) {
-            this.playOrder = Utils.checkNotNull(playOrder, "playOrder");
+            this.playOrder = Utils.checkNotNull(playOrder, PLAY_ORDER_FIELD);
             return this;
         }
 
@@ -326,7 +333,7 @@ public class CreatePlaylistRequestSmart implements CreatePlaylistRequest {
          * `createdDate` is added. Optionally, you can include media based on `updatedDate`.
          */
         public Builder metadata(@Nonnull Metadata metadata) {
-            this.metadata = Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Utils.checkNotNull(metadata, METADATA_FIELD);
             return this;
         }
 

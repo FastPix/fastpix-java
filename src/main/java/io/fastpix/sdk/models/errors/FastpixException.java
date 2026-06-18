@@ -9,14 +9,14 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "java:S1165", "java:S1452"})
 public abstract class FastpixException extends RuntimeException {
 
     private int code;
     private byte[] body;
-    private HttpResponse<?> rawResponse;
+    private transient HttpResponse<?> rawResponse;
 
-    public FastpixException(String message, int code, @Nullable byte[] body, HttpResponse<?> rawResponse, @Nullable Throwable cause) {
+    protected FastpixException(String message, int code, @Nullable byte[] body, HttpResponse<?> rawResponse, @Nullable Throwable cause) {
         super(message, cause);
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(rawResponse, "rawResponse");
