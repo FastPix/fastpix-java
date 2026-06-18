@@ -4,7 +4,6 @@ import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.String;
 import io.fastpix.sdk.models.operations.CreateMediaPlaybackIdRequest;
 import io.fastpix.sdk.models.operations.CreateMediaPlaybackIdRequestBody;
 import io.fastpix.sdk.models.operations.CreateMediaPlaybackIdRequestBuilder;
@@ -38,6 +37,7 @@ import io.fastpix.sdk.utils.Options;
 /**
  * Operations for video playback management
  */
+@SuppressWarnings("java:S6539") // SDK facade: high coupling is inherent — each method delegates to a distinct operation; splitting would break the public API.
 public class Playback {
     private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;

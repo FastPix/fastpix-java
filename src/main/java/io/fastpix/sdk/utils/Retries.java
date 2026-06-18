@@ -140,11 +140,11 @@ public class Retries {
         }
     }
 
-    public final static Builder builder() {
+    public static final Builder builder() {
         return new Builder();
     }
 
-    public final static class Builder {
+    public static final class Builder {
 
         private Callable<HttpResponse<InputStream>> action;
         private RetryConfig retryConfig;

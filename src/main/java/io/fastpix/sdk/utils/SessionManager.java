@@ -33,7 +33,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         String sessionKey();
     }
 
-    public final static class Session<T> {
+    public static final class Session<T> {
         private final T credentials;
         private final Optional<String> token;
         private final List<String> scopes;
@@ -194,7 +194,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         }
     }
 
-    final static class TokenResponse {
+    static final class TokenResponse {
 
         @JsonProperty("access_token")
         Optional<String> accessToken;

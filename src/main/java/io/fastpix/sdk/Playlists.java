@@ -4,8 +4,6 @@ import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.String;
 import io.fastpix.sdk.models.components.CreatePlaylistRequest;
 import io.fastpix.sdk.models.components.MediaIdsRequest;
 import io.fastpix.sdk.models.components.UpdatePlaylistRequest;
@@ -36,6 +34,9 @@ import io.fastpix.sdk.utils.Headers;
 import io.fastpix.sdk.utils.Options;
 
 
+// Facade aggregating one operation trio (request/builder/response) per playlist
+// endpoint; the high class-fan-out is inherent to this API surface, not a design smell.
+@SuppressWarnings("java:S6539")
 public class Playlists {
     private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;

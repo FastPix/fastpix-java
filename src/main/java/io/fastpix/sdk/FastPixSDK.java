@@ -1,6 +1,4 @@
 package io.fastpix.sdk;
-
-import java.lang.String;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -81,6 +79,9 @@ import io.fastpix.sdk.utils.Utils;
  * <p>- **Prevent tampering:** Ensure requested assets have not been modified. - **Time-bound access:**
  * Enable signed URLs with expiration for controlled viewing windows.
  */
+// Root SDK aggregator exposing every API group as a single entry point; the high
+// class-fan-out is inherent to this facade's purpose, not a design smell.
+@SuppressWarnings("java:S6539")
 public class FastPixSDK {
     private static final Headers _headers = Headers.EMPTY;
 

@@ -368,7 +368,7 @@ public class ListBreakdownValuesRequest {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private ListBreakdownValuesMetricId metricId;
 

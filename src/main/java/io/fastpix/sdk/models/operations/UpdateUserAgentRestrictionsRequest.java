@@ -100,7 +100,7 @@ public class UpdateUserAgentRestrictionsRequest {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String mediaId;
 

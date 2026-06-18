@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,20 +9,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
- * without runtime errors. Instances are immutable singletons with reference equality.
- * Use {@code asEnum()} for switch expressions.
- */
-/**
  * AccessPolicy
  * 
  * <p>Access policy for media content
  */
 public class AccessPolicy {
 
-    public static final AccessPolicy PUBLIC = new AccessPolicy("public");
-    public static final AccessPolicy PRIVATE = new AccessPolicy("private");
-    public static final AccessPolicy DRM = new AccessPolicy("drm");
+    private static final String VALUE_PUBLIC = "public";
+    private static final String VALUE_PRIVATE = "private";
+    private static final String VALUE_DRM = "drm";
+
+    public static final AccessPolicy PUBLIC = new AccessPolicy(VALUE_PUBLIC);
+    public static final AccessPolicy PRIVATE = new AccessPolicy(VALUE_PRIVATE);
+    public static final AccessPolicy DRM = new AccessPolicy(VALUE_DRM);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -50,7 +47,7 @@ public class AccessPolicy {
     @JsonCreator
     public static AccessPolicy of(String value) {
         synchronized (AccessPolicy.class) {
-            return values.computeIfAbsent(value, v -> new AccessPolicy(v));
+            return values.computeIfAbsent(value, AccessPolicy::new);
         }
     }
 
@@ -98,26 +95,26 @@ public class AccessPolicy {
 
     private static final Map<String, AccessPolicy> createValuesMap() {
         Map<String, AccessPolicy> map = new LinkedHashMap<>();
-        map.put("public", PUBLIC);
-        map.put("private", PRIVATE);
-        map.put("drm", DRM);
+        map.put(VALUE_PUBLIC, PUBLIC);
+        map.put(VALUE_PRIVATE, PRIVATE);
+        map.put(VALUE_DRM, DRM);
         return map;
     }
 
     private static final Map<String, AccessPolicyEnum> createEnumsMap() {
         Map<String, AccessPolicyEnum> map = new HashMap<>();
-        map.put("public", AccessPolicyEnum.PUBLIC);
-        map.put("private", AccessPolicyEnum.PRIVATE);
-        map.put("drm", AccessPolicyEnum.DRM);
+        map.put(VALUE_PUBLIC, AccessPolicyEnum.PUBLIC);
+        map.put(VALUE_PRIVATE, AccessPolicyEnum.PRIVATE);
+        map.put(VALUE_DRM, AccessPolicyEnum.DRM);
         return map;
     }
     
     
     public enum AccessPolicyEnum {
 
-        PUBLIC("public"),
-        PRIVATE("private"),
-        DRM("drm"),;
+        PUBLIC(VALUE_PUBLIC),
+        PRIVATE(VALUE_PRIVATE),
+        DRM(VALUE_DRM),;
 
         private final String value;
 

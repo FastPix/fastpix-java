@@ -24,7 +24,7 @@ The FastPix Java SDK simplifies integration with the FastPix platform. It provid
 To get started with the FastPix Java SDK, ensure you have the following:
 
 - The FastPix APIs are authenticated using a **Username** and a **Password**. You must generate these credentials to use the SDK.
-- Follow the steps in the [Authentication with Basic Auth](https://fastpix.com/docs/get-started/overview) guide to obtain your credentials.
+- Follow the steps in the [Authentication with Basic Auth](https://fastpix.com/docs/getting-started/activate-your-account) guide to obtain your credentials.
 
 ### Environment Variables (Optional)
 
@@ -347,7 +347,7 @@ For detailed documentation, see [FastPix Video on Demand Overview](https://fastp
 
 Stream, manage, and transform live video content with real-time broadcasting capabilities.
 
-For detailed documentation, see [FastPix Live Stream Overview](https://fastpix.com/docs/get-started/live-overview).
+For detailed documentation, see [FastPix Live Stream Overview](https://fastpix.com/docs/live-stream-api/overview).
 
 #### Start Live Stream
 - [Create Stream](docs/sdks/streams/README.md#create) - Initialize new live streaming session with DVR mode support
@@ -377,7 +377,7 @@ For detailed documentation, see [FastPix Live Stream Overview](https://fastpix.c
 
 Monitor video performance and quality with comprehensive analytics and real-time metrics.
 
-For detailed documentation, see [FastPix Video Data Overview](https://fastpix.com/docs/concepts/what-video-data-do-we-capture).
+For detailed documentation, see [FastPix Video Data Overview](https://fastpix.com/docs/video-data-api/overview).
 
 #### Metrics
 - [List Breakdown Values](docs/sdks/metrics/README.md#listbreakdown) - Get detailed breakdown of metrics by dimension
@@ -937,6 +937,6 @@ We value community contributions and feedback. Feel free to submit pull requests
 
 ## Detailed Usage
 
-For comprehensive understanding of each API's functionality, including detailed request and response specifications, parameter descriptions, and additional examples, please refer to the [FastPix API Reference](https://fastpix.com/docs/video-security/secure-media-access-with-jwts).
+For comprehensive understanding of each API's functionality, including detailed request and response specifications, parameter descriptions, and additional examples, please refer to the [FastPix API Reference](https://fastpix.com/docs/product-os-api/overview).
 
 The API reference offers complete documentation for all available endpoints and features, enabling developers to integrate and leverage FastPix APIs effectively.

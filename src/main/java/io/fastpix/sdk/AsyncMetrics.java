@@ -4,7 +4,6 @@ import static io.fastpix.sdk.operations.Operations.AsyncRequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.String;
 import java.util.concurrent.CompletableFuture;
 import io.fastpix.sdk.models.operations.Dimension;
 import io.fastpix.sdk.models.operations.GetTimeseriesDataRequest;

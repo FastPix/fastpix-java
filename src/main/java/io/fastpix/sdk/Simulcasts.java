@@ -4,7 +4,6 @@ import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.String;
 import io.fastpix.sdk.models.components.SimulcastUpdateRequest;
 import io.fastpix.sdk.models.operations.UpdateSpecificSimulcastOfStreamRequest;
 import io.fastpix.sdk.models.operations.UpdateSpecificSimulcastOfStreamRequestBuilder;

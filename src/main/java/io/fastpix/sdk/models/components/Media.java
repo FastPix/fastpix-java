@@ -798,7 +798,7 @@ public class Media {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private JsonNullable<String> thumbnail;
 

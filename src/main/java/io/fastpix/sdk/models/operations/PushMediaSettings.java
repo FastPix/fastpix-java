@@ -589,7 +589,7 @@ public class PushMediaSettings {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private DirectUploadVideoMediaAccessPolicy accessPolicy;
 

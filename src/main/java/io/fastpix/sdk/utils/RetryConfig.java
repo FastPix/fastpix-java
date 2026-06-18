@@ -29,11 +29,11 @@ public class RetryConfig {
         return backoff;
     }
 
-    public final static Builder builder() {
+    public static final Builder builder() {
         return new Builder();
     }
 
-    public final static class Builder {
+    public static final class Builder {
 
         private Strategy strategy = Strategy.NONE;
         private boolean enabled = true;

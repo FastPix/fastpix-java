@@ -26,11 +26,11 @@ public class Options {
         }
     }
 
-    public final static Builder builder() {
+    public static final Builder builder() {
         return new Builder();
     }
 
-    public final static class Builder {
+    public static final class Builder {
 
         private Optional<RetryConfig> retryConfig = Optional.empty();
 

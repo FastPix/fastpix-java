@@ -4,7 +4,6 @@ import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.String;
 import io.fastpix.sdk.models.operations.UpdateMediaModerationRequest;
 import io.fastpix.sdk.models.operations.UpdateMediaModerationRequestBody;
 import io.fastpix.sdk.models.operations.UpdateMediaModerationRequestBuilder;

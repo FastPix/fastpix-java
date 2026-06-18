@@ -123,7 +123,7 @@ public class PatchLiveStreamRequest {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private Map<String, String> metadata;
 

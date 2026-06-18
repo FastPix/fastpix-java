@@ -91,7 +91,7 @@ public class ListPlaybackIdsAccessRestrictions {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private ListPlaybackIdsDomains domains;
 

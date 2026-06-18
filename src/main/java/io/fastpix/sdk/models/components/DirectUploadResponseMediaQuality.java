@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,20 +9,23 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * DirectUploadResponseMediaQuality
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
- */
-/**
- * DirectUploadResponseMediaQuality
- * 
+ *
  * <p>The quality tier applied to the media.
  */
 public class DirectUploadResponseMediaQuality {
 
-    public static final DirectUploadResponseMediaQuality STANDARD = new DirectUploadResponseMediaQuality("standard");
-    public static final DirectUploadResponseMediaQuality PRO = new DirectUploadResponseMediaQuality("pro");
-    public static final DirectUploadResponseMediaQuality PREMIUM = new DirectUploadResponseMediaQuality("premium");
+    private static final String STANDARD_VALUE = "standard";
+    private static final String PRO_VALUE = "pro";
+    private static final String PREMIUM_VALUE = "premium";
+
+    public static final DirectUploadResponseMediaQuality STANDARD = new DirectUploadResponseMediaQuality(STANDARD_VALUE);
+    public static final DirectUploadResponseMediaQuality PRO = new DirectUploadResponseMediaQuality(PRO_VALUE);
+    public static final DirectUploadResponseMediaQuality PREMIUM = new DirectUploadResponseMediaQuality(PREMIUM_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -50,7 +51,7 @@ public class DirectUploadResponseMediaQuality {
     @JsonCreator
     public static DirectUploadResponseMediaQuality of(String value) {
         synchronized (DirectUploadResponseMediaQuality.class) {
-            return values.computeIfAbsent(value, v -> new DirectUploadResponseMediaQuality(v));
+            return values.computeIfAbsent(value, DirectUploadResponseMediaQuality::new);
         }
     }
 
@@ -98,26 +99,26 @@ public class DirectUploadResponseMediaQuality {
 
     private static final Map<String, DirectUploadResponseMediaQuality> createValuesMap() {
         Map<String, DirectUploadResponseMediaQuality> map = new LinkedHashMap<>();
-        map.put("standard", STANDARD);
-        map.put("pro", PRO);
-        map.put("premium", PREMIUM);
+        map.put(STANDARD_VALUE, STANDARD);
+        map.put(PRO_VALUE, PRO);
+        map.put(PREMIUM_VALUE, PREMIUM);
         return map;
     }
 
     private static final Map<String, DirectUploadResponseMediaQualityEnum> createEnumsMap() {
         Map<String, DirectUploadResponseMediaQualityEnum> map = new HashMap<>();
-        map.put("standard", DirectUploadResponseMediaQualityEnum.STANDARD);
-        map.put("pro", DirectUploadResponseMediaQualityEnum.PRO);
-        map.put("premium", DirectUploadResponseMediaQualityEnum.PREMIUM);
+        map.put(STANDARD_VALUE, DirectUploadResponseMediaQualityEnum.STANDARD);
+        map.put(PRO_VALUE, DirectUploadResponseMediaQualityEnum.PRO);
+        map.put(PREMIUM_VALUE, DirectUploadResponseMediaQualityEnum.PREMIUM);
         return map;
     }
     
     
     public enum DirectUploadResponseMediaQualityEnum {
 
-        STANDARD("standard"),
-        PRO("pro"),
-        PREMIUM("premium"),;
+        STANDARD(STANDARD_VALUE),
+        PRO(PRO_VALUE),
+        PREMIUM(PREMIUM_VALUE),;
 
         private final String value;
 

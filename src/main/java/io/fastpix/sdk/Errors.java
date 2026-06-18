@@ -3,8 +3,6 @@ package io.fastpix.sdk;
 import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.String;
 import io.fastpix.sdk.models.operations.ListErrorsRequest;
 import io.fastpix.sdk.models.operations.ListErrorsRequestBuilder;
 import io.fastpix.sdk.models.operations.ListErrorsResponse;

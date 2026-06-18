@@ -83,11 +83,11 @@ public class BackoffStrategy {
         return retryReadTimeoutError;
     }
 
-    public final static Builder builder() {
+    public static final Builder builder() {
         return new Builder();
     }
 
-    public final static class Builder {
+    public static final class Builder {
 
         private long initialIntervalMs = DEFAULT_INITIAL_INTERVAL_MS;
         private long maxIntervalMs = DEFAULT_MAX_INTERVAL_MS;

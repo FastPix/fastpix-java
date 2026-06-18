@@ -4,7 +4,6 @@ import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.String;
 import io.fastpix.sdk.models.components.PatchLiveStreamRequest;
 import io.fastpix.sdk.models.operations.GetLiveStreamByIdRequest;
 import io.fastpix.sdk.models.operations.GetLiveStreamByIdRequestBuilder;

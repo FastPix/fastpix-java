@@ -91,7 +91,7 @@ public class UpdatedMp4SupportRequestBody {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private UpdatedMp4SupportMp4Support mp4Support;
 
