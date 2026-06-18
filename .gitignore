@@ -4,6 +4,9 @@
 build/
 !build/docs/
 .gradle/
+
+# Eclipse/IDE build output
+bin/
 *.jar
 !gradle-wrapper.jar
 *.class

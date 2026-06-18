@@ -25,6 +25,27 @@ stages:
     - checkout: self
       fetchDepth: 0
 
+    # SonarCloud's Java sensor needs JDK 17+ to run, and the SDK targets Java 11.
+    - task: JavaToolInstaller@0
+      displayName: 'Use JDK 17'
+      inputs:
+        versionSpec: '17'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+
+    # The Java sensor analyses COMPILED bytecode, not source. Without this the
+    # scanner finds no .class files and reports zero issues for every .java file.
+    # We compile the SDK and resolve the dependency classpath so Sonar can wire up
+    # sonar.java.binaries (our classes) and sonar.java.libraries (dependency jars).
+    - script: |
+        set -e
+        chmod +x ./gradlew
+        ./gradlew --no-daemon clean compileJava
+        SONAR_LIBS="$(./gradlew -q --no-daemon printRuntimeClasspath | tail -n1 | tr ':' ',')"
+        echo "Resolved Sonar Java libraries: $SONAR_LIBS"
+        echo "##vso[task.setvariable variable=sonarJavaLibraries]$SONAR_LIBS"
+      displayName: 'Compile SDK and resolve classpath'
+
     - task: SonarCloudPrepare@3
       displayName: 'Prepare SonarCloud Analysis'
       inputs:
@@ -39,8 +60,10 @@ stages:
           sonar.organization=fastpix
           sonar.projectName=java-language-sdk-server-side
           sonar.sourceEncoding=UTF-8
-          sonar.sources=.
-          sonar.java.binaries=.
+          sonar.sources=src/main/java
+          sonar.java.source=11
+          sonar.java.binaries=build/classes/java/main
+          sonar.java.libraries=$(sonarJavaLibraries)
 
     - task: SonarCloudAnalyze@3
       displayName: 'Run SonarCloud Code Analysis'
