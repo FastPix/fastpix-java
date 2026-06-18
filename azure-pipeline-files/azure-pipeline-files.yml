@@ -41,7 +41,18 @@ stages:
         set -e
         chmod +x ./gradlew
         ./gradlew --no-daemon clean compileJava
-        SONAR_LIBS="$(./gradlew -q --no-daemon printRuntimeClasspath | tail -n1 | tr ':' ',')"
+        # Build a comma-separated classpath for sonar.java.libraries, keeping only
+        # entries that actually exist on disk. SonarJava rejects the whole property
+        # if any path is missing (e.g. build/resources/main is never created when
+        # there are no main resources), so unresolved entries must be filtered out.
+        RAW_CP="$(./gradlew -q --no-daemon printRuntimeClasspath | tail -n1)"
+        SONAR_LIBS=""
+        IFS=':'
+        for entry in $RAW_CP; do
+          [ -e "$entry" ] || continue
+          if [ -z "$SONAR_LIBS" ]; then SONAR_LIBS="$entry"; else SONAR_LIBS="$SONAR_LIBS,$entry"; fi
+        done
+        unset IFS
         echo "Resolved Sonar Java libraries: $SONAR_LIBS"
         echo "##vso[task.setvariable variable=sonarJavaLibraries]$SONAR_LIBS"
       displayName: 'Compile SDK and resolve classpath'
