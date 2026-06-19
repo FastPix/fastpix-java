@@ -10,40 +10,38 @@ All notable changes to this project will be documented in this file.
 
 - **SDK version bump: `1.0.2` → `1.0.3`.**
   A maintenance release focused on static-analysis (SonarQube) cleanup. It
-  contains no functional, API, or behavioral changes and is fully backward
-  compatible with `1.0.2`.
+  contains no functional or behavioral changes and is source-compatible with
+  `1.0.2` for normal SDK usage (see Compatibility for one constructor
+  visibility change). The `version` property, the `SDK_VERSION` runtime
+  constant, and the installation documentation now report `1.0.3`.
 
-  Version identifiers updated:
-  - `version` property in the build configuration — now `1.0.3`.
-  - `SDK_VERSION` runtime constant and the installation documentation — now
-    aligned with the package version `1.0.3`.
-
-- **Static-analysis cleanup (non-behavioral).** Resolved a broad set of
-  SonarQube findings across the SDK utilities, operations, and models:
-  - **Exception specificity** — generic `RuntimeException` throws in the
-    request-serialization path replaced with intent-revealing types
-    (`IllegalStateException` for missing metadata, `IllegalArgumentException`
-    for unsupported or invalid content). The thrown conditions are unchanged.
-  - **Idiomatic cleanups** — `collection.size() > 0` replaced with
-    `!collection.isEmpty()`; eligible lambdas replaced with method references;
-    single-branch `switch` statements converted to `if` expressions; explicit
-    `default` cases added.
-  - **Code structure** — removed unused private methods, fields, imports, and
-    redundant constructors; extracted duplicated string literals into named
-    constants; merged collapsible conditionals; dropped redundant control flow.
-  - **Contract alignment** — `FastpixException.withBody(...)` no longer
-    annotates its parameter as `@Nullable`, matching the method's existing
-    runtime contract (it already rejects `null` via `Utils.checkNotNull`).
-  - **Intentional patterns documented** — deliberate uses of reflection-based
-    field access, established serialization branching, and the SDK-controlled
-    media-type regex annotated with targeted `@SuppressWarnings` and
-    explanatory comments rather than restructuring proven code. The JSON
-    content-type matching pattern is unchanged.
+- **Static-analysis cleanup (non-behavioral).** Resolved a set of SonarQube
+  findings across the SDK utilities, operations, and models. The thrown
+  conditions, serialization flow, and matched content types are unchanged:
+  - Replaced regular-expression media-type detection in `RequestBody` with
+    equivalent linear-time `String` comparisons, removing the super-linear
+    backtracking risk.
+  - Reduced the cognitive complexity of `RequestBody.serializeContentType(...)`
+    by extracting its JSON and raw-value branches into helper methods.
+  - Replaced generic `RuntimeException` throws in the serialization path with
+    specific `IllegalStateException` and `IllegalArgumentException` types.
+  - Removed `@Nullable` from the `FastpixException.withBody(...)` parameter to
+    match its existing non-null runtime contract.
+  - Narrowed the `FastpixException(String, int, byte[], HttpResponse, Throwable)`
+    constructor from `public` to `protected` (see Compatibility).
+  - Applied idiomatic and structural cleanups: `!isEmpty()` over `size() > 0`,
+    method references over equivalent lambdas, `if` expressions over
+    single-branch `switch` statements, and removal of unused members,
+    redundant constructors, and duplicated string literals.
 
 ### Compatibility
 
-- No changes to public types, method signatures, request/response models,
-  default server URLs, hooks, or retry logic.
+- No changes to public method signatures, request/response models, default
+  server URLs, hooks, or retry logic.
+- **One source-level change:** the `FastpixException` all-args constructor is
+  now `protected` instead of `public`. Throwing, catching, and reading
+  `FastpixException` are unaffected; this only impacts code that constructed
+  `FastpixException` directly from outside the package — an unsupported usage.
 - No action required to upgrade beyond re-resolving the dependency.
 
 ---

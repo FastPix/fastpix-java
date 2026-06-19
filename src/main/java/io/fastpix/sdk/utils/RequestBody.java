@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -76,41 +75,46 @@ public final class RequestBody {
 
     private static SerializedBody serializeContentType(String fieldName, String contentType, Object value)
             throws IllegalArgumentException, IllegalAccessException, UnsupportedOperationException, IOException {
-        // Matches an application/text media type whose subtype contains json (including a +json vendor
-        // suffix). The previous lazy ".*?" next to "\+*" allowed the same "+" to be matched two ways,
-        // causing backtracking; this single greedy form matches the same set without that ambiguity.
-        Pattern jsonPattern = Pattern.compile("(application|text)\\/.*json.*");
-        Pattern multipartPattern = Pattern.compile("multipart\\/.*");
-        Pattern formPattern = Pattern.compile("application\\/x-www-form-urlencoded.*");
-        Pattern textPattern = Pattern.compile("text\\/plain");
+        // Media-type matching uses plain String checks rather than regular expressions: these tests are
+        // simple prefix/contains comparisons, so String methods run in guaranteed linear time and avoid
+        // the super-linear backtracking risk that regex quantifiers carry. The matched set is unchanged:
+        // a "json" body is any application/* or text/* type whose subtype contains "json" (including a
+        // +json vendor suffix).
+        final boolean isText = "text/plain".equals(contentType);
+        final boolean isJson = (contentType.startsWith("application/") || contentType.startsWith("text/"))
+                && contentType.contains("json");
+        final boolean isMultipart = contentType.startsWith("multipart/");
+        final boolean isForm = contentType.startsWith("application/x-www-form-urlencoded");
 
-        final SerializedBody body;
-
-        if (textPattern.matcher(contentType).matches()) {
-            body = new SerializedBody(contentType, BodyPublishers.ofString(value.toString()));
-        } else if (jsonPattern.matcher(contentType).matches()) {
-            ObjectMapper mapper = JSON.getMapper();
-            if (value instanceof JsonNullable && !((JsonNullable<?>) value).isPresent()) {
-                body = new SerializedBody(contentType, BodyPublishers.noBody());
-            } else {
-                body = new SerializedBody(contentType, BodyPublishers.ofString(mapper.writeValueAsString(value)));
-            }
-        } else if (multipartPattern.matcher(contentType).matches()) {
-            body = serializeMultipart(value);
-        } else if (formPattern.matcher(contentType).matches()) {
-            body = serializeFormData(value);
-        } else {
-            if (value instanceof String) {
-                body = new SerializedBody(contentType, BodyPublishers.ofString((String) value));
-            } else if (value instanceof byte[]) {
-                body = new SerializedBody(contentType, BodyPublishers.ofByteArray((byte[]) value));
-            } else if (value instanceof HttpRequest.BodyPublisher) {
-                body = new SerializedBody(contentType, (HttpRequest.BodyPublisher) value);
-            } else {
-                throw new IllegalArgumentException("Unsupported content type " + contentType + " for field " + fieldName);
-            }
+        if (isText) {
+            return new SerializedBody(contentType, BodyPublishers.ofString(value.toString()));
+        } else if (isJson) {
+            return serializeJson(contentType, value);
+        } else if (isMultipart) {
+            return serializeMultipart(value);
+        } else if (isForm) {
+            return serializeFormData(value);
         }
-        return body;
+        return serializeRaw(fieldName, contentType, value);
+    }
+
+    private static SerializedBody serializeJson(String contentType, Object value) throws IOException {
+        if (value instanceof JsonNullable && !((JsonNullable<?>) value).isPresent()) {
+            return new SerializedBody(contentType, BodyPublishers.noBody());
+        }
+        ObjectMapper mapper = JSON.getMapper();
+        return new SerializedBody(contentType, BodyPublishers.ofString(mapper.writeValueAsString(value)));
+    }
+
+    private static SerializedBody serializeRaw(String fieldName, String contentType, Object value) {
+        if (value instanceof String) {
+            return new SerializedBody(contentType, BodyPublishers.ofString((String) value));
+        } else if (value instanceof byte[]) {
+            return new SerializedBody(contentType, BodyPublishers.ofByteArray((byte[]) value));
+        } else if (value instanceof HttpRequest.BodyPublisher) {
+            return new SerializedBody(contentType, (HttpRequest.BodyPublisher) value);
+        }
+        throw new IllegalArgumentException("Unsupported content type " + contentType + " for field " + fieldName);
     }
 
     // This multipart serializer walks reflective fields and branches over file, json and scalar shapes,
