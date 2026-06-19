@@ -38,6 +38,9 @@ import io.fastpix.sdk.utils.Options;
 /**
  * Operations for video playback management
  */
+// Facade aggregating one operation trio (request/builder/response) per playback
+// endpoint; the high class-fan-out is inherent to this API surface, not a design smell.
+@SuppressWarnings("java:S6539")
 public class AsyncPlayback {
     private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;

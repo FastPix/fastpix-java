@@ -12,6 +12,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Reflections {
 
+    private Reflections() {
+        // Utility class, prevent instantiation
+    }
+
     /**
      * Extracts the underlying value from an enum wrapper instance if the class follows the enum wrapper pattern.
      *
@@ -34,6 +38,10 @@ public class Reflections {
      * @return {@code Optional<?>} containing the extracted value (String or Integer) if the class
      * follows the enum wrapper pattern and the value extraction succeeds, {@code Optional.empty()} otherwise
      */
+    // The wildcard return reflects that the extracted value may be a String or Integer and is part of
+    // this internal API contract; reflection is required to invoke the value accessor, so the
+    // wildcard-return and reflective-accessibility findings are suppressed.
+    @SuppressWarnings({"java:S1452", "java:S3011"})
     public static Optional<?> getUnwrappedEnumValue(Class<?> clazz, Object instance) {
         Objects.requireNonNull(clazz, "Class cannot be null");
 

@@ -16,6 +16,8 @@ import java.util.function.Function;
  */
 public final class ReactiveUtils {
 
+    private static final String SOURCE_PUBLISHER_NULL_MESSAGE = "Source publisher cannot be null";
+
     private ReactiveUtils() {
         // Utility class
     }
@@ -35,7 +37,7 @@ public final class ReactiveUtils {
             Flow.Publisher<T> source,
             Function<T, CompletableFuture<R>> mapper) {
 
-        Objects.requireNonNull(source, "Source publisher cannot be null");
+        Objects.requireNonNull(source, SOURCE_PUBLISHER_NULL_MESSAGE);
         Objects.requireNonNull(mapper, "Mapper function cannot be null");
 
         return new AsyncMappingPublisher<>(source, mapper);
@@ -54,7 +56,7 @@ public final class ReactiveUtils {
             Flow.Publisher<T> source,
             Function<T, R> mapper) {
 
-        Objects.requireNonNull(source, "Source publisher cannot be null");
+        Objects.requireNonNull(source, SOURCE_PUBLISHER_NULL_MESSAGE);
         Objects.requireNonNull(mapper, "Mapper function cannot be null");
 
         return new SyncMappingPublisher<>(source, mapper);
@@ -73,7 +75,7 @@ public final class ReactiveUtils {
             Flow.Publisher<T> source,
             Function<T, Iterable<R>> flattener) {
 
-        Objects.requireNonNull(source, "Source publisher cannot be null");
+        Objects.requireNonNull(source, SOURCE_PUBLISHER_NULL_MESSAGE);
         Objects.requireNonNull(flattener, "Flattener function cannot be null");
 
         return new FlatteningPublisher<>(source, flattener);
@@ -475,11 +477,9 @@ public final class ReactiveUtils {
 
             @Override
             public void onNext(T item) {
-                long afterDecrement;
                 synchronized (ConcatSubscription.this) {
                     if (demand == 0) return; // should not happen if upstream respects RS
                     demand--;
-                    afterDecrement = demand;
                 }
                 downstream.onNext(item);
                 // no need to request here; downstream will call request() again if needed

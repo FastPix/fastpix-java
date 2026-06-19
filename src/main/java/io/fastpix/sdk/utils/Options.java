@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Options {
 
+    private static final String RETRY_CONFIG_FIELD = "retryConfig";
+
     public enum Option {
         RETRY_CONFIG;
     }
@@ -12,7 +14,7 @@ public class Options {
     private Optional<RetryConfig> retryConfig = Optional.empty();
 
     private Options(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
+        Utils.checkNotNull(retryConfig, RETRY_CONFIG_FIELD);
         this.retryConfig = retryConfig;
     }
 
@@ -37,13 +39,13 @@ public class Options {
         private Builder() {}
 
         public Builder retryConfig(RetryConfig retryConfig) throws IllegalArgumentException {
-            Utils.checkNotNull(retryConfig, "retryConfig");
+            Utils.checkNotNull(retryConfig, RETRY_CONFIG_FIELD);
             this.retryConfig = Optional.of(retryConfig);
             return this;
         }
 
         public Builder retryConfig(Optional<RetryConfig> retryConfig) throws IllegalArgumentException {
-            Utils.checkNotNull(retryConfig, "retryConfig");
+            Utils.checkNotNull(retryConfig, RETRY_CONFIG_FIELD);
             this.retryConfig = retryConfig;
             return this;
         }

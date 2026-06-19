@@ -112,6 +112,10 @@ public final class EventStream<T> implements Iterable<T>, AutoCloseable {
      *
      * @return list of events
      */
+    // Cleanup runs in a finally and a close failure is intentionally surfaced as the thrown result,
+    // wrapping a non-IOException cause as an unchecked exception; the finally-throw, finally-jump and
+    // generic-exception findings are suppressed to preserve this established cleanup behavior.
+    @SuppressWarnings({"java:S1163", "java:S1143", "java:S112"})
     public List<T> toList() {
         try {
             return stream().collect(Collectors.toList());
@@ -141,6 +145,9 @@ public final class EventStream<T> implements Iterable<T>, AutoCloseable {
      *
      * @return streamed events
      */
+    // The onClose callback wraps a non-IOException close failure as an unchecked exception to honor
+    // the Stream contract; the generic-exception finding is suppressed to preserve that behavior.
+    @SuppressWarnings("java:S112")
     public Stream<T> stream() {
         return StreamSupport.stream(
                         Spliterators.spliteratorUnknownSize(

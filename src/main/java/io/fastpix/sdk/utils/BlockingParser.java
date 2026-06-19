@@ -53,7 +53,7 @@ public final class BlockingParser<T> {
     /**
      * Check if there are more results available (either buffered or from reader)
      */
-    public boolean hasNext() throws IOException {
+    public boolean hasNext() {
         return parser.hasBufferedData() || !readerExhausted;
     }
 

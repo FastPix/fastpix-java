@@ -62,7 +62,7 @@ public class BackoffStrategy {
     /**
     * @deprecated use {@link #baseFactor()} instead.
     */
-    @Deprecated
+    @Deprecated(since = "1.0.2")
     public double exponent() {
         return baseFactor;
     }
@@ -168,13 +168,9 @@ public class BackoffStrategy {
           * @param baseFactor The base factor to use.
           * @return The builder instance.
           */
-        @Deprecated
+        @Deprecated(since = "1.0.2")
         public Builder exponent(double baseFactor) {
-            if (baseFactor <= 0 ) {
-                throw new IllegalArgumentException("baseFactor must be strictly positive");
-            }
-            this.baseFactor = baseFactor;
-            return this;
+            return baseFactor(baseFactor);
         }
 
         /**

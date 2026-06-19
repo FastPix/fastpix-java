@@ -14,6 +14,10 @@ import io.fastpix.sdk.SecuritySource;
  * Holder class for hook-associated types. This class does not get
  * instantiated.
  */
+// The hook SPI interfaces deliberately declare throws Exception so implementations may propagate any
+// failure; narrowing these would change the public hook contract, so the generic-exception finding
+// is suppressed rather than altering the API.
+@SuppressWarnings("java:S112")
 public final class Hook {
 
     private Hook() {

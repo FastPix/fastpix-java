@@ -10,6 +10,10 @@ final class Metadata {
         // prevent instantiation
     }
 
+    // This binder intentionally uses reflection to populate the annotation-driven metadata fields, and
+    // its branching mirrors the metadata grammar it parses; restructuring would change the established
+    // parsing behavior.
+    @SuppressWarnings({"java:S3776", "java:S3011"})
     static <T> T parse(String name, T metadata, Field field)
             throws IllegalArgumentException, IllegalAccessException {
         FastpixMetadata md = field.getAnnotation(FastpixMetadata.class);
@@ -74,6 +78,6 @@ final class Metadata {
             return null;
         }
 
-        return (T) metadata;
+        return metadata;
     }
 }

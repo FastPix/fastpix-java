@@ -33,7 +33,7 @@ public enum Types {
     }
 
     private static Set<Class<?>> getPrimitiveWrapperTypes() {
-        Set<Class<?>> ret = new HashSet<Class<?>>();
+        Set<Class<?>> ret = new HashSet<>();
         ret.add(Boolean.class);
         ret.add(Character.class);
         ret.add(Byte.class);

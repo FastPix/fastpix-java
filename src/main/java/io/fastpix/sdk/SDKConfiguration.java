@@ -11,6 +11,10 @@ import io.fastpix.sdk.utils.RetryConfig;
 import io.fastpix.sdk.utils.FastpixHTTPClient;
 import io.fastpix.sdk.utils.Utils;
 
+// The leading-underscore hook fields are an intentional generated naming convention that avoids
+// clashing with their public accessor and setter parameter names; renaming would be inconsistent
+// with the rest of the generated SDK.
+@SuppressWarnings("java:S116")
 public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
@@ -82,8 +86,7 @@ public class SDKConfiguration {
     private Hooks _hooks = createHooks();
 
     private static Hooks createHooks() {
-        Hooks hooks = new Hooks();
-        return hooks;
+        return new Hooks();
     }
     
     public Hooks hooks() {

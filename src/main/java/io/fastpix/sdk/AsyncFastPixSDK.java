@@ -1,6 +1,5 @@
 package io.fastpix.sdk;
 
-import io.fastpix.sdk.utils.Headers;
 
 /**
  * FASTPIX API'S: FastPix provides a comprehensive set of APIs that enable developers to manage both
@@ -69,7 +68,6 @@ import io.fastpix.sdk.utils.Headers;
 // class-fan-out is inherent to this facade's purpose, not a design smell.
 @SuppressWarnings("java:S6539")
 public class AsyncFastPixSDK {
-    private static final Headers _headers = Headers.EMPTY;
 
     private final AsyncInputVideos inputVideos;
 
@@ -233,12 +231,10 @@ public class AsyncFastPixSDK {
         return errors;
     }
 
-    private SDKConfiguration sdkConfiguration;
     private final FastPixSDK syncSDK;
 
     AsyncFastPixSDK(FastPixSDK syncSDK, SDKConfiguration sdkConfiguration) {
         this.syncSDK = syncSDK;
-        this.sdkConfiguration = sdkConfiguration;
         this.inputVideos = new AsyncInputVideos(syncSDK.inputVideos(), sdkConfiguration);
         this.manageVideos = new AsyncManageVideos(syncSDK.manageVideos(), sdkConfiguration);
         this.videos = new AsyncVideos(syncSDK.videos(), sdkConfiguration);

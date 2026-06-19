@@ -8,10 +8,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
-import java.lang.Exception;
-import java.lang.Object;
-import java.lang.String;
-import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
@@ -45,9 +41,24 @@ import io.fastpix.sdk.utils.Utils.JsonShape;
 import io.fastpix.sdk.utils.Utils;
 
 
-public class DeleteMediaFromPlaylist {
+// Holder for the generated Sync/Async operation classes. The leading-underscore _headers
+// field/parameter and the securitySource field/accessor sharing a name are intentional
+// generated conventions; renaming would be inconsistent across all operation classes.
+@SuppressWarnings({"java:S116", "java:S117", "java:S1845", "java:S2142"})
+public final class DeleteMediaFromPlaylist {
 
-    static abstract class Base {
+    private static final String OPERATION_ID = "delete-media-from-playlist";
+    private static final String APPLICATION_JSON = "application/json";
+    private static final String API_ERROR_OCCURRED = "API error occurred";
+    private static final String UNEXPECTED_CONTENT_TYPE = "Unexpected content-type received: ";
+    private static final String STATUS_4XX = "4XX";
+    private static final String STATUS_5XX = "5XX";
+
+    private DeleteMediaFromPlaylist() {
+        // utility holder for the generated operation classes; not instantiable
+    }
+
+    abstract static class Base {
         final SDKConfiguration sdkConfiguration;
         final String baseUrl;
         final SecuritySource securitySource;
@@ -56,7 +67,7 @@ public class DeleteMediaFromPlaylist {
         final HTTPClient client;
         final Headers _headers;
 
-        public Base(
+        protected Base(
                 @Nonnull SDKConfiguration sdkConfiguration, @Nullable Options options,
                 Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -72,7 +83,7 @@ public class DeleteMediaFromPlaylist {
                     .orElse(RetryConfig.builder().backoff(BackoffStrategy.builder()
                                     .initialInterval(1000, TimeUnit.MILLISECONDS)
                                     .maxInterval(10000, TimeUnit.MILLISECONDS)
-                                    .baseFactor((double) (1.5))
+                                    .baseFactor(1.5)
                                     .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
                                     .retryConnectError(true)
                                     .build())
@@ -88,7 +99,7 @@ public class DeleteMediaFromPlaylist {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "delete-media-from-playlist",
+                    OPERATION_ID,
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -97,7 +108,7 @@ public class DeleteMediaFromPlaylist {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "delete-media-from-playlist",
+                    OPERATION_ID,
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -106,7 +117,7 @@ public class DeleteMediaFromPlaylist {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "delete-media-from-playlist",
+                    OPERATION_ID,
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -127,7 +138,7 @@ public class DeleteMediaFromPlaylist {
                     "json",
                     false);
             req.setBody(Optional.ofNullable(serializedRequestBody));
-            req.addHeader("Accept", "application/json")
+            req.addHeader("Accept", APPLICATION_JSON)
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
@@ -174,7 +185,7 @@ public class DeleteMediaFromPlaylist {
                         }
                         try {
                             HttpResponse<InputStream> httpRes = client.send(r);
-                            if (Utils.statusCodeMatches(httpRes.statusCode(), "4XX", "5XX")) {
+                            if (Utils.statusCodeMatches(httpRes.statusCode(), STATUS_4XX, STATUS_5XX)) {
                                 return onError(httpRes, null);
                             }
                             return httpRes;
@@ -205,25 +216,25 @@ public class DeleteMediaFromPlaylist {
             DeleteMediaFromPlaylistResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                if (Utils.contentTypeMatches(contentType, APPLICATION_JSON)) {
                     return res.withPlaylistByIdResponse(Utils.unmarshal(response, new TypeReference<PlaylistByIdResponse>() {}));
                 } else {
-                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                    throw APIException.from(UNEXPECTED_CONTENT_TYPE + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), STATUS_4XX)) {
                 // no content
-                throw APIException.from("API error occurred", response);
+                throw APIException.from(API_ERROR_OCCURRED, response);
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), STATUS_5XX)) {
                 // no content
-                throw APIException.from("API error occurred", response);
+                throw APIException.from(API_ERROR_OCCURRED, response);
             }
             if (Utils.statusCodeMatches(response.statusCode(), "default")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                if (Utils.contentTypeMatches(contentType, APPLICATION_JSON)) {
                     return res.withDefaultError(Utils.unmarshal(response, new TypeReference<DefaultError>() {}));
                 } else {
-                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                    throw APIException.from(UNEXPECTED_CONTENT_TYPE + contentType, response);
                 }
             }
             throw APIException.from("Unexpected status code received: " + response.statusCode(), response);
@@ -267,7 +278,7 @@ public class DeleteMediaFromPlaylist {
                                 if (err != null) {
                                     return onError(null, err);
                                 }
-                                if (Utils.statusCodeMatches(resp.statusCode(), "4XX", "5XX")) {
+                                if (Utils.statusCodeMatches(resp.statusCode(), STATUS_4XX, STATUS_5XX)) {
                                     return onError(resp, null);
                                 }
                                 return CompletableFuture.completedFuture(resp);
@@ -293,27 +304,27 @@ public class DeleteMediaFromPlaylist {
             io.fastpix.sdk.models.operations.async.DeleteMediaFromPlaylistResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                if (Utils.contentTypeMatches(contentType, APPLICATION_JSON)) {
                     return Utils.unmarshalAsync(response, new TypeReference<PlaylistByIdResponse>() {})
                             .thenApply(res::withPlaylistByIdResponse);
                 } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
+                    return Utils.createAsyncApiError(response, UNEXPECTED_CONTENT_TYPE + contentType);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), STATUS_4XX)) {
                 // no content
-                return Utils.createAsyncApiError(response, "API error occurred");
+                return Utils.createAsyncApiError(response, API_ERROR_OCCURRED);
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), STATUS_5XX)) {
                 // no content
-                return Utils.createAsyncApiError(response, "API error occurred");
+                return Utils.createAsyncApiError(response, API_ERROR_OCCURRED);
             }
             if (Utils.statusCodeMatches(response.statusCode(), "default")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                if (Utils.contentTypeMatches(contentType, APPLICATION_JSON)) {
                     return Utils.unmarshalAsync(response, new TypeReference<DefaultError>() {})
                             .thenApply(res::withDefaultError);
                 } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
+                    return Utils.createAsyncApiError(response, UNEXPECTED_CONTENT_TYPE + contentType);
                 }
             }
             return Utils.createAsyncApiError(response, "Unexpected status code received: " + response.statusCode());

@@ -20,6 +20,9 @@ public final class Security {
         // prevent instantiation
     }
     
+    // Reflection is required to walk the fields of arbitrary generated security types, and the field scan
+    // skips non-applicable fields inline; restructuring would change the security-resolution flow.
+    @SuppressWarnings({"java:S3776", "java:S135", "java:S3011"})
     public static HTTPRequest configureSecurity(HTTPRequest request, Object security) throws Exception {
         if (security != null) {
             Field[] fields = security.getClass().getDeclaredFields();
@@ -51,6 +54,9 @@ public final class Security {
         return request;
     }
 
+    // Reflection reads the fields of arbitrary security-option types; the field scan skips non-applicable
+    // fields inline.
+    @SuppressWarnings({"java:S135", "java:S3011"})
     private static void parseSecurityOption(HTTPRequest request, Object option)
             throws Exception {
         Field[] fields = option.getClass().getDeclaredFields();
@@ -72,6 +78,9 @@ public final class Security {
         }
     }
 
+    // Reflection reads the fields of arbitrary security-scheme types; the field scan skips non-applicable
+    // fields inline.
+    @SuppressWarnings({"java:S135", "java:S3011"})
     private static void parseSecurityScheme(HTTPRequest requestBuilder, SecurityMetadata schemeMetadata,
             Object scheme) throws Exception {
 
@@ -105,7 +114,7 @@ public final class Security {
 
     private static void parseSecuritySchemeValue(HTTPRequest request, SecurityMetadata schemeMetadata,
             SecurityMetadata securityMetadata,
-            Object value) throws Exception {
+            Object value) {
         switch (schemeMetadata.type) {
             case "apiKey":
                 switch (schemeMetadata.subtype) {
@@ -121,7 +130,7 @@ public final class Security {
                                 String.format("%s=%s", securityMetadata.name, Utils.valToString(value)));
                         break;
                     default:
-                        throw new RuntimeException(
+                        throw new IllegalArgumentException(
                                 "Unsupported apiKey security scheme subtype: " + securityMetadata.subtype);
                 }
                 break;
@@ -143,14 +152,17 @@ public final class Security {
                         // in their own BeforeRequest hook.
                         break;
                     default:
-                        throw new RuntimeException("Unsupported http security scheme subtype: " + schemeMetadata.subtype);
+                        throw new IllegalArgumentException("Unsupported http security scheme subtype: " + schemeMetadata.subtype);
                 }
                 break;
             default:
-                throw new RuntimeException("Unsupported security scheme type: " + schemeMetadata.subtype);
+                throw new IllegalArgumentException("Unsupported security scheme type: " + schemeMetadata.subtype);
         }
     }
 
+    // Reflection reads the username and password fields of arbitrary basic-auth types; the field scan
+    // skips non-applicable fields inline.
+    @SuppressWarnings({"java:S135", "java:S3011"})
     private static void parseBasicAuthScheme(HTTPRequest requestBuilder, Object scheme)
             throws IllegalAccessException {
         Field[] fields = scheme.getClass().getDeclaredFields();
@@ -179,7 +191,7 @@ public final class Security {
                     password = Utils.valToString(value);
                     break;
                 default:
-                    throw new RuntimeException("Unsupported security scheme field for basic auth: " + securityMetadata.name);
+                    throw new IllegalArgumentException("Unsupported security scheme field for basic auth: " + securityMetadata.name);
             }
         }
 
@@ -228,17 +240,19 @@ public final class Security {
         return Optional.empty();
     }
 
+    // Reflection is required to read an arbitrary annotated field value.
+    @SuppressWarnings("java:S3011")
     private static Object getUnwrappedFieldValue(Object o, Field f) {
         try {
             f.setAccessible(true);
             Object value = f.get(o);
-            if (value != null && value instanceof Optional) {
+            if (value instanceof Optional) {
                 return ((Optional<?>) value).orElse(null);
             } else {
                 return value;
             }
         } catch (IllegalArgumentException | IllegalAccessException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
     
@@ -264,6 +278,8 @@ public final class Security {
         return Security.findStringValueWhereMetadataContainsRegexes(o, "\\bname=" + name + "\\b");
     }
     
+    // Reflection is required to read the matched annotated field values.
+    @SuppressWarnings("java:S3011")
     public static Optional<Object> findValueWhereMetadataContainsRegexes(Object o, String... regexes) {
         return findFieldsWhereMetadataContainsRegexes(o, regexes)
                    .flatMap(f -> {

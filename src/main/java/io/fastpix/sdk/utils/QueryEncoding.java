@@ -7,7 +7,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 
 final class QueryEncoding {
-    
+
+    private QueryEncoding() {
+        // Utility class, prevent instantiation
+    }
+
     private static final int RADIX = 16;
     private static final char QUERY_PARAM_SEPARATOR = '&';
     private static final char PARAM_VALUE_SEPARATOR = '=';
@@ -44,7 +48,7 @@ final class QueryEncoding {
      * @param blankAsPlus set to true to encode a blank as a plus character
      * @return encoded query string
      */
-    static String formatQuery(final Iterable<? extends NameValue> parameters,
+    static String formatQuery(final Iterable<NameValue> parameters,
             final Charset charset, final boolean blankAsPlus) {
         StringBuilder buf = new StringBuilder();
         int i = 0;

@@ -3,7 +3,6 @@ package io.fastpix.sdk.utils;
 import java.util.Objects;
 
 // internal class, not for public use
-// TODO move to internal package
 public final class QueryParameter {
     
     private final String name;

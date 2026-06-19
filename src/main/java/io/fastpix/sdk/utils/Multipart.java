@@ -120,7 +120,7 @@ public final class Multipart {
         FormField(String name, String value, String contentType) {
             this.name = name;
             this.value = value;
-            this.contentType = contentType != null ? contentType : "text/plain; charset=UTF-8";
+            this.contentType = contentType != null ? contentType : DEFAULT_TEXT_CT;
         }
 
         @Override
@@ -188,6 +188,9 @@ public final class Multipart {
     /**
      * RFC 5987 filename* with ASCII fallback.
      */
+    // Kept alongside the other private formatting helpers in this section, which it depends on; moving it
+    // into FilePart would split related helper logic across classes.
+    @SuppressWarnings("java:S3398")
     private static String contentDispositionWithFilename(String name, String filename) {
         String safeName = escapeQuoted(name);
         String fallback = escapeQuoted(asAsciiFilenameFallback(filename));
@@ -214,6 +217,9 @@ public final class Multipart {
         return BodyPublishers.fromPublisher(ReactiveUtils.concat(List.of(publishers)));
     }
 
+    // Kept with its sibling concat overload in this helpers section; moving it into Builder would
+    // separate the two related concat helpers.
+    @SuppressWarnings("java:S3398")
     private static BodyPublisher concat(List<BodyPublisher> publishers) {
         List<Flow.Publisher<ByteBuffer>> bufferPublishers = List.copyOf(publishers);
         return BodyPublishers.fromPublisher(ReactiveUtils.concat(bufferPublishers));

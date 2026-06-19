@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import io.fastpix.sdk.models.errors.AuthException;
 
@@ -156,6 +155,9 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         }
     }
 
+    // The multi-catch wraps the InterruptedException into the thrown cause, preserving the existing
+    // token-request error flow without altering interrupt handling.
+    @SuppressWarnings("java:S2142")
     public static <T extends HasSessionKey> Session<T> requestOAuth2Token(HTTPClient client, T credentials, List<String> scopes,
             Map<String, String> body, Map<String, String> headers, URI tokenUri) {
         try {
@@ -179,7 +181,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
                     response);
             }
             TokenResponse t = Utils.mapper().readValue(response.body(), TokenResponse.class);
-            if (!t.tokenType.orElse("").toLowerCase().equals("bearer")) {
+            if (!t.tokenType.orElse("").equalsIgnoreCase("bearer")) {
                 throw new AuthException(
                     "Expected 'Bearer' token type but was '" + t.tokenType.orElse("") + "'",
                     response.statusCode(),
@@ -188,9 +190,9 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
             }
             final Optional<OffsetDateTime> expiresAt = t.expiresInSeconds
                     .map(x -> OffsetDateTime.now().plus(x, ChronoUnit.SECONDS));
-            return new Session<T>(credentials, t.accessToken, scopes, expiresAt);
+            return new Session<>(credentials, t.accessToken, scopes, expiresAt);
         } catch (IOException | IllegalArgumentException | IllegalAccessException | InterruptedException | URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -203,7 +205,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         Optional<String> tokenType;
 
         @JsonProperty("expires_in")
-        Optional<Long> expiresInSeconds;;
+        Optional<Long> expiresInSeconds;
 
     }
 

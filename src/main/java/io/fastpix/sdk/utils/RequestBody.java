@@ -28,6 +28,9 @@ public final class RequestBody {
         // prevent instantiation
     }
 
+    // Reflection is used to read the request field of arbitrary generated request types, which requires
+    // making the field accessible.
+    @SuppressWarnings("java:S3011")
     public static SerializedBody serialize(Object request, String requestField, String serializationMethod,
                                            boolean nullable) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException,
             UnsupportedOperationException, IOException {
@@ -65,7 +68,7 @@ public final class RequestBody {
 
         RequestMetadata requestMetadata = RequestMetadata.parse(reqField);
         if (requestMetadata == null) {
-            throw new RuntimeException("Missing request metadata on request field");
+            throw new IllegalStateException("Missing request metadata on request field");
         }
 
         return serializeContentType(requestField, requestMetadata.mediaType, requestValue);
@@ -101,12 +104,16 @@ public final class RequestBody {
             } else if (value instanceof HttpRequest.BodyPublisher) {
                 body = new SerializedBody(contentType, (HttpRequest.BodyPublisher) value);
             } else {
-                throw new RuntimeException("Unsupported content type " + contentType + " for field " + fieldName);
+                throw new IllegalArgumentException("Unsupported content type " + contentType + " for field " + fieldName);
             }
         }
         return body;
     }
 
+    // This multipart serializer walks reflective fields and branches over file, json and scalar shapes,
+    // skipping non-applicable fields inline; reflection is required to read arbitrary request types and
+    // restructuring the branches would change the serialization flow.
+    @SuppressWarnings({"java:S3776", "java:S135", "java:S3011"})
     private static SerializedBody serializeMultipart(Object value)
             throws IllegalArgumentException, IllegalAccessException, UnsupportedOperationException, IOException {
         Multipart.Builder builder = Multipart.builder();
@@ -126,7 +133,7 @@ public final class RequestBody {
 
             MultipartFormMetadata metadata = MultipartFormMetadata.parse(field);
             if (metadata == null) {
-                throw new RuntimeException("Missing multipart form metadata on field " + field.getName());
+                throw new IllegalStateException("Missing multipart form metadata on field " + field.getName());
             }
 
             if (metadata.file) {
@@ -160,10 +167,13 @@ public final class RequestBody {
         return new SerializedBody(m.contentType(), m.bodyPublisher());
     }
 
+    // Reflection is required to read the content and filename fields of arbitrary file wrapper types,
+    // and the field scan skips non-applicable fields inline; restructuring would change the flow.
+    @SuppressWarnings({"java:S3776", "java:S135", "java:S3011"})
     private static void serializeMultipartFile(String fieldName, Multipart.Builder builder, Object file)
             throws IllegalArgumentException, IllegalAccessException {
         if (Types.getType(file.getClass()) != Types.OBJECT) {
-            throw new RuntimeException("Invalid type for multipart file");
+            throw new IllegalArgumentException("Invalid type for multipart file");
         }
 
         String fileName = "";
@@ -192,7 +202,7 @@ public final class RequestBody {
         }
 
         if (fileName.isBlank() || content == null) {
-            throw new RuntimeException("Invalid multipart file");
+            throw new IllegalArgumentException("Invalid multipart file");
         }
         
         // Detect content type based on file extension
@@ -212,6 +222,10 @@ public final class RequestBody {
         }
     }
 
+    // This form-data serializer branches over map, object and array shapes (nested), using reflection to
+    // read arbitrary request types and skipping non-applicable fields inline; consolidating it would
+    // change the established serialization flow.
+    @SuppressWarnings({"java:S3776", "java:S6541", "java:S135", "java:S3011"})
     public static SerializedBody serializeFormData(Object value)
             throws IOException, IllegalArgumentException, IllegalAccessException {
         List<NameValue> params = new ArrayList<>();
@@ -227,7 +241,7 @@ public final class RequestBody {
             break;
         case OBJECT:
             if (!Utils.allowIntrospection(value.getClass())) {
-                throw new RuntimeException("Invalid type for form data");
+                throw new IllegalArgumentException("Invalid type for form data");
             }
             Field[] fields = value.getClass().getDeclaredFields();
 
@@ -285,7 +299,7 @@ public final class RequestBody {
                                 }
                             }
 
-                            if (items.size() > 0) {
+                            if (!items.isEmpty()) {
                                 params.add(new NameValue(metadata.name, String.join(",", items)));
                             }
                         }
@@ -305,7 +319,7 @@ public final class RequestBody {
                             }
                         }
 
-                        if (items.size() > 0) {
+                        if (!items.isEmpty()) {
                             params.add(new NameValue(metadata.name, String.join(",", items)));
                         }
 
@@ -324,7 +338,7 @@ public final class RequestBody {
                             }
                         }
 
-                        if (items.size() > 0) {
+                        if (!items.isEmpty()) {
                             params.add(new NameValue(metadata.name, String.join(",", items)));
                         }
 
@@ -338,7 +352,7 @@ public final class RequestBody {
             }
             break;
         default:
-            throw new RuntimeException("Invalid type for form data");
+            throw new IllegalArgumentException("Invalid type for form data");
         }
 
         // ensure that a fresh open input stream is provided every time

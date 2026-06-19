@@ -14,6 +14,7 @@ public final class Globals {
     
 
     public Globals() {
+        // No initialization required: the parameter maps are initialized at their field declarations.
     }
     
     // internal use only

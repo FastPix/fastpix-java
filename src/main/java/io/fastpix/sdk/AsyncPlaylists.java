@@ -35,6 +35,9 @@ import io.fastpix.sdk.utils.Headers;
 import io.fastpix.sdk.utils.Options;
 
 
+// Generated SDK facade: exposes one builder method per playlist operation, so it necessarily
+// references many operation/request/response classes. Splitting it would change the public API.
+@SuppressWarnings("java:S6539")
 public class AsyncPlaylists {
     private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;

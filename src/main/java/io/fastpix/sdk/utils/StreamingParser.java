@@ -256,6 +256,9 @@ public final class StreamingParser<T> {
             return sanitized;
         }
 
+        // SSE field parsing walks each line and dispatches on the field key in one place to keep the
+        // message assembly cohesive; the cognitive-complexity finding is suppressed.
+        @SuppressWarnings("java:S3776")
         private EventStreamMessage parseMessage(String text) {
             String[] lines = text.split("\n");
             Optional<String> event = Optional.empty();
@@ -293,7 +296,9 @@ public final class StreamingParser<T> {
                             firstData = false;
                             data.append(value);
                             break;
-                        // ignore unknown fields
+                        default:
+                            // ignore unknown fields
+                            break;
                     }
                 }
             }

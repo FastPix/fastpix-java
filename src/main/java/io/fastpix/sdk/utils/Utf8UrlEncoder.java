@@ -7,7 +7,6 @@ import java.util.BitSet;
 import java.util.Objects;
 
 // Internal use only
-// TODO move to an internal package
 public final class Utf8UrlEncoder {
 
     private static final BitSet DO_NOT_ENCODE_CHARS = createDoNotEncodeChars();
@@ -29,25 +28,29 @@ public final class Utf8UrlEncoder {
             char ch = safeCharacters.charAt(i);
             max = Math.max(ch, max);
         }
-        BitSet safeChars = new BitSet(max + 1);
+        BitSet bits = new BitSet(max + 1);
         for (int i = 0; i < safeCharacters.length(); i++) {
             char ch = safeCharacters.charAt(i);
-            safeChars.set(ch);
+            bits.set(ch);
         }
-        this.safeChars = safeChars;
+        this.safeChars = bits;
     }
 
     public String encode(String s) {
         return encode(s, StandardCharsets.UTF_8);
     }
     
+    // This is the percent-encoding algorithm (derived from java.net.URLEncoder): it advances the index by
+    // variable amounts to keep UTF-16 surrogate pairs together, so the counter is updated within the loop
+    // body and read in the loop condition by design; restructuring would change the encoding behavior.
+    @SuppressWarnings({"java:S3776", "java:S127", "java:S1121"})
     private String encode(String s, Charset charset) {
         boolean changed = false;
         StringBuilder out = new StringBuilder(s.length());
         CharArrayWriter writer = new CharArrayWriter();
 
         for (int i = 0; i < s.length();) {
-            int c = (int) s.charAt(i);
+            int c = s.charAt(i);
             if (DO_NOT_ENCODE_CHARS.get(c) || safeChars.get(c)) {
                 out.append((char) c);
                 i++;
@@ -55,17 +58,15 @@ public final class Utf8UrlEncoder {
                 // convert to external encoding before hex conversion
                 do {
                     writer.write(c);
-                    if (c >= 0xD800 && c <= 0xDBFF) {
-                        if ((i + 1) < s.length()) {
-                            int d = (int) s.charAt(i + 1);
-                            if (d >= 0xDC00 && d <= 0xDFFF) {
-                                writer.write(d);
-                                i++;
-                            }
+                    if (c >= 0xD800 && c <= 0xDBFF && (i + 1) < s.length()) {
+                        int d = s.charAt(i + 1);
+                        if (d >= 0xDC00 && d <= 0xDFFF) {
+                            writer.write(d);
+                            i++;
                         }
                     }
                     i++;
-                } while (i < s.length() && !DO_NOT_ENCODE_CHARS.get((c = (int) s.charAt(i))));
+                } while (i < s.length() && !DO_NOT_ENCODE_CHARS.get((c = s.charAt(i))));
 
                 writer.flush();
                 String str = new String(writer.toCharArray());

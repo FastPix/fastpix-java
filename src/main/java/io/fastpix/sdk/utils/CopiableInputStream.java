@@ -5,6 +5,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 
 public class CopiableInputStream {
     private final byte[] bytes;
@@ -13,7 +14,7 @@ public class CopiableInputStream {
         try (InputStream stream = original) {
             this.bytes = IOUtils.toByteArray(stream);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
     }
 

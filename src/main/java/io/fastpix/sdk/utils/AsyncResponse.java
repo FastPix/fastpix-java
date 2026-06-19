@@ -1,5 +1,4 @@
 package io.fastpix.sdk.utils;
-import io.fastpix.sdk.utils.Blob;
 import java.net.http.HttpResponse;
 
 public interface AsyncResponse {

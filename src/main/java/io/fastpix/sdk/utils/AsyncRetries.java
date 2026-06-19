@@ -8,7 +8,6 @@ import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.Supplier;
-import io.fastpix.sdk.utils.Blob;
 
 public class AsyncRetries {
 
@@ -49,7 +48,7 @@ public class AsyncRetries {
         }
     }
 
-    private <T> void attempt(Supplier<CompletableFuture<HttpResponse<Blob>>> task,
+    private void attempt(Supplier<CompletableFuture<HttpResponse<Blob>>> task,
                              CompletableFuture<HttpResponse<Blob>> result,
                              BackoffStrategy backoff,
                              State state) {
@@ -73,11 +72,9 @@ public class AsyncRetries {
                 maybeRetry(task, result, backoff, state, e);
                 return;
             }
-            if (e instanceof IOException) {
-                if (shouldRetryIOException(e, backoff)) {
-                    maybeRetry(task, result, backoff, state, e);
-                    return;
-                }
+            if (e instanceof IOException && shouldRetryIOException(e, backoff)) {
+                maybeRetry(task, result, backoff, state, e);
+                return;
             }
             logger.debug("Non-retryable exception encountered: {}", e.getClass().getSimpleName());
             result.completeExceptionally(new NonRetryableException(e));
