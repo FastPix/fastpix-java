@@ -3,14 +3,14 @@ package io.fastpix.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class ListFilterValuesForDimensionRequest {
+
+    private static final String DIMENSIONS_ID = "dimensionsId";
     /**
      * Pass Dimensions Id
      */
@@ -101,7 +101,7 @@ public class ListFilterValuesForDimensionRequest {
      * Pass Dimensions Id
      */
     public ListFilterValuesForDimensionRequest withDimensionsId(@Nonnull DimensionsId dimensionsId) {
-        this.dimensionsId = Utils.checkNotNull(dimensionsId, "dimensionsId");
+        this.dimensionsId = Utils.checkNotNull(dimensionsId, DIMENSIONS_ID);
         return this;
     }
 
@@ -161,7 +161,7 @@ public class ListFilterValuesForDimensionRequest {
     @Override
     public String toString() {
         return Utils.toString(ListFilterValuesForDimensionRequest.class,
-                "dimensionsId", dimensionsId,
+                DIMENSIONS_ID, dimensionsId,
                 "timespan", timespan,
                 "filterby", filterby);
     }
@@ -183,7 +183,7 @@ public class ListFilterValuesForDimensionRequest {
          * Pass Dimensions Id
          */
         public Builder dimensionsId(@Nonnull DimensionsId dimensionsId) {
-            this.dimensionsId = Utils.checkNotNull(dimensionsId, "dimensionsId");
+            this.dimensionsId = Utils.checkNotNull(dimensionsId, DIMENSIONS_ID);
             return this;
         }
 

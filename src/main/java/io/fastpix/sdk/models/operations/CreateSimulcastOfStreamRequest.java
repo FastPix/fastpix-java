@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.SimulcastRequest;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -11,6 +9,9 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class CreateSimulcastOfStreamRequest {
+
+    private static final String STREAM_ID = "streamId";
+    private static final String BODY_NAME = "body";
     /**
      * After creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
@@ -51,13 +52,13 @@ public class CreateSimulcastOfStreamRequest {
      * After creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
     public CreateSimulcastOfStreamRequest withStreamId(@Nonnull String streamId) {
-        this.streamId = Utils.checkNotNull(streamId, "streamId");
+        this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
         return this;
     }
 
 
     public CreateSimulcastOfStreamRequest withBody(@Nonnull SimulcastRequest body) {
-        this.body = Utils.checkNotNull(body, "body");
+        this.body = Utils.checkNotNull(body, BODY_NAME);
         return this;
     }
 
@@ -85,8 +86,8 @@ public class CreateSimulcastOfStreamRequest {
     @Override
     public String toString() {
         return Utils.toString(CreateSimulcastOfStreamRequest.class,
-                "streamId", streamId,
-                "body", body);
+                STREAM_ID, streamId,
+                BODY_NAME, body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -104,12 +105,12 @@ public class CreateSimulcastOfStreamRequest {
          * After creating a new live stream, FastPix assigns a unique identifier to the stream.
          */
         public Builder streamId(@Nonnull String streamId) {
-            this.streamId = Utils.checkNotNull(streamId, "streamId");
+            this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
             return this;
         }
 
         public Builder body(@Nonnull SimulcastRequest body) {
-            this.body = Utils.checkNotNull(body, "body");
+            this.body = Utils.checkNotNull(body, BODY_NAME);
             return this;
         }
 

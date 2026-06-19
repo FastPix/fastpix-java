@@ -2,14 +2,15 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class GetLiveStreamPlaybackIdRequest {
+
+    private static final String STREAM_ID = "streamId";
+    private static final String PLAYBACK_ID = "playbackId";
     /**
      * After creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
@@ -55,7 +56,7 @@ public class GetLiveStreamPlaybackIdRequest {
      * After creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
     public GetLiveStreamPlaybackIdRequest withStreamId(@Nonnull String streamId) {
-        this.streamId = Utils.checkNotNull(streamId, "streamId");
+        this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
         return this;
     }
 
@@ -64,7 +65,7 @@ public class GetLiveStreamPlaybackIdRequest {
      * After creating a new playbackId, FastPix assigns a unique identifier to the playback.
      */
     public GetLiveStreamPlaybackIdRequest withPlaybackId(@Nonnull String playbackId) {
-        this.playbackId = Utils.checkNotNull(playbackId, "playbackId");
+        this.playbackId = Utils.checkNotNull(playbackId, PLAYBACK_ID);
         return this;
     }
 
@@ -92,8 +93,8 @@ public class GetLiveStreamPlaybackIdRequest {
     @Override
     public String toString() {
         return Utils.toString(GetLiveStreamPlaybackIdRequest.class,
-                "streamId", streamId,
-                "playbackId", playbackId);
+                STREAM_ID, streamId,
+                PLAYBACK_ID, playbackId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -111,7 +112,7 @@ public class GetLiveStreamPlaybackIdRequest {
          * After creating a new live stream, FastPix assigns a unique identifier to the stream.
          */
         public Builder streamId(@Nonnull String streamId) {
-            this.streamId = Utils.checkNotNull(streamId, "streamId");
+            this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
             return this;
         }
 
@@ -119,7 +120,7 @@ public class GetLiveStreamPlaybackIdRequest {
          * After creating a new playbackId, FastPix assigns a unique identifier to the playback.
          */
         public Builder playbackId(@Nonnull String playbackId) {
-            this.playbackId = Utils.checkNotNull(playbackId, "playbackId");
+            this.playbackId = Utils.checkNotNull(playbackId, PLAYBACK_ID);
             return this;
         }
 

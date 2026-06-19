@@ -3,9 +3,6 @@ package io.fastpix.sdk.models.operations.async;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.io.InputStream;
-import java.lang.Override;
-import java.lang.String;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.CreateResponse;
@@ -16,6 +13,10 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class CreateSigningKeyResponse implements AsyncResponse {
+
+    private static final String CONTENT_TYPE = "contentType";
+    private static final String RAW_RESPONSE = "rawResponse";
+
     /**
      * HTTP response content type for this operation
      */
@@ -111,7 +112,7 @@ public class CreateSigningKeyResponse implements AsyncResponse {
      * HTTP response content type for this operation
      */
     public CreateSigningKeyResponse withContentType(@Nonnull String contentType) {
-        this.contentType = Utils.checkNotNull(contentType, "contentType");
+        this.contentType = Utils.checkNotNull(contentType, CONTENT_TYPE);
         return this;
     }
 
@@ -129,7 +130,7 @@ public class CreateSigningKeyResponse implements AsyncResponse {
      * Raw HTTP response; suitable for custom response parsing
      */
     public CreateSigningKeyResponse withRawResponse(@Nonnull HttpResponse<Blob> rawResponse) {
-        this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+        this.rawResponse = Utils.checkNotNull(rawResponse, RAW_RESPONSE);
         return this;
     }
 
@@ -180,9 +181,9 @@ public class CreateSigningKeyResponse implements AsyncResponse {
     @Override
     public String toString() {
         return Utils.toString(CreateSigningKeyResponse.class,
-                "contentType", contentType,
+                CONTENT_TYPE, contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse,
+                RAW_RESPONSE, rawResponse,
                 "createResponse", createResponse,
                 "defaultError", defaultError);
     }
@@ -208,7 +209,7 @@ public class CreateSigningKeyResponse implements AsyncResponse {
          * HTTP response content type for this operation
          */
         public Builder contentType(@Nonnull String contentType) {
-            this.contentType = Utils.checkNotNull(contentType, "contentType");
+            this.contentType = Utils.checkNotNull(contentType, CONTENT_TYPE);
             return this;
         }
 
@@ -224,7 +225,7 @@ public class CreateSigningKeyResponse implements AsyncResponse {
          * Raw HTTP response; suitable for custom response parsing
          */
         public Builder rawResponse(@Nonnull HttpResponse<Blob> rawResponse) {
-            this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+            this.rawResponse = Utils.checkNotNull(rawResponse, RAW_RESPONSE);
             return this;
         }
 

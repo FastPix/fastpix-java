@@ -2,14 +2,14 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class ListPlaybackIdsRequest {
+
+    private static final String MEDIA_ID = "mediaId";
 
     @FastpixMetadata("pathParam:style=simple,explode=false,name=mediaId")
     private String mediaId;
@@ -31,7 +31,7 @@ public class ListPlaybackIdsRequest {
 
 
     public ListPlaybackIdsRequest withMediaId(@Nonnull String mediaId) {
-        this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+        this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
         return this;
     }
 
@@ -58,7 +58,7 @@ public class ListPlaybackIdsRequest {
     @Override
     public String toString() {
         return Utils.toString(ListPlaybackIdsRequest.class,
-                "mediaId", mediaId);
+                MEDIA_ID, mediaId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -71,7 +71,7 @@ public class ListPlaybackIdsRequest {
         }
 
         public Builder mediaId(@Nonnull String mediaId) {
-            this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+            this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
             return this;
         }
 

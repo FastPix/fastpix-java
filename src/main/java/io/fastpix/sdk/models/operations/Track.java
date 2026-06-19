@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.AudioTrack;
 import io.fastpix.sdk.models.components.SubtitleTrack;
@@ -17,8 +14,10 @@ import io.fastpix.sdk.utils.Utils.JsonShape;
 import io.fastpix.sdk.utils.Utils.TypeReferenceWithShape;
 import io.fastpix.sdk.utils.Utils;
 
-@JsonDeserialize(using = Track._Deserializer.class)
+@JsonDeserialize(using = Track.Deserializer.class)
 public class Track {
+
+    private static final String VALUE_FIELD = "value";
 
     @JsonValue
     private final TypedObject value;
@@ -28,17 +27,17 @@ public class Track {
     }
 
     public static Track of(VideoTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new Track(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static Track of(AudioTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new Track(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static Track of(SubtitleTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_FIELD);
         return new Track(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
@@ -111,9 +110,9 @@ public class Track {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<Track> {
+    public static final class Deserializer extends OneOfDeserializer<Track> {
 
-        public _Deserializer() {
+        public Deserializer() {
             super(Track.class, false,
                   TypeReferenceWithShape.of(new TypeReference<VideoTrack>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<AudioTrack>() {}, JsonShape.DEFAULT),
@@ -124,7 +123,7 @@ public class Track {
     @Override
     public String toString() {
         return Utils.toString(Track.class,
-                "value", value);
+                VALUE_FIELD, value);
     }
 
 }

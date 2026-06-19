@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.SortOrder;
 import io.fastpix.sdk.utils.LazySingletonValue;
@@ -15,6 +12,8 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class ListLiveClipsRequest {
+
+    private static final String LIVESTREAM_ID = "livestreamId";
     /**
      * The stream Id is unique identifier assigned to the live stream.
      */
@@ -98,7 +97,7 @@ public class ListLiveClipsRequest {
      * The stream Id is unique identifier assigned to the live stream.
      */
     public ListLiveClipsRequest withLivestreamId(@Nonnull String livestreamId) {
-        this.livestreamId = Utils.checkNotNull(livestreamId, "livestreamId");
+        this.livestreamId = Utils.checkNotNull(livestreamId, LIVESTREAM_ID);
         return this;
     }
 
@@ -156,7 +155,7 @@ public class ListLiveClipsRequest {
     @Override
     public String toString() {
         return Utils.toString(ListLiveClipsRequest.class,
-                "livestreamId", livestreamId,
+                LIVESTREAM_ID, livestreamId,
                 "limit", limit,
                 "offset", offset,
                 "orderBy", orderBy);
@@ -181,7 +180,7 @@ public class ListLiveClipsRequest {
          * The stream Id is unique identifier assigned to the live stream.
          */
         public Builder livestreamId(@Nonnull String livestreamId) {
-            this.livestreamId = Utils.checkNotNull(livestreamId, "livestreamId");
+            this.livestreamId = Utils.checkNotNull(livestreamId, LIVESTREAM_ID);
             return this;
         }
 

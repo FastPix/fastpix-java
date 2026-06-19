@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,20 +9,23 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * ListPlaybackIdsAccessPolicy
+ *
+ * <p>The access policy set for the playback ID.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * ListPlaybackIdsAccessPolicy
- * 
- * <p>The access policy set for the playback ID.
- */
 public class ListPlaybackIdsAccessPolicy {
 
-    public static final ListPlaybackIdsAccessPolicy PUBLIC = new ListPlaybackIdsAccessPolicy("public");
-    public static final ListPlaybackIdsAccessPolicy PRIVATE = new ListPlaybackIdsAccessPolicy("private");
-    public static final ListPlaybackIdsAccessPolicy DRM = new ListPlaybackIdsAccessPolicy("drm");
+    private static final String PUBLIC_VALUE = "public";
+    private static final String PRIVATE_VALUE = "private";
+    private static final String DRM_VALUE = "drm";
+
+    public static final ListPlaybackIdsAccessPolicy PUBLIC = new ListPlaybackIdsAccessPolicy(PUBLIC_VALUE);
+    public static final ListPlaybackIdsAccessPolicy PRIVATE = new ListPlaybackIdsAccessPolicy(PRIVATE_VALUE);
+    public static final ListPlaybackIdsAccessPolicy DRM = new ListPlaybackIdsAccessPolicy(DRM_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -50,7 +51,7 @@ public class ListPlaybackIdsAccessPolicy {
     @JsonCreator
     public static ListPlaybackIdsAccessPolicy of(String value) {
         synchronized (ListPlaybackIdsAccessPolicy.class) {
-            return values.computeIfAbsent(value, v -> new ListPlaybackIdsAccessPolicy(v));
+            return values.computeIfAbsent(value, ListPlaybackIdsAccessPolicy::new);
         }
     }
 
@@ -98,26 +99,26 @@ public class ListPlaybackIdsAccessPolicy {
 
     private static final Map<String, ListPlaybackIdsAccessPolicy> createValuesMap() {
         Map<String, ListPlaybackIdsAccessPolicy> map = new LinkedHashMap<>();
-        map.put("public", PUBLIC);
-        map.put("private", PRIVATE);
-        map.put("drm", DRM);
+        map.put(PUBLIC_VALUE, PUBLIC);
+        map.put(PRIVATE_VALUE, PRIVATE);
+        map.put(DRM_VALUE, DRM);
         return map;
     }
 
     private static final Map<String, ListPlaybackIdsAccessPolicyEnum> createEnumsMap() {
         Map<String, ListPlaybackIdsAccessPolicyEnum> map = new HashMap<>();
-        map.put("public", ListPlaybackIdsAccessPolicyEnum.PUBLIC);
-        map.put("private", ListPlaybackIdsAccessPolicyEnum.PRIVATE);
-        map.put("drm", ListPlaybackIdsAccessPolicyEnum.DRM);
+        map.put(PUBLIC_VALUE, ListPlaybackIdsAccessPolicyEnum.PUBLIC);
+        map.put(PRIVATE_VALUE, ListPlaybackIdsAccessPolicyEnum.PRIVATE);
+        map.put(DRM_VALUE, ListPlaybackIdsAccessPolicyEnum.DRM);
         return map;
     }
     
     
     public enum ListPlaybackIdsAccessPolicyEnum {
 
-        PUBLIC("public"),
-        PRIVATE("private"),
-        DRM("drm"),;
+        PUBLIC(PUBLIC_VALUE),
+        PRIVATE(PRIVATE_VALUE),
+        DRM(DRM_VALUE),;
 
         private final String value;
 

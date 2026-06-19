@@ -3,23 +3,24 @@ package io.fastpix.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.AddTrackRequest;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class AddMediaTrackRequestBody {
+
+    private static final String PROP_TRACKS = "tracks";
+
     /**
      * Contains details about the track being added to the media file.
      */
-    @JsonProperty("tracks")
+    @JsonProperty(PROP_TRACKS)
     private AddTrackRequest tracks;
 
     @JsonCreator
     public AddMediaTrackRequestBody(
-            @JsonProperty("tracks") @Nonnull AddTrackRequest tracks) {
+            @JsonProperty(PROP_TRACKS) @Nonnull AddTrackRequest tracks) {
         this.tracks = Optional.ofNullable(tracks)
             .orElseThrow(() -> new IllegalArgumentException("tracks cannot be null"));
     }
@@ -40,7 +41,7 @@ public class AddMediaTrackRequestBody {
      * Contains details about the track being added to the media file.
      */
     public AddMediaTrackRequestBody withTracks(@Nonnull AddTrackRequest tracks) {
-        this.tracks = Utils.checkNotNull(tracks, "tracks");
+        this.tracks = Utils.checkNotNull(tracks, PROP_TRACKS);
         return this;
     }
 
@@ -67,7 +68,7 @@ public class AddMediaTrackRequestBody {
     @Override
     public String toString() {
         return Utils.toString(AddMediaTrackRequestBody.class,
-                "tracks", tracks);
+                PROP_TRACKS, tracks);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -83,7 +84,7 @@ public class AddMediaTrackRequestBody {
          * Contains details about the track being added to the media file.
          */
         public Builder tracks(@Nonnull AddTrackRequest tracks) {
-            this.tracks = Utils.checkNotNull(tracks, "tracks");
+            this.tracks = Utils.checkNotNull(tracks, PROP_TRACKS);
             return this;
         }
 

@@ -2,14 +2,15 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class UpdatedSourceAccessRequest {
+
+    private static final String MEDIA_ID = "mediaId";
+    private static final String BODY_NAME = "body";
     /**
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
@@ -50,13 +51,13 @@ public class UpdatedSourceAccessRequest {
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
     public UpdatedSourceAccessRequest withMediaId(@Nonnull String mediaId) {
-        this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+        this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
         return this;
     }
 
 
     public UpdatedSourceAccessRequest withBody(@Nonnull UpdatedSourceAccessRequestBody body) {
-        this.body = Utils.checkNotNull(body, "body");
+        this.body = Utils.checkNotNull(body, BODY_NAME);
         return this;
     }
 
@@ -84,8 +85,8 @@ public class UpdatedSourceAccessRequest {
     @Override
     public String toString() {
         return Utils.toString(UpdatedSourceAccessRequest.class,
-                "mediaId", mediaId,
-                "body", body);
+                MEDIA_ID, mediaId,
+                BODY_NAME, body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -103,12 +104,12 @@ public class UpdatedSourceAccessRequest {
          * The unique identifier assigned to the media when created. The value must be a valid UUID.
          */
         public Builder mediaId(@Nonnull String mediaId) {
-            this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+            this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
             return this;
         }
 
         public Builder body(@Nonnull UpdatedSourceAccessRequestBody body) {
-            this.body = Utils.checkNotNull(body, "body");
+            this.body = Utils.checkNotNull(body, BODY_NAME);
             return this;
         }
 

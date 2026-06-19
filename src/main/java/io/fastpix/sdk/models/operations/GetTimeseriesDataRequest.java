@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.LazySingletonValue;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -13,6 +11,8 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class GetTimeseriesDataRequest {
+
+    private static final String METRIC_ID = "metricId";
     /**
      * Pass metric Id
      */
@@ -154,7 +154,7 @@ public class GetTimeseriesDataRequest {
      * Pass metric Id
      */
     public GetTimeseriesDataRequest withMetricId(@Nonnull GetTimeseriesDataMetricId metricId) {
-        this.metricId = Utils.checkNotNull(metricId, "metricId");
+        this.metricId = Utils.checkNotNull(metricId, METRIC_ID);
         return this;
     }
 
@@ -246,7 +246,7 @@ public class GetTimeseriesDataRequest {
     @Override
     public String toString() {
         return Utils.toString(GetTimeseriesDataRequest.class,
-                "metricId", metricId,
+                METRIC_ID, metricId,
                 "groupBy", groupBy,
                 "sortOrder", sortOrder,
                 "measurement", measurement,
@@ -277,7 +277,7 @@ public class GetTimeseriesDataRequest {
          * Pass metric Id
          */
         public Builder metricId(@Nonnull GetTimeseriesDataMetricId metricId) {
-            this.metricId = Utils.checkNotNull(metricId, "metricId");
+            this.metricId = Utils.checkNotNull(metricId, METRIC_ID);
             return this;
         }
 

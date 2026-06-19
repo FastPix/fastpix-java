@@ -2,14 +2,15 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class DeleteMediaTrackRequest {
+
+    private static final String MEDIA_ID = "mediaId";
+    private static final String TRACK_ID = "trackId";
     /**
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
@@ -55,7 +56,7 @@ public class DeleteMediaTrackRequest {
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
     public DeleteMediaTrackRequest withMediaId(@Nonnull String mediaId) {
-        this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+        this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
         return this;
     }
 
@@ -64,7 +65,7 @@ public class DeleteMediaTrackRequest {
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
     public DeleteMediaTrackRequest withTrackId(@Nonnull String trackId) {
-        this.trackId = Utils.checkNotNull(trackId, "trackId");
+        this.trackId = Utils.checkNotNull(trackId, TRACK_ID);
         return this;
     }
 
@@ -92,8 +93,8 @@ public class DeleteMediaTrackRequest {
     @Override
     public String toString() {
         return Utils.toString(DeleteMediaTrackRequest.class,
-                "mediaId", mediaId,
-                "trackId", trackId);
+                MEDIA_ID, mediaId,
+                TRACK_ID, trackId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -111,7 +112,7 @@ public class DeleteMediaTrackRequest {
          * The unique identifier assigned to the media when created. The value must be a valid UUID.
          */
         public Builder mediaId(@Nonnull String mediaId) {
-            this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+            this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
             return this;
         }
 
@@ -119,7 +120,7 @@ public class DeleteMediaTrackRequest {
          * The unique identifier assigned to the media when created. The value must be a valid UUID.
          */
         public Builder trackId(@Nonnull String trackId) {
-            this.trackId = Utils.checkNotNull(trackId, "trackId");
+            this.trackId = Utils.checkNotNull(trackId, TRACK_ID);
             return this;
         }
 

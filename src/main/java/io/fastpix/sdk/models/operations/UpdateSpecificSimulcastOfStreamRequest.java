@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.SimulcastUpdateRequest;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -11,6 +9,10 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class UpdateSpecificSimulcastOfStreamRequest {
+
+    private static final String STREAM_ID = "streamId";
+    private static final String SIMULCAST_ID = "simulcastId";
+    private static final String BODY_NAME = "body";
     /**
      * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
@@ -69,7 +71,7 @@ public class UpdateSpecificSimulcastOfStreamRequest {
      * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
     public UpdateSpecificSimulcastOfStreamRequest withStreamId(@Nonnull String streamId) {
-        this.streamId = Utils.checkNotNull(streamId, "streamId");
+        this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
         return this;
     }
 
@@ -79,13 +81,13 @@ public class UpdateSpecificSimulcastOfStreamRequest {
      * maximum of 255 characters.
      */
     public UpdateSpecificSimulcastOfStreamRequest withSimulcastId(@Nonnull String simulcastId) {
-        this.simulcastId = Utils.checkNotNull(simulcastId, "simulcastId");
+        this.simulcastId = Utils.checkNotNull(simulcastId, SIMULCAST_ID);
         return this;
     }
 
 
     public UpdateSpecificSimulcastOfStreamRequest withBody(@Nonnull SimulcastUpdateRequest body) {
-        this.body = Utils.checkNotNull(body, "body");
+        this.body = Utils.checkNotNull(body, BODY_NAME);
         return this;
     }
 
@@ -114,9 +116,9 @@ public class UpdateSpecificSimulcastOfStreamRequest {
     @Override
     public String toString() {
         return Utils.toString(UpdateSpecificSimulcastOfStreamRequest.class,
-                "streamId", streamId,
-                "simulcastId", simulcastId,
-                "body", body);
+                STREAM_ID, streamId,
+                SIMULCAST_ID, simulcastId,
+                BODY_NAME, body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -136,7 +138,7 @@ public class UpdateSpecificSimulcastOfStreamRequest {
          * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
          */
         public Builder streamId(@Nonnull String streamId) {
-            this.streamId = Utils.checkNotNull(streamId, "streamId");
+            this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
             return this;
         }
 
@@ -145,12 +147,12 @@ public class UpdateSpecificSimulcastOfStreamRequest {
          * maximum of 255 characters.
          */
         public Builder simulcastId(@Nonnull String simulcastId) {
-            this.simulcastId = Utils.checkNotNull(simulcastId, "simulcastId");
+            this.simulcastId = Utils.checkNotNull(simulcastId, SIMULCAST_ID);
             return this;
         }
 
         public Builder body(@Nonnull SimulcastUpdateRequest body) {
-            this.body = Utils.checkNotNull(body, "body");
+            this.body = Utils.checkNotNull(body, BODY_NAME);
             return this;
         }
 

@@ -2,14 +2,14 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class GetSigningKeyByIdRequest {
+
+    private static final String SIGNING_KEY_ID = "signingKeyId";
     /**
      * When creating the signing key, FastPix assigns a universally unique identifier with a maximum length
      * of 255 characters.
@@ -42,7 +42,7 @@ public class GetSigningKeyByIdRequest {
      * of 255 characters.
      */
     public GetSigningKeyByIdRequest withSigningKeyId(@Nonnull String signingKeyId) {
-        this.signingKeyId = Utils.checkNotNull(signingKeyId, "signingKeyId");
+        this.signingKeyId = Utils.checkNotNull(signingKeyId, SIGNING_KEY_ID);
         return this;
     }
 
@@ -69,7 +69,7 @@ public class GetSigningKeyByIdRequest {
     @Override
     public String toString() {
         return Utils.toString(GetSigningKeyByIdRequest.class,
-                "signingKeyId", signingKeyId);
+                SIGNING_KEY_ID, signingKeyId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -86,7 +86,7 @@ public class GetSigningKeyByIdRequest {
          * of 255 characters.
          */
         public Builder signingKeyId(@Nonnull String signingKeyId) {
-            this.signingKeyId = Utils.checkNotNull(signingKeyId, "signingKeyId");
+            this.signingKeyId = Utils.checkNotNull(signingKeyId, SIGNING_KEY_ID);
             return this;
         }
 

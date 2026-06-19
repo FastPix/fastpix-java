@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.LazySingletonValue;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -14,6 +11,8 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class ListBreakdownValuesRequest {
+
+    private static final String METRIC_ID = "metricId";
     /**
      * Pass metric Id
      */
@@ -223,7 +222,7 @@ public class ListBreakdownValuesRequest {
      * Pass metric Id
      */
     public ListBreakdownValuesRequest withMetricId(@Nonnull ListBreakdownValuesMetricId metricId) {
-        this.metricId = Utils.checkNotNull(metricId, "metricId");
+        this.metricId = Utils.checkNotNull(metricId, METRIC_ID);
         return this;
     }
 
@@ -356,7 +355,7 @@ public class ListBreakdownValuesRequest {
     @Override
     public String toString() {
         return Utils.toString(ListBreakdownValuesRequest.class,
-                "metricId", metricId,
+                METRIC_ID, metricId,
                 "timespan", timespan,
                 "filterby", filterby,
                 "limit", limit,
@@ -396,7 +395,7 @@ public class ListBreakdownValuesRequest {
          * Pass metric Id
          */
         public Builder metricId(@Nonnull ListBreakdownValuesMetricId metricId) {
-            this.metricId = Utils.checkNotNull(metricId, "metricId");
+            this.metricId = Utils.checkNotNull(metricId, METRIC_ID);
             return this;
         }
 

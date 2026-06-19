@@ -2,14 +2,14 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class GetPlaylistByIdRequest {
+
+    private static final String PLAYLIST_ID = "playlistId";
     /**
      * The unique id of the playlist you want to retrieve.
      */
@@ -39,7 +39,7 @@ public class GetPlaylistByIdRequest {
      * The unique id of the playlist you want to retrieve.
      */
     public GetPlaylistByIdRequest withPlaylistId(@Nonnull String playlistId) {
-        this.playlistId = Utils.checkNotNull(playlistId, "playlistId");
+        this.playlistId = Utils.checkNotNull(playlistId, PLAYLIST_ID);
         return this;
     }
 
@@ -66,7 +66,7 @@ public class GetPlaylistByIdRequest {
     @Override
     public String toString() {
         return Utils.toString(GetPlaylistByIdRequest.class,
-                "playlistId", playlistId);
+                PLAYLIST_ID, playlistId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -82,7 +82,7 @@ public class GetPlaylistByIdRequest {
          * The unique id of the playlist you want to retrieve.
          */
         public Builder playlistId(@Nonnull String playlistId) {
-            this.playlistId = Utils.checkNotNull(playlistId, "playlistId");
+            this.playlistId = Utils.checkNotNull(playlistId, PLAYLIST_ID);
             return this;
         }
 

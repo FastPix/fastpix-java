@@ -3,9 +3,6 @@ package io.fastpix.sdk.models.operations.async;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.io.InputStream;
-import java.lang.Override;
-import java.lang.String;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.DefaultError;
@@ -14,7 +11,14 @@ import io.fastpix.sdk.utils.Blob;
 import io.fastpix.sdk.utils.Utils;
 
 
+// The "getAllPlaylistsResponse" field intentionally mirrors the wrapped component type
+// (io.fastpix.sdk.models.components.GetAllPlaylistsResponse) and its public accessor/builder
+// names; renaming it would desync the field from those generated public API names.
+@SuppressWarnings("java:S1700")
 public class GetAllPlaylistsResponse implements AsyncResponse {
+
+    private static final String CONTENT_TYPE = "contentType";
+    private static final String RAW_RESPONSE = "rawResponse";
     /**
      * HTTP response content type for this operation
      */
@@ -110,7 +114,7 @@ public class GetAllPlaylistsResponse implements AsyncResponse {
      * HTTP response content type for this operation
      */
     public GetAllPlaylistsResponse withContentType(@Nonnull String contentType) {
-        this.contentType = Utils.checkNotNull(contentType, "contentType");
+        this.contentType = Utils.checkNotNull(contentType, CONTENT_TYPE);
         return this;
     }
 
@@ -128,7 +132,7 @@ public class GetAllPlaylistsResponse implements AsyncResponse {
      * Raw HTTP response; suitable for custom response parsing
      */
     public GetAllPlaylistsResponse withRawResponse(@Nonnull HttpResponse<Blob> rawResponse) {
-        this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+        this.rawResponse = Utils.checkNotNull(rawResponse, RAW_RESPONSE);
         return this;
     }
 
@@ -179,9 +183,9 @@ public class GetAllPlaylistsResponse implements AsyncResponse {
     @Override
     public String toString() {
         return Utils.toString(GetAllPlaylistsResponse.class,
-                "contentType", contentType,
+                CONTENT_TYPE, contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse,
+                RAW_RESPONSE, rawResponse,
                 "getAllPlaylistsResponse", getAllPlaylistsResponse,
                 "defaultError", defaultError);
     }
@@ -207,7 +211,7 @@ public class GetAllPlaylistsResponse implements AsyncResponse {
          * HTTP response content type for this operation
          */
         public Builder contentType(@Nonnull String contentType) {
-            this.contentType = Utils.checkNotNull(contentType, "contentType");
+            this.contentType = Utils.checkNotNull(contentType, CONTENT_TYPE);
             return this;
         }
 
@@ -223,7 +227,7 @@ public class GetAllPlaylistsResponse implements AsyncResponse {
          * Raw HTTP response; suitable for custom response parsing
          */
         public Builder rawResponse(@Nonnull HttpResponse<Blob> rawResponse) {
-            this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+            this.rawResponse = Utils.checkNotNull(rawResponse, RAW_RESPONSE);
             return this;
         }
 
