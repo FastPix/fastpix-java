@@ -4,6 +4,50 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.3]
+
+### Changed
+
+- **SDK version bump: `1.0.2` → `1.0.3`.**
+  A maintenance release focused on static-analysis (SonarQube) cleanup. It
+  contains no functional, API, or behavioral changes and is fully backward
+  compatible with `1.0.2`.
+
+  Version identifiers updated:
+  - `version` property in the build configuration — now `1.0.3`.
+  - `SDK_VERSION` runtime constant and the installation documentation — now
+    aligned with the package version `1.0.3`.
+
+- **Static-analysis cleanup (non-behavioral).** Resolved a broad set of
+  SonarQube findings across the SDK utilities, operations, and models:
+  - **Exception specificity** — generic `RuntimeException` throws in the
+    request-serialization path replaced with intent-revealing types
+    (`IllegalStateException` for missing metadata, `IllegalArgumentException`
+    for unsupported or invalid content). The thrown conditions are unchanged.
+  - **Idiomatic cleanups** — `collection.size() > 0` replaced with
+    `!collection.isEmpty()`; eligible lambdas replaced with method references;
+    single-branch `switch` statements converted to `if` expressions; explicit
+    `default` cases added.
+  - **Code structure** — removed unused private methods, fields, imports, and
+    redundant constructors; extracted duplicated string literals into named
+    constants; merged collapsible conditionals; dropped redundant control flow.
+  - **Contract alignment** — `FastpixException.withBody(...)` no longer
+    annotates its parameter as `@Nullable`, matching the method's existing
+    runtime contract (it already rejects `null` via `Utils.checkNotNull`).
+  - **Intentional patterns documented** — deliberate uses of reflection-based
+    field access, established serialization branching, and the SDK-controlled
+    media-type regex annotated with targeted `@SuppressWarnings` and
+    explanatory comments rather than restructuring proven code. The JSON
+    content-type matching pattern is unchanged.
+
+### Compatibility
+
+- No changes to public types, method signatures, request/response models,
+  default server URLs, hooks, or retry logic.
+- No action required to upgrade beyond re-resolving the dependency.
+
+---
+
 ## [1.0.2]
 
 ### ⚠️ Important — FastPix is migrating from `.io` to `.com`

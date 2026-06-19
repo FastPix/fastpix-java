@@ -74,12 +74,12 @@ public final class RequestBody {
         return serializeContentType(requestField, requestMetadata.mediaType, requestValue);
     }
 
-    // The media-type patterns match SDK-controlled content-type strings rather than untrusted input,
-    // so the backtracking-performance finding is suppressed rather than altering the matching regex.
-    @SuppressWarnings("java:S5852")
     private static SerializedBody serializeContentType(String fieldName, String contentType, Object value)
             throws IllegalArgumentException, IllegalAccessException, UnsupportedOperationException, IOException {
-        Pattern jsonPattern = Pattern.compile("(application|text)\\/.*?\\+*json.*");
+        // Matches an application/text media type whose subtype contains json (including a +json vendor
+        // suffix). The previous lazy ".*?" next to "\+*" allowed the same "+" to be matched two ways,
+        // causing backtracking; this single greedy form matches the same set without that ambiguity.
+        Pattern jsonPattern = Pattern.compile("(application|text)\\/.*json.*");
         Pattern multipartPattern = Pattern.compile("multipart\\/.*");
         Pattern formPattern = Pattern.compile("application\\/x-www-form-urlencoded.*");
         Pattern textPattern = Pattern.compile("text\\/plain");
