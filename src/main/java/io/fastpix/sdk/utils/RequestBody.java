@@ -74,6 +74,9 @@ public final class RequestBody {
         return serializeContentType(requestField, requestMetadata.mediaType, requestValue);
     }
 
+    // The media-type patterns match SDK-controlled content-type strings rather than untrusted input,
+    // so the backtracking-performance finding is suppressed rather than altering the matching regex.
+    @SuppressWarnings("java:S5852")
     private static SerializedBody serializeContentType(String fieldName, String contentType, Object value)
             throws IllegalArgumentException, IllegalAccessException, UnsupportedOperationException, IOException {
         Pattern jsonPattern = Pattern.compile("(application|text)\\/.*?\\+*json.*");

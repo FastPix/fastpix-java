@@ -66,7 +66,7 @@ public abstract class FastpixException extends RuntimeException {
         return this;
     }
     
-    public FastpixException withBody(@Nullable byte[] body) {
+    public FastpixException withBody(byte[] body) {
         Utils.checkNotNull(body, "body");
         this.body = body;
         return this;

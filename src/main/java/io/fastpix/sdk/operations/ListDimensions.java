@@ -258,7 +258,7 @@ public final class ListDimensions {
                     .statusCodes(retryStatusCodes)
                     .scheduler(retryScheduler)
                     .build();
-            return retries.retry(() -> unchecked(() -> onBuildRequest()).get().thenCompose(client::sendAsync)
+            return retries.retry(() -> unchecked(this::onBuildRequest).get().thenCompose(client::sendAsync)
                             .handle((resp, err) -> {
                                 if (err != null) {
                                     return onError(null, err);

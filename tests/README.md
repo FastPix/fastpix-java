@@ -103,7 +103,7 @@ accurate testing. If a fixture is missing, the GET driver falls back to a
 placeholder UUID, which typically yields a 404.
 
 <!-- BEGIN GET_ENDPOINTS_CONSOLIDATED -->
-Last generated: 2026-06-19T12:12:25.119Z
+Last generated: 2026-06-19T16:05:10.682Z
 
 - **Total GET endpoints**: 30
 - **PASS**: 26

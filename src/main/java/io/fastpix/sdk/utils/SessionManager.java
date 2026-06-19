@@ -9,6 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,7 +90,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         // First look for an exact match
         Session<T> exactSession = clientSessions.get(scopeKey);
         if (exactSession != null) {
-            if (hasTokenExpired(exactSession.expiresAt, OffsetDateTime.now())) {
+            if (hasTokenExpired(exactSession.expiresAt, OffsetDateTime.now(ZoneId.systemDefault()))) {
                 removeSession(sessionKey, scopeKey);
             } else {
                 return Optional.of(exactSession);
@@ -101,7 +102,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         Session<T> validSession = null;
         for (Map.Entry<String, Session<T>> entry : clientSessions.entrySet()) {
             Session<T> session = entry.getValue();
-            if (hasTokenExpired(session.expiresAt, OffsetDateTime.now())) {
+            if (hasTokenExpired(session.expiresAt, OffsetDateTime.now(ZoneId.systemDefault()))) {
                 expiredSessionKeys.add(entry.getKey());
             } else if (hasRequiredScopes(session.scopes, requiredScopes)) {
                 validSession = session;
@@ -189,7 +190,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
                     response);
             }
             final Optional<OffsetDateTime> expiresAt = t.expiresInSeconds
-                    .map(x -> OffsetDateTime.now().plus(x, ChronoUnit.SECONDS));
+                    .map(x -> OffsetDateTime.now(ZoneId.systemDefault()).plus(x, ChronoUnit.SECONDS));
             return new Session<>(credentials, t.accessToken, scopes, expiresAt);
         } catch (IOException | IllegalArgumentException | IllegalAccessException | InterruptedException | URISyntaxException e) {
             throw new IllegalStateException(e);

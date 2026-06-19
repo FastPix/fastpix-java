@@ -80,7 +80,7 @@ public final class Security {
 
     // Reflection reads the fields of arbitrary security-scheme types; the field scan skips non-applicable
     // fields inline.
-    @SuppressWarnings({"java:S135", "java:S3011"})
+    @SuppressWarnings({"java:S135", "java:S3011", "java:S112"})
     private static void parseSecurityScheme(HTTPRequest requestBuilder, SecurityMetadata schemeMetadata,
             Object scheme) throws Exception {
 

@@ -19,7 +19,7 @@ public class QueryParameters {
     // This metadata-driven query builder walks reflective fields and skips several non-applicable
     // cases inline; reflection is required to read arbitrary request types and restructuring the
     // skips would change the parsing flow, so the related findings are suppressed.
-    @SuppressWarnings({"java:S3776", "java:S135", "java:S3011"})
+    @SuppressWarnings({"java:S3776", "java:S135", "java:S3011", "java:S112"})
     public static <T extends Object> List<QueryParameter> parseQueryParams(Class<T> type, T queryParams,
             Globals globals) throws Exception {
         List<QueryParameter> allParams = new ArrayList<>();

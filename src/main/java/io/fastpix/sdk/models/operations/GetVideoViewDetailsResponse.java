@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
-import java.lang.Override;
-import java.lang.String;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.DefaultError;
