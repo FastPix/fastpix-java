@@ -59,6 +59,21 @@ stages:
         echo "##vso[task.setvariable variable=sonarJavaLibraries]$SONAR_LIBS"
       displayName: 'Compile SDK and resolve classpath'
 
+    # Verification gate: run the JUnit suite. set -e fails the stage (and the PR)
+    # if any test fails, so broken changes can't reach main or a release tag.
+    - script: |
+        set -e
+        ./gradlew --no-daemon test
+      displayName: 'Run unit tests'
+
+    - task: PublishTestResults@2
+      displayName: 'Publish unit test results'
+      condition: always()
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/build/test-results/test/TEST-*.xml'
+        failTaskOnFailedTests: true
+
     - task: SonarCloudPrepare@3
       displayName: 'Prepare SonarCloud Analysis'
       inputs:
