@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.LazySingletonValue;
 import io.fastpix.sdk.utils.Utils;
@@ -18,11 +16,14 @@ import io.fastpix.sdk.utils.Utils;
  * <p>Request body for direct upload
  */
 public class DirectUploadVideoMediaRequest {
+
+    private static final String CORS_ORIGIN = "corsOrigin";
+    private static final String PUSH_MEDIA_SETTINGS = "pushMediaSettings";
     /**
      * Upload media directly from a device using the URL name or enter "*" to allow all.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("corsOrigin")
+    @JsonProperty(CORS_ORIGIN)
     private String corsOrigin;
 
     /**
@@ -34,13 +35,13 @@ public class DirectUploadVideoMediaRequest {
      * Overview</a>.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("pushMediaSettings")
+    @JsonProperty(PUSH_MEDIA_SETTINGS)
     private PushMediaSettings pushMediaSettings;
 
     @JsonCreator
     public DirectUploadVideoMediaRequest(
-            @JsonProperty("corsOrigin") @Nullable String corsOrigin,
-            @JsonProperty("pushMediaSettings") @Nullable PushMediaSettings pushMediaSettings) {
+            @JsonProperty(CORS_ORIGIN) @Nullable String corsOrigin,
+            @JsonProperty(PUSH_MEDIA_SETTINGS) @Nullable PushMediaSettings pushMediaSettings) {
         this.corsOrigin = Optional.ofNullable(corsOrigin)
             .orElse(Builder._SINGLETON_VALUE_CorsOrigin.value());
         this.pushMediaSettings = pushMediaSettings;
@@ -120,12 +121,12 @@ public class DirectUploadVideoMediaRequest {
     @Override
     public String toString() {
         return Utils.toString(DirectUploadVideoMediaRequest.class,
-                "corsOrigin", corsOrigin,
-                "pushMediaSettings", pushMediaSettings);
+                CORS_ORIGIN, corsOrigin,
+                PUSH_MEDIA_SETTINGS, pushMediaSettings);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String corsOrigin;
 
@@ -164,7 +165,7 @@ public class DirectUploadVideoMediaRequest {
 
         private static final LazySingletonValue<String> _SINGLETON_VALUE_CorsOrigin =
                 new LazySingletonValue<>(
-                        "corsOrigin",
+                        CORS_ORIGIN,
                         "\"*\"",
                         new TypeReference<String>() {});
     }

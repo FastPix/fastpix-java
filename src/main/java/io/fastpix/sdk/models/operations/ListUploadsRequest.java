@@ -3,9 +3,6 @@ package io.fastpix.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.SortOrder;
 import io.fastpix.sdk.utils.LazySingletonValue;
@@ -132,7 +129,7 @@ public class ListUploadsRequest {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private Long limit;
 

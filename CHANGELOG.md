@@ -4,6 +4,48 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.3]
+
+### Changed
+
+- **SDK version bump: `1.0.2` → `1.0.3`.**
+  A maintenance release focused on static-analysis (SonarQube) cleanup. It
+  contains no functional or behavioral changes and is source-compatible with
+  `1.0.2` for normal SDK usage (see Compatibility for one constructor
+  visibility change). The `version` property, the `SDK_VERSION` runtime
+  constant, and the installation documentation now report `1.0.3`.
+
+- **Static-analysis cleanup (non-behavioral).** Resolved a set of SonarQube
+  findings across the SDK utilities, operations, and models. The thrown
+  conditions, serialization flow, and matched content types are unchanged:
+  - Replaced regular-expression media-type detection in `RequestBody` with
+    equivalent linear-time `String` comparisons, removing the super-linear
+    backtracking risk.
+  - Reduced the cognitive complexity of `RequestBody.serializeContentType(...)`
+    by extracting its JSON and raw-value branches into helper methods.
+  - Replaced generic `RuntimeException` throws in the serialization path with
+    specific `IllegalStateException` and `IllegalArgumentException` types.
+  - Removed `@Nullable` from the `FastpixException.withBody(...)` parameter to
+    match its existing non-null runtime contract.
+  - Narrowed the `FastpixException(String, int, byte[], HttpResponse, Throwable)`
+    constructor from `public` to `protected` (see Compatibility).
+  - Applied idiomatic and structural cleanups: `!isEmpty()` over `size() > 0`,
+    method references over equivalent lambdas, `if` expressions over
+    single-branch `switch` statements, and removal of unused members,
+    redundant constructors, and duplicated string literals.
+
+### Compatibility
+
+- No changes to public method signatures, request/response models, default
+  server URLs, hooks, or retry logic.
+- **One source-level change:** the `FastpixException` all-args constructor is
+  now `protected` instead of `public`. Throwing, catching, and reading
+  `FastpixException` are unaffected; this only impacts code that constructed
+  `FastpixException` directly from outside the package — an unsupported usage.
+- No action required to upgrade beyond re-resolving the dependency.
+
+---
+
 ## [1.0.2]
 
 ### ⚠️ Important — FastPix is migrating from `.io` to `.com`

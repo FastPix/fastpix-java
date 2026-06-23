@@ -2,14 +2,14 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class GetDrmConfigurationByIdRequest {
+
+    private static final String DRM_CONFIGURATION_ID = "drmConfigurationId";
     /**
      * The unique identifier of the DRM configuration.
      */
@@ -39,7 +39,7 @@ public class GetDrmConfigurationByIdRequest {
      * The unique identifier of the DRM configuration.
      */
     public GetDrmConfigurationByIdRequest withDrmConfigurationId(@Nonnull String drmConfigurationId) {
-        this.drmConfigurationId = Utils.checkNotNull(drmConfigurationId, "drmConfigurationId");
+        this.drmConfigurationId = Utils.checkNotNull(drmConfigurationId, DRM_CONFIGURATION_ID);
         return this;
     }
 
@@ -66,11 +66,11 @@ public class GetDrmConfigurationByIdRequest {
     @Override
     public String toString() {
         return Utils.toString(GetDrmConfigurationByIdRequest.class,
-                "drmConfigurationId", drmConfigurationId);
+                DRM_CONFIGURATION_ID, drmConfigurationId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String drmConfigurationId;
 
@@ -82,7 +82,7 @@ public class GetDrmConfigurationByIdRequest {
          * The unique identifier of the DRM configuration.
          */
         public Builder drmConfigurationId(@Nonnull String drmConfigurationId) {
-            this.drmConfigurationId = Utils.checkNotNull(drmConfigurationId, "drmConfigurationId");
+            this.drmConfigurationId = Utils.checkNotNull(drmConfigurationId, DRM_CONFIGURATION_ID);
             return this;
         }
 

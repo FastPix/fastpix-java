@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -14,28 +11,30 @@ import io.fastpix.sdk.utils.Utils.JsonShape;
 import io.fastpix.sdk.utils.Utils.TypeReferenceWithShape;
 import io.fastpix.sdk.utils.Utils;
 
-@JsonDeserialize(using = GetMediaResponseTrack._Deserializer.class)
+@JsonDeserialize(using = GetMediaResponseTrack.TrackDeserializer.class)
 public class GetMediaResponseTrack {
+
+    private static final String VALUE_NAME = "value";
 
     @JsonValue
     private final TypedObject value;
-    
+
     private GetMediaResponseTrack(TypedObject value) {
         this.value = value;
     }
 
     public static GetMediaResponseTrack of(VideoTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_NAME);
         return new GetMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static GetMediaResponseTrack of(AudioTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_NAME);
         return new GetMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static GetMediaResponseTrack of(SubtitleTrack value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_NAME);
         return new GetMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
@@ -108,9 +107,9 @@ public class GetMediaResponseTrack {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<GetMediaResponseTrack> {
+    public static final class TrackDeserializer extends OneOfDeserializer<GetMediaResponseTrack> {
 
-        public _Deserializer() {
+        public TrackDeserializer() {
             super(GetMediaResponseTrack.class, false,
                   TypeReferenceWithShape.of(new TypeReference<VideoTrack>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<AudioTrack>() {}, JsonShape.DEFAULT),
@@ -121,7 +120,7 @@ public class GetMediaResponseTrack {
     @Override
     public String toString() {
         return Utils.toString(GetMediaResponseTrack.class,
-                "value", value);
+                VALUE_NAME, value);
     }
 
 }

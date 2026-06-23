@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
-import java.lang.Override;
-import java.lang.String;
 import io.fastpix.sdk.utils.UnknownType;
 
 

@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,27 +9,37 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * GetAllMediaResponseSourceResolution
+ *
+ * <p>The actual resolution of the uploaded media. This represents the native quality of the source media.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * GetAllMediaResponseSourceResolution
- * 
- * <p>The actual resolution of the uploaded media. This represents the native quality of the source media.
- */
 public class GetAllMediaResponseSourceResolution {
 
-    public static final GetAllMediaResponseSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new GetAllMediaResponseSourceResolution("2160p");
-    public static final GetAllMediaResponseSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY = new GetAllMediaResponseSourceResolution("2160");
-    public static final GetAllMediaResponseSourceResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new GetAllMediaResponseSourceResolution("1440p");
-    public static final GetAllMediaResponseSourceResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY = new GetAllMediaResponseSourceResolution("1440");
-    public static final GetAllMediaResponseSourceResolution ONE_THOUSAND_AND_EIGHTYP = new GetAllMediaResponseSourceResolution("1080p");
-    public static final GetAllMediaResponseSourceResolution ONE_THOUSAND_AND_EIGHTY = new GetAllMediaResponseSourceResolution("1080");
-    public static final GetAllMediaResponseSourceResolution SEVEN_HUNDRED_AND_TWENTYP = new GetAllMediaResponseSourceResolution("720p");
-    public static final GetAllMediaResponseSourceResolution SEVEN_HUNDRED_AND_TWENTY = new GetAllMediaResponseSourceResolution("720");
-    public static final GetAllMediaResponseSourceResolution FOUR_HUNDRED_AND_EIGHTYP = new GetAllMediaResponseSourceResolution("480p");
-    public static final GetAllMediaResponseSourceResolution FOUR_HUNDRED_AND_EIGHTY = new GetAllMediaResponseSourceResolution("480");
+    private static final String RESOLUTION_2160P = "2160p";
+    private static final String RESOLUTION_2160 = "2160";
+    private static final String RESOLUTION_1440P = "1440p";
+    private static final String RESOLUTION_1440 = "1440";
+    private static final String RESOLUTION_1080P = "1080p";
+    private static final String RESOLUTION_1080 = "1080";
+    private static final String RESOLUTION_720P = "720p";
+    private static final String RESOLUTION_720 = "720";
+    private static final String RESOLUTION_480P = "480p";
+    private static final String RESOLUTION_480 = "480";
+
+    public static final GetAllMediaResponseSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new GetAllMediaResponseSourceResolution(RESOLUTION_2160P);
+    public static final GetAllMediaResponseSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY = new GetAllMediaResponseSourceResolution(RESOLUTION_2160);
+    public static final GetAllMediaResponseSourceResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new GetAllMediaResponseSourceResolution(RESOLUTION_1440P);
+    public static final GetAllMediaResponseSourceResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY = new GetAllMediaResponseSourceResolution(RESOLUTION_1440);
+    public static final GetAllMediaResponseSourceResolution ONE_THOUSAND_AND_EIGHTYP = new GetAllMediaResponseSourceResolution(RESOLUTION_1080P);
+    public static final GetAllMediaResponseSourceResolution ONE_THOUSAND_AND_EIGHTY = new GetAllMediaResponseSourceResolution(RESOLUTION_1080);
+    public static final GetAllMediaResponseSourceResolution SEVEN_HUNDRED_AND_TWENTYP = new GetAllMediaResponseSourceResolution(RESOLUTION_720P);
+    public static final GetAllMediaResponseSourceResolution SEVEN_HUNDRED_AND_TWENTY = new GetAllMediaResponseSourceResolution(RESOLUTION_720);
+    public static final GetAllMediaResponseSourceResolution FOUR_HUNDRED_AND_EIGHTYP = new GetAllMediaResponseSourceResolution(RESOLUTION_480P);
+    public static final GetAllMediaResponseSourceResolution FOUR_HUNDRED_AND_EIGHTY = new GetAllMediaResponseSourceResolution(RESOLUTION_480);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -57,7 +65,7 @@ public class GetAllMediaResponseSourceResolution {
     @JsonCreator
     public static GetAllMediaResponseSourceResolution of(String value) {
         synchronized (GetAllMediaResponseSourceResolution.class) {
-            return values.computeIfAbsent(value, v -> new GetAllMediaResponseSourceResolution(v));
+            return values.computeIfAbsent(value, GetAllMediaResponseSourceResolution::new);
         }
     }
 
@@ -105,47 +113,47 @@ public class GetAllMediaResponseSourceResolution {
 
     private static final Map<String, GetAllMediaResponseSourceResolution> createValuesMap() {
         Map<String, GetAllMediaResponseSourceResolution> map = new LinkedHashMap<>();
-        map.put("2160p", TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
-        map.put("2160", TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY);
-        map.put("1440p", ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
-        map.put("1440", ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY);
-        map.put("1080p", ONE_THOUSAND_AND_EIGHTYP);
-        map.put("1080", ONE_THOUSAND_AND_EIGHTY);
-        map.put("720p", SEVEN_HUNDRED_AND_TWENTYP);
-        map.put("720", SEVEN_HUNDRED_AND_TWENTY);
-        map.put("480p", FOUR_HUNDRED_AND_EIGHTYP);
-        map.put("480", FOUR_HUNDRED_AND_EIGHTY);
+        map.put(RESOLUTION_2160P, TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_2160, TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY);
+        map.put(RESOLUTION_1440P, ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
+        map.put(RESOLUTION_1440, ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY);
+        map.put(RESOLUTION_1080P, ONE_THOUSAND_AND_EIGHTYP);
+        map.put(RESOLUTION_1080, ONE_THOUSAND_AND_EIGHTY);
+        map.put(RESOLUTION_720P, SEVEN_HUNDRED_AND_TWENTYP);
+        map.put(RESOLUTION_720, SEVEN_HUNDRED_AND_TWENTY);
+        map.put(RESOLUTION_480P, FOUR_HUNDRED_AND_EIGHTYP);
+        map.put(RESOLUTION_480, FOUR_HUNDRED_AND_EIGHTY);
         return map;
     }
 
     private static final Map<String, GetAllMediaResponseSourceResolutionEnum> createEnumsMap() {
         Map<String, GetAllMediaResponseSourceResolutionEnum> map = new HashMap<>();
-        map.put("2160p", GetAllMediaResponseSourceResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
-        map.put("2160", GetAllMediaResponseSourceResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY);
-        map.put("1440p", GetAllMediaResponseSourceResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
-        map.put("1440", GetAllMediaResponseSourceResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY);
-        map.put("1080p", GetAllMediaResponseSourceResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
-        map.put("1080", GetAllMediaResponseSourceResolutionEnum.ONE_THOUSAND_AND_EIGHTY);
-        map.put("720p", GetAllMediaResponseSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
-        map.put("720", GetAllMediaResponseSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTY);
-        map.put("480p", GetAllMediaResponseSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
-        map.put("480", GetAllMediaResponseSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTY);
+        map.put(RESOLUTION_2160P, GetAllMediaResponseSourceResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_2160, GetAllMediaResponseSourceResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY);
+        map.put(RESOLUTION_1440P, GetAllMediaResponseSourceResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
+        map.put(RESOLUTION_1440, GetAllMediaResponseSourceResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY);
+        map.put(RESOLUTION_1080P, GetAllMediaResponseSourceResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
+        map.put(RESOLUTION_1080, GetAllMediaResponseSourceResolutionEnum.ONE_THOUSAND_AND_EIGHTY);
+        map.put(RESOLUTION_720P, GetAllMediaResponseSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
+        map.put(RESOLUTION_720, GetAllMediaResponseSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTY);
+        map.put(RESOLUTION_480P, GetAllMediaResponseSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
+        map.put(RESOLUTION_480, GetAllMediaResponseSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTY);
         return map;
     }
     
     
     public enum GetAllMediaResponseSourceResolutionEnum {
 
-        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP("2160p"),
-        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY("2160"),
-        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP("1440p"),
-        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY("1440"),
-        ONE_THOUSAND_AND_EIGHTYP("1080p"),
-        ONE_THOUSAND_AND_EIGHTY("1080"),
-        SEVEN_HUNDRED_AND_TWENTYP("720p"),
-        SEVEN_HUNDRED_AND_TWENTY("720"),
-        FOUR_HUNDRED_AND_EIGHTYP("480p"),
-        FOUR_HUNDRED_AND_EIGHTY("480"),;
+        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP(RESOLUTION_2160P),
+        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY(RESOLUTION_2160),
+        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP(RESOLUTION_1440P),
+        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY(RESOLUTION_1440),
+        ONE_THOUSAND_AND_EIGHTYP(RESOLUTION_1080P),
+        ONE_THOUSAND_AND_EIGHTY(RESOLUTION_1080),
+        SEVEN_HUNDRED_AND_TWENTYP(RESOLUTION_720P),
+        SEVEN_HUNDRED_AND_TWENTY(RESOLUTION_720),
+        FOUR_HUNDRED_AND_EIGHTYP(RESOLUTION_480P),
+        FOUR_HUNDRED_AND_EIGHTY(RESOLUTION_480),;
 
         private final String value;
 

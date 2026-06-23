@@ -2,14 +2,16 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class UpdateUserAgentRestrictionsRequest {
+
+    private static final String MEDIA_ID = "mediaId";
+    private static final String PLAYBACK_ID = "playbackId";
+    private static final String BODY_NAME = "body";
 
     @FastpixMetadata("pathParam:style=simple,explode=false,name=mediaId")
     private String mediaId;
@@ -53,19 +55,19 @@ public class UpdateUserAgentRestrictionsRequest {
 
 
     public UpdateUserAgentRestrictionsRequest withMediaId(@Nonnull String mediaId) {
-        this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+        this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
         return this;
     }
 
 
     public UpdateUserAgentRestrictionsRequest withPlaybackId(@Nonnull String playbackId) {
-        this.playbackId = Utils.checkNotNull(playbackId, "playbackId");
+        this.playbackId = Utils.checkNotNull(playbackId, PLAYBACK_ID);
         return this;
     }
 
 
     public UpdateUserAgentRestrictionsRequest withBody(@Nonnull UpdateUserAgentRestrictionsRequestBody body) {
-        this.body = Utils.checkNotNull(body, "body");
+        this.body = Utils.checkNotNull(body, BODY_NAME);
         return this;
     }
 
@@ -94,13 +96,13 @@ public class UpdateUserAgentRestrictionsRequest {
     @Override
     public String toString() {
         return Utils.toString(UpdateUserAgentRestrictionsRequest.class,
-                "mediaId", mediaId,
-                "playbackId", playbackId,
-                "body", body);
+                MEDIA_ID, mediaId,
+                PLAYBACK_ID, playbackId,
+                BODY_NAME, body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String mediaId;
 
@@ -113,17 +115,17 @@ public class UpdateUserAgentRestrictionsRequest {
         }
 
         public Builder mediaId(@Nonnull String mediaId) {
-            this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+            this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
             return this;
         }
 
         public Builder playbackId(@Nonnull String playbackId) {
-            this.playbackId = Utils.checkNotNull(playbackId, "playbackId");
+            this.playbackId = Utils.checkNotNull(playbackId, PLAYBACK_ID);
             return this;
         }
 
         public Builder body(@Nonnull UpdateUserAgentRestrictionsRequestBody body) {
-            this.body = Utils.checkNotNull(body, "body");
+            this.body = Utils.checkNotNull(body, BODY_NAME);
             return this;
         }
 

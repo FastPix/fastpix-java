@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,18 +9,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * SubtitleTrackType
+ *
+ * <p>Defines the type of input track.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * SubtitleTrackType
- * 
- * <p>Defines the type of input track.
- */
 public class SubtitleTrackType {
 
-    public static final SubtitleTrackType SUBTITLE = new SubtitleTrackType("subtitle");
+    private static final String SUBTITLE_VALUE = "subtitle";
+
+    public static final SubtitleTrackType SUBTITLE = new SubtitleTrackType(SUBTITLE_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -48,7 +47,7 @@ public class SubtitleTrackType {
     @JsonCreator
     public static SubtitleTrackType of(String value) {
         synchronized (SubtitleTrackType.class) {
-            return values.computeIfAbsent(value, v -> new SubtitleTrackType(v));
+            return values.computeIfAbsent(value, SubtitleTrackType::new);
         }
     }
 
@@ -96,20 +95,20 @@ public class SubtitleTrackType {
 
     private static final Map<String, SubtitleTrackType> createValuesMap() {
         Map<String, SubtitleTrackType> map = new LinkedHashMap<>();
-        map.put("subtitle", SUBTITLE);
+        map.put(SUBTITLE_VALUE, SUBTITLE);
         return map;
     }
 
     private static final Map<String, SubtitleTrackTypeEnum> createEnumsMap() {
         Map<String, SubtitleTrackTypeEnum> map = new HashMap<>();
-        map.put("subtitle", SubtitleTrackTypeEnum.SUBTITLE);
+        map.put(SUBTITLE_VALUE, SubtitleTrackTypeEnum.SUBTITLE);
         return map;
     }
     
     
     public enum SubtitleTrackTypeEnum {
 
-        SUBTITLE("subtitle"),;
+        SUBTITLE(SUBTITLE_VALUE),;
 
         private final String value;
 

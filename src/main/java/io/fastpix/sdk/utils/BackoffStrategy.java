@@ -62,7 +62,7 @@ public class BackoffStrategy {
     /**
     * @deprecated use {@link #baseFactor()} instead.
     */
-    @Deprecated
+    @Deprecated(since = "1.0.2")
     public double exponent() {
         return baseFactor;
     }
@@ -83,11 +83,11 @@ public class BackoffStrategy {
         return retryReadTimeoutError;
     }
 
-    public final static Builder builder() {
+    public static final Builder builder() {
         return new Builder();
     }
 
-    public final static class Builder {
+    public static final class Builder {
 
         private long initialIntervalMs = DEFAULT_INITIAL_INTERVAL_MS;
         private long maxIntervalMs = DEFAULT_MAX_INTERVAL_MS;
@@ -168,13 +168,9 @@ public class BackoffStrategy {
           * @param baseFactor The base factor to use.
           * @return The builder instance.
           */
-        @Deprecated
+        @Deprecated(since = "1.0.2")
         public Builder exponent(double baseFactor) {
-            if (baseFactor <= 0 ) {
-                throw new IllegalArgumentException("baseFactor must be strictly positive");
-            }
-            this.baseFactor = baseFactor;
-            return this;
+            return baseFactor(baseFactor);
         }
 
         /**

@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,8 +15,11 @@ import java.util.Optional;
  */
 public class ListPlaybackIdsDomainsDefaultPolicy {
 
-    public static final ListPlaybackIdsDomainsDefaultPolicy ALLOW = new ListPlaybackIdsDomainsDefaultPolicy("allow");
-    public static final ListPlaybackIdsDomainsDefaultPolicy DENY = new ListPlaybackIdsDomainsDefaultPolicy("deny");
+    private static final String ALLOW_VALUE = "allow";
+    private static final String DENY_VALUE = "deny";
+
+    public static final ListPlaybackIdsDomainsDefaultPolicy ALLOW = new ListPlaybackIdsDomainsDefaultPolicy(ALLOW_VALUE);
+    public static final ListPlaybackIdsDomainsDefaultPolicy DENY = new ListPlaybackIdsDomainsDefaultPolicy(DENY_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -44,7 +45,7 @@ public class ListPlaybackIdsDomainsDefaultPolicy {
     @JsonCreator
     public static ListPlaybackIdsDomainsDefaultPolicy of(String value) {
         synchronized (ListPlaybackIdsDomainsDefaultPolicy.class) {
-            return values.computeIfAbsent(value, v -> new ListPlaybackIdsDomainsDefaultPolicy(v));
+            return values.computeIfAbsent(value, ListPlaybackIdsDomainsDefaultPolicy::new);
         }
     }
 
@@ -92,23 +93,23 @@ public class ListPlaybackIdsDomainsDefaultPolicy {
 
     private static final Map<String, ListPlaybackIdsDomainsDefaultPolicy> createValuesMap() {
         Map<String, ListPlaybackIdsDomainsDefaultPolicy> map = new LinkedHashMap<>();
-        map.put("allow", ALLOW);
-        map.put("deny", DENY);
+        map.put(ALLOW_VALUE, ALLOW);
+        map.put(DENY_VALUE, DENY);
         return map;
     }
 
     private static final Map<String, ListPlaybackIdsDomainsDefaultPolicyEnum> createEnumsMap() {
         Map<String, ListPlaybackIdsDomainsDefaultPolicyEnum> map = new HashMap<>();
-        map.put("allow", ListPlaybackIdsDomainsDefaultPolicyEnum.ALLOW);
-        map.put("deny", ListPlaybackIdsDomainsDefaultPolicyEnum.DENY);
+        map.put(ALLOW_VALUE, ListPlaybackIdsDomainsDefaultPolicyEnum.ALLOW);
+        map.put(DENY_VALUE, ListPlaybackIdsDomainsDefaultPolicyEnum.DENY);
         return map;
     }
     
     
     public enum ListPlaybackIdsDomainsDefaultPolicyEnum {
 
-        ALLOW("allow"),
-        DENY("deny"),;
+        ALLOW(ALLOW_VALUE),
+        DENY(DENY_VALUE),;
 
         private final String value;
 

@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.UpdatePlaylistRequest;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -11,6 +9,9 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class UpdateAPlaylistRequest {
+
+    private static final String PLAYLIST_ID = "playlistId";
+    private static final String BODY_NAME = "body";
     /**
      * The unique id of the playlist you want to retrieve.
      */
@@ -51,13 +52,13 @@ public class UpdateAPlaylistRequest {
      * The unique id of the playlist you want to retrieve.
      */
     public UpdateAPlaylistRequest withPlaylistId(@Nonnull String playlistId) {
-        this.playlistId = Utils.checkNotNull(playlistId, "playlistId");
+        this.playlistId = Utils.checkNotNull(playlistId, PLAYLIST_ID);
         return this;
     }
 
 
     public UpdateAPlaylistRequest withBody(@Nonnull UpdatePlaylistRequest body) {
-        this.body = Utils.checkNotNull(body, "body");
+        this.body = Utils.checkNotNull(body, BODY_NAME);
         return this;
     }
 
@@ -85,12 +86,12 @@ public class UpdateAPlaylistRequest {
     @Override
     public String toString() {
         return Utils.toString(UpdateAPlaylistRequest.class,
-                "playlistId", playlistId,
-                "body", body);
+                PLAYLIST_ID, playlistId,
+                BODY_NAME, body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String playlistId;
 
@@ -104,12 +105,12 @@ public class UpdateAPlaylistRequest {
          * The unique id of the playlist you want to retrieve.
          */
         public Builder playlistId(@Nonnull String playlistId) {
-            this.playlistId = Utils.checkNotNull(playlistId, "playlistId");
+            this.playlistId = Utils.checkNotNull(playlistId, PLAYLIST_ID);
             return this;
         }
 
         public Builder body(@Nonnull UpdatePlaylistRequest body) {
-            this.body = Utils.checkNotNull(body, "body");
+            this.body = Utils.checkNotNull(body, BODY_NAME);
             return this;
         }
 

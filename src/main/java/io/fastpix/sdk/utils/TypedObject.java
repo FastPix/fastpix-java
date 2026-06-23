@@ -26,6 +26,10 @@ public class TypedObject {
         return value;
     }
 
+    // TypedObject is a type-erased holder with no class type parameter, so the stored TypeReference
+    // is necessarily a wildcard; the wildcard-return finding is suppressed rather than changing this
+    // public accessor or making the whole holder generic.
+    @SuppressWarnings("java:S1452")
     public TypeReference<?> typeReference() {
         return typeReference;
     }

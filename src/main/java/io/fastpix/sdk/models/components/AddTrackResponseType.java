@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,19 +9,21 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * AddTrackResponseType
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
- */
-/**
- * AddTrackResponseType
- * 
+ *
  * <p>Specifies the type of track (audio or subtitle).
  */
 public class AddTrackResponseType {
 
-    public static final AddTrackResponseType AUDIO = new AddTrackResponseType("audio");
-    public static final AddTrackResponseType SUBTITLE = new AddTrackResponseType("subtitle");
+    private static final String AUDIO_VALUE = "audio";
+    private static final String SUBTITLE_VALUE = "subtitle";
+
+    public static final AddTrackResponseType AUDIO = new AddTrackResponseType(AUDIO_VALUE);
+    public static final AddTrackResponseType SUBTITLE = new AddTrackResponseType(SUBTITLE_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -49,7 +49,7 @@ public class AddTrackResponseType {
     @JsonCreator
     public static AddTrackResponseType of(String value) {
         synchronized (AddTrackResponseType.class) {
-            return values.computeIfAbsent(value, v -> new AddTrackResponseType(v));
+            return values.computeIfAbsent(value, AddTrackResponseType::new);
         }
     }
 
@@ -97,23 +97,23 @@ public class AddTrackResponseType {
 
     private static final Map<String, AddTrackResponseType> createValuesMap() {
         Map<String, AddTrackResponseType> map = new LinkedHashMap<>();
-        map.put("audio", AUDIO);
-        map.put("subtitle", SUBTITLE);
+        map.put(AUDIO_VALUE, AUDIO);
+        map.put(SUBTITLE_VALUE, SUBTITLE);
         return map;
     }
 
     private static final Map<String, AddTrackResponseTypeEnum> createEnumsMap() {
         Map<String, AddTrackResponseTypeEnum> map = new HashMap<>();
-        map.put("audio", AddTrackResponseTypeEnum.AUDIO);
-        map.put("subtitle", AddTrackResponseTypeEnum.SUBTITLE);
+        map.put(AUDIO_VALUE, AddTrackResponseTypeEnum.AUDIO);
+        map.put(SUBTITLE_VALUE, AddTrackResponseTypeEnum.SUBTITLE);
         return map;
     }
     
     
     public enum AddTrackResponseTypeEnum {
 
-        AUDIO("audio"),
-        SUBTITLE("subtitle"),;
+        AUDIO(AUDIO_VALUE),
+        SUBTITLE(SUBTITLE_VALUE),;
 
         private final String value;
 

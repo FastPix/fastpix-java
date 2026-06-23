@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,18 +9,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * DirectUploadStatus
+ *
+ * <p>Determines the media's status, which can be one of the possible values.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * DirectUploadStatus
- * 
- * <p>Determines the media's status, which can be one of the possible values.
- */
 public class DirectUploadStatus {
 
-    public static final DirectUploadStatus WAITING = new DirectUploadStatus("waiting");
+    private static final String WAITING_VALUE = "waiting";
+
+    public static final DirectUploadStatus WAITING = new DirectUploadStatus(WAITING_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -48,7 +47,7 @@ public class DirectUploadStatus {
     @JsonCreator
     public static DirectUploadStatus of(String value) {
         synchronized (DirectUploadStatus.class) {
-            return values.computeIfAbsent(value, v -> new DirectUploadStatus(v));
+            return values.computeIfAbsent(value, DirectUploadStatus::new);
         }
     }
 
@@ -96,20 +95,20 @@ public class DirectUploadStatus {
 
     private static final Map<String, DirectUploadStatus> createValuesMap() {
         Map<String, DirectUploadStatus> map = new LinkedHashMap<>();
-        map.put("waiting", WAITING);
+        map.put(WAITING_VALUE, WAITING);
         return map;
     }
 
     private static final Map<String, DirectUploadStatusEnum> createEnumsMap() {
         Map<String, DirectUploadStatusEnum> map = new HashMap<>();
-        map.put("waiting", DirectUploadStatusEnum.WAITING);
+        map.put(WAITING_VALUE, DirectUploadStatusEnum.WAITING);
         return map;
     }
     
     
     public enum DirectUploadStatusEnum {
 
-        WAITING("waiting"),;
+        WAITING(WAITING_VALUE),;
 
         private final String value;
 

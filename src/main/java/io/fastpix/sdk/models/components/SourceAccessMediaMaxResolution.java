@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,22 +9,27 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * SourceAccessMediaMaxResolution
+ *
+ * <p>The maximum resolution specified by the user for the media.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * SourceAccessMediaMaxResolution
- * 
- * <p>The maximum resolution specified by the user for the media.
- */
 public class SourceAccessMediaMaxResolution {
 
-    public static final SourceAccessMediaMaxResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new SourceAccessMediaMaxResolution("2160p");
-    public static final SourceAccessMediaMaxResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new SourceAccessMediaMaxResolution("1440p");
-    public static final SourceAccessMediaMaxResolution ONE_THOUSAND_AND_EIGHTYP = new SourceAccessMediaMaxResolution("1080p");
-    public static final SourceAccessMediaMaxResolution SEVEN_HUNDRED_AND_TWENTYP = new SourceAccessMediaMaxResolution("720p");
-    public static final SourceAccessMediaMaxResolution FOUR_HUNDRED_AND_EIGHTYP = new SourceAccessMediaMaxResolution("480p");
+    private static final String RESOLUTION_2160P = "2160p";
+    private static final String RESOLUTION_1440P = "1440p";
+    private static final String RESOLUTION_1080P = "1080p";
+    private static final String RESOLUTION_720P = "720p";
+    private static final String RESOLUTION_480P = "480p";
+
+    public static final SourceAccessMediaMaxResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new SourceAccessMediaMaxResolution(RESOLUTION_2160P);
+    public static final SourceAccessMediaMaxResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new SourceAccessMediaMaxResolution(RESOLUTION_1440P);
+    public static final SourceAccessMediaMaxResolution ONE_THOUSAND_AND_EIGHTYP = new SourceAccessMediaMaxResolution(RESOLUTION_1080P);
+    public static final SourceAccessMediaMaxResolution SEVEN_HUNDRED_AND_TWENTYP = new SourceAccessMediaMaxResolution(RESOLUTION_720P);
+    public static final SourceAccessMediaMaxResolution FOUR_HUNDRED_AND_EIGHTYP = new SourceAccessMediaMaxResolution(RESOLUTION_480P);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -52,7 +55,7 @@ public class SourceAccessMediaMaxResolution {
     @JsonCreator
     public static SourceAccessMediaMaxResolution of(String value) {
         synchronized (SourceAccessMediaMaxResolution.class) {
-            return values.computeIfAbsent(value, v -> new SourceAccessMediaMaxResolution(v));
+            return values.computeIfAbsent(value, SourceAccessMediaMaxResolution::new);
         }
     }
 
@@ -100,32 +103,32 @@ public class SourceAccessMediaMaxResolution {
 
     private static final Map<String, SourceAccessMediaMaxResolution> createValuesMap() {
         Map<String, SourceAccessMediaMaxResolution> map = new LinkedHashMap<>();
-        map.put("2160p", TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
-        map.put("1440p", ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
-        map.put("1080p", ONE_THOUSAND_AND_EIGHTYP);
-        map.put("720p", SEVEN_HUNDRED_AND_TWENTYP);
-        map.put("480p", FOUR_HUNDRED_AND_EIGHTYP);
+        map.put(RESOLUTION_2160P, TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_1440P, ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
+        map.put(RESOLUTION_1080P, ONE_THOUSAND_AND_EIGHTYP);
+        map.put(RESOLUTION_720P, SEVEN_HUNDRED_AND_TWENTYP);
+        map.put(RESOLUTION_480P, FOUR_HUNDRED_AND_EIGHTYP);
         return map;
     }
 
     private static final Map<String, SourceAccessMediaMaxResolutionEnum> createEnumsMap() {
         Map<String, SourceAccessMediaMaxResolutionEnum> map = new HashMap<>();
-        map.put("2160p", SourceAccessMediaMaxResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
-        map.put("1440p", SourceAccessMediaMaxResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
-        map.put("1080p", SourceAccessMediaMaxResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
-        map.put("720p", SourceAccessMediaMaxResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
-        map.put("480p", SourceAccessMediaMaxResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
+        map.put(RESOLUTION_2160P, SourceAccessMediaMaxResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_1440P, SourceAccessMediaMaxResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
+        map.put(RESOLUTION_1080P, SourceAccessMediaMaxResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
+        map.put(RESOLUTION_720P, SourceAccessMediaMaxResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
+        map.put(RESOLUTION_480P, SourceAccessMediaMaxResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
         return map;
     }
     
     
     public enum SourceAccessMediaMaxResolutionEnum {
 
-        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP("2160p"),
-        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP("1440p"),
-        ONE_THOUSAND_AND_EIGHTYP("1080p"),
-        SEVEN_HUNDRED_AND_TWENTYP("720p"),
-        FOUR_HUNDRED_AND_EIGHTYP("480p"),;
+        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP(RESOLUTION_2160P),
+        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP(RESOLUTION_1440P),
+        ONE_THOUSAND_AND_EIGHTYP(RESOLUTION_1080P),
+        SEVEN_HUNDRED_AND_TWENTYP(RESOLUTION_720P),
+        FOUR_HUNDRED_AND_EIGHTYP(RESOLUTION_480P),;
 
         private final String value;
 

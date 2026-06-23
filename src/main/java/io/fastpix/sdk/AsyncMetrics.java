@@ -4,7 +4,6 @@ import static io.fastpix.sdk.operations.Operations.AsyncRequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.String;
 import java.util.concurrent.CompletableFuture;
 import io.fastpix.sdk.models.operations.Dimension;
 import io.fastpix.sdk.models.operations.GetTimeseriesDataRequest;
@@ -32,6 +31,9 @@ import io.fastpix.sdk.utils.Options;
 /**
  * Operations involving metrics
  */
+// Generated SDK facade: exposes one builder method per metrics operation, so it necessarily
+// references many operation/request/response classes. Splitting it would change the public API.
+@SuppressWarnings("java:S6539")
 public class AsyncMetrics {
     private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;

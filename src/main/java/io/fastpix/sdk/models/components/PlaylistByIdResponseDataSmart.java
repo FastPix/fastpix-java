@@ -6,9 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.Override;
-import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +13,11 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, PlaylistByIdResponseData {
+
+    private static final String TYPE_FIELD = "type";
+    private static final String PLAY_ORDER_FIELD = "playOrder";
+    private static final String METADATA_FIELD = "metadata";
+
     /**
      * The unique id of the playlist
      */
@@ -256,7 +258,7 @@ public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, Pla
      * type of the playlist, when it was created
      */
     public PlaylistByIdResponseDataSmart withType(@Nonnull PlaylistByIdResponseDataSmartType type) {
-        this.type = Utils.checkNotNull(type, "type");
+        this.type = Utils.checkNotNull(type, TYPE_FIELD);
         return this;
     }
 
@@ -274,7 +276,7 @@ public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, Pla
      * Determines the insertion order of media into playlist.
      */
     public PlaylistByIdResponseDataSmart withPlayOrder(@Nonnull PlaylistOrder playOrder) {
-        this.playOrder = Utils.checkNotNull(playOrder, "playOrder");
+        this.playOrder = Utils.checkNotNull(playOrder, PLAY_ORDER_FIELD);
         return this;
     }
 
@@ -284,7 +286,7 @@ public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, Pla
      * `createdDate` is added. Optionally, you can include media based on `updatedDate`.
      */
     public PlaylistByIdResponseDataSmart withMetadata(@Nonnull PlaylistByIdResponseMetadata metadata) {
-        this.metadata = Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Utils.checkNotNull(metadata, METADATA_FIELD);
         return this;
     }
 
@@ -370,10 +372,10 @@ public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, Pla
                 "id", id,
                 "name", name,
                 "referenceId", referenceId,
-                "type", type,
+                TYPE_FIELD, type,
                 "description", description,
-                "playOrder", playOrder,
-                "metadata", metadata,
+                PLAY_ORDER_FIELD, playOrder,
+                METADATA_FIELD, metadata,
                 "mediaList", mediaList,
                 "workspaceId", workspaceId,
                 "createdAt", createdAt,
@@ -382,7 +384,7 @@ public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, Pla
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String id;
 
@@ -440,7 +442,7 @@ public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, Pla
          * type of the playlist, when it was created
          */
         public Builder type(@Nonnull PlaylistByIdResponseDataSmartType type) {
-            this.type = Utils.checkNotNull(type, "type");
+            this.type = Utils.checkNotNull(type, TYPE_FIELD);
             return this;
         }
 
@@ -456,7 +458,7 @@ public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, Pla
          * Determines the insertion order of media into playlist.
          */
         public Builder playOrder(@Nonnull PlaylistOrder playOrder) {
-            this.playOrder = Utils.checkNotNull(playOrder, "playOrder");
+            this.playOrder = Utils.checkNotNull(playOrder, PLAY_ORDER_FIELD);
             return this;
         }
 
@@ -465,7 +467,7 @@ public class PlaylistByIdResponseDataSmart implements PlaylistCreatedSchema, Pla
          * `createdDate` is added. Optionally, you can include media based on `updatedDate`.
          */
         public Builder metadata(@Nonnull PlaylistByIdResponseMetadata metadata) {
-            this.metadata = Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Utils.checkNotNull(metadata, METADATA_FIELD);
             return this;
         }
 

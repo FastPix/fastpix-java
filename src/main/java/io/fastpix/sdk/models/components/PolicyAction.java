@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,19 +9,17 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
- * without runtime errors. Instances are immutable singletons with reference equality.
- * Use {@code asEnum()} for switch expressions.
- */
-/**
  * PolicyAction
- * 
+ *
  * <p>Policy action type
  */
 public class PolicyAction {
 
-    public static final PolicyAction ALLOW = new PolicyAction("allow");
-    public static final PolicyAction DENY = new PolicyAction("deny");
+    private static final String VALUE_ALLOW = "allow";
+    private static final String VALUE_DENY = "deny";
+
+    public static final PolicyAction ALLOW = new PolicyAction(VALUE_ALLOW);
+    public static final PolicyAction DENY = new PolicyAction(VALUE_DENY);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -40,16 +36,16 @@ public class PolicyAction {
     }
 
     /**
-     * Returns a PolicyAction with the given value. For a specific value the 
-     * returned object will always be a singleton so reference equality 
+     * Returns a PolicyAction with the given value. For a specific value the
+     * returned object will always be a singleton so reference equality
      * is satisfied when the values are the same.
-     * 
+     *
      * @param value value to be wrapped as PolicyAction
-     */ 
+     */
     @JsonCreator
     public static PolicyAction of(String value) {
         synchronized (PolicyAction.class) {
-            return values.computeIfAbsent(value, v -> new PolicyAction(v));
+            return values.computeIfAbsent(value, PolicyAction::new);
         }
     }
 
@@ -97,23 +93,23 @@ public class PolicyAction {
 
     private static final Map<String, PolicyAction> createValuesMap() {
         Map<String, PolicyAction> map = new LinkedHashMap<>();
-        map.put("allow", ALLOW);
-        map.put("deny", DENY);
+        map.put(VALUE_ALLOW, ALLOW);
+        map.put(VALUE_DENY, DENY);
         return map;
     }
 
     private static final Map<String, PolicyActionEnum> createEnumsMap() {
         Map<String, PolicyActionEnum> map = new HashMap<>();
-        map.put("allow", PolicyActionEnum.ALLOW);
-        map.put("deny", PolicyActionEnum.DENY);
+        map.put(VALUE_ALLOW, PolicyActionEnum.ALLOW);
+        map.put(VALUE_DENY, PolicyActionEnum.DENY);
         return map;
     }
-    
-    
+
+
     public enum PolicyActionEnum {
 
-        ALLOW("allow"),
-        DENY("deny"),;
+        ALLOW(VALUE_ALLOW),
+        DENY(VALUE_DENY),;
 
         private final String value;
 
@@ -126,4 +122,3 @@ public class PolicyAction {
         }
     }
 }
-

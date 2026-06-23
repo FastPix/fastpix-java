@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.List;
 import java.util.Optional;
 import io.fastpix.sdk.utils.Utils;
@@ -198,7 +196,7 @@ public class VideoInput {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String type;
 

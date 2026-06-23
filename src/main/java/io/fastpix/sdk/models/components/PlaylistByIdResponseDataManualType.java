@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,18 +9,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * PlaylistByIdResponseDataManualType
+ *
+ * <p>type of the playlist, when it was created
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * PlaylistByIdResponseDataManualType
- * 
- * <p>type of the playlist, when it was created
- */
 public class PlaylistByIdResponseDataManualType {
 
-    public static final PlaylistByIdResponseDataManualType MANUAL = new PlaylistByIdResponseDataManualType("manual");
+    private static final String MANUAL_VALUE = "manual";
+
+    public static final PlaylistByIdResponseDataManualType MANUAL = new PlaylistByIdResponseDataManualType(MANUAL_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -48,7 +47,7 @@ public class PlaylistByIdResponseDataManualType {
     @JsonCreator
     public static PlaylistByIdResponseDataManualType of(String value) {
         synchronized (PlaylistByIdResponseDataManualType.class) {
-            return values.computeIfAbsent(value, v -> new PlaylistByIdResponseDataManualType(v));
+            return values.computeIfAbsent(value, PlaylistByIdResponseDataManualType::new);
         }
     }
 
@@ -96,20 +95,20 @@ public class PlaylistByIdResponseDataManualType {
 
     private static final Map<String, PlaylistByIdResponseDataManualType> createValuesMap() {
         Map<String, PlaylistByIdResponseDataManualType> map = new LinkedHashMap<>();
-        map.put("manual", MANUAL);
+        map.put(MANUAL_VALUE, MANUAL);
         return map;
     }
 
     private static final Map<String, PlaylistByIdResponseDataManualTypeEnum> createEnumsMap() {
         Map<String, PlaylistByIdResponseDataManualTypeEnum> map = new HashMap<>();
-        map.put("manual", PlaylistByIdResponseDataManualTypeEnum.MANUAL);
+        map.put(MANUAL_VALUE, PlaylistByIdResponseDataManualTypeEnum.MANUAL);
         return map;
     }
     
     
     public enum PlaylistByIdResponseDataManualTypeEnum {
 
-        MANUAL("manual"),;
+        MANUAL(MANUAL_VALUE),;
 
         private final String value;
 

@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,74 +9,131 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * GenerateTrackResponseLanguageCode
+ *
+ * <p>The BCP 47 language code representing the language of the generated track.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * GenerateTrackResponseLanguageCode
- * 
- * <p>The BCP 47 language code representing the language of the generated track.
- */
 public class GenerateTrackResponseLanguageCode {
 
-    public static final GenerateTrackResponseLanguageCode AR_SA = new GenerateTrackResponseLanguageCode("ar-SA");
-    public static final GenerateTrackResponseLanguageCode BN_BD = new GenerateTrackResponseLanguageCode("bn-BD");
-    public static final GenerateTrackResponseLanguageCode BN_IN = new GenerateTrackResponseLanguageCode("bn-IN");
-    public static final GenerateTrackResponseLanguageCode CA_ES = new GenerateTrackResponseLanguageCode("ca-ES");
-    public static final GenerateTrackResponseLanguageCode CS_CZ = new GenerateTrackResponseLanguageCode("cs-CZ");
-    public static final GenerateTrackResponseLanguageCode DA_DK = new GenerateTrackResponseLanguageCode("da-DK");
-    public static final GenerateTrackResponseLanguageCode DE_AT = new GenerateTrackResponseLanguageCode("de-AT");
-    public static final GenerateTrackResponseLanguageCode DE_CH = new GenerateTrackResponseLanguageCode("de-CH");
-    public static final GenerateTrackResponseLanguageCode DEDE = new GenerateTrackResponseLanguageCode("de-DE");
-    public static final GenerateTrackResponseLanguageCode EL_GR = new GenerateTrackResponseLanguageCode("el-GR");
-    public static final GenerateTrackResponseLanguageCode EN_AU = new GenerateTrackResponseLanguageCode("en-AU");
-    public static final GenerateTrackResponseLanguageCode EN_CA = new GenerateTrackResponseLanguageCode("en-CA");
-    public static final GenerateTrackResponseLanguageCode EN_GB = new GenerateTrackResponseLanguageCode("en-GB");
-    public static final GenerateTrackResponseLanguageCode EN_IE = new GenerateTrackResponseLanguageCode("en-IE");
-    public static final GenerateTrackResponseLanguageCode EN_IN = new GenerateTrackResponseLanguageCode("en-IN");
-    public static final GenerateTrackResponseLanguageCode EN_NZ = new GenerateTrackResponseLanguageCode("en-NZ");
-    public static final GenerateTrackResponseLanguageCode EN_US = new GenerateTrackResponseLanguageCode("en-US");
-    public static final GenerateTrackResponseLanguageCode EN_ZA = new GenerateTrackResponseLanguageCode("en-ZA");
-    public static final GenerateTrackResponseLanguageCode ES_AR = new GenerateTrackResponseLanguageCode("es-AR");
-    public static final GenerateTrackResponseLanguageCode ES_CL = new GenerateTrackResponseLanguageCode("es-CL");
-    public static final GenerateTrackResponseLanguageCode ES_CO = new GenerateTrackResponseLanguageCode("es-CO");
-    public static final GenerateTrackResponseLanguageCode ESES = new GenerateTrackResponseLanguageCode("es-ES");
-    public static final GenerateTrackResponseLanguageCode ES_MX = new GenerateTrackResponseLanguageCode("es-MX");
-    public static final GenerateTrackResponseLanguageCode ES_US = new GenerateTrackResponseLanguageCode("es-US");
-    public static final GenerateTrackResponseLanguageCode FIFI = new GenerateTrackResponseLanguageCode("fi-FI");
-    public static final GenerateTrackResponseLanguageCode FR_BE = new GenerateTrackResponseLanguageCode("fr-BE");
-    public static final GenerateTrackResponseLanguageCode FR_CA = new GenerateTrackResponseLanguageCode("fr-CA");
-    public static final GenerateTrackResponseLanguageCode FR_CH = new GenerateTrackResponseLanguageCode("fr-CH");
-    public static final GenerateTrackResponseLanguageCode FRFR = new GenerateTrackResponseLanguageCode("fr-FR");
-    public static final GenerateTrackResponseLanguageCode HE_IL = new GenerateTrackResponseLanguageCode("he-IL");
-    public static final GenerateTrackResponseLanguageCode HI_IN = new GenerateTrackResponseLanguageCode("hi-IN");
-    public static final GenerateTrackResponseLanguageCode HRHR = new GenerateTrackResponseLanguageCode("hr-HR");
-    public static final GenerateTrackResponseLanguageCode HUHU = new GenerateTrackResponseLanguageCode("hu-HU");
-    public static final GenerateTrackResponseLanguageCode IDID = new GenerateTrackResponseLanguageCode("id-ID");
-    public static final GenerateTrackResponseLanguageCode IT_CH = new GenerateTrackResponseLanguageCode("it-CH");
-    public static final GenerateTrackResponseLanguageCode ITIT = new GenerateTrackResponseLanguageCode("it-IT");
-    public static final GenerateTrackResponseLanguageCode JA_JP = new GenerateTrackResponseLanguageCode("ja-JP");
-    public static final GenerateTrackResponseLanguageCode KO_KR = new GenerateTrackResponseLanguageCode("ko-KR");
-    public static final GenerateTrackResponseLanguageCode NL_BE = new GenerateTrackResponseLanguageCode("nl-BE");
-    public static final GenerateTrackResponseLanguageCode NLNL = new GenerateTrackResponseLanguageCode("nl-NL");
-    public static final GenerateTrackResponseLanguageCode NONO = new GenerateTrackResponseLanguageCode("no-NO");
-    public static final GenerateTrackResponseLanguageCode PLPL = new GenerateTrackResponseLanguageCode("pl-PL");
-    public static final GenerateTrackResponseLanguageCode PT_BR = new GenerateTrackResponseLanguageCode("pt-BR");
-    public static final GenerateTrackResponseLanguageCode PTPT = new GenerateTrackResponseLanguageCode("pt-PT");
-    public static final GenerateTrackResponseLanguageCode RORO = new GenerateTrackResponseLanguageCode("ro-RO");
-    public static final GenerateTrackResponseLanguageCode RURU = new GenerateTrackResponseLanguageCode("ru-RU");
-    public static final GenerateTrackResponseLanguageCode SKSK = new GenerateTrackResponseLanguageCode("sk-SK");
-    public static final GenerateTrackResponseLanguageCode SV_SE = new GenerateTrackResponseLanguageCode("sv-SE");
-    public static final GenerateTrackResponseLanguageCode TA_IN = new GenerateTrackResponseLanguageCode("ta-IN");
-    public static final GenerateTrackResponseLanguageCode TA_LK = new GenerateTrackResponseLanguageCode("ta-LK");
-    public static final GenerateTrackResponseLanguageCode THTH = new GenerateTrackResponseLanguageCode("th-TH");
-    public static final GenerateTrackResponseLanguageCode TRTR = new GenerateTrackResponseLanguageCode("tr-TR");
-    public static final GenerateTrackResponseLanguageCode UK_UA = new GenerateTrackResponseLanguageCode("uk-UA");
-    public static final GenerateTrackResponseLanguageCode BGBG = new GenerateTrackResponseLanguageCode("bg-BG");
-    public static final GenerateTrackResponseLanguageCode ZH_CN = new GenerateTrackResponseLanguageCode("zh-CN");
-    public static final GenerateTrackResponseLanguageCode ZH_HK = new GenerateTrackResponseLanguageCode("zh-HK");
-    public static final GenerateTrackResponseLanguageCode ZH_TW = new GenerateTrackResponseLanguageCode("zh-TW");
+    private static final String AR_SA_VALUE = "ar-SA";
+    private static final String BN_BD_VALUE = "bn-BD";
+    private static final String BN_IN_VALUE = "bn-IN";
+    private static final String CA_ES_VALUE = "ca-ES";
+    private static final String CS_CZ_VALUE = "cs-CZ";
+    private static final String DA_DK_VALUE = "da-DK";
+    private static final String DE_AT_VALUE = "de-AT";
+    private static final String DE_CH_VALUE = "de-CH";
+    private static final String DEDE_VALUE = "de-DE";
+    private static final String EL_GR_VALUE = "el-GR";
+    private static final String EN_AU_VALUE = "en-AU";
+    private static final String EN_CA_VALUE = "en-CA";
+    private static final String EN_GB_VALUE = "en-GB";
+    private static final String EN_IE_VALUE = "en-IE";
+    private static final String EN_IN_VALUE = "en-IN";
+    private static final String EN_NZ_VALUE = "en-NZ";
+    private static final String EN_US_VALUE = "en-US";
+    private static final String EN_ZA_VALUE = "en-ZA";
+    private static final String ES_AR_VALUE = "es-AR";
+    private static final String ES_CL_VALUE = "es-CL";
+    private static final String ES_CO_VALUE = "es-CO";
+    private static final String ESES_VALUE = "es-ES";
+    private static final String ES_MX_VALUE = "es-MX";
+    private static final String ES_US_VALUE = "es-US";
+    private static final String FIFI_VALUE = "fi-FI";
+    private static final String FR_BE_VALUE = "fr-BE";
+    private static final String FR_CA_VALUE = "fr-CA";
+    private static final String FR_CH_VALUE = "fr-CH";
+    private static final String FRFR_VALUE = "fr-FR";
+    private static final String HE_IL_VALUE = "he-IL";
+    private static final String HI_IN_VALUE = "hi-IN";
+    private static final String HRHR_VALUE = "hr-HR";
+    private static final String HUHU_VALUE = "hu-HU";
+    private static final String IDID_VALUE = "id-ID";
+    private static final String IT_CH_VALUE = "it-CH";
+    private static final String ITIT_VALUE = "it-IT";
+    private static final String JA_JP_VALUE = "ja-JP";
+    private static final String KO_KR_VALUE = "ko-KR";
+    private static final String NL_BE_VALUE = "nl-BE";
+    private static final String NLNL_VALUE = "nl-NL";
+    private static final String NONO_VALUE = "no-NO";
+    private static final String PLPL_VALUE = "pl-PL";
+    private static final String PT_BR_VALUE = "pt-BR";
+    private static final String PTPT_VALUE = "pt-PT";
+    private static final String RORO_VALUE = "ro-RO";
+    private static final String RURU_VALUE = "ru-RU";
+    private static final String SKSK_VALUE = "sk-SK";
+    private static final String SV_SE_VALUE = "sv-SE";
+    private static final String TA_IN_VALUE = "ta-IN";
+    private static final String TA_LK_VALUE = "ta-LK";
+    private static final String THTH_VALUE = "th-TH";
+    private static final String TRTR_VALUE = "tr-TR";
+    private static final String UK_UA_VALUE = "uk-UA";
+    private static final String BGBG_VALUE = "bg-BG";
+    private static final String ZH_CN_VALUE = "zh-CN";
+    private static final String ZH_HK_VALUE = "zh-HK";
+    private static final String ZH_TW_VALUE = "zh-TW";
+
+    public static final GenerateTrackResponseLanguageCode AR_SA = new GenerateTrackResponseLanguageCode(AR_SA_VALUE);
+    public static final GenerateTrackResponseLanguageCode BN_BD = new GenerateTrackResponseLanguageCode(BN_BD_VALUE);
+    public static final GenerateTrackResponseLanguageCode BN_IN = new GenerateTrackResponseLanguageCode(BN_IN_VALUE);
+    public static final GenerateTrackResponseLanguageCode CA_ES = new GenerateTrackResponseLanguageCode(CA_ES_VALUE);
+    public static final GenerateTrackResponseLanguageCode CS_CZ = new GenerateTrackResponseLanguageCode(CS_CZ_VALUE);
+    public static final GenerateTrackResponseLanguageCode DA_DK = new GenerateTrackResponseLanguageCode(DA_DK_VALUE);
+    public static final GenerateTrackResponseLanguageCode DE_AT = new GenerateTrackResponseLanguageCode(DE_AT_VALUE);
+    public static final GenerateTrackResponseLanguageCode DE_CH = new GenerateTrackResponseLanguageCode(DE_CH_VALUE);
+    public static final GenerateTrackResponseLanguageCode DEDE = new GenerateTrackResponseLanguageCode(DEDE_VALUE);
+    public static final GenerateTrackResponseLanguageCode EL_GR = new GenerateTrackResponseLanguageCode(EL_GR_VALUE);
+    public static final GenerateTrackResponseLanguageCode EN_AU = new GenerateTrackResponseLanguageCode(EN_AU_VALUE);
+    public static final GenerateTrackResponseLanguageCode EN_CA = new GenerateTrackResponseLanguageCode(EN_CA_VALUE);
+    public static final GenerateTrackResponseLanguageCode EN_GB = new GenerateTrackResponseLanguageCode(EN_GB_VALUE);
+    public static final GenerateTrackResponseLanguageCode EN_IE = new GenerateTrackResponseLanguageCode(EN_IE_VALUE);
+    public static final GenerateTrackResponseLanguageCode EN_IN = new GenerateTrackResponseLanguageCode(EN_IN_VALUE);
+    public static final GenerateTrackResponseLanguageCode EN_NZ = new GenerateTrackResponseLanguageCode(EN_NZ_VALUE);
+    public static final GenerateTrackResponseLanguageCode EN_US = new GenerateTrackResponseLanguageCode(EN_US_VALUE);
+    public static final GenerateTrackResponseLanguageCode EN_ZA = new GenerateTrackResponseLanguageCode(EN_ZA_VALUE);
+    public static final GenerateTrackResponseLanguageCode ES_AR = new GenerateTrackResponseLanguageCode(ES_AR_VALUE);
+    public static final GenerateTrackResponseLanguageCode ES_CL = new GenerateTrackResponseLanguageCode(ES_CL_VALUE);
+    public static final GenerateTrackResponseLanguageCode ES_CO = new GenerateTrackResponseLanguageCode(ES_CO_VALUE);
+    public static final GenerateTrackResponseLanguageCode ESES = new GenerateTrackResponseLanguageCode(ESES_VALUE);
+    public static final GenerateTrackResponseLanguageCode ES_MX = new GenerateTrackResponseLanguageCode(ES_MX_VALUE);
+    public static final GenerateTrackResponseLanguageCode ES_US = new GenerateTrackResponseLanguageCode(ES_US_VALUE);
+    public static final GenerateTrackResponseLanguageCode FIFI = new GenerateTrackResponseLanguageCode(FIFI_VALUE);
+    public static final GenerateTrackResponseLanguageCode FR_BE = new GenerateTrackResponseLanguageCode(FR_BE_VALUE);
+    public static final GenerateTrackResponseLanguageCode FR_CA = new GenerateTrackResponseLanguageCode(FR_CA_VALUE);
+    public static final GenerateTrackResponseLanguageCode FR_CH = new GenerateTrackResponseLanguageCode(FR_CH_VALUE);
+    public static final GenerateTrackResponseLanguageCode FRFR = new GenerateTrackResponseLanguageCode(FRFR_VALUE);
+    public static final GenerateTrackResponseLanguageCode HE_IL = new GenerateTrackResponseLanguageCode(HE_IL_VALUE);
+    public static final GenerateTrackResponseLanguageCode HI_IN = new GenerateTrackResponseLanguageCode(HI_IN_VALUE);
+    public static final GenerateTrackResponseLanguageCode HRHR = new GenerateTrackResponseLanguageCode(HRHR_VALUE);
+    public static final GenerateTrackResponseLanguageCode HUHU = new GenerateTrackResponseLanguageCode(HUHU_VALUE);
+    public static final GenerateTrackResponseLanguageCode IDID = new GenerateTrackResponseLanguageCode(IDID_VALUE);
+    public static final GenerateTrackResponseLanguageCode IT_CH = new GenerateTrackResponseLanguageCode(IT_CH_VALUE);
+    public static final GenerateTrackResponseLanguageCode ITIT = new GenerateTrackResponseLanguageCode(ITIT_VALUE);
+    public static final GenerateTrackResponseLanguageCode JA_JP = new GenerateTrackResponseLanguageCode(JA_JP_VALUE);
+    public static final GenerateTrackResponseLanguageCode KO_KR = new GenerateTrackResponseLanguageCode(KO_KR_VALUE);
+    public static final GenerateTrackResponseLanguageCode NL_BE = new GenerateTrackResponseLanguageCode(NL_BE_VALUE);
+    public static final GenerateTrackResponseLanguageCode NLNL = new GenerateTrackResponseLanguageCode(NLNL_VALUE);
+    public static final GenerateTrackResponseLanguageCode NONO = new GenerateTrackResponseLanguageCode(NONO_VALUE);
+    public static final GenerateTrackResponseLanguageCode PLPL = new GenerateTrackResponseLanguageCode(PLPL_VALUE);
+    public static final GenerateTrackResponseLanguageCode PT_BR = new GenerateTrackResponseLanguageCode(PT_BR_VALUE);
+    public static final GenerateTrackResponseLanguageCode PTPT = new GenerateTrackResponseLanguageCode(PTPT_VALUE);
+    public static final GenerateTrackResponseLanguageCode RORO = new GenerateTrackResponseLanguageCode(RORO_VALUE);
+    public static final GenerateTrackResponseLanguageCode RURU = new GenerateTrackResponseLanguageCode(RURU_VALUE);
+    public static final GenerateTrackResponseLanguageCode SKSK = new GenerateTrackResponseLanguageCode(SKSK_VALUE);
+    public static final GenerateTrackResponseLanguageCode SV_SE = new GenerateTrackResponseLanguageCode(SV_SE_VALUE);
+    public static final GenerateTrackResponseLanguageCode TA_IN = new GenerateTrackResponseLanguageCode(TA_IN_VALUE);
+    public static final GenerateTrackResponseLanguageCode TA_LK = new GenerateTrackResponseLanguageCode(TA_LK_VALUE);
+    public static final GenerateTrackResponseLanguageCode THTH = new GenerateTrackResponseLanguageCode(THTH_VALUE);
+    public static final GenerateTrackResponseLanguageCode TRTR = new GenerateTrackResponseLanguageCode(TRTR_VALUE);
+    public static final GenerateTrackResponseLanguageCode UK_UA = new GenerateTrackResponseLanguageCode(UK_UA_VALUE);
+    public static final GenerateTrackResponseLanguageCode BGBG = new GenerateTrackResponseLanguageCode(BGBG_VALUE);
+    public static final GenerateTrackResponseLanguageCode ZH_CN = new GenerateTrackResponseLanguageCode(ZH_CN_VALUE);
+    public static final GenerateTrackResponseLanguageCode ZH_HK = new GenerateTrackResponseLanguageCode(ZH_HK_VALUE);
+    public static final GenerateTrackResponseLanguageCode ZH_TW = new GenerateTrackResponseLanguageCode(ZH_TW_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -104,7 +159,7 @@ public class GenerateTrackResponseLanguageCode {
     @JsonCreator
     public static GenerateTrackResponseLanguageCode of(String value) {
         synchronized (GenerateTrackResponseLanguageCode.class) {
-            return values.computeIfAbsent(value, v -> new GenerateTrackResponseLanguageCode(v));
+            return values.computeIfAbsent(value, GenerateTrackResponseLanguageCode::new);
         }
     }
 
@@ -152,188 +207,188 @@ public class GenerateTrackResponseLanguageCode {
 
     private static final Map<String, GenerateTrackResponseLanguageCode> createValuesMap() {
         Map<String, GenerateTrackResponseLanguageCode> map = new LinkedHashMap<>();
-        map.put("ar-SA", AR_SA);
-        map.put("bn-BD", BN_BD);
-        map.put("bn-IN", BN_IN);
-        map.put("ca-ES", CA_ES);
-        map.put("cs-CZ", CS_CZ);
-        map.put("da-DK", DA_DK);
-        map.put("de-AT", DE_AT);
-        map.put("de-CH", DE_CH);
-        map.put("de-DE", DEDE);
-        map.put("el-GR", EL_GR);
-        map.put("en-AU", EN_AU);
-        map.put("en-CA", EN_CA);
-        map.put("en-GB", EN_GB);
-        map.put("en-IE", EN_IE);
-        map.put("en-IN", EN_IN);
-        map.put("en-NZ", EN_NZ);
-        map.put("en-US", EN_US);
-        map.put("en-ZA", EN_ZA);
-        map.put("es-AR", ES_AR);
-        map.put("es-CL", ES_CL);
-        map.put("es-CO", ES_CO);
-        map.put("es-ES", ESES);
-        map.put("es-MX", ES_MX);
-        map.put("es-US", ES_US);
-        map.put("fi-FI", FIFI);
-        map.put("fr-BE", FR_BE);
-        map.put("fr-CA", FR_CA);
-        map.put("fr-CH", FR_CH);
-        map.put("fr-FR", FRFR);
-        map.put("he-IL", HE_IL);
-        map.put("hi-IN", HI_IN);
-        map.put("hr-HR", HRHR);
-        map.put("hu-HU", HUHU);
-        map.put("id-ID", IDID);
-        map.put("it-CH", IT_CH);
-        map.put("it-IT", ITIT);
-        map.put("ja-JP", JA_JP);
-        map.put("ko-KR", KO_KR);
-        map.put("nl-BE", NL_BE);
-        map.put("nl-NL", NLNL);
-        map.put("no-NO", NONO);
-        map.put("pl-PL", PLPL);
-        map.put("pt-BR", PT_BR);
-        map.put("pt-PT", PTPT);
-        map.put("ro-RO", RORO);
-        map.put("ru-RU", RURU);
-        map.put("sk-SK", SKSK);
-        map.put("sv-SE", SV_SE);
-        map.put("ta-IN", TA_IN);
-        map.put("ta-LK", TA_LK);
-        map.put("th-TH", THTH);
-        map.put("tr-TR", TRTR);
-        map.put("uk-UA", UK_UA);
-        map.put("bg-BG", BGBG);
-        map.put("zh-CN", ZH_CN);
-        map.put("zh-HK", ZH_HK);
-        map.put("zh-TW", ZH_TW);
+        map.put(AR_SA_VALUE, AR_SA);
+        map.put(BN_BD_VALUE, BN_BD);
+        map.put(BN_IN_VALUE, BN_IN);
+        map.put(CA_ES_VALUE, CA_ES);
+        map.put(CS_CZ_VALUE, CS_CZ);
+        map.put(DA_DK_VALUE, DA_DK);
+        map.put(DE_AT_VALUE, DE_AT);
+        map.put(DE_CH_VALUE, DE_CH);
+        map.put(DEDE_VALUE, DEDE);
+        map.put(EL_GR_VALUE, EL_GR);
+        map.put(EN_AU_VALUE, EN_AU);
+        map.put(EN_CA_VALUE, EN_CA);
+        map.put(EN_GB_VALUE, EN_GB);
+        map.put(EN_IE_VALUE, EN_IE);
+        map.put(EN_IN_VALUE, EN_IN);
+        map.put(EN_NZ_VALUE, EN_NZ);
+        map.put(EN_US_VALUE, EN_US);
+        map.put(EN_ZA_VALUE, EN_ZA);
+        map.put(ES_AR_VALUE, ES_AR);
+        map.put(ES_CL_VALUE, ES_CL);
+        map.put(ES_CO_VALUE, ES_CO);
+        map.put(ESES_VALUE, ESES);
+        map.put(ES_MX_VALUE, ES_MX);
+        map.put(ES_US_VALUE, ES_US);
+        map.put(FIFI_VALUE, FIFI);
+        map.put(FR_BE_VALUE, FR_BE);
+        map.put(FR_CA_VALUE, FR_CA);
+        map.put(FR_CH_VALUE, FR_CH);
+        map.put(FRFR_VALUE, FRFR);
+        map.put(HE_IL_VALUE, HE_IL);
+        map.put(HI_IN_VALUE, HI_IN);
+        map.put(HRHR_VALUE, HRHR);
+        map.put(HUHU_VALUE, HUHU);
+        map.put(IDID_VALUE, IDID);
+        map.put(IT_CH_VALUE, IT_CH);
+        map.put(ITIT_VALUE, ITIT);
+        map.put(JA_JP_VALUE, JA_JP);
+        map.put(KO_KR_VALUE, KO_KR);
+        map.put(NL_BE_VALUE, NL_BE);
+        map.put(NLNL_VALUE, NLNL);
+        map.put(NONO_VALUE, NONO);
+        map.put(PLPL_VALUE, PLPL);
+        map.put(PT_BR_VALUE, PT_BR);
+        map.put(PTPT_VALUE, PTPT);
+        map.put(RORO_VALUE, RORO);
+        map.put(RURU_VALUE, RURU);
+        map.put(SKSK_VALUE, SKSK);
+        map.put(SV_SE_VALUE, SV_SE);
+        map.put(TA_IN_VALUE, TA_IN);
+        map.put(TA_LK_VALUE, TA_LK);
+        map.put(THTH_VALUE, THTH);
+        map.put(TRTR_VALUE, TRTR);
+        map.put(UK_UA_VALUE, UK_UA);
+        map.put(BGBG_VALUE, BGBG);
+        map.put(ZH_CN_VALUE, ZH_CN);
+        map.put(ZH_HK_VALUE, ZH_HK);
+        map.put(ZH_TW_VALUE, ZH_TW);
         return map;
     }
 
     private static final Map<String, GenerateTrackResponseLanguageCodeEnum> createEnumsMap() {
         Map<String, GenerateTrackResponseLanguageCodeEnum> map = new HashMap<>();
-        map.put("ar-SA", GenerateTrackResponseLanguageCodeEnum.AR_SA);
-        map.put("bn-BD", GenerateTrackResponseLanguageCodeEnum.BN_BD);
-        map.put("bn-IN", GenerateTrackResponseLanguageCodeEnum.BN_IN);
-        map.put("ca-ES", GenerateTrackResponseLanguageCodeEnum.CA_ES);
-        map.put("cs-CZ", GenerateTrackResponseLanguageCodeEnum.CS_CZ);
-        map.put("da-DK", GenerateTrackResponseLanguageCodeEnum.DA_DK);
-        map.put("de-AT", GenerateTrackResponseLanguageCodeEnum.DE_AT);
-        map.put("de-CH", GenerateTrackResponseLanguageCodeEnum.DE_CH);
-        map.put("de-DE", GenerateTrackResponseLanguageCodeEnum.DEDE);
-        map.put("el-GR", GenerateTrackResponseLanguageCodeEnum.EL_GR);
-        map.put("en-AU", GenerateTrackResponseLanguageCodeEnum.EN_AU);
-        map.put("en-CA", GenerateTrackResponseLanguageCodeEnum.EN_CA);
-        map.put("en-GB", GenerateTrackResponseLanguageCodeEnum.EN_GB);
-        map.put("en-IE", GenerateTrackResponseLanguageCodeEnum.EN_IE);
-        map.put("en-IN", GenerateTrackResponseLanguageCodeEnum.EN_IN);
-        map.put("en-NZ", GenerateTrackResponseLanguageCodeEnum.EN_NZ);
-        map.put("en-US", GenerateTrackResponseLanguageCodeEnum.EN_US);
-        map.put("en-ZA", GenerateTrackResponseLanguageCodeEnum.EN_ZA);
-        map.put("es-AR", GenerateTrackResponseLanguageCodeEnum.ES_AR);
-        map.put("es-CL", GenerateTrackResponseLanguageCodeEnum.ES_CL);
-        map.put("es-CO", GenerateTrackResponseLanguageCodeEnum.ES_CO);
-        map.put("es-ES", GenerateTrackResponseLanguageCodeEnum.ESES);
-        map.put("es-MX", GenerateTrackResponseLanguageCodeEnum.ES_MX);
-        map.put("es-US", GenerateTrackResponseLanguageCodeEnum.ES_US);
-        map.put("fi-FI", GenerateTrackResponseLanguageCodeEnum.FIFI);
-        map.put("fr-BE", GenerateTrackResponseLanguageCodeEnum.FR_BE);
-        map.put("fr-CA", GenerateTrackResponseLanguageCodeEnum.FR_CA);
-        map.put("fr-CH", GenerateTrackResponseLanguageCodeEnum.FR_CH);
-        map.put("fr-FR", GenerateTrackResponseLanguageCodeEnum.FRFR);
-        map.put("he-IL", GenerateTrackResponseLanguageCodeEnum.HE_IL);
-        map.put("hi-IN", GenerateTrackResponseLanguageCodeEnum.HI_IN);
-        map.put("hr-HR", GenerateTrackResponseLanguageCodeEnum.HRHR);
-        map.put("hu-HU", GenerateTrackResponseLanguageCodeEnum.HUHU);
-        map.put("id-ID", GenerateTrackResponseLanguageCodeEnum.IDID);
-        map.put("it-CH", GenerateTrackResponseLanguageCodeEnum.IT_CH);
-        map.put("it-IT", GenerateTrackResponseLanguageCodeEnum.ITIT);
-        map.put("ja-JP", GenerateTrackResponseLanguageCodeEnum.JA_JP);
-        map.put("ko-KR", GenerateTrackResponseLanguageCodeEnum.KO_KR);
-        map.put("nl-BE", GenerateTrackResponseLanguageCodeEnum.NL_BE);
-        map.put("nl-NL", GenerateTrackResponseLanguageCodeEnum.NLNL);
-        map.put("no-NO", GenerateTrackResponseLanguageCodeEnum.NONO);
-        map.put("pl-PL", GenerateTrackResponseLanguageCodeEnum.PLPL);
-        map.put("pt-BR", GenerateTrackResponseLanguageCodeEnum.PT_BR);
-        map.put("pt-PT", GenerateTrackResponseLanguageCodeEnum.PTPT);
-        map.put("ro-RO", GenerateTrackResponseLanguageCodeEnum.RORO);
-        map.put("ru-RU", GenerateTrackResponseLanguageCodeEnum.RURU);
-        map.put("sk-SK", GenerateTrackResponseLanguageCodeEnum.SKSK);
-        map.put("sv-SE", GenerateTrackResponseLanguageCodeEnum.SV_SE);
-        map.put("ta-IN", GenerateTrackResponseLanguageCodeEnum.TA_IN);
-        map.put("ta-LK", GenerateTrackResponseLanguageCodeEnum.TA_LK);
-        map.put("th-TH", GenerateTrackResponseLanguageCodeEnum.THTH);
-        map.put("tr-TR", GenerateTrackResponseLanguageCodeEnum.TRTR);
-        map.put("uk-UA", GenerateTrackResponseLanguageCodeEnum.UK_UA);
-        map.put("bg-BG", GenerateTrackResponseLanguageCodeEnum.BGBG);
-        map.put("zh-CN", GenerateTrackResponseLanguageCodeEnum.ZH_CN);
-        map.put("zh-HK", GenerateTrackResponseLanguageCodeEnum.ZH_HK);
-        map.put("zh-TW", GenerateTrackResponseLanguageCodeEnum.ZH_TW);
+        map.put(AR_SA_VALUE, GenerateTrackResponseLanguageCodeEnum.AR_SA);
+        map.put(BN_BD_VALUE, GenerateTrackResponseLanguageCodeEnum.BN_BD);
+        map.put(BN_IN_VALUE, GenerateTrackResponseLanguageCodeEnum.BN_IN);
+        map.put(CA_ES_VALUE, GenerateTrackResponseLanguageCodeEnum.CA_ES);
+        map.put(CS_CZ_VALUE, GenerateTrackResponseLanguageCodeEnum.CS_CZ);
+        map.put(DA_DK_VALUE, GenerateTrackResponseLanguageCodeEnum.DA_DK);
+        map.put(DE_AT_VALUE, GenerateTrackResponseLanguageCodeEnum.DE_AT);
+        map.put(DE_CH_VALUE, GenerateTrackResponseLanguageCodeEnum.DE_CH);
+        map.put(DEDE_VALUE, GenerateTrackResponseLanguageCodeEnum.DEDE);
+        map.put(EL_GR_VALUE, GenerateTrackResponseLanguageCodeEnum.EL_GR);
+        map.put(EN_AU_VALUE, GenerateTrackResponseLanguageCodeEnum.EN_AU);
+        map.put(EN_CA_VALUE, GenerateTrackResponseLanguageCodeEnum.EN_CA);
+        map.put(EN_GB_VALUE, GenerateTrackResponseLanguageCodeEnum.EN_GB);
+        map.put(EN_IE_VALUE, GenerateTrackResponseLanguageCodeEnum.EN_IE);
+        map.put(EN_IN_VALUE, GenerateTrackResponseLanguageCodeEnum.EN_IN);
+        map.put(EN_NZ_VALUE, GenerateTrackResponseLanguageCodeEnum.EN_NZ);
+        map.put(EN_US_VALUE, GenerateTrackResponseLanguageCodeEnum.EN_US);
+        map.put(EN_ZA_VALUE, GenerateTrackResponseLanguageCodeEnum.EN_ZA);
+        map.put(ES_AR_VALUE, GenerateTrackResponseLanguageCodeEnum.ES_AR);
+        map.put(ES_CL_VALUE, GenerateTrackResponseLanguageCodeEnum.ES_CL);
+        map.put(ES_CO_VALUE, GenerateTrackResponseLanguageCodeEnum.ES_CO);
+        map.put(ESES_VALUE, GenerateTrackResponseLanguageCodeEnum.ESES);
+        map.put(ES_MX_VALUE, GenerateTrackResponseLanguageCodeEnum.ES_MX);
+        map.put(ES_US_VALUE, GenerateTrackResponseLanguageCodeEnum.ES_US);
+        map.put(FIFI_VALUE, GenerateTrackResponseLanguageCodeEnum.FIFI);
+        map.put(FR_BE_VALUE, GenerateTrackResponseLanguageCodeEnum.FR_BE);
+        map.put(FR_CA_VALUE, GenerateTrackResponseLanguageCodeEnum.FR_CA);
+        map.put(FR_CH_VALUE, GenerateTrackResponseLanguageCodeEnum.FR_CH);
+        map.put(FRFR_VALUE, GenerateTrackResponseLanguageCodeEnum.FRFR);
+        map.put(HE_IL_VALUE, GenerateTrackResponseLanguageCodeEnum.HE_IL);
+        map.put(HI_IN_VALUE, GenerateTrackResponseLanguageCodeEnum.HI_IN);
+        map.put(HRHR_VALUE, GenerateTrackResponseLanguageCodeEnum.HRHR);
+        map.put(HUHU_VALUE, GenerateTrackResponseLanguageCodeEnum.HUHU);
+        map.put(IDID_VALUE, GenerateTrackResponseLanguageCodeEnum.IDID);
+        map.put(IT_CH_VALUE, GenerateTrackResponseLanguageCodeEnum.IT_CH);
+        map.put(ITIT_VALUE, GenerateTrackResponseLanguageCodeEnum.ITIT);
+        map.put(JA_JP_VALUE, GenerateTrackResponseLanguageCodeEnum.JA_JP);
+        map.put(KO_KR_VALUE, GenerateTrackResponseLanguageCodeEnum.KO_KR);
+        map.put(NL_BE_VALUE, GenerateTrackResponseLanguageCodeEnum.NL_BE);
+        map.put(NLNL_VALUE, GenerateTrackResponseLanguageCodeEnum.NLNL);
+        map.put(NONO_VALUE, GenerateTrackResponseLanguageCodeEnum.NONO);
+        map.put(PLPL_VALUE, GenerateTrackResponseLanguageCodeEnum.PLPL);
+        map.put(PT_BR_VALUE, GenerateTrackResponseLanguageCodeEnum.PT_BR);
+        map.put(PTPT_VALUE, GenerateTrackResponseLanguageCodeEnum.PTPT);
+        map.put(RORO_VALUE, GenerateTrackResponseLanguageCodeEnum.RORO);
+        map.put(RURU_VALUE, GenerateTrackResponseLanguageCodeEnum.RURU);
+        map.put(SKSK_VALUE, GenerateTrackResponseLanguageCodeEnum.SKSK);
+        map.put(SV_SE_VALUE, GenerateTrackResponseLanguageCodeEnum.SV_SE);
+        map.put(TA_IN_VALUE, GenerateTrackResponseLanguageCodeEnum.TA_IN);
+        map.put(TA_LK_VALUE, GenerateTrackResponseLanguageCodeEnum.TA_LK);
+        map.put(THTH_VALUE, GenerateTrackResponseLanguageCodeEnum.THTH);
+        map.put(TRTR_VALUE, GenerateTrackResponseLanguageCodeEnum.TRTR);
+        map.put(UK_UA_VALUE, GenerateTrackResponseLanguageCodeEnum.UK_UA);
+        map.put(BGBG_VALUE, GenerateTrackResponseLanguageCodeEnum.BGBG);
+        map.put(ZH_CN_VALUE, GenerateTrackResponseLanguageCodeEnum.ZH_CN);
+        map.put(ZH_HK_VALUE, GenerateTrackResponseLanguageCodeEnum.ZH_HK);
+        map.put(ZH_TW_VALUE, GenerateTrackResponseLanguageCodeEnum.ZH_TW);
         return map;
     }
     
     
     public enum GenerateTrackResponseLanguageCodeEnum {
 
-        AR_SA("ar-SA"),
-        BN_BD("bn-BD"),
-        BN_IN("bn-IN"),
-        CA_ES("ca-ES"),
-        CS_CZ("cs-CZ"),
-        DA_DK("da-DK"),
-        DE_AT("de-AT"),
-        DE_CH("de-CH"),
-        DEDE("de-DE"),
-        EL_GR("el-GR"),
-        EN_AU("en-AU"),
-        EN_CA("en-CA"),
-        EN_GB("en-GB"),
-        EN_IE("en-IE"),
-        EN_IN("en-IN"),
-        EN_NZ("en-NZ"),
-        EN_US("en-US"),
-        EN_ZA("en-ZA"),
-        ES_AR("es-AR"),
-        ES_CL("es-CL"),
-        ES_CO("es-CO"),
-        ESES("es-ES"),
-        ES_MX("es-MX"),
-        ES_US("es-US"),
-        FIFI("fi-FI"),
-        FR_BE("fr-BE"),
-        FR_CA("fr-CA"),
-        FR_CH("fr-CH"),
-        FRFR("fr-FR"),
-        HE_IL("he-IL"),
-        HI_IN("hi-IN"),
-        HRHR("hr-HR"),
-        HUHU("hu-HU"),
-        IDID("id-ID"),
-        IT_CH("it-CH"),
-        ITIT("it-IT"),
-        JA_JP("ja-JP"),
-        KO_KR("ko-KR"),
-        NL_BE("nl-BE"),
-        NLNL("nl-NL"),
-        NONO("no-NO"),
-        PLPL("pl-PL"),
-        PT_BR("pt-BR"),
-        PTPT("pt-PT"),
-        RORO("ro-RO"),
-        RURU("ru-RU"),
-        SKSK("sk-SK"),
-        SV_SE("sv-SE"),
-        TA_IN("ta-IN"),
-        TA_LK("ta-LK"),
-        THTH("th-TH"),
-        TRTR("tr-TR"),
-        UK_UA("uk-UA"),
-        BGBG("bg-BG"),
-        ZH_CN("zh-CN"),
-        ZH_HK("zh-HK"),
-        ZH_TW("zh-TW"),;
+        AR_SA(AR_SA_VALUE),
+        BN_BD(BN_BD_VALUE),
+        BN_IN(BN_IN_VALUE),
+        CA_ES(CA_ES_VALUE),
+        CS_CZ(CS_CZ_VALUE),
+        DA_DK(DA_DK_VALUE),
+        DE_AT(DE_AT_VALUE),
+        DE_CH(DE_CH_VALUE),
+        DEDE(DEDE_VALUE),
+        EL_GR(EL_GR_VALUE),
+        EN_AU(EN_AU_VALUE),
+        EN_CA(EN_CA_VALUE),
+        EN_GB(EN_GB_VALUE),
+        EN_IE(EN_IE_VALUE),
+        EN_IN(EN_IN_VALUE),
+        EN_NZ(EN_NZ_VALUE),
+        EN_US(EN_US_VALUE),
+        EN_ZA(EN_ZA_VALUE),
+        ES_AR(ES_AR_VALUE),
+        ES_CL(ES_CL_VALUE),
+        ES_CO(ES_CO_VALUE),
+        ESES(ESES_VALUE),
+        ES_MX(ES_MX_VALUE),
+        ES_US(ES_US_VALUE),
+        FIFI(FIFI_VALUE),
+        FR_BE(FR_BE_VALUE),
+        FR_CA(FR_CA_VALUE),
+        FR_CH(FR_CH_VALUE),
+        FRFR(FRFR_VALUE),
+        HE_IL(HE_IL_VALUE),
+        HI_IN(HI_IN_VALUE),
+        HRHR(HRHR_VALUE),
+        HUHU(HUHU_VALUE),
+        IDID(IDID_VALUE),
+        IT_CH(IT_CH_VALUE),
+        ITIT(ITIT_VALUE),
+        JA_JP(JA_JP_VALUE),
+        KO_KR(KO_KR_VALUE),
+        NL_BE(NL_BE_VALUE),
+        NLNL(NLNL_VALUE),
+        NONO(NONO_VALUE),
+        PLPL(PLPL_VALUE),
+        PT_BR(PT_BR_VALUE),
+        PTPT(PTPT_VALUE),
+        RORO(RORO_VALUE),
+        RURU(RURU_VALUE),
+        SKSK(SKSK_VALUE),
+        SV_SE(SV_SE_VALUE),
+        TA_IN(TA_IN_VALUE),
+        TA_LK(TA_LK_VALUE),
+        THTH(THTH_VALUE),
+        TRTR(TRTR_VALUE),
+        UK_UA(UK_UA_VALUE),
+        BGBG(BGBG_VALUE),
+        ZH_CN(ZH_CN_VALUE),
+        ZH_HK(ZH_HK_VALUE),
+        ZH_TW(ZH_TW_VALUE),;
 
         private final String value;
 
@@ -346,4 +401,3 @@ public class GenerateTrackResponseLanguageCode {
         }
     }
 }
-

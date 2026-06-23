@@ -23,7 +23,7 @@ public class Retries {
         Utils.checkNotNull(action, "action");
         Utils.checkNotNull(retryConfig, "retryConfig");
         Utils.checkNotNull(statusCodes, "statusCodes");
-        if(statusCodes.size() == 0) {
+        if(statusCodes.isEmpty()) {
             throw new IllegalArgumentException("statusCodes list cannot be empty");
         }
         this.action = action;
@@ -36,10 +36,8 @@ public class Retries {
 
         switch(retryConfig.strategy()) {
             case BACKOFF:
-                if(!retryConfig.backoff().isPresent()){
-                    throw new IllegalArgumentException("Backoff strategy is not defined");
-                }
-                BackoffStrategy backoff = retryConfig.backoff().get();
+                BackoffStrategy backoff = retryConfig.backoff()
+                        .orElseThrow(() -> new IllegalArgumentException("Backoff strategy is not defined"));
                 return retryWithBackoff(backoff.retryConnectError(), backoff.retryReadTimeoutError());
 
             case NONE:
@@ -50,6 +48,9 @@ public class Retries {
         }
     }
 
+    // Status-code matching plus the layered IO/retryable exception handling is kept in one method to
+    // preserve the established retry-decision flow; the cognitive-complexity finding is suppressed.
+    @SuppressWarnings("java:S3776")
     private HttpResponse<InputStream> getResponse(boolean retryConnectError, boolean retryReadTimeoutError) throws Exception {
         try {
             HttpResponse<InputStream> response = action.call();
@@ -93,8 +94,11 @@ public class Retries {
         }
     }
 
+    // The backoff retry loop combines elapsed-time checks, jitter computation and trace logging in one
+    // place to preserve the established retry timing; the cognitive-complexity finding is suppressed.
+    @SuppressWarnings("java:S3776")
     private HttpResponse<InputStream> retryWithBackoff(boolean retryConnectError, boolean retryReadTimeoutError) throws Exception {
-        BackoffStrategy backoff = retryConfig.backoff().get();
+        BackoffStrategy backoff = retryConfig.backoff().orElseThrow();
         long initialIntervalMs = backoff.initialIntervalMs();
         long startMs = System.currentTimeMillis();
         int numAttempts = 0;
@@ -140,11 +144,11 @@ public class Retries {
         }
     }
 
-    public final static Builder builder() {
+    public static final Builder builder() {
         return new Builder();
     }
 
-    public final static class Builder {
+    public static final class Builder {
 
         private Callable<HttpResponse<InputStream>> action;
         private RetryConfig retryConfig;
@@ -184,7 +188,7 @@ public class Retries {
           */
         public Builder statusCodes(List<String> statusCodes) {
             Utils.checkNotNull(statusCodes, "statusCodes");
-            if(statusCodes.size() == 0) {
+            if(statusCodes.isEmpty()) {
                 throw new IllegalArgumentException("statusCodes list cannot be empty");
             }
             this.statusCodes = statusCodes;

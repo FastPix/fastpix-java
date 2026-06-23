@@ -4,7 +4,6 @@ import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.String;
 import io.fastpix.sdk.models.operations.Dimension;
 import io.fastpix.sdk.models.operations.GetTimeseriesDataRequest;
 import io.fastpix.sdk.models.operations.GetTimeseriesDataRequestBuilder;
@@ -31,6 +30,9 @@ import io.fastpix.sdk.utils.Options;
 /**
  * Operations involving metrics
  */
+// Facade aggregating one operation trio (request/builder/response) per metrics
+// endpoint; the high class-fan-out is inherent to this API surface, not a design smell.
+@SuppressWarnings("java:S6539")
 public class Metrics {
     private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;

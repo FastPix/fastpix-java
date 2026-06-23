@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
-import java.lang.Boolean;
-import java.lang.Override;
-import java.lang.String;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -190,7 +187,7 @@ public class DirectUploadResponse {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private List<PlaybackId> playbackIds;
 

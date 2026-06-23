@@ -4,8 +4,6 @@ import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.String;
 import io.fastpix.sdk.models.operations.GetDrmConfigurationByIdRequest;
 import io.fastpix.sdk.models.operations.GetDrmConfigurationByIdRequestBuilder;
 import io.fastpix.sdk.models.operations.GetDrmConfigurationByIdResponse;

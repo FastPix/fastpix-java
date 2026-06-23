@@ -2,14 +2,14 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class GetMediaSummaryRequest {
+
+    private static final String MEDIA_ID = "mediaId";
     /**
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
@@ -39,7 +39,7 @@ public class GetMediaSummaryRequest {
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
     public GetMediaSummaryRequest withMediaId(@Nonnull String mediaId) {
-        this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+        this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
         return this;
     }
 
@@ -66,11 +66,11 @@ public class GetMediaSummaryRequest {
     @Override
     public String toString() {
         return Utils.toString(GetMediaSummaryRequest.class,
-                "mediaId", mediaId);
+                MEDIA_ID, mediaId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String mediaId;
 
@@ -82,7 +82,7 @@ public class GetMediaSummaryRequest {
          * The unique identifier assigned to the media when created. The value must be a valid UUID.
          */
         public Builder mediaId(@Nonnull String mediaId) {
-            this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+            this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
             return this;
         }
 

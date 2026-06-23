@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.MediaIdsRequest;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -11,6 +9,10 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class AddMediaToPlaylistRequest {
+
+    private static final String PLAYLIST_ID_FIELD = "playlistId";
+    private static final String BODY_FIELD = "body";
+
     /**
      * The unique id of the playlist you want to perform the operation on.
      */
@@ -51,13 +53,13 @@ public class AddMediaToPlaylistRequest {
      * The unique id of the playlist you want to perform the operation on.
      */
     public AddMediaToPlaylistRequest withPlaylistId(@Nonnull String playlistId) {
-        this.playlistId = Utils.checkNotNull(playlistId, "playlistId");
+        this.playlistId = Utils.checkNotNull(playlistId, PLAYLIST_ID_FIELD);
         return this;
     }
 
 
     public AddMediaToPlaylistRequest withBody(@Nonnull MediaIdsRequest body) {
-        this.body = Utils.checkNotNull(body, "body");
+        this.body = Utils.checkNotNull(body, BODY_FIELD);
         return this;
     }
 
@@ -85,12 +87,12 @@ public class AddMediaToPlaylistRequest {
     @Override
     public String toString() {
         return Utils.toString(AddMediaToPlaylistRequest.class,
-                "playlistId", playlistId,
-                "body", body);
+                PLAYLIST_ID_FIELD, playlistId,
+                BODY_FIELD, body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String playlistId;
 
@@ -104,12 +106,12 @@ public class AddMediaToPlaylistRequest {
          * The unique id of the playlist you want to perform the operation on.
          */
         public Builder playlistId(@Nonnull String playlistId) {
-            this.playlistId = Utils.checkNotNull(playlistId, "playlistId");
+            this.playlistId = Utils.checkNotNull(playlistId, PLAYLIST_ID_FIELD);
             return this;
         }
 
         public Builder body(@Nonnull MediaIdsRequest body) {
-            this.body = Utils.checkNotNull(body, "body");
+            this.body = Utils.checkNotNull(body, BODY_FIELD);
             return this;
         }
 

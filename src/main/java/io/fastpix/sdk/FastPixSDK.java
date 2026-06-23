@@ -1,11 +1,8 @@
 package io.fastpix.sdk;
-
-import java.lang.String;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import io.fastpix.sdk.utils.HTTPClient;
-import io.fastpix.sdk.utils.Headers;
 import io.fastpix.sdk.utils.RetryConfig;
 import io.fastpix.sdk.utils.FastpixHTTPClient;
 import io.fastpix.sdk.utils.Utils;
@@ -81,13 +78,17 @@ import io.fastpix.sdk.utils.Utils;
  * <p>- **Prevent tampering:** Ensure requested assets have not been modified. - **Time-bound access:**
  * Enable signed URLs with expiration for controlled viewing windows.
  */
+// Root SDK aggregator exposing every API group as a single entry point; the high
+// class-fan-out is inherent to this facade's purpose, not a design smell.
+@SuppressWarnings("java:S6539")
 public class FastPixSDK {
-    private static final Headers _headers = Headers.EMPTY;
-
 
     /**
      * SERVERS contains the list of server urls available to the SDK.
      */
+    // Generated server list mirroring the OpenAPI `servers` block; exposed as a
+    // public constant by convention. The array is never mutated by the SDK.
+    @SuppressWarnings("java:S2386")
     public static final String[] SERVERS = {
         /*
          * FastPix Video APIs
@@ -311,8 +312,7 @@ public class FastPixSDK {
 
         private final SDKConfiguration sdkConfiguration = new SDKConfiguration();
         private String serverUrl;
-        private String server;
-        
+
 
         private Builder() {
         }
@@ -413,13 +413,19 @@ public class FastPixSDK {
             return this;
         }
 
-        // Visible for testing, may be accessed via reflection in tests
+        // Visible for testing, may be accessed via reflection in tests.
+        // The leading-underscore name is an intentional test hook; renaming would
+        // break the reflective lookup, so the naming-convention rule is suppressed.
+        @SuppressWarnings("java:S100")
         Builder _hooks(io.fastpix.sdk.utils.Hooks hooks) {
-            sdkConfiguration.setHooks(hooks);  
-            return this;  
+            sdkConfiguration.setHooks(hooks);
+            return this;
         }
-        
-        // Visible for testing, may be accessed via reflection in tests
+
+        // Visible for testing, may be accessed via reflection in tests.
+        // The leading-underscore name is an intentional test hook; renaming would
+        // break the reflective lookup, so the naming-convention rule is suppressed.
+        @SuppressWarnings("java:S100")
         Builder _hooks(Consumer<? super io.fastpix.sdk.utils.Hooks> consumer) {
             consumer.accept(sdkConfiguration.hooks());
             return this;    

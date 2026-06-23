@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,19 +9,21 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * PlaylistOrder
+ *
+ * <p>Determines the insertion order of media into playlist.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * PlaylistOrder
- * 
- * <p>Determines the insertion order of media into playlist.
- */
 public class PlaylistOrder {
 
-    public static final PlaylistOrder CREATED_DATE_ASC = new PlaylistOrder("createdDate ASC");
-    public static final PlaylistOrder CREATED_DATE_DESC = new PlaylistOrder("createdDate DESC");
+    private static final String CREATED_DATE_ASC_VALUE = "createdDate ASC";
+    private static final String CREATED_DATE_DESC_VALUE = "createdDate DESC";
+
+    public static final PlaylistOrder CREATED_DATE_ASC = new PlaylistOrder(CREATED_DATE_ASC_VALUE);
+    public static final PlaylistOrder CREATED_DATE_DESC = new PlaylistOrder(CREATED_DATE_DESC_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -49,7 +49,7 @@ public class PlaylistOrder {
     @JsonCreator
     public static PlaylistOrder of(String value) {
         synchronized (PlaylistOrder.class) {
-            return values.computeIfAbsent(value, v -> new PlaylistOrder(v));
+            return values.computeIfAbsent(value, PlaylistOrder::new);
         }
     }
 
@@ -97,23 +97,23 @@ public class PlaylistOrder {
 
     private static final Map<String, PlaylistOrder> createValuesMap() {
         Map<String, PlaylistOrder> map = new LinkedHashMap<>();
-        map.put("createdDate ASC", CREATED_DATE_ASC);
-        map.put("createdDate DESC", CREATED_DATE_DESC);
+        map.put(CREATED_DATE_ASC_VALUE, CREATED_DATE_ASC);
+        map.put(CREATED_DATE_DESC_VALUE, CREATED_DATE_DESC);
         return map;
     }
 
     private static final Map<String, PlaylistOrderEnum> createEnumsMap() {
         Map<String, PlaylistOrderEnum> map = new HashMap<>();
-        map.put("createdDate ASC", PlaylistOrderEnum.CREATED_DATE_ASC);
-        map.put("createdDate DESC", PlaylistOrderEnum.CREATED_DATE_DESC);
+        map.put(CREATED_DATE_ASC_VALUE, PlaylistOrderEnum.CREATED_DATE_ASC);
+        map.put(CREATED_DATE_DESC_VALUE, PlaylistOrderEnum.CREATED_DATE_DESC);
         return map;
     }
     
     
     public enum PlaylistOrderEnum {
 
-        CREATED_DATE_ASC("createdDate ASC"),
-        CREATED_DATE_DESC("createdDate DESC"),;
+        CREATED_DATE_ASC(CREATED_DATE_ASC_VALUE),
+        CREATED_DATE_DESC(CREATED_DATE_DESC_VALUE),;
 
         private final String value;
 

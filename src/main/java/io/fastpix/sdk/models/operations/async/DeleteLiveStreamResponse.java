@@ -3,9 +3,6 @@ package io.fastpix.sdk.models.operations.async;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.io.InputStream;
-import java.lang.Override;
-import java.lang.String;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.DefaultError;
@@ -16,6 +13,10 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class DeleteLiveStreamResponse implements AsyncResponse {
+
+    private static final String PROP_CONTENT_TYPE = "contentType";
+    private static final String PROP_RAW_RESPONSE = "rawResponse";
+
     /**
      * HTTP response content type for this operation
      */
@@ -57,7 +58,7 @@ public class DeleteLiveStreamResponse implements AsyncResponse {
         this.liveStreamDeleteResponse = liveStreamDeleteResponse;
         this.defaultError = defaultError;
     }
-    
+
     public DeleteLiveStreamResponse(
             @Nonnull String contentType,
             int statusCode,
@@ -111,7 +112,7 @@ public class DeleteLiveStreamResponse implements AsyncResponse {
      * HTTP response content type for this operation
      */
     public DeleteLiveStreamResponse withContentType(@Nonnull String contentType) {
-        this.contentType = Utils.checkNotNull(contentType, "contentType");
+        this.contentType = Utils.checkNotNull(contentType, PROP_CONTENT_TYPE);
         return this;
     }
 
@@ -129,7 +130,7 @@ public class DeleteLiveStreamResponse implements AsyncResponse {
      * Raw HTTP response; suitable for custom response parsing
      */
     public DeleteLiveStreamResponse withRawResponse(@Nonnull HttpResponse<Blob> rawResponse) {
-        this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+        this.rawResponse = Utils.checkNotNull(rawResponse, PROP_RAW_RESPONSE);
         return this;
     }
 
@@ -162,33 +163,33 @@ public class DeleteLiveStreamResponse implements AsyncResponse {
             return false;
         }
         DeleteLiveStreamResponse other = (DeleteLiveStreamResponse) o;
-        return 
+        return
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
             Utils.enhancedDeepEquals(this.liveStreamDeleteResponse, other.liveStreamDeleteResponse) &&
             Utils.enhancedDeepEquals(this.defaultError, other.defaultError);
     }
-    
+
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
             liveStreamDeleteResponse, defaultError);
     }
-    
+
     @Override
     public String toString() {
         return Utils.toString(DeleteLiveStreamResponse.class,
-                "contentType", contentType,
+                PROP_CONTENT_TYPE, contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse,
+                PROP_RAW_RESPONSE, rawResponse,
                 "liveStreamDeleteResponse", liveStreamDeleteResponse,
                 "defaultError", defaultError);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String contentType;
 
@@ -208,7 +209,7 @@ public class DeleteLiveStreamResponse implements AsyncResponse {
          * HTTP response content type for this operation
          */
         public Builder contentType(@Nonnull String contentType) {
-            this.contentType = Utils.checkNotNull(contentType, "contentType");
+            this.contentType = Utils.checkNotNull(contentType, PROP_CONTENT_TYPE);
             return this;
         }
 
@@ -224,7 +225,7 @@ public class DeleteLiveStreamResponse implements AsyncResponse {
          * Raw HTTP response; suitable for custom response parsing
          */
         public Builder rawResponse(@Nonnull HttpResponse<Blob> rawResponse) {
-            this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+            this.rawResponse = Utils.checkNotNull(rawResponse, PROP_RAW_RESPONSE);
             return this;
         }
 

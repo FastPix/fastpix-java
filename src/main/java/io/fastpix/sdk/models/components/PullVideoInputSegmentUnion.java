@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
+
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -17,6 +15,8 @@ import io.fastpix.sdk.utils.Utils;
 @JsonDeserialize(using = PullVideoInputSegmentUnion._Deserializer.class)
 public class PullVideoInputSegmentUnion {
 
+    private static final String PROP_VALUE = "value";
+
     @JsonValue
     private final TypedObject value;
     
@@ -25,12 +25,12 @@ public class PullVideoInputSegmentUnion {
     }
 
     public static PullVideoInputSegmentUnion of(PullVideoInputSegment1 value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, PROP_VALUE);
         return new PullVideoInputSegmentUnion(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static PullVideoInputSegmentUnion of(PullVideoInputSegment2 value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, PROP_VALUE);
         return new PullVideoInputSegmentUnion(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
@@ -89,7 +89,10 @@ public class PullVideoInputSegmentUnion {
         return Utils.enhancedHash(value.value());
     }
     
-    @SuppressWarnings("serial")
+    // Leading-underscore name is an intentional SDK-wide convention marking internal
+    // Jackson deserializer machinery (referenced only via @JsonDeserialize); renaming
+    // would be inconsistent with the rest of the generated union types.
+    @SuppressWarnings({"serial", "java:S101"})
     public static final class _Deserializer extends OneOfDeserializer<PullVideoInputSegmentUnion> {
 
         public _Deserializer() {
@@ -102,7 +105,7 @@ public class PullVideoInputSegmentUnion {
     @Override
     public String toString() {
         return Utils.toString(PullVideoInputSegmentUnion.class,
-                "value", value);
+                PROP_VALUE, value);
     }
 
 }

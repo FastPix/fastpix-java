@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,8 +15,11 @@ import java.util.Optional;
  */
 public class GetPlaybackIdUserAgentsDefaultPolicy {
 
-    public static final GetPlaybackIdUserAgentsDefaultPolicy ALLOW = new GetPlaybackIdUserAgentsDefaultPolicy("allow");
-    public static final GetPlaybackIdUserAgentsDefaultPolicy DENY = new GetPlaybackIdUserAgentsDefaultPolicy("deny");
+    private static final String ALLOW_VALUE = "allow";
+    private static final String DENY_VALUE = "deny";
+
+    public static final GetPlaybackIdUserAgentsDefaultPolicy ALLOW = new GetPlaybackIdUserAgentsDefaultPolicy(ALLOW_VALUE);
+    public static final GetPlaybackIdUserAgentsDefaultPolicy DENY = new GetPlaybackIdUserAgentsDefaultPolicy(DENY_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -44,7 +45,7 @@ public class GetPlaybackIdUserAgentsDefaultPolicy {
     @JsonCreator
     public static GetPlaybackIdUserAgentsDefaultPolicy of(String value) {
         synchronized (GetPlaybackIdUserAgentsDefaultPolicy.class) {
-            return values.computeIfAbsent(value, v -> new GetPlaybackIdUserAgentsDefaultPolicy(v));
+            return values.computeIfAbsent(value, GetPlaybackIdUserAgentsDefaultPolicy::new);
         }
     }
 
@@ -92,23 +93,23 @@ public class GetPlaybackIdUserAgentsDefaultPolicy {
 
     private static final Map<String, GetPlaybackIdUserAgentsDefaultPolicy> createValuesMap() {
         Map<String, GetPlaybackIdUserAgentsDefaultPolicy> map = new LinkedHashMap<>();
-        map.put("allow", ALLOW);
-        map.put("deny", DENY);
+        map.put(ALLOW_VALUE, ALLOW);
+        map.put(DENY_VALUE, DENY);
         return map;
     }
 
     private static final Map<String, GetPlaybackIdUserAgentsDefaultPolicyEnum> createEnumsMap() {
         Map<String, GetPlaybackIdUserAgentsDefaultPolicyEnum> map = new HashMap<>();
-        map.put("allow", GetPlaybackIdUserAgentsDefaultPolicyEnum.ALLOW);
-        map.put("deny", GetPlaybackIdUserAgentsDefaultPolicyEnum.DENY);
+        map.put(ALLOW_VALUE, GetPlaybackIdUserAgentsDefaultPolicyEnum.ALLOW);
+        map.put(DENY_VALUE, GetPlaybackIdUserAgentsDefaultPolicyEnum.DENY);
         return map;
     }
     
     
     public enum GetPlaybackIdUserAgentsDefaultPolicyEnum {
 
-        ALLOW("allow"),
-        DENY("deny"),;
+        ALLOW(ALLOW_VALUE),
+        DENY(DENY_VALUE),;
 
         private final String value;
 

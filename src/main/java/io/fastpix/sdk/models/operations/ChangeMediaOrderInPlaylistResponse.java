@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
-import java.lang.Override;
-import java.lang.String;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.DefaultError;
@@ -15,6 +13,9 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class ChangeMediaOrderInPlaylistResponse implements Response {
+
+    private static final String CONTENT_TYPE = "contentType";
+    private static final String RAW_RESPONSE = "rawResponse";
     /**
      * HTTP response content type for this operation
      */
@@ -110,7 +111,7 @@ public class ChangeMediaOrderInPlaylistResponse implements Response {
      * HTTP response content type for this operation
      */
     public ChangeMediaOrderInPlaylistResponse withContentType(@Nonnull String contentType) {
-        this.contentType = Utils.checkNotNull(contentType, "contentType");
+        this.contentType = Utils.checkNotNull(contentType, CONTENT_TYPE);
         return this;
     }
 
@@ -128,7 +129,7 @@ public class ChangeMediaOrderInPlaylistResponse implements Response {
      * Raw HTTP response; suitable for custom response parsing
      */
     public ChangeMediaOrderInPlaylistResponse withRawResponse(@Nonnull HttpResponse<InputStream> rawResponse) {
-        this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+        this.rawResponse = Utils.checkNotNull(rawResponse, RAW_RESPONSE);
         return this;
     }
 
@@ -179,15 +180,15 @@ public class ChangeMediaOrderInPlaylistResponse implements Response {
     @Override
     public String toString() {
         return Utils.toString(ChangeMediaOrderInPlaylistResponse.class,
-                "contentType", contentType,
+                CONTENT_TYPE, contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse,
+                RAW_RESPONSE, rawResponse,
                 "playlistByIdResponse", playlistByIdResponse,
                 "defaultError", defaultError);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String contentType;
 
@@ -207,7 +208,7 @@ public class ChangeMediaOrderInPlaylistResponse implements Response {
          * HTTP response content type for this operation
          */
         public Builder contentType(@Nonnull String contentType) {
-            this.contentType = Utils.checkNotNull(contentType, "contentType");
+            this.contentType = Utils.checkNotNull(contentType, CONTENT_TYPE);
             return this;
         }
 
@@ -223,7 +224,7 @@ public class ChangeMediaOrderInPlaylistResponse implements Response {
          * Raw HTTP response; suitable for custom response parsing
          */
         public Builder rawResponse(@Nonnull HttpResponse<InputStream> rawResponse) {
-            this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+            this.rawResponse = Utils.checkNotNull(rawResponse, RAW_RESPONSE);
             return this;
         }
 

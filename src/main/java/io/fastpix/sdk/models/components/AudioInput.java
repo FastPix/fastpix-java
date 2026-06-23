@@ -6,14 +6,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.List;
 import java.util.Optional;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class AudioInput {
+
+    private static final String SWAP_TRACK_URL = "swapTrackUrl";
+
     /**
      * Type of overlay (currently only supports "audio").
      */
@@ -23,7 +24,7 @@ public class AudioInput {
     /**
      * URL of the audio track to replace the existing audio in the video.
      */
-    @JsonProperty("swapTrackUrl")
+    @JsonProperty(SWAP_TRACK_URL)
     private String swapTrackUrl;
 
     /**
@@ -36,7 +37,7 @@ public class AudioInput {
     @JsonCreator
     public AudioInput(
             @JsonProperty("type") @Nonnull AudioInputType type,
-            @JsonProperty("swapTrackUrl") @Nonnull String swapTrackUrl,
+            @JsonProperty(SWAP_TRACK_URL) @Nonnull String swapTrackUrl,
             @JsonProperty("imposeTracks") @Nullable List<ImposeTrack> imposeTracks) {
         this.type = Optional.ofNullable(type)
             .orElseThrow(() -> new IllegalArgumentException("type cannot be null"));
@@ -90,7 +91,7 @@ public class AudioInput {
      * URL of the audio track to replace the existing audio in the video.
      */
     public AudioInput withSwapTrackUrl(@Nonnull String swapTrackUrl) {
-        this.swapTrackUrl = Utils.checkNotNull(swapTrackUrl, "swapTrackUrl");
+        this.swapTrackUrl = Utils.checkNotNull(swapTrackUrl, SWAP_TRACK_URL);
         return this;
     }
 
@@ -129,12 +130,12 @@ public class AudioInput {
     public String toString() {
         return Utils.toString(AudioInput.class,
                 "type", type,
-                "swapTrackUrl", swapTrackUrl,
+                SWAP_TRACK_URL, swapTrackUrl,
                 "imposeTracks", imposeTracks);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private AudioInputType type;
 
@@ -158,7 +159,7 @@ public class AudioInput {
          * URL of the audio track to replace the existing audio in the video.
          */
         public Builder swapTrackUrl(@Nonnull String swapTrackUrl) {
-            this.swapTrackUrl = Utils.checkNotNull(swapTrackUrl, "swapTrackUrl");
+            this.swapTrackUrl = Utils.checkNotNull(swapTrackUrl, SWAP_TRACK_URL);
             return this;
         }
 

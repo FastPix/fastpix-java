@@ -26,6 +26,9 @@ import org.reactivestreams.Subscription;
  * @param <ResponseT> the AsyncResponse type that contains the event stream
  * @param <ItemT> the type that events are deserialized into
  */
+// Descriptive multi-letter type-parameter names are kept intentionally for readability in this
+// reactive publisher; renaming to single letters would obscure the response and item type roles.
+@SuppressWarnings("java:S119")
 public class EventStream<ResponseT extends AsyncResponse, ItemT> implements Publisher<ItemT> {
 
     private static final FastpixLogger logger = FastpixLogger.getLogger(EventStream.class);
@@ -47,6 +50,9 @@ public class EventStream<ResponseT extends AsyncResponse, ItemT> implements Publ
          * @return the converted item, or null if this item should be skipped
          * @throws Exception if conversion fails
          */
+        // The broad throws is part of the public Protocol contract: implementations such as the JSONL
+        // parser surface checked deserialization failures, so narrowing it would change the API.
+        @SuppressWarnings("java:S112")
         ItemT processItem(ParsedT parsed, ObjectMapper objectMapper, TypeReference<ItemT> typeReference) throws Exception;
         
         /**
@@ -151,6 +157,10 @@ public class EventStream<ResponseT extends AsyncResponse, ItemT> implements Publ
             this.parser = ((Protocol<Object, ItemT>) protocol).createParser();
         }
 
+        // The complexity comes from the inline reactive wiring (response future to blob publisher to
+        // subscriber callbacks); the callbacks share the subscription state directly, so extracting them
+        // would change the established flow rather than simplify it.
+        @SuppressWarnings("java:S3776")
         public void start(CompletableFuture<HttpResponse<Blob>> httpResponseFuture) {
             // Wait for the CompletableFuture and then subscribe to the Blob
             httpResponseFuture.whenComplete((httpResponse, throwable) -> {

@@ -2,14 +2,15 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class CancelUploadRequest {
+
+    private static final String UPLOAD_ID_FIELD = "uploadId";
+
     /**
      * When uploading the media, FastPix assigns a universally unique identifier with a maximum length of
      * 255 characters.
@@ -42,7 +43,7 @@ public class CancelUploadRequest {
      * 255 characters.
      */
     public CancelUploadRequest withUploadId(@Nonnull String uploadId) {
-        this.uploadId = Utils.checkNotNull(uploadId, "uploadId");
+        this.uploadId = Utils.checkNotNull(uploadId, UPLOAD_ID_FIELD);
         return this;
     }
 
@@ -69,11 +70,11 @@ public class CancelUploadRequest {
     @Override
     public String toString() {
         return Utils.toString(CancelUploadRequest.class,
-                "uploadId", uploadId);
+                UPLOAD_ID_FIELD, uploadId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String uploadId;
 
@@ -86,7 +87,7 @@ public class CancelUploadRequest {
          * 255 characters.
          */
         public Builder uploadId(@Nonnull String uploadId) {
-            this.uploadId = Utils.checkNotNull(uploadId, "uploadId");
+            this.uploadId = Utils.checkNotNull(uploadId, UPLOAD_ID_FIELD);
             return this;
         }
 

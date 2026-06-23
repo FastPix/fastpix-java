@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,18 +9,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * GenerateTrackResponseType
+ *
+ * <p>The type of track generated ("subtitle").
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * GenerateTrackResponseType
- * 
- * <p>The type of track generated ("subtitle").
- */
 public class GenerateTrackResponseType {
 
-    public static final GenerateTrackResponseType SUBTITLE = new GenerateTrackResponseType("subtitle");
+    private static final String SUBTITLE_VALUE = "subtitle";
+
+    public static final GenerateTrackResponseType SUBTITLE = new GenerateTrackResponseType(SUBTITLE_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -48,7 +47,7 @@ public class GenerateTrackResponseType {
     @JsonCreator
     public static GenerateTrackResponseType of(String value) {
         synchronized (GenerateTrackResponseType.class) {
-            return values.computeIfAbsent(value, v -> new GenerateTrackResponseType(v));
+            return values.computeIfAbsent(value, GenerateTrackResponseType::new);
         }
     }
 
@@ -96,20 +95,20 @@ public class GenerateTrackResponseType {
 
     private static final Map<String, GenerateTrackResponseType> createValuesMap() {
         Map<String, GenerateTrackResponseType> map = new LinkedHashMap<>();
-        map.put("subtitle", SUBTITLE);
+        map.put(SUBTITLE_VALUE, SUBTITLE);
         return map;
     }
 
     private static final Map<String, GenerateTrackResponseTypeEnum> createEnumsMap() {
         Map<String, GenerateTrackResponseTypeEnum> map = new HashMap<>();
-        map.put("subtitle", GenerateTrackResponseTypeEnum.SUBTITLE);
+        map.put(SUBTITLE_VALUE, GenerateTrackResponseTypeEnum.SUBTITLE);
         return map;
     }
     
     
     public enum GenerateTrackResponseTypeEnum {
 
-        SUBTITLE("subtitle"),;
+        SUBTITLE(SUBTITLE_VALUE),;
 
         private final String value;
 

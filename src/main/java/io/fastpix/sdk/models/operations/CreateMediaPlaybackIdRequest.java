@@ -3,14 +3,15 @@ package io.fastpix.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class CreateMediaPlaybackIdRequest {
+
+    private static final String PROP_MEDIA_ID = "mediaId";
+
     /**
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
@@ -31,7 +32,7 @@ public class CreateMediaPlaybackIdRequest {
             .orElseThrow(() -> new IllegalArgumentException("mediaId cannot be null"));
         this.body = body;
     }
-    
+
     public CreateMediaPlaybackIdRequest(
             @Nonnull String mediaId) {
         this(mediaId, null);
@@ -60,7 +61,7 @@ public class CreateMediaPlaybackIdRequest {
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
     public CreateMediaPlaybackIdRequest withMediaId(@Nonnull String mediaId) {
-        this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+        this.mediaId = Utils.checkNotNull(mediaId, PROP_MEDIA_ID);
         return this;
     }
 
@@ -83,26 +84,26 @@ public class CreateMediaPlaybackIdRequest {
             return false;
         }
         CreateMediaPlaybackIdRequest other = (CreateMediaPlaybackIdRequest) o;
-        return 
+        return
             Utils.enhancedDeepEquals(this.mediaId, other.mediaId) &&
             Utils.enhancedDeepEquals(this.body, other.body);
     }
-    
+
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             mediaId, body);
     }
-    
+
     @Override
     public String toString() {
         return Utils.toString(CreateMediaPlaybackIdRequest.class,
-                "mediaId", mediaId,
+                PROP_MEDIA_ID, mediaId,
                 "body", body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String mediaId;
 
@@ -116,7 +117,7 @@ public class CreateMediaPlaybackIdRequest {
          * The unique identifier assigned to the media when created. The value must be a valid UUID.
          */
         public Builder mediaId(@Nonnull String mediaId) {
-            this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+            this.mediaId = Utils.checkNotNull(mediaId, PROP_MEDIA_ID);
             return this;
         }
 

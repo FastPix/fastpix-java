@@ -37,11 +37,7 @@ public class HTTPRequest {
     }
     
     public HTTPRequest addHeader(String key, String value) {
-        List<String> headerValues = headers.get(key);
-        if (headerValues == null) {
-            headerValues = new ArrayList<>();
-            headers.put(key, headerValues);
-        }
+        List<String> headerValues = headers.computeIfAbsent(key, k -> new ArrayList<>());
         if (!headerValues.contains(value)) {
             headerValues.add(value);
         }
@@ -64,10 +60,13 @@ public class HTTPRequest {
     }
     
     public HTTPRequest addQueryParams(Collection<QueryParameter> params) {
-        params.forEach(p -> addQueryParam(p));
+        params.forEach(this::addQueryParam);
         return this;
     }
     
+    // A malformed URI is wrapped as an unchecked exception to keep this builder free of a checked
+    // signature; the generic-exception finding is suppressed to preserve the existing thrown type.
+    @SuppressWarnings("java:S112")
     public HttpRequest build() {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder();
 

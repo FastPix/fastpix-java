@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Map;
 import java.util.Optional;
 import io.fastpix.sdk.utils.Utils;
@@ -17,11 +15,16 @@ import io.fastpix.sdk.utils.Utils;
  * <p>Generates subtitle files for audio/video files.
  */
 public class Subtitles {
+
+    private static final String PROP_LANGUAGE_NAME = "languageName";
+    private static final String PROP_METADATA = "metadata";
+    private static final String PROP_LANGUAGE_CODE = "languageCode";
+
     /**
      * Name of the language in which the subtitles will be generated.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("languageName")
+    @JsonProperty(PROP_LANGUAGE_NAME)
     private String languageName;
 
     /**
@@ -30,7 +33,7 @@ public class Subtitles {
      * can have maximum of 255 characters and upto 10 entries are allowed.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("metadata")
+    @JsonProperty(PROP_METADATA)
     private Map<String, String> metadata;
 
     /**
@@ -39,14 +42,14 @@ public class Subtitles {
      * ensure compatibility. (for text only).
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("languageCode")
+    @JsonProperty(PROP_LANGUAGE_CODE)
     private CreateMediaRequestLanguageCode languageCode;
 
     @JsonCreator
     public Subtitles(
-            @JsonProperty("languageName") @Nullable String languageName,
-            @JsonProperty("metadata") @Nullable Map<String, String> metadata,
-            @JsonProperty("languageCode") @Nullable CreateMediaRequestLanguageCode languageCode) {
+            @JsonProperty(PROP_LANGUAGE_NAME) @Nullable String languageName,
+            @JsonProperty(PROP_METADATA) @Nullable Map<String, String> metadata,
+            @JsonProperty(PROP_LANGUAGE_CODE) @Nullable CreateMediaRequestLanguageCode languageCode) {
         this.languageName = languageName;
         this.metadata = metadata;
         this.languageCode = languageCode;
@@ -141,13 +144,13 @@ public class Subtitles {
     @Override
     public String toString() {
         return Utils.toString(Subtitles.class,
-                "languageName", languageName,
-                "metadata", metadata,
-                "languageCode", languageCode);
+                PROP_LANGUAGE_NAME, languageName,
+                PROP_METADATA, metadata,
+                PROP_LANGUAGE_CODE, languageCode);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String languageName;
 

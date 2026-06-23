@@ -3,33 +3,35 @@ package io.fastpix.sdk.models.components;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class CreateLiveStreamRequest {
+
+    private static final String PLAYBACK_SETTINGS = "playbackSettings";
+    private static final String INPUT_MEDIA_SETTINGS = "inputMediaSettings";
+
     /**
      * Displays the result of the playback settings.
      */
-    @JsonProperty("playbackSettings")
+    @JsonProperty(PLAYBACK_SETTINGS)
     private PlaybackSettings playbackSettings;
 
     /**
      * Contains configuration details for input media settings.
      */
-    @JsonProperty("inputMediaSettings")
+    @JsonProperty(INPUT_MEDIA_SETTINGS)
     private InputMediaSettings inputMediaSettings;
 
     @JsonCreator
     public CreateLiveStreamRequest(
-            @JsonProperty("playbackSettings") @Nonnull PlaybackSettings playbackSettings,
-            @JsonProperty("inputMediaSettings") @Nonnull InputMediaSettings inputMediaSettings) {
+            @JsonProperty(PLAYBACK_SETTINGS) @Nonnull PlaybackSettings playbackSettings,
+            @JsonProperty(INPUT_MEDIA_SETTINGS) @Nonnull InputMediaSettings inputMediaSettings) {
         this.playbackSettings = Optional.ofNullable(playbackSettings)
-            .orElseThrow(() -> new IllegalArgumentException("playbackSettings cannot be null"));
+            .orElseThrow(() -> new IllegalArgumentException(PLAYBACK_SETTINGS + " cannot be null"));
         this.inputMediaSettings = Optional.ofNullable(inputMediaSettings)
-            .orElseThrow(() -> new IllegalArgumentException("inputMediaSettings cannot be null"));
+            .orElseThrow(() -> new IllegalArgumentException(INPUT_MEDIA_SETTINGS + " cannot be null"));
     }
 
     /**
@@ -55,7 +57,7 @@ public class CreateLiveStreamRequest {
      * Displays the result of the playback settings.
      */
     public CreateLiveStreamRequest withPlaybackSettings(@Nonnull PlaybackSettings playbackSettings) {
-        this.playbackSettings = Utils.checkNotNull(playbackSettings, "playbackSettings");
+        this.playbackSettings = Utils.checkNotNull(playbackSettings, PLAYBACK_SETTINGS);
         return this;
     }
 
@@ -64,7 +66,7 @@ public class CreateLiveStreamRequest {
      * Contains configuration details for input media settings.
      */
     public CreateLiveStreamRequest withInputMediaSettings(@Nonnull InputMediaSettings inputMediaSettings) {
-        this.inputMediaSettings = Utils.checkNotNull(inputMediaSettings, "inputMediaSettings");
+        this.inputMediaSettings = Utils.checkNotNull(inputMediaSettings, INPUT_MEDIA_SETTINGS);
         return this;
     }
 
@@ -92,12 +94,12 @@ public class CreateLiveStreamRequest {
     @Override
     public String toString() {
         return Utils.toString(CreateLiveStreamRequest.class,
-                "playbackSettings", playbackSettings,
-                "inputMediaSettings", inputMediaSettings);
+                PLAYBACK_SETTINGS, playbackSettings,
+                INPUT_MEDIA_SETTINGS, inputMediaSettings);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private PlaybackSettings playbackSettings;
 
@@ -111,7 +113,7 @@ public class CreateLiveStreamRequest {
          * Displays the result of the playback settings.
          */
         public Builder playbackSettings(@Nonnull PlaybackSettings playbackSettings) {
-            this.playbackSettings = Utils.checkNotNull(playbackSettings, "playbackSettings");
+            this.playbackSettings = Utils.checkNotNull(playbackSettings, PLAYBACK_SETTINGS);
             return this;
         }
 
@@ -119,7 +121,7 @@ public class CreateLiveStreamRequest {
          * Contains configuration details for input media settings.
          */
         public Builder inputMediaSettings(@Nonnull InputMediaSettings inputMediaSettings) {
-            this.inputMediaSettings = Utils.checkNotNull(inputMediaSettings, "inputMediaSettings");
+            this.inputMediaSettings = Utils.checkNotNull(inputMediaSettings, INPUT_MEDIA_SETTINGS);
             return this;
         }
 

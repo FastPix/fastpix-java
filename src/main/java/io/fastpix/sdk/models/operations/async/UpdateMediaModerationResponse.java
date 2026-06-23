@@ -3,9 +3,6 @@ package io.fastpix.sdk.models.operations.async;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.io.InputStream;
-import java.lang.Override;
-import java.lang.String;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.DefaultError;
@@ -16,6 +13,9 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class UpdateMediaModerationResponse implements AsyncResponse {
+
+    private static final String CONTENT_TYPE = "contentType";
+    private static final String RAW_RESPONSE = "rawResponse";
     /**
      * HTTP response content type for this operation
      */
@@ -111,7 +111,7 @@ public class UpdateMediaModerationResponse implements AsyncResponse {
      * HTTP response content type for this operation
      */
     public UpdateMediaModerationResponse withContentType(@Nonnull String contentType) {
-        this.contentType = Utils.checkNotNull(contentType, "contentType");
+        this.contentType = Utils.checkNotNull(contentType, CONTENT_TYPE);
         return this;
     }
 
@@ -129,7 +129,7 @@ public class UpdateMediaModerationResponse implements AsyncResponse {
      * Raw HTTP response; suitable for custom response parsing
      */
     public UpdateMediaModerationResponse withRawResponse(@Nonnull HttpResponse<Blob> rawResponse) {
-        this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+        this.rawResponse = Utils.checkNotNull(rawResponse, RAW_RESPONSE);
         return this;
     }
 
@@ -180,15 +180,15 @@ public class UpdateMediaModerationResponse implements AsyncResponse {
     @Override
     public String toString() {
         return Utils.toString(UpdateMediaModerationResponse.class,
-                "contentType", contentType,
+                CONTENT_TYPE, contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse,
+                RAW_RESPONSE, rawResponse,
                 "object", object,
                 "defaultError", defaultError);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String contentType;
 
@@ -208,7 +208,7 @@ public class UpdateMediaModerationResponse implements AsyncResponse {
          * HTTP response content type for this operation
          */
         public Builder contentType(@Nonnull String contentType) {
-            this.contentType = Utils.checkNotNull(contentType, "contentType");
+            this.contentType = Utils.checkNotNull(contentType, CONTENT_TYPE);
             return this;
         }
 
@@ -224,7 +224,7 @@ public class UpdateMediaModerationResponse implements AsyncResponse {
          * Raw HTTP response; suitable for custom response parsing
          */
         public Builder rawResponse(@Nonnull HttpResponse<Blob> rawResponse) {
-            this.rawResponse = Utils.checkNotNull(rawResponse, "rawResponse");
+            this.rawResponse = Utils.checkNotNull(rawResponse, RAW_RESPONSE);
             return this;
         }
 

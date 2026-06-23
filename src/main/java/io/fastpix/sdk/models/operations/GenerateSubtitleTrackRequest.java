@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.TrackSubtitlesGenerateRequest;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -11,6 +9,10 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class GenerateSubtitleTrackRequest {
+
+    private static final String MEDIA_ID = "mediaId";
+    private static final String TRACK_ID = "trackId";
+    private static final String BODY_NAME = "body";
     /**
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
@@ -69,7 +71,7 @@ public class GenerateSubtitleTrackRequest {
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
     public GenerateSubtitleTrackRequest withMediaId(@Nonnull String mediaId) {
-        this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+        this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
         return this;
     }
 
@@ -79,13 +81,13 @@ public class GenerateSubtitleTrackRequest {
      * generated.
      */
     public GenerateSubtitleTrackRequest withTrackId(@Nonnull String trackId) {
-        this.trackId = Utils.checkNotNull(trackId, "trackId");
+        this.trackId = Utils.checkNotNull(trackId, TRACK_ID);
         return this;
     }
 
 
     public GenerateSubtitleTrackRequest withBody(@Nonnull TrackSubtitlesGenerateRequest body) {
-        this.body = Utils.checkNotNull(body, "body");
+        this.body = Utils.checkNotNull(body, BODY_NAME);
         return this;
     }
 
@@ -114,13 +116,13 @@ public class GenerateSubtitleTrackRequest {
     @Override
     public String toString() {
         return Utils.toString(GenerateSubtitleTrackRequest.class,
-                "mediaId", mediaId,
-                "trackId", trackId,
-                "body", body);
+                MEDIA_ID, mediaId,
+                TRACK_ID, trackId,
+                BODY_NAME, body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String mediaId;
 
@@ -136,7 +138,7 @@ public class GenerateSubtitleTrackRequest {
          * The unique identifier assigned to the media when created. The value must be a valid UUID.
          */
         public Builder mediaId(@Nonnull String mediaId) {
-            this.mediaId = Utils.checkNotNull(mediaId, "mediaId");
+            this.mediaId = Utils.checkNotNull(mediaId, MEDIA_ID);
             return this;
         }
 
@@ -145,12 +147,12 @@ public class GenerateSubtitleTrackRequest {
          * generated.
          */
         public Builder trackId(@Nonnull String trackId) {
-            this.trackId = Utils.checkNotNull(trackId, "trackId");
+            this.trackId = Utils.checkNotNull(trackId, TRACK_ID);
             return this;
         }
 
         public Builder body(@Nonnull TrackSubtitlesGenerateRequest body) {
-            this.body = Utils.checkNotNull(body, "body");
+            this.body = Utils.checkNotNull(body, BODY_NAME);
             return this;
         }
 

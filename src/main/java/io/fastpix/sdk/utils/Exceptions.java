@@ -5,6 +5,10 @@ import java.util.function.Supplier;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
+// This is the SDK generic-exception bridge: it deliberately wraps arbitrary causes as a
+// RuntimeException and its Checked functional interfaces declare throws Exception by design, so the
+// generic-exception findings are suppressed rather than narrowing these intentionally broad types.
+@SuppressWarnings("java:S112")
 public class Exceptions {
     public static Exception coerceException(Throwable throwable) {
         if (throwable instanceof Exception) {

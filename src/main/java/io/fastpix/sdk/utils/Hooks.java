@@ -35,16 +35,19 @@ public class Hooks implements BeforeRequest, AfterSuccess, AfterError, SdkInit {
 
     private static final FastpixLogger logger = FastpixLogger.getLogger(Hooks.class);
 
+    private static final String CONTEXT = "context";
+
     // we use CopyOnWriteArrayList for thread safety
     private final List<BeforeRequest> beforeRequestHooks = new CopyOnWriteArrayList<>();
     private final List<AfterSuccess> afterSuccessHooks = new CopyOnWriteArrayList<>();
     private final List<AfterError> afterErrorHooks = new CopyOnWriteArrayList<>();
-    private final List<SdkInit> SdkInitHooks = new CopyOnWriteArrayList<>();
+    private final List<SdkInit> sdkInitHooks = new CopyOnWriteArrayList<>();
     
     /**
      * Constructor.
      */
     public Hooks() {
+        // No initialization required: the hook lists are initialized at their field declarations.
     }
 
     /**
@@ -103,19 +106,19 @@ public class Hooks implements BeforeRequest, AfterSuccess, AfterError, SdkInit {
      * Registers a {@link SdkInit} hook to be applied in order of registration
      * (multiple can be registered).
      * 
-     * @param SdkInit hook to be registered
+     * @param sdkInit hook to be registered
      * @return this
      */
-    public Hooks registerSdkInit(SdkInit SdkInit) {
-        Utils.checkNotNull(SdkInit, "SdkInit");
-        this.SdkInitHooks.add(SdkInit);
-        logger.debug("Registered SdkInit hook: {} (total: {})", SdkInit.getClass().getSimpleName(), SdkInitHooks.size());
+    public Hooks registerSdkInit(SdkInit sdkInit) {
+        Utils.checkNotNull(sdkInit, "sdkInit");
+        this.sdkInitHooks.add(sdkInit);
+        logger.debug("Registered SdkInit hook: {} (total: {})", sdkInit.getClass().getSimpleName(), sdkInitHooks.size());
         return this;
     }
     
     @Override
     public HttpRequest beforeRequest(BeforeRequestContext context, HttpRequest request) throws Exception {
-        Utils.checkNotNull(context, "context");
+        Utils.checkNotNull(context, CONTEXT);
         Utils.checkNotNull(request, "request");
         if (logger.isTraceEnabled() && !beforeRequestHooks.isEmpty()) {
             logger.trace("Executing {} beforeRequest hook(s) for operation: {}", beforeRequestHooks.size(), context.operationId());
@@ -129,7 +132,7 @@ public class Hooks implements BeforeRequest, AfterSuccess, AfterError, SdkInit {
     @Override
     public HttpResponse<InputStream> afterSuccess(AfterSuccessContext context, HttpResponse<InputStream> response)
             throws Exception {
-        Utils.checkNotNull(context, "context");
+        Utils.checkNotNull(context, CONTEXT);
         Utils.checkNotNull(response, "response");
 
         if (logger.isTraceEnabled() && !afterSuccessHooks.isEmpty()) {
@@ -149,7 +152,7 @@ public class Hooks implements BeforeRequest, AfterSuccess, AfterError, SdkInit {
             AfterErrorContext context,
             Optional<HttpResponse<InputStream>> response,
             Optional<Exception> error) throws Exception {
-        Utils.checkNotNull(context, "context");
+        Utils.checkNotNull(context, CONTEXT);
         Utils.checkNotNull(response, "response");
         Utils.checkNotNull(error, "error");
         Utils.checkArgument(
@@ -189,10 +192,10 @@ public class Hooks implements BeforeRequest, AfterSuccess, AfterError, SdkInit {
 
     @Override
     public SDKConfiguration sdkInit(SDKConfiguration config) {
-        if (logger.isDebugEnabled() && !SdkInitHooks.isEmpty()) {
-            logger.debug("Executing {} sdkInit hook(s)", SdkInitHooks.size());
+        if (logger.isDebugEnabled() && !sdkInitHooks.isEmpty()) {
+            logger.debug("Executing {} sdkInit hook(s)", sdkInitHooks.size());
         }
-        for (SdkInit hook : SdkInitHooks) {
+        for (SdkInit hook : sdkInitHooks) {
             config = hook.sdkInit(config);
             if (config == null) {
                 throw new IllegalStateException("sdkInit cannot return null");

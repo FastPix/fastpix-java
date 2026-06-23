@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,25 +9,29 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
- * without runtime errors. Instances are immutable singletons with reference equality.
- * Use {@code asEnum()} for switch expressions.
- */
-/**
  * UpdateMediaStatus
- * 
+ *
  * <p>Determines the media's status, which can be one of the possible values.
  */
 public class UpdateMediaStatus {
 
-    public static final UpdateMediaStatus CREATED = new UpdateMediaStatus("Created");
-    public static final UpdateMediaStatus DOWNLOADING = new UpdateMediaStatus("Downloading");
-    public static final UpdateMediaStatus DOWNLOADED = new UpdateMediaStatus("Downloaded");
-    public static final UpdateMediaStatus VALIDATING = new UpdateMediaStatus("Validating");
-    public static final UpdateMediaStatus IN_QUEUE = new UpdateMediaStatus("In Queue");
-    public static final UpdateMediaStatus PROCESSING = new UpdateMediaStatus("Processing");
-    public static final UpdateMediaStatus READY = new UpdateMediaStatus("Ready");
-    public static final UpdateMediaStatus FAILED = new UpdateMediaStatus("Failed");
+    private static final String VALUE_CREATED = "Created";
+    private static final String VALUE_DOWNLOADING = "Downloading";
+    private static final String VALUE_DOWNLOADED = "Downloaded";
+    private static final String VALUE_VALIDATING = "Validating";
+    private static final String VALUE_IN_QUEUE = "In Queue";
+    private static final String VALUE_PROCESSING = "Processing";
+    private static final String VALUE_READY = "Ready";
+    private static final String VALUE_FAILED = "Failed";
+
+    public static final UpdateMediaStatus CREATED = new UpdateMediaStatus(VALUE_CREATED);
+    public static final UpdateMediaStatus DOWNLOADING = new UpdateMediaStatus(VALUE_DOWNLOADING);
+    public static final UpdateMediaStatus DOWNLOADED = new UpdateMediaStatus(VALUE_DOWNLOADED);
+    public static final UpdateMediaStatus VALIDATING = new UpdateMediaStatus(VALUE_VALIDATING);
+    public static final UpdateMediaStatus IN_QUEUE = new UpdateMediaStatus(VALUE_IN_QUEUE);
+    public static final UpdateMediaStatus PROCESSING = new UpdateMediaStatus(VALUE_PROCESSING);
+    public static final UpdateMediaStatus READY = new UpdateMediaStatus(VALUE_READY);
+    public static final UpdateMediaStatus FAILED = new UpdateMediaStatus(VALUE_FAILED);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -46,16 +48,16 @@ public class UpdateMediaStatus {
     }
 
     /**
-     * Returns a UpdateMediaStatus with the given value. For a specific value the 
-     * returned object will always be a singleton so reference equality 
+     * Returns a UpdateMediaStatus with the given value. For a specific value the
+     * returned object will always be a singleton so reference equality
      * is satisfied when the values are the same.
-     * 
+     *
      * @param value value to be wrapped as UpdateMediaStatus
-     */ 
+     */
     @JsonCreator
     public static UpdateMediaStatus of(String value) {
         synchronized (UpdateMediaStatus.class) {
-            return values.computeIfAbsent(value, v -> new UpdateMediaStatus(v));
+            return values.computeIfAbsent(value, UpdateMediaStatus::new);
         }
     }
 
@@ -103,41 +105,41 @@ public class UpdateMediaStatus {
 
     private static final Map<String, UpdateMediaStatus> createValuesMap() {
         Map<String, UpdateMediaStatus> map = new LinkedHashMap<>();
-        map.put("Created", CREATED);
-        map.put("Downloading", DOWNLOADING);
-        map.put("Downloaded", DOWNLOADED);
-        map.put("Validating", VALIDATING);
-        map.put("In Queue", IN_QUEUE);
-        map.put("Processing", PROCESSING);
-        map.put("Ready", READY);
-        map.put("Failed", FAILED);
+        map.put(VALUE_CREATED, CREATED);
+        map.put(VALUE_DOWNLOADING, DOWNLOADING);
+        map.put(VALUE_DOWNLOADED, DOWNLOADED);
+        map.put(VALUE_VALIDATING, VALIDATING);
+        map.put(VALUE_IN_QUEUE, IN_QUEUE);
+        map.put(VALUE_PROCESSING, PROCESSING);
+        map.put(VALUE_READY, READY);
+        map.put(VALUE_FAILED, FAILED);
         return map;
     }
 
     private static final Map<String, UpdateMediaStatusEnum> createEnumsMap() {
         Map<String, UpdateMediaStatusEnum> map = new HashMap<>();
-        map.put("Created", UpdateMediaStatusEnum.CREATED);
-        map.put("Downloading", UpdateMediaStatusEnum.DOWNLOADING);
-        map.put("Downloaded", UpdateMediaStatusEnum.DOWNLOADED);
-        map.put("Validating", UpdateMediaStatusEnum.VALIDATING);
-        map.put("In Queue", UpdateMediaStatusEnum.IN_QUEUE);
-        map.put("Processing", UpdateMediaStatusEnum.PROCESSING);
-        map.put("Ready", UpdateMediaStatusEnum.READY);
-        map.put("Failed", UpdateMediaStatusEnum.FAILED);
+        map.put(VALUE_CREATED, UpdateMediaStatusEnum.CREATED);
+        map.put(VALUE_DOWNLOADING, UpdateMediaStatusEnum.DOWNLOADING);
+        map.put(VALUE_DOWNLOADED, UpdateMediaStatusEnum.DOWNLOADED);
+        map.put(VALUE_VALIDATING, UpdateMediaStatusEnum.VALIDATING);
+        map.put(VALUE_IN_QUEUE, UpdateMediaStatusEnum.IN_QUEUE);
+        map.put(VALUE_PROCESSING, UpdateMediaStatusEnum.PROCESSING);
+        map.put(VALUE_READY, UpdateMediaStatusEnum.READY);
+        map.put(VALUE_FAILED, UpdateMediaStatusEnum.FAILED);
         return map;
     }
-    
-    
+
+
     public enum UpdateMediaStatusEnum {
 
-        CREATED("Created"),
-        DOWNLOADING("Downloading"),
-        DOWNLOADED("Downloaded"),
-        VALIDATING("Validating"),
-        IN_QUEUE("In Queue"),
-        PROCESSING("Processing"),
-        READY("Ready"),
-        FAILED("Failed"),;
+        CREATED(VALUE_CREATED),
+        DOWNLOADING(VALUE_DOWNLOADING),
+        DOWNLOADED(VALUE_DOWNLOADED),
+        VALIDATING(VALUE_VALIDATING),
+        IN_QUEUE(VALUE_IN_QUEUE),
+        PROCESSING(VALUE_PROCESSING),
+        READY(VALUE_READY),
+        FAILED(VALUE_FAILED),;
 
         private final String value;
 
@@ -150,4 +152,3 @@ public class UpdateMediaStatus {
         }
     }
 }
-

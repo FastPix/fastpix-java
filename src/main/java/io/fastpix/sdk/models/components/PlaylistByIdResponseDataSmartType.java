@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,18 +9,15 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
- * without runtime errors. Instances are immutable singletons with reference equality.
- * Use {@code asEnum()} for switch expressions.
- */
-/**
  * PlaylistByIdResponseDataSmartType
- * 
+ *
  * <p>type of the playlist, when it was created
  */
 public class PlaylistByIdResponseDataSmartType {
 
-    public static final PlaylistByIdResponseDataSmartType SMART = new PlaylistByIdResponseDataSmartType("smart");
+    private static final String VALUE_SMART = "smart";
+
+    public static final PlaylistByIdResponseDataSmartType SMART = new PlaylistByIdResponseDataSmartType(VALUE_SMART);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -39,16 +34,16 @@ public class PlaylistByIdResponseDataSmartType {
     }
 
     /**
-     * Returns a PlaylistByIdResponseDataSmartType with the given value. For a specific value the 
-     * returned object will always be a singleton so reference equality 
+     * Returns a PlaylistByIdResponseDataSmartType with the given value. For a specific value the
+     * returned object will always be a singleton so reference equality
      * is satisfied when the values are the same.
-     * 
+     *
      * @param value value to be wrapped as PlaylistByIdResponseDataSmartType
-     */ 
+     */
     @JsonCreator
     public static PlaylistByIdResponseDataSmartType of(String value) {
         synchronized (PlaylistByIdResponseDataSmartType.class) {
-            return values.computeIfAbsent(value, v -> new PlaylistByIdResponseDataSmartType(v));
+            return values.computeIfAbsent(value, PlaylistByIdResponseDataSmartType::new);
         }
     }
 
@@ -96,20 +91,20 @@ public class PlaylistByIdResponseDataSmartType {
 
     private static final Map<String, PlaylistByIdResponseDataSmartType> createValuesMap() {
         Map<String, PlaylistByIdResponseDataSmartType> map = new LinkedHashMap<>();
-        map.put("smart", SMART);
+        map.put(VALUE_SMART, SMART);
         return map;
     }
 
     private static final Map<String, PlaylistByIdResponseDataSmartTypeEnum> createEnumsMap() {
         Map<String, PlaylistByIdResponseDataSmartTypeEnum> map = new HashMap<>();
-        map.put("smart", PlaylistByIdResponseDataSmartTypeEnum.SMART);
+        map.put(VALUE_SMART, PlaylistByIdResponseDataSmartTypeEnum.SMART);
         return map;
     }
-    
-    
+
+
     public enum PlaylistByIdResponseDataSmartTypeEnum {
 
-        SMART("smart"),;
+        SMART(VALUE_SMART),;
 
         private final String value;
 
@@ -122,4 +117,3 @@ public class PlaylistByIdResponseDataSmartType {
         }
     }
 }
-

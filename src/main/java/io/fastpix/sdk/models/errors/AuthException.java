@@ -19,7 +19,7 @@ public class AuthException extends FastpixException {
      *
      * @deprecated Use {@link #code()} instead.
      */
-    @Deprecated
+    @Deprecated(since = "1.0.2")
     public Optional<Integer> statusCode() {
         return Optional.of(super.code());
     }

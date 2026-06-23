@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,25 +9,33 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * GetMediaResponseStatus
+ *
+ * <p>Determines the media's status, which can be one of the possible values.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * GetMediaResponseStatus
- * 
- * <p>Determines the media's status, which can be one of the possible values.
- */
 public class GetMediaResponseStatus {
 
-    public static final GetMediaResponseStatus CREATED = new GetMediaResponseStatus("Created");
-    public static final GetMediaResponseStatus DOWNLOADING = new GetMediaResponseStatus("Downloading");
-    public static final GetMediaResponseStatus DOWNLOADED = new GetMediaResponseStatus("Downloaded");
-    public static final GetMediaResponseStatus VALIDATING = new GetMediaResponseStatus("Validating");
-    public static final GetMediaResponseStatus IN_QUEUE = new GetMediaResponseStatus("In Queue");
-    public static final GetMediaResponseStatus PROCESSING = new GetMediaResponseStatus("Processing");
-    public static final GetMediaResponseStatus READY = new GetMediaResponseStatus("Ready");
-    public static final GetMediaResponseStatus FAILED = new GetMediaResponseStatus("Failed");
+    private static final String CREATED_VALUE = "Created";
+    private static final String DOWNLOADING_VALUE = "Downloading";
+    private static final String DOWNLOADED_VALUE = "Downloaded";
+    private static final String VALIDATING_VALUE = "Validating";
+    private static final String IN_QUEUE_VALUE = "In Queue";
+    private static final String PROCESSING_VALUE = "Processing";
+    private static final String READY_VALUE = "Ready";
+    private static final String FAILED_VALUE = "Failed";
+
+    public static final GetMediaResponseStatus CREATED = new GetMediaResponseStatus(CREATED_VALUE);
+    public static final GetMediaResponseStatus DOWNLOADING = new GetMediaResponseStatus(DOWNLOADING_VALUE);
+    public static final GetMediaResponseStatus DOWNLOADED = new GetMediaResponseStatus(DOWNLOADED_VALUE);
+    public static final GetMediaResponseStatus VALIDATING = new GetMediaResponseStatus(VALIDATING_VALUE);
+    public static final GetMediaResponseStatus IN_QUEUE = new GetMediaResponseStatus(IN_QUEUE_VALUE);
+    public static final GetMediaResponseStatus PROCESSING = new GetMediaResponseStatus(PROCESSING_VALUE);
+    public static final GetMediaResponseStatus READY = new GetMediaResponseStatus(READY_VALUE);
+    public static final GetMediaResponseStatus FAILED = new GetMediaResponseStatus(FAILED_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -55,7 +61,7 @@ public class GetMediaResponseStatus {
     @JsonCreator
     public static GetMediaResponseStatus of(String value) {
         synchronized (GetMediaResponseStatus.class) {
-            return values.computeIfAbsent(value, v -> new GetMediaResponseStatus(v));
+            return values.computeIfAbsent(value, GetMediaResponseStatus::new);
         }
     }
 
@@ -103,41 +109,41 @@ public class GetMediaResponseStatus {
 
     private static final Map<String, GetMediaResponseStatus> createValuesMap() {
         Map<String, GetMediaResponseStatus> map = new LinkedHashMap<>();
-        map.put("Created", CREATED);
-        map.put("Downloading", DOWNLOADING);
-        map.put("Downloaded", DOWNLOADED);
-        map.put("Validating", VALIDATING);
-        map.put("In Queue", IN_QUEUE);
-        map.put("Processing", PROCESSING);
-        map.put("Ready", READY);
-        map.put("Failed", FAILED);
+        map.put(CREATED_VALUE, CREATED);
+        map.put(DOWNLOADING_VALUE, DOWNLOADING);
+        map.put(DOWNLOADED_VALUE, DOWNLOADED);
+        map.put(VALIDATING_VALUE, VALIDATING);
+        map.put(IN_QUEUE_VALUE, IN_QUEUE);
+        map.put(PROCESSING_VALUE, PROCESSING);
+        map.put(READY_VALUE, READY);
+        map.put(FAILED_VALUE, FAILED);
         return map;
     }
 
     private static final Map<String, GetMediaResponseStatusEnum> createEnumsMap() {
         Map<String, GetMediaResponseStatusEnum> map = new HashMap<>();
-        map.put("Created", GetMediaResponseStatusEnum.CREATED);
-        map.put("Downloading", GetMediaResponseStatusEnum.DOWNLOADING);
-        map.put("Downloaded", GetMediaResponseStatusEnum.DOWNLOADED);
-        map.put("Validating", GetMediaResponseStatusEnum.VALIDATING);
-        map.put("In Queue", GetMediaResponseStatusEnum.IN_QUEUE);
-        map.put("Processing", GetMediaResponseStatusEnum.PROCESSING);
-        map.put("Ready", GetMediaResponseStatusEnum.READY);
-        map.put("Failed", GetMediaResponseStatusEnum.FAILED);
+        map.put(CREATED_VALUE, GetMediaResponseStatusEnum.CREATED);
+        map.put(DOWNLOADING_VALUE, GetMediaResponseStatusEnum.DOWNLOADING);
+        map.put(DOWNLOADED_VALUE, GetMediaResponseStatusEnum.DOWNLOADED);
+        map.put(VALIDATING_VALUE, GetMediaResponseStatusEnum.VALIDATING);
+        map.put(IN_QUEUE_VALUE, GetMediaResponseStatusEnum.IN_QUEUE);
+        map.put(PROCESSING_VALUE, GetMediaResponseStatusEnum.PROCESSING);
+        map.put(READY_VALUE, GetMediaResponseStatusEnum.READY);
+        map.put(FAILED_VALUE, GetMediaResponseStatusEnum.FAILED);
         return map;
     }
     
     
     public enum GetMediaResponseStatusEnum {
 
-        CREATED("Created"),
-        DOWNLOADING("Downloading"),
-        DOWNLOADED("Downloaded"),
-        VALIDATING("Validating"),
-        IN_QUEUE("In Queue"),
-        PROCESSING("Processing"),
-        READY("Ready"),
-        FAILED("Failed"),;
+        CREATED(CREATED_VALUE),
+        DOWNLOADING(DOWNLOADING_VALUE),
+        DOWNLOADED(DOWNLOADED_VALUE),
+        VALIDATING(VALIDATING_VALUE),
+        IN_QUEUE(IN_QUEUE_VALUE),
+        PROCESSING(PROCESSING_VALUE),
+        READY(READY_VALUE),
+        FAILED(FAILED_VALUE),;
 
         private final String value;
 

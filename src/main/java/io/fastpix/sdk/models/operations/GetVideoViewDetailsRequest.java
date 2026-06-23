@@ -2,14 +2,14 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class GetVideoViewDetailsRequest {
+
+    private static final String VIEW_ID = "viewId";
     /**
      * Pass View Id
      */
@@ -39,7 +39,7 @@ public class GetVideoViewDetailsRequest {
      * Pass View Id
      */
     public GetVideoViewDetailsRequest withViewId(@Nonnull String viewId) {
-        this.viewId = Utils.checkNotNull(viewId, "viewId");
+        this.viewId = Utils.checkNotNull(viewId, VIEW_ID);
         return this;
     }
 
@@ -66,11 +66,11 @@ public class GetVideoViewDetailsRequest {
     @Override
     public String toString() {
         return Utils.toString(GetVideoViewDetailsRequest.class,
-                "viewId", viewId);
+                VIEW_ID, viewId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String viewId;
 
@@ -82,7 +82,7 @@ public class GetVideoViewDetailsRequest {
          * Pass View Id
          */
         public Builder viewId(@Nonnull String viewId) {
-            this.viewId = Utils.checkNotNull(viewId, "viewId");
+            this.viewId = Utils.checkNotNull(viewId, VIEW_ID);
             return this;
         }
 

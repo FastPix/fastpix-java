@@ -8,9 +8,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
-import java.lang.Exception;
-import java.lang.String;
-import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
@@ -42,9 +39,24 @@ import io.fastpix.sdk.utils.RetryConfig;
 import io.fastpix.sdk.utils.Utils;
 
 
-public class ListFilterValuesForDimension {
+// Holder for the generated Sync/Async operation classes. The leading-underscore _headers
+// field/parameter and the securitySource field/accessor sharing a name are intentional
+// generated conventions; renaming would be inconsistent across all operation classes.
+@SuppressWarnings({"java:S116", "java:S117", "java:S1845", "java:S2142"})
+public final class ListFilterValuesForDimension {
 
-    static abstract class Base {
+    private static final String OPERATION_ID = "list_filter_values_for_dimension";
+    private static final String APPLICATION_JSON = "application/json";
+    private static final String API_ERROR_OCCURRED = "API error occurred";
+    private static final String UNEXPECTED_CONTENT_TYPE = "Unexpected content-type received: ";
+    private static final String STATUS_4XX = "4XX";
+    private static final String STATUS_5XX = "5XX";
+
+    private ListFilterValuesForDimension() {
+        // utility holder for the generated operation classes; not instantiable
+    }
+
+    abstract static class Base {
         final SDKConfiguration sdkConfiguration;
         final String baseUrl;
         final SecuritySource securitySource;
@@ -53,7 +65,7 @@ public class ListFilterValuesForDimension {
         final HTTPClient client;
         final Headers _headers;
 
-        public Base(
+        protected Base(
                 @Nonnull SDKConfiguration sdkConfiguration, @Nullable Options options,
                 Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -69,7 +81,7 @@ public class ListFilterValuesForDimension {
                     .orElse(RetryConfig.builder().backoff(BackoffStrategy.builder()
                                     .initialInterval(1000, TimeUnit.MILLISECONDS)
                                     .maxInterval(10000, TimeUnit.MILLISECONDS)
-                                    .baseFactor((double) (1.5))
+                                    .baseFactor(1.5)
                                     .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
                                     .retryConnectError(true)
                                     .build())
@@ -85,7 +97,7 @@ public class ListFilterValuesForDimension {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "list_filter_values_for_dimension",
+                    OPERATION_ID,
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -94,7 +106,7 @@ public class ListFilterValuesForDimension {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "list_filter_values_for_dimension",
+                    OPERATION_ID,
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -103,7 +115,7 @@ public class ListFilterValuesForDimension {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "list_filter_values_for_dimension",
+                    OPERATION_ID,
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -114,7 +126,7 @@ public class ListFilterValuesForDimension {
                     "/data/dimensions/{dimensionsId}",
                     request, null);
             HTTPRequest req = new HTTPRequest(url, "GET");
-            req.addHeader("Accept", "application/json")
+            req.addHeader("Accept", APPLICATION_JSON)
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
 
@@ -166,7 +178,7 @@ public class ListFilterValuesForDimension {
                         }
                         try {
                             HttpResponse<InputStream> httpRes = client.send(r);
-                            if (Utils.statusCodeMatches(httpRes.statusCode(), "4XX", "5XX")) {
+                            if (Utils.statusCodeMatches(httpRes.statusCode(), STATUS_4XX, STATUS_5XX)) {
                                 return onError(httpRes, null);
                             }
                             return httpRes;
@@ -197,25 +209,25 @@ public class ListFilterValuesForDimension {
             ListFilterValuesForDimensionResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                if (Utils.contentTypeMatches(contentType, APPLICATION_JSON)) {
                     return res.withObject(Utils.unmarshal(response, new TypeReference<ListFilterValuesForDimensionResponseBody>() {}));
                 } else {
-                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                    throw APIException.from(UNEXPECTED_CONTENT_TYPE + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), STATUS_4XX)) {
                 // no content
-                throw APIException.from("API error occurred", response);
+                throw APIException.from(API_ERROR_OCCURRED, response);
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), STATUS_5XX)) {
                 // no content
-                throw APIException.from("API error occurred", response);
+                throw APIException.from(API_ERROR_OCCURRED, response);
             }
             if (Utils.statusCodeMatches(response.statusCode(), "default")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                if (Utils.contentTypeMatches(contentType, APPLICATION_JSON)) {
                     return res.withDefaultError(Utils.unmarshal(response, new TypeReference<DefaultError>() {}));
                 } else {
-                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                    throw APIException.from(UNEXPECTED_CONTENT_TYPE + contentType, response);
                 }
             }
             throw APIException.from("Unexpected status code received: " + response.statusCode(), response);
@@ -259,7 +271,7 @@ public class ListFilterValuesForDimension {
                                 if (err != null) {
                                     return onError(null, err);
                                 }
-                                if (Utils.statusCodeMatches(resp.statusCode(), "4XX", "5XX")) {
+                                if (Utils.statusCodeMatches(resp.statusCode(), STATUS_4XX, STATUS_5XX)) {
                                     return onError(resp, null);
                                 }
                                 return CompletableFuture.completedFuture(resp);
@@ -285,27 +297,27 @@ public class ListFilterValuesForDimension {
             io.fastpix.sdk.models.operations.async.ListFilterValuesForDimensionResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                if (Utils.contentTypeMatches(contentType, APPLICATION_JSON)) {
                     return Utils.unmarshalAsync(response, new TypeReference<ListFilterValuesForDimensionResponseBody>() {})
                             .thenApply(res::withObject);
                 } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
+                    return Utils.createAsyncApiError(response, UNEXPECTED_CONTENT_TYPE + contentType);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), STATUS_4XX)) {
                 // no content
-                return Utils.createAsyncApiError(response, "API error occurred");
+                return Utils.createAsyncApiError(response, API_ERROR_OCCURRED);
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), STATUS_5XX)) {
                 // no content
-                return Utils.createAsyncApiError(response, "API error occurred");
+                return Utils.createAsyncApiError(response, API_ERROR_OCCURRED);
             }
             if (Utils.statusCodeMatches(response.statusCode(), "default")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                if (Utils.contentTypeMatches(contentType, APPLICATION_JSON)) {
                     return Utils.unmarshalAsync(response, new TypeReference<DefaultError>() {})
                             .thenApply(res::withDefaultError);
                 } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
+                    return Utils.createAsyncApiError(response, UNEXPECTED_CONTENT_TYPE + contentType);
                 }
             }
             return Utils.createAsyncApiError(response, "Unexpected status code received: " + response.statusCode());

@@ -6,9 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Map;
 import java.util.Optional;
 import io.fastpix.sdk.utils.LazySingletonValue;
@@ -123,7 +120,7 @@ public class PatchLiveStreamRequest {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private Map<String, String> metadata;
 

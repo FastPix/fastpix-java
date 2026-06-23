@@ -4,8 +4,6 @@ import static io.fastpix.sdk.operations.Operations.RequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Long;
-import java.lang.String;
 import io.fastpix.sdk.models.components.SortOrder;
 import io.fastpix.sdk.models.components.UpdateTrackRequest;
 import io.fastpix.sdk.models.operations.CancelUploadRequest;
@@ -51,6 +49,7 @@ import io.fastpix.sdk.utils.Headers;
 import io.fastpix.sdk.utils.Options;
 
 
+@SuppressWarnings("java:S6539") // SDK facade: high coupling is inherent — each method delegates to a distinct operation; splitting would break the public API.
 public class Videos {
     private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;

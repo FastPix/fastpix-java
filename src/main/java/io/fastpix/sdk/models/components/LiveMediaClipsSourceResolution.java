@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,27 +9,37 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
+ * LiveMediaClipsSourceResolution
+ *
+ * <p>The actual resolution of the uploaded media. This represents the native quality of the source media.
+ *
+ * <p>Wrapper for an "open" enum that can handle unknown values from API responses
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-/**
- * LiveMediaClipsSourceResolution
- * 
- * <p>The actual resolution of the uploaded media. This represents the native quality of the source media.
- */
 public class LiveMediaClipsSourceResolution {
 
-    public static final LiveMediaClipsSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new LiveMediaClipsSourceResolution("2160p");
-    public static final LiveMediaClipsSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY = new LiveMediaClipsSourceResolution("2160");
-    public static final LiveMediaClipsSourceResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new LiveMediaClipsSourceResolution("1440p");
-    public static final LiveMediaClipsSourceResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY = new LiveMediaClipsSourceResolution("1440");
-    public static final LiveMediaClipsSourceResolution ONE_THOUSAND_AND_EIGHTYP = new LiveMediaClipsSourceResolution("1080p");
-    public static final LiveMediaClipsSourceResolution ONE_THOUSAND_AND_EIGHTY = new LiveMediaClipsSourceResolution("1080");
-    public static final LiveMediaClipsSourceResolution SEVEN_HUNDRED_AND_TWENTYP = new LiveMediaClipsSourceResolution("720p");
-    public static final LiveMediaClipsSourceResolution SEVEN_HUNDRED_AND_TWENTY = new LiveMediaClipsSourceResolution("720");
-    public static final LiveMediaClipsSourceResolution FOUR_HUNDRED_AND_EIGHTYP = new LiveMediaClipsSourceResolution("480p");
-    public static final LiveMediaClipsSourceResolution FOUR_HUNDRED_AND_EIGHTY = new LiveMediaClipsSourceResolution("480");
+    private static final String RESOLUTION_2160P = "2160p";
+    private static final String RESOLUTION_2160 = "2160";
+    private static final String RESOLUTION_1440P = "1440p";
+    private static final String RESOLUTION_1440 = "1440";
+    private static final String RESOLUTION_1080P = "1080p";
+    private static final String RESOLUTION_1080 = "1080";
+    private static final String RESOLUTION_720P = "720p";
+    private static final String RESOLUTION_720 = "720";
+    private static final String RESOLUTION_480P = "480p";
+    private static final String RESOLUTION_480 = "480";
+
+    public static final LiveMediaClipsSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new LiveMediaClipsSourceResolution(RESOLUTION_2160P);
+    public static final LiveMediaClipsSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY = new LiveMediaClipsSourceResolution(RESOLUTION_2160);
+    public static final LiveMediaClipsSourceResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new LiveMediaClipsSourceResolution(RESOLUTION_1440P);
+    public static final LiveMediaClipsSourceResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY = new LiveMediaClipsSourceResolution(RESOLUTION_1440);
+    public static final LiveMediaClipsSourceResolution ONE_THOUSAND_AND_EIGHTYP = new LiveMediaClipsSourceResolution(RESOLUTION_1080P);
+    public static final LiveMediaClipsSourceResolution ONE_THOUSAND_AND_EIGHTY = new LiveMediaClipsSourceResolution(RESOLUTION_1080);
+    public static final LiveMediaClipsSourceResolution SEVEN_HUNDRED_AND_TWENTYP = new LiveMediaClipsSourceResolution(RESOLUTION_720P);
+    public static final LiveMediaClipsSourceResolution SEVEN_HUNDRED_AND_TWENTY = new LiveMediaClipsSourceResolution(RESOLUTION_720);
+    public static final LiveMediaClipsSourceResolution FOUR_HUNDRED_AND_EIGHTYP = new LiveMediaClipsSourceResolution(RESOLUTION_480P);
+    public static final LiveMediaClipsSourceResolution FOUR_HUNDRED_AND_EIGHTY = new LiveMediaClipsSourceResolution(RESOLUTION_480);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -57,7 +65,7 @@ public class LiveMediaClipsSourceResolution {
     @JsonCreator
     public static LiveMediaClipsSourceResolution of(String value) {
         synchronized (LiveMediaClipsSourceResolution.class) {
-            return values.computeIfAbsent(value, v -> new LiveMediaClipsSourceResolution(v));
+            return values.computeIfAbsent(value, LiveMediaClipsSourceResolution::new);
         }
     }
 
@@ -105,47 +113,47 @@ public class LiveMediaClipsSourceResolution {
 
     private static final Map<String, LiveMediaClipsSourceResolution> createValuesMap() {
         Map<String, LiveMediaClipsSourceResolution> map = new LinkedHashMap<>();
-        map.put("2160p", TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
-        map.put("2160", TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY);
-        map.put("1440p", ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
-        map.put("1440", ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY);
-        map.put("1080p", ONE_THOUSAND_AND_EIGHTYP);
-        map.put("1080", ONE_THOUSAND_AND_EIGHTY);
-        map.put("720p", SEVEN_HUNDRED_AND_TWENTYP);
-        map.put("720", SEVEN_HUNDRED_AND_TWENTY);
-        map.put("480p", FOUR_HUNDRED_AND_EIGHTYP);
-        map.put("480", FOUR_HUNDRED_AND_EIGHTY);
+        map.put(RESOLUTION_2160P, TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_2160, TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY);
+        map.put(RESOLUTION_1440P, ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
+        map.put(RESOLUTION_1440, ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY);
+        map.put(RESOLUTION_1080P, ONE_THOUSAND_AND_EIGHTYP);
+        map.put(RESOLUTION_1080, ONE_THOUSAND_AND_EIGHTY);
+        map.put(RESOLUTION_720P, SEVEN_HUNDRED_AND_TWENTYP);
+        map.put(RESOLUTION_720, SEVEN_HUNDRED_AND_TWENTY);
+        map.put(RESOLUTION_480P, FOUR_HUNDRED_AND_EIGHTYP);
+        map.put(RESOLUTION_480, FOUR_HUNDRED_AND_EIGHTY);
         return map;
     }
 
     private static final Map<String, LiveMediaClipsSourceResolutionEnum> createEnumsMap() {
         Map<String, LiveMediaClipsSourceResolutionEnum> map = new HashMap<>();
-        map.put("2160p", LiveMediaClipsSourceResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
-        map.put("2160", LiveMediaClipsSourceResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY);
-        map.put("1440p", LiveMediaClipsSourceResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
-        map.put("1440", LiveMediaClipsSourceResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY);
-        map.put("1080p", LiveMediaClipsSourceResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
-        map.put("1080", LiveMediaClipsSourceResolutionEnum.ONE_THOUSAND_AND_EIGHTY);
-        map.put("720p", LiveMediaClipsSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
-        map.put("720", LiveMediaClipsSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTY);
-        map.put("480p", LiveMediaClipsSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
-        map.put("480", LiveMediaClipsSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTY);
+        map.put(RESOLUTION_2160P, LiveMediaClipsSourceResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_2160, LiveMediaClipsSourceResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY);
+        map.put(RESOLUTION_1440P, LiveMediaClipsSourceResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
+        map.put(RESOLUTION_1440, LiveMediaClipsSourceResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY);
+        map.put(RESOLUTION_1080P, LiveMediaClipsSourceResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
+        map.put(RESOLUTION_1080, LiveMediaClipsSourceResolutionEnum.ONE_THOUSAND_AND_EIGHTY);
+        map.put(RESOLUTION_720P, LiveMediaClipsSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
+        map.put(RESOLUTION_720, LiveMediaClipsSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTY);
+        map.put(RESOLUTION_480P, LiveMediaClipsSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
+        map.put(RESOLUTION_480, LiveMediaClipsSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTY);
         return map;
     }
     
     
     public enum LiveMediaClipsSourceResolutionEnum {
 
-        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP("2160p"),
-        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY("2160"),
-        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP("1440p"),
-        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY("1440"),
-        ONE_THOUSAND_AND_EIGHTYP("1080p"),
-        ONE_THOUSAND_AND_EIGHTY("1080"),
-        SEVEN_HUNDRED_AND_TWENTYP("720p"),
-        SEVEN_HUNDRED_AND_TWENTY("720"),
-        FOUR_HUNDRED_AND_EIGHTYP("480p"),
-        FOUR_HUNDRED_AND_EIGHTY("480"),;
+        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP(RESOLUTION_2160P),
+        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY(RESOLUTION_2160),
+        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP(RESOLUTION_1440P),
+        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTY(RESOLUTION_1440),
+        ONE_THOUSAND_AND_EIGHTYP(RESOLUTION_1080P),
+        ONE_THOUSAND_AND_EIGHTY(RESOLUTION_1080),
+        SEVEN_HUNDRED_AND_TWENTYP(RESOLUTION_720P),
+        SEVEN_HUNDRED_AND_TWENTY(RESOLUTION_720),
+        FOUR_HUNDRED_AND_EIGHTYP(RESOLUTION_480P),
+        FOUR_HUNDRED_AND_EIGHTY(RESOLUTION_480),;
 
         private final String value;
 

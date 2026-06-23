@@ -6,6 +6,7 @@ package io.fastpix.sdk.hooks;
 // consequence any customization of this class will be preserved.
 //
 
+@SuppressWarnings({"java:S1172", "java:S125"})
 public final class SDKHooks {
 
     private SDKHooks() {

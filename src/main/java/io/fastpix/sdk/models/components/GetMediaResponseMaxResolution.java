@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.Override;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,22 +9,23 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Wrapper for an "open" enum that can handle unknown values from API responses
- * without runtime errors. Instances are immutable singletons with reference equality.
- * Use {@code asEnum()} for switch expressions.
- */
-/**
  * GetMediaResponseMaxResolution
- * 
+ *
  * <p>The maximum resolution specified by the user for the media.
  */
 public class GetMediaResponseMaxResolution {
 
-    public static final GetMediaResponseMaxResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new GetMediaResponseMaxResolution("2160p");
-    public static final GetMediaResponseMaxResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new GetMediaResponseMaxResolution("1440p");
-    public static final GetMediaResponseMaxResolution ONE_THOUSAND_AND_EIGHTYP = new GetMediaResponseMaxResolution("1080p");
-    public static final GetMediaResponseMaxResolution SEVEN_HUNDRED_AND_TWENTYP = new GetMediaResponseMaxResolution("720p");
-    public static final GetMediaResponseMaxResolution FOUR_HUNDRED_AND_EIGHTYP = new GetMediaResponseMaxResolution("480p");
+    private static final String VALUE_2160P = "2160p";
+    private static final String VALUE_1440P = "1440p";
+    private static final String VALUE_1080P = "1080p";
+    private static final String VALUE_720P = "720p";
+    private static final String VALUE_480P = "480p";
+
+    public static final GetMediaResponseMaxResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new GetMediaResponseMaxResolution(VALUE_2160P);
+    public static final GetMediaResponseMaxResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new GetMediaResponseMaxResolution(VALUE_1440P);
+    public static final GetMediaResponseMaxResolution ONE_THOUSAND_AND_EIGHTYP = new GetMediaResponseMaxResolution(VALUE_1080P);
+    public static final GetMediaResponseMaxResolution SEVEN_HUNDRED_AND_TWENTYP = new GetMediaResponseMaxResolution(VALUE_720P);
+    public static final GetMediaResponseMaxResolution FOUR_HUNDRED_AND_EIGHTYP = new GetMediaResponseMaxResolution(VALUE_480P);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -43,16 +42,16 @@ public class GetMediaResponseMaxResolution {
     }
 
     /**
-     * Returns a GetMediaResponseMaxResolution with the given value. For a specific value the 
-     * returned object will always be a singleton so reference equality 
+     * Returns a GetMediaResponseMaxResolution with the given value. For a specific value the
+     * returned object will always be a singleton so reference equality
      * is satisfied when the values are the same.
-     * 
+     *
      * @param value value to be wrapped as GetMediaResponseMaxResolution
-     */ 
+     */
     @JsonCreator
     public static GetMediaResponseMaxResolution of(String value) {
         synchronized (GetMediaResponseMaxResolution.class) {
-            return values.computeIfAbsent(value, v -> new GetMediaResponseMaxResolution(v));
+            return values.computeIfAbsent(value, GetMediaResponseMaxResolution::new);
         }
     }
 
@@ -100,32 +99,32 @@ public class GetMediaResponseMaxResolution {
 
     private static final Map<String, GetMediaResponseMaxResolution> createValuesMap() {
         Map<String, GetMediaResponseMaxResolution> map = new LinkedHashMap<>();
-        map.put("2160p", TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
-        map.put("1440p", ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
-        map.put("1080p", ONE_THOUSAND_AND_EIGHTYP);
-        map.put("720p", SEVEN_HUNDRED_AND_TWENTYP);
-        map.put("480p", FOUR_HUNDRED_AND_EIGHTYP);
+        map.put(VALUE_2160P, TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
+        map.put(VALUE_1440P, ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
+        map.put(VALUE_1080P, ONE_THOUSAND_AND_EIGHTYP);
+        map.put(VALUE_720P, SEVEN_HUNDRED_AND_TWENTYP);
+        map.put(VALUE_480P, FOUR_HUNDRED_AND_EIGHTYP);
         return map;
     }
 
     private static final Map<String, GetMediaResponseMaxResolutionEnum> createEnumsMap() {
         Map<String, GetMediaResponseMaxResolutionEnum> map = new HashMap<>();
-        map.put("2160p", GetMediaResponseMaxResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
-        map.put("1440p", GetMediaResponseMaxResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
-        map.put("1080p", GetMediaResponseMaxResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
-        map.put("720p", GetMediaResponseMaxResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
-        map.put("480p", GetMediaResponseMaxResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
+        map.put(VALUE_2160P, GetMediaResponseMaxResolutionEnum.TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP);
+        map.put(VALUE_1440P, GetMediaResponseMaxResolutionEnum.ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP);
+        map.put(VALUE_1080P, GetMediaResponseMaxResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
+        map.put(VALUE_720P, GetMediaResponseMaxResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
+        map.put(VALUE_480P, GetMediaResponseMaxResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
         return map;
     }
-    
-    
+
+
     public enum GetMediaResponseMaxResolutionEnum {
 
-        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP("2160p"),
-        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP("1440p"),
-        ONE_THOUSAND_AND_EIGHTYP("1080p"),
-        SEVEN_HUNDRED_AND_TWENTYP("720p"),
-        FOUR_HUNDRED_AND_EIGHTYP("480p"),;
+        TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP(VALUE_2160P),
+        ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP(VALUE_1440P),
+        ONE_THOUSAND_AND_EIGHTYP(VALUE_1080P),
+        SEVEN_HUNDRED_AND_TWENTYP(VALUE_720P),
+        FOUR_HUNDRED_AND_EIGHTYP(VALUE_480P),;
 
         private final String value;
 
@@ -138,4 +137,3 @@ public class GetMediaResponseMaxResolution {
         }
     }
 }
-

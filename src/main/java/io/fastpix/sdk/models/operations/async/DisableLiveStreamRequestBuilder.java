@@ -3,8 +3,6 @@ package io.fastpix.sdk.models.operations.async;
 import static io.fastpix.sdk.operations.Operations.AsyncRequestOperation;
 
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-import java.lang.String;
 import java.util.concurrent.CompletableFuture;
 import io.fastpix.sdk.SDKConfiguration;
 import io.fastpix.sdk.models.operations.DisableLiveStreamRequest;
@@ -14,6 +12,11 @@ import io.fastpix.sdk.utils.Options;
 import io.fastpix.sdk.utils.RetryConfig;
 import io.fastpix.sdk.utils.Utils;
 
+// Leading-underscore field/method names (_headers, _setterCalled, _buildRequest) are an
+// intentional generated convention that avoids clashing with the user-facing builder
+// setters (header(), body(), ...); renaming would be inconsistent across all
+// *RequestBuilder classes and could reintroduce those clashes.
+@SuppressWarnings({"java:S116", "java:S100"})
 public class DisableLiveStreamRequestBuilder {
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers();

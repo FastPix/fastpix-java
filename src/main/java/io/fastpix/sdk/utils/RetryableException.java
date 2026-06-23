@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.net.http.HttpResponse;
 
 public final class RetryableException extends Exception {
-    private final HttpResponse<InputStream> response;
+    private final transient HttpResponse<InputStream> response;
 
     public RetryableException(HttpResponse<InputStream> response) {
         this.response = response;

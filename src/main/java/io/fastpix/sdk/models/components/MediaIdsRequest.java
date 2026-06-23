@@ -3,8 +3,6 @@ package io.fastpix.sdk.models.components;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.List;
 import java.util.Optional;
 import io.fastpix.sdk.utils.Utils;
@@ -15,6 +13,8 @@ import io.fastpix.sdk.utils.Utils;
  * <p>The list of mediaId(s) you want to perform the operation on.
  */
 public class MediaIdsRequest {
+
+    private static final String MEDIA_IDS_FIELD = "mediaIds";
 
     @JsonProperty("mediaIds")
     private List<String> mediaIds;
@@ -36,7 +36,7 @@ public class MediaIdsRequest {
 
 
     public MediaIdsRequest withMediaIds(@Nonnull List<String> mediaIds) {
-        this.mediaIds = Utils.checkNotNull(mediaIds, "mediaIds");
+        this.mediaIds = Utils.checkNotNull(mediaIds, MEDIA_IDS_FIELD);
         return this;
     }
 
@@ -63,11 +63,11 @@ public class MediaIdsRequest {
     @Override
     public String toString() {
         return Utils.toString(MediaIdsRequest.class,
-                "mediaIds", mediaIds);
+                MEDIA_IDS_FIELD, mediaIds);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private List<String> mediaIds;
 
@@ -76,7 +76,7 @@ public class MediaIdsRequest {
         }
 
         public Builder mediaIds(@Nonnull List<String> mediaIds) {
-            this.mediaIds = Utils.checkNotNull(mediaIds, "mediaIds");
+            this.mediaIds = Utils.checkNotNull(mediaIds, MEDIA_IDS_FIELD);
             return this;
         }
 

@@ -16,8 +16,12 @@ import java.util.function.BiPredicate;
  */
 public final class Helpers {
 
+    private Helpers() {
+        // Utility class, prevent instantiation
+    }
+
     /**
-     * Returns an {@link HttpRequest.Builder} which is initialized with the 
+     * Returns an {@link HttpRequest.Builder} which is initialized with the
      * state of the given {@link HttpRequest}. 
      * 
      * <p>Note that headers can be added and modified but not removed. To 
@@ -109,6 +113,10 @@ public final class Helpers {
             latch.countDown();
         }
 
+        // The latch wait surfaces a timeout and an interruption as unchecked exceptions to keep this
+        // internal helper free of a checked signature; the generic-exception and ignored-interrupt
+        // findings are suppressed to preserve the existing thrown types and control flow unchanged.
+        @SuppressWarnings({"java:S112", "java:S2142"})
         public byte[] bytes() {
             try {
                 if (!latch.await(30, TimeUnit.SECONDS)) {

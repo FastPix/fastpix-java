@@ -2,8 +2,6 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.PlaybackIdRequest;
 import io.fastpix.sdk.utils.FastpixMetadata;
@@ -11,6 +9,9 @@ import io.fastpix.sdk.utils.Utils;
 
 
 public class CreatePlaybackIdOfStreamRequest {
+
+    private static final String STREAM_ID = "streamId";
+    private static final String BODY_NAME = "body";
     /**
      * After creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
@@ -51,13 +52,13 @@ public class CreatePlaybackIdOfStreamRequest {
      * After creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
     public CreatePlaybackIdOfStreamRequest withStreamId(@Nonnull String streamId) {
-        this.streamId = Utils.checkNotNull(streamId, "streamId");
+        this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
         return this;
     }
 
 
     public CreatePlaybackIdOfStreamRequest withBody(@Nonnull PlaybackIdRequest body) {
-        this.body = Utils.checkNotNull(body, "body");
+        this.body = Utils.checkNotNull(body, BODY_NAME);
         return this;
     }
 
@@ -85,12 +86,12 @@ public class CreatePlaybackIdOfStreamRequest {
     @Override
     public String toString() {
         return Utils.toString(CreatePlaybackIdOfStreamRequest.class,
-                "streamId", streamId,
-                "body", body);
+                STREAM_ID, streamId,
+                BODY_NAME, body);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String streamId;
 
@@ -104,12 +105,12 @@ public class CreatePlaybackIdOfStreamRequest {
          * After creating a new live stream, FastPix assigns a unique identifier to the stream.
          */
         public Builder streamId(@Nonnull String streamId) {
-            this.streamId = Utils.checkNotNull(streamId, "streamId");
+            this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
             return this;
         }
 
         public Builder body(@Nonnull PlaybackIdRequest body) {
-            this.body = Utils.checkNotNull(body, "body");
+            this.body = Utils.checkNotNull(body, BODY_NAME);
             return this;
         }
 

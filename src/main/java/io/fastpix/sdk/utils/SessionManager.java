@@ -9,6 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import io.fastpix.sdk.models.errors.AuthException;
 
@@ -33,7 +33,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         String sessionKey();
     }
 
-    public final static class Session<T> {
+    public static final class Session<T> {
         private final T credentials;
         private final Optional<String> token;
         private final List<String> scopes;
@@ -90,7 +90,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         // First look for an exact match
         Session<T> exactSession = clientSessions.get(scopeKey);
         if (exactSession != null) {
-            if (hasTokenExpired(exactSession.expiresAt, OffsetDateTime.now())) {
+            if (hasTokenExpired(exactSession.expiresAt, OffsetDateTime.now(ZoneId.systemDefault()))) {
                 removeSession(sessionKey, scopeKey);
             } else {
                 return Optional.of(exactSession);
@@ -102,7 +102,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         Session<T> validSession = null;
         for (Map.Entry<String, Session<T>> entry : clientSessions.entrySet()) {
             Session<T> session = entry.getValue();
-            if (hasTokenExpired(session.expiresAt, OffsetDateTime.now())) {
+            if (hasTokenExpired(session.expiresAt, OffsetDateTime.now(ZoneId.systemDefault()))) {
                 expiredSessionKeys.add(entry.getKey());
             } else if (hasRequiredScopes(session.scopes, requiredScopes)) {
                 validSession = session;
@@ -156,6 +156,9 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         }
     }
 
+    // The multi-catch wraps the InterruptedException into the thrown cause, preserving the existing
+    // token-request error flow without altering interrupt handling.
+    @SuppressWarnings("java:S2142")
     public static <T extends HasSessionKey> Session<T> requestOAuth2Token(HTTPClient client, T credentials, List<String> scopes,
             Map<String, String> body, Map<String, String> headers, URI tokenUri) {
         try {
@@ -179,7 +182,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
                     response);
             }
             TokenResponse t = Utils.mapper().readValue(response.body(), TokenResponse.class);
-            if (!t.tokenType.orElse("").toLowerCase().equals("bearer")) {
+            if (!t.tokenType.orElse("").equalsIgnoreCase("bearer")) {
                 throw new AuthException(
                     "Expected 'Bearer' token type but was '" + t.tokenType.orElse("") + "'",
                     response.statusCode(),
@@ -187,14 +190,14 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
                     response);
             }
             final Optional<OffsetDateTime> expiresAt = t.expiresInSeconds
-                    .map(x -> OffsetDateTime.now().plus(x, ChronoUnit.SECONDS));
-            return new Session<T>(credentials, t.accessToken, scopes, expiresAt);
+                    .map(x -> OffsetDateTime.now(ZoneId.systemDefault()).plus(x, ChronoUnit.SECONDS));
+            return new Session<>(credentials, t.accessToken, scopes, expiresAt);
         } catch (IOException | IllegalArgumentException | IllegalAccessException | InterruptedException | URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 
-    final static class TokenResponse {
+    static final class TokenResponse {
 
         @JsonProperty("access_token")
         Optional<String> accessToken;
@@ -203,7 +206,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
         Optional<String> tokenType;
 
         @JsonProperty("expires_in")
-        Optional<Long> expiresInSeconds;;
+        Optional<Long> expiresInSeconds;
 
     }
 

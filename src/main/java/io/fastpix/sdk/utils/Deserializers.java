@@ -6,7 +6,6 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -16,6 +15,10 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public final class Deserializers {
+
+    private Deserializers() {
+        // Utility class, prevent instantiation
+    }
 
     public static final JsonDeserializer<Boolean> BOOLEAN_STRICT = new StrictBooleanDeserializer();
     public static final JsonDeserializer<Integer> INTEGER_STRICT = new StrictIntegerDeserializer();
@@ -53,7 +56,7 @@ public final class Deserializers {
 
         @Override
         public Boolean deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws IOException {
             JsonToken t = p.currentToken();
             if (t == JsonToken.VALUE_TRUE) {
                 return true;
@@ -75,7 +78,7 @@ public final class Deserializers {
 
         @Override
         public Double deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws IOException {
             JsonToken t = p.currentToken();
             if (t == JsonToken.VALUE_NUMBER_INT) {
                 return p.getDoubleValue();
@@ -97,7 +100,7 @@ public final class Deserializers {
 
         @Override
         public Float deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws IOException {
             JsonToken t = p.currentToken();
             if (t == JsonToken.VALUE_NUMBER_INT) {
                 return p.getFloatValue();
@@ -119,7 +122,7 @@ public final class Deserializers {
 
         @Override
         public Integer deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws IOException {
             JsonToken t = p.currentToken();
             if (t == JsonToken.VALUE_NUMBER_INT) {
                 return p.getIntValue();
@@ -138,7 +141,7 @@ public final class Deserializers {
         }
 
         @Override
-        public LocalDate deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+        public LocalDate deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
             if (p.currentToken() == JsonToken.VALUE_STRING) {
                 String text = p.getText();
                 try {
@@ -162,7 +165,7 @@ public final class Deserializers {
 
         @Override
         public Long deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws IOException {
             JsonToken t = p.currentToken();
             if (t == JsonToken.VALUE_NUMBER_INT) {
                 return p.getLongValue();
@@ -181,7 +184,7 @@ public final class Deserializers {
         }
 
         @Override
-        public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+        public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
             if (p.currentToken() == JsonToken.VALUE_STRING) {
                 String text = p.getText();
                 try {
@@ -205,7 +208,7 @@ public final class Deserializers {
 
         @Override
         public Short deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws IOException {
             JsonToken t = p.currentToken();
             if (t == JsonToken.VALUE_NUMBER_INT) {
                 return p.getShortValue();
@@ -225,7 +228,7 @@ public final class Deserializers {
 
         @Override
         public String deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws IOException {
             JsonToken t = p.currentToken();
             if (t == JsonToken.VALUE_STRING) {
                 return p.getText();

@@ -2,14 +2,15 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class CompleteLiveStreamRequest {
+
+    private static final String STREAM_ID_FIELD = "streamId";
+
     /**
      * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
@@ -39,7 +40,7 @@ public class CompleteLiveStreamRequest {
      * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
     public CompleteLiveStreamRequest withStreamId(@Nonnull String streamId) {
-        this.streamId = Utils.checkNotNull(streamId, "streamId");
+        this.streamId = Utils.checkNotNull(streamId, STREAM_ID_FIELD);
         return this;
     }
 
@@ -66,11 +67,11 @@ public class CompleteLiveStreamRequest {
     @Override
     public String toString() {
         return Utils.toString(CompleteLiveStreamRequest.class,
-                "streamId", streamId);
+                STREAM_ID_FIELD, streamId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String streamId;
 
@@ -82,7 +83,7 @@ public class CompleteLiveStreamRequest {
          * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
          */
         public Builder streamId(@Nonnull String streamId) {
-            this.streamId = Utils.checkNotNull(streamId, "streamId");
+            this.streamId = Utils.checkNotNull(streamId, STREAM_ID_FIELD);
             return this;
         }
 

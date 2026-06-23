@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -14,33 +11,35 @@ import io.fastpix.sdk.utils.Utils.JsonShape;
 import io.fastpix.sdk.utils.Utils.TypeReferenceWithShape;
 import io.fastpix.sdk.utils.Utils;
 
-@JsonDeserialize(using = Input._Deserializer.class)
+@JsonDeserialize(using = Input.InputDeserializer.class)
 public class Input {
+
+    private static final String VALUE_NAME = "value";
 
     @JsonValue
     private final TypedObject value;
-    
+
     private Input(TypedObject value) {
         this.value = value;
     }
 
     public static Input of(PullVideoInput value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_NAME);
         return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static Input of(WatermarkInput value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_NAME);
         return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static Input of(AudioInput value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_NAME);
         return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static Input of(SubtitleInput value) {
-        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(value, VALUE_NAME);
         return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
@@ -126,9 +125,9 @@ public class Input {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<Input> {
+    public static final class InputDeserializer extends OneOfDeserializer<Input> {
 
-        public _Deserializer() {
+        public InputDeserializer() {
             super(Input.class, false,
                   TypeReferenceWithShape.of(new TypeReference<PullVideoInput>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WatermarkInput>() {}, JsonShape.DEFAULT),
@@ -140,7 +139,7 @@ public class Input {
     @Override
     public String toString() {
         return Utils.toString(Input.class,
-                "value", value);
+                VALUE_NAME, value);
     }
 
 }

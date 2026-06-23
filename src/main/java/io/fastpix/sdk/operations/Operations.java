@@ -8,6 +8,10 @@ import java.util.concurrent.CompletableFuture;
 
 // Internal API only
 
+// The descriptive type-parameter names (ReqT/ResT) are an intentional convention that conveys the
+// request and response roles across these operation interfaces; the naming-convention finding is
+// suppressed rather than renaming them to single letters.
+@SuppressWarnings("java:S119")
 public class Operations {
     /**
     * Base interface for all operations

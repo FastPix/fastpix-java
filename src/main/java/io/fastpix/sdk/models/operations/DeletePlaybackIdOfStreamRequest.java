@@ -2,14 +2,15 @@ package io.fastpix.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.annotation.Nonnull;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.utils.FastpixMetadata;
 import io.fastpix.sdk.utils.Utils;
 
 
 public class DeletePlaybackIdOfStreamRequest {
+
+    private static final String STREAM_ID = "streamId";
+    private static final String PLAYBACK_ID = "playbackId";
     /**
      * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
@@ -55,7 +56,7 @@ public class DeletePlaybackIdOfStreamRequest {
      * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      */
     public DeletePlaybackIdOfStreamRequest withStreamId(@Nonnull String streamId) {
-        this.streamId = Utils.checkNotNull(streamId, "streamId");
+        this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
         return this;
     }
 
@@ -64,7 +65,7 @@ public class DeletePlaybackIdOfStreamRequest {
      * Unique identifier for the playbackId
      */
     public DeletePlaybackIdOfStreamRequest withPlaybackId(@Nonnull String playbackId) {
-        this.playbackId = Utils.checkNotNull(playbackId, "playbackId");
+        this.playbackId = Utils.checkNotNull(playbackId, PLAYBACK_ID);
         return this;
     }
 
@@ -92,12 +93,12 @@ public class DeletePlaybackIdOfStreamRequest {
     @Override
     public String toString() {
         return Utils.toString(DeletePlaybackIdOfStreamRequest.class,
-                "streamId", streamId,
-                "playbackId", playbackId);
+                STREAM_ID, streamId,
+                PLAYBACK_ID, playbackId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private String streamId;
 
@@ -111,7 +112,7 @@ public class DeletePlaybackIdOfStreamRequest {
          * Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
          */
         public Builder streamId(@Nonnull String streamId) {
-            this.streamId = Utils.checkNotNull(streamId, "streamId");
+            this.streamId = Utils.checkNotNull(streamId, STREAM_ID);
             return this;
         }
 
@@ -119,7 +120,7 @@ public class DeletePlaybackIdOfStreamRequest {
          * Unique identifier for the playbackId
          */
         public Builder playbackId(@Nonnull String playbackId) {
-            this.playbackId = Utils.checkNotNull(playbackId, "playbackId");
+            this.playbackId = Utils.checkNotNull(playbackId, PLAYBACK_ID);
             return this;
         }
 

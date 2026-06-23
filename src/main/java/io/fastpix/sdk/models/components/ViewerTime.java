@@ -4,10 +4,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Long;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 import io.fastpix.sdk.utils.OneOfDeserializer;
 import io.fastpix.sdk.utils.TypedObject;
@@ -20,7 +16,7 @@ import io.fastpix.sdk.utils.Utils;
  * 
  * <p>The unix epoch timestamp which represents the actual time the event has occurred.
  */
-@JsonDeserialize(using = ViewerTime._Deserializer.class)
+@JsonDeserialize(using = ViewerTime.Deserializer.class)
 public class ViewerTime {
 
     @JsonValue
@@ -95,9 +91,9 @@ public class ViewerTime {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<ViewerTime> {
+    public static final class Deserializer extends OneOfDeserializer<ViewerTime> {
 
-        public _Deserializer() {
+        public Deserializer() {
             super(ViewerTime.class, false,
                   TypeReferenceWithShape.of(new TypeReference<String>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<Long>() {}, JsonShape.DEFAULT));

@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Objects;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -69,7 +67,7 @@ public class BigIntegerString {
 
         @Override
         public void serialize(BigIntegerString value, JsonGenerator g, SerializerProvider provider)
-                throws IOException, JsonProcessingException {
+                throws IOException {
             g.writeString(value.value.toString());
         }
     }
@@ -83,7 +81,7 @@ public class BigIntegerString {
 
         @Override
         public BigIntegerString deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws IOException {
             String s = p.readValueAs(String.class);
             return new BigIntegerString(new BigInteger(s));
         }

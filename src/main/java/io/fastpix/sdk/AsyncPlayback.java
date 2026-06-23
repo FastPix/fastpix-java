@@ -4,7 +4,6 @@ import static io.fastpix.sdk.operations.Operations.AsyncRequestOperation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.String;
 import java.util.concurrent.CompletableFuture;
 import io.fastpix.sdk.models.operations.CreateMediaPlaybackIdRequest;
 import io.fastpix.sdk.models.operations.CreateMediaPlaybackIdRequestBody;
@@ -39,6 +38,9 @@ import io.fastpix.sdk.utils.Options;
 /**
  * Operations for video playback management
  */
+// Facade aggregating one operation trio (request/builder/response) per playback
+// endpoint; the high class-fan-out is inherent to this API surface, not a design smell.
+@SuppressWarnings("java:S6539")
 public class AsyncPlayback {
     private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;

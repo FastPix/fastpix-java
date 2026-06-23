@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import java.lang.Override;
-import java.lang.String;
 import java.util.Optional;
 import io.fastpix.sdk.models.components.AccessPolicy;
 import io.fastpix.sdk.utils.Utils;
@@ -18,6 +16,9 @@ import io.fastpix.sdk.utils.Utils;
  * <p>Request body for creating playback id for an media
  */
 public class CreateMediaPlaybackIdRequestBody {
+
+    private static final String ACCESS_POLICY_FIELD = "accessPolicy";
+
     /**
      * Access policy for media content
      */
@@ -96,7 +97,7 @@ public class CreateMediaPlaybackIdRequestBody {
      * Access policy for media content
      */
     public CreateMediaPlaybackIdRequestBody withAccessPolicy(@Nonnull AccessPolicy accessPolicy) {
-        this.accessPolicy = Utils.checkNotNull(accessPolicy, "accessPolicy");
+        this.accessPolicy = Utils.checkNotNull(accessPolicy, ACCESS_POLICY_FIELD);
         return this;
     }
 
@@ -151,14 +152,14 @@ public class CreateMediaPlaybackIdRequestBody {
     @Override
     public String toString() {
         return Utils.toString(CreateMediaPlaybackIdRequestBody.class,
-                "accessPolicy", accessPolicy,
+                ACCESS_POLICY_FIELD, accessPolicy,
                 "accessRestrictions", accessRestrictions,
                 "drmConfigurationId", drmConfigurationId,
                 "resolution", resolution);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    public static final class Builder {
 
         private AccessPolicy accessPolicy;
 
@@ -176,7 +177,7 @@ public class CreateMediaPlaybackIdRequestBody {
          * Access policy for media content
          */
         public Builder accessPolicy(@Nonnull AccessPolicy accessPolicy) {
-            this.accessPolicy = Utils.checkNotNull(accessPolicy, "accessPolicy");
+            this.accessPolicy = Utils.checkNotNull(accessPolicy, ACCESS_POLICY_FIELD);
             return this;
         }
 

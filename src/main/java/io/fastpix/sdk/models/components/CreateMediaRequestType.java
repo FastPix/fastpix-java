@@ -1,7 +1,6 @@
 package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
