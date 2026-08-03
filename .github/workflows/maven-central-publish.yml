@@ -32,24 +32,18 @@ jobs:
           ORG_GRADLE_PROJECT_signingPassphrase: ${{ secrets.GPG_PASSPHRASE }}
         run: ./gradlew clean build publishToMavenLocal
 
-      - name: Resolve published version
-        run: |
-          VERSION="$(./gradlew -q --no-daemon properties | awk -F': ' '/^version: /{print $2}')"
-          echo "Resolved version: $VERSION"
-          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
-
       - name: List build outputs
         run: |
           find build -type f
-          find ~/.m2/repository/io/fastpix/sdk/"$VERSION" -type f || true
+          find ~/.m2/repository/io/fastpix/sdk/0.1.0 -type f || true
 
       - name: Prepare artifacts for upload
         run: |
           mkdir -p upload
-          cp ~/.m2/repository/io/fastpix/sdk/"$VERSION"/sdk-"$VERSION".jar upload/
-          cp ~/.m2/repository/io/fastpix/sdk/"$VERSION"/sdk-"$VERSION".pom upload/
-          cp ~/.m2/repository/io/fastpix/sdk/"$VERSION"/sdk-"$VERSION"-sources.jar upload/ || true
-          cp ~/.m2/repository/io/fastpix/sdk/"$VERSION"/sdk-"$VERSION"-javadoc.jar upload/ || true
+          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0.jar upload/
+          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0.pom upload/
+          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0-sources.jar upload/ || true
+          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0-javadoc.jar upload/ || true
 
       - name: Upload to Central Publishing Portal
         env:
@@ -57,8 +51,8 @@ jobs:
           CPP_USER_TOKEN_PASSWORD: ${{ secrets.CPP_USER_TOKEN_PASSWORD }}
         run: |
           curl -u "$CPP_USER_TOKEN_USERNAME:$CPP_USER_TOKEN_PASSWORD" \
-            -F "file=@upload/sdk-$VERSION.jar" \
-            -F "file=@upload/sdk-$VERSION.pom" \
-            -F "file=@upload/sdk-$VERSION-sources.jar" \
-            -F "file=@upload/sdk-$VERSION-javadoc.jar" \
+            -F "file=@upload/sdk-0.1.0.jar" \
+            -F "file=@upload/sdk-0.1.0.pom" \
+            -F "file=@upload/sdk-0.1.0-sources.jar" \
+            -F "file=@upload/sdk-0.1.0-javadoc.jar" \
             https://central.sonatype.com/api/v1/publish
