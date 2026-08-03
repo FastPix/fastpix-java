@@ -44,12 +44,20 @@ public class AddTrackRequest {
     @JsonProperty("languageName")
     private String languageName;
 
+    /**
+     * Title of the track.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private String title;
+
     @JsonCreator
     public AddTrackRequest(
             @JsonProperty("url") @Nullable String url,
             @JsonProperty("type") @Nullable AddTrackRequestType type,
             @JsonProperty("languageCode") @Nullable String languageCode,
-            @JsonProperty("languageName") @Nullable String languageName) {
+            @JsonProperty("languageName") @Nullable String languageName,
+            @JsonProperty("title") @Nullable String title) {
         this.url = Optional.ofNullable(url)
             .orElse(Builder._SINGLETON_VALUE_Url.value());
         this.type = Optional.ofNullable(type)
@@ -58,11 +66,12 @@ public class AddTrackRequest {
             .orElse(Builder._SINGLETON_VALUE_LanguageCode.value());
         this.languageName = Optional.ofNullable(languageName)
             .orElse(Builder._SINGLETON_VALUE_LanguageName.value());
+        this.title = title;
     }
-    
+
     public AddTrackRequest() {
         this(null, null, null,
-            null);
+            null, null);
     }
 
     /**
@@ -91,6 +100,13 @@ public class AddTrackRequest {
      */
     public Optional<String> languageName() {
         return Optional.ofNullable(this.languageName);
+    }
+
+    /**
+     * Title of the track.
+     */
+    public Optional<String> title() {
+        return Optional.ofNullable(this.title);
     }
 
     public static Builder builder() {
@@ -134,6 +150,15 @@ public class AddTrackRequest {
     }
 
 
+    /**
+     * Title of the track.
+     */
+    public AddTrackRequest withTitle(@Nullable String title) {
+        this.title = title;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -147,23 +172,25 @@ public class AddTrackRequest {
             Utils.enhancedDeepEquals(this.url, other.url) &&
             Utils.enhancedDeepEquals(this.type, other.type) &&
             Utils.enhancedDeepEquals(this.languageCode, other.languageCode) &&
-            Utils.enhancedDeepEquals(this.languageName, other.languageName);
+            Utils.enhancedDeepEquals(this.languageName, other.languageName) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
-    
+
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             url, type, languageCode,
-            languageName);
+            languageName, title);
     }
-    
+
     @Override
     public String toString() {
         return Utils.toString(AddTrackRequest.class,
                 "url", url,
                 "type", type,
                 "languageCode", languageCode,
-                "languageName", languageName);
+                "languageName", languageName,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -176,6 +203,8 @@ public class AddTrackRequest {
         private String languageCode;
 
         private String languageName;
+
+        private String title;
 
         private Builder() {
           // force use of static builder() method
@@ -213,10 +242,18 @@ public class AddTrackRequest {
             return this;
         }
 
+        /**
+         * Title of the track.
+         */
+        public Builder title(@Nullable String title) {
+            this.title = title;
+            return this;
+        }
+
         public AddTrackRequest build() {
             return new AddTrackRequest(
                 url, type, languageCode,
-                languageName);
+                languageName, title);
         }
 
 

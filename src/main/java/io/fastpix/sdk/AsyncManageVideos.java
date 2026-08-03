@@ -274,13 +274,13 @@ public class AsyncManageVideos {
      * <p>#### Webhook events
      * 
      * <p>1. After successfully adding a track, your system must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackcreated">video.media.track.created</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackcreated">video.media.track.created</a>.
      * 
      * <p>2. Once the track is processed and ready, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackready">video.media.track.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackready">video.media.track.ready</a>.
      * 
      * <p>3. Finally, an update event <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> must
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> must
      * notify your system about the media's updated status.
      * 
      * <p>#### Example
@@ -290,8 +290,8 @@ public class AsyncManageVideos {
      * in different languages, you can specify type: `subtitle` with the corresponding subtitle `url`,
      * `languageCode` and `languageName`.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @return The async call builder
      */
@@ -318,13 +318,13 @@ public class AsyncManageVideos {
      * <p>#### Webhook events
      * 
      * <p>1. After successfully adding a track, your system must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackcreated">video.media.track.created</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackcreated">video.media.track.created</a>.
      * 
      * <p>2. Once the track is processed and ready, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackready">video.media.track.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackready">video.media.track.ready</a>.
      * 
      * <p>3. Finally, an update event <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> must
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> must
      * notify your system about the media's updated status.
      * 
      * <p>#### Example
@@ -334,8 +334,8 @@ public class AsyncManageVideos {
      * in different languages, you can specify type: `subtitle` with the corresponding subtitle `url`,
      * `languageCode` and `languageName`.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      * @param body 
@@ -364,13 +364,13 @@ public class AsyncManageVideos {
      * <p>#### Webhook events
      * 
      * <p>1. After successfully adding a track, your system must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackcreated">video.media.track.created</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackcreated">video.media.track.created</a>.
      * 
      * <p>2. Once the track is processed and ready, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackready">video.media.track.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackready">video.media.track.ready</a>.
      * 
      * <p>3. Finally, an update event <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> must
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> must
      * notify your system about the media's updated status.
      * 
      * <p>#### Example
@@ -380,8 +380,8 @@ public class AsyncManageVideos {
      * in different languages, you can specify type: `subtitle` with the corresponding subtitle `url`,
      * `languageCode` and `languageName`.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      * @param body 
@@ -420,7 +420,7 @@ public class AsyncManageVideos {
      * **video.media.track.deleted**.
      * 
      * <p>2. Once the media file is updated to reflect the track removal, a <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * must be triggered.
      * 
      * <p>#### Example
@@ -432,8 +432,8 @@ public class AsyncManageVideos {
      * - The content owner requests the removal of a specific subtitle or audio track.
      * - A new version of the track gets uploaded to replace the existing one.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @return The async call builder
      */
@@ -460,7 +460,7 @@ public class AsyncManageVideos {
      * **video.media.track.deleted**.
      * 
      * <p>2. Once the media file is updated to reflect the track removal, a <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * must be triggered.
      * 
      * <p>#### Example
@@ -472,8 +472,8 @@ public class AsyncManageVideos {
      * - The content owner requests the removal of a specific subtitle or audio track.
      * - A new version of the track gets uploaded to replace the existing one.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      * @param trackId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -502,7 +502,7 @@ public class AsyncManageVideos {
      * **video.media.track.deleted**.
      * 
      * <p>2. Once the media file is updated to reflect the track removal, a <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * must be triggered.
      * 
      * <p>#### Example
@@ -514,8 +514,8 @@ public class AsyncManageVideos {
      * - The content owner requests the removal of a specific subtitle or audio track.
      * - A new version of the track gets uploaded to replace the existing one.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      * @param trackId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -553,14 +553,14 @@ public class AsyncManageVideos {
      * <p>#### Webhook Events
      * 
      * <p>1. After the subtitle track is generated and ready, you receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasubtitlegeneratedready">video.media.subtitle.generated.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasubtitlegenerated">video.media.subtitle.generated</a>.
      * 
      * <p>2. Finally the <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * notifies your system about the media’s updated status.
      * 
      * <p>&lt;/br&gt; Related guide: <a
-     * href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/generate-subtitles-automatically">Add auto-generated
+     * href="https://fastpix.com/docs/video-on-demand/generate-subtitles-automatically">Add auto-generated
      * subtitles</a>
      * 
      * @return The async call builder
@@ -587,14 +587,14 @@ public class AsyncManageVideos {
      * <p>#### Webhook Events
      * 
      * <p>1. After the subtitle track is generated and ready, you receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasubtitlegeneratedready">video.media.subtitle.generated.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasubtitlegenerated">video.media.subtitle.generated</a>.
      * 
      * <p>2. Finally the <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * notifies your system about the media’s updated status.
      * 
      * <p>&lt;/br&gt; Related guide: <a
-     * href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/generate-subtitles-automatically">Add auto-generated
+     * href="https://fastpix.com/docs/video-on-demand/generate-subtitles-automatically">Add auto-generated
      * subtitles</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -628,14 +628,14 @@ public class AsyncManageVideos {
      * <p>#### Webhook Events
      * 
      * <p>1. After the subtitle track is generated and ready, you receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasubtitlegeneratedready">video.media.subtitle.generated.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasubtitlegenerated">video.media.subtitle.generated</a>.
      * 
      * <p>2. Finally the <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * notifies your system about the media’s updated status.
      * 
      * <p>&lt;/br&gt; Related guide: <a
-     * href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/generate-subtitles-automatically">Add auto-generated
+     * href="https://fastpix.com/docs/video-on-demand/generate-subtitles-automatically">Add auto-generated
      * subtitles</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -759,9 +759,9 @@ public class AsyncManageVideos {
      * 
      * <p>3. You receive a response confirming the update to the media’s source access status.
      * 4. Webhook events: <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasourceready">video.media.source.ready</a>,
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasourceready">video.media.source.ready</a>,
      * <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasourcedeleted">video.media.source.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasourcedeleted">video.media.source.deleted</a>
      * 
      * @return The async call builder
      */
@@ -786,9 +786,9 @@ public class AsyncManageVideos {
      * 
      * <p>3. You receive a response confirming the update to the media’s source access status.
      * 4. Webhook events: <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasourceready">video.media.source.ready</a>,
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasourceready">video.media.source.ready</a>,
      * <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasourcedeleted">video.media.source.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasourcedeleted">video.media.source.deleted</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      *         
@@ -816,9 +816,9 @@ public class AsyncManageVideos {
      * 
      * <p>3. You receive a response confirming the update to the media’s source access status.
      * 4. Webhook events: <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasourceready">video.media.source.ready</a>,
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasourceready">video.media.source.ready</a>,
      * <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasourcedeleted">video.media.source.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasourcedeleted">video.media.source.deleted</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      *         

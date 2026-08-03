@@ -31,7 +31,7 @@ public class DirectUploadVideoMediaRequest {
      * These settings define how the uploaded video is handled, including access control, resolution, DRM,
      * and optional metadata.
      * For a complete explanation of how media uploads and processing work, refer to the
-     * <a href="https://fastpix.com/docs/video-on-demand-api/overview">FastPix Video on Demand
+     * <a href="https://fastpix.com/docs/video-on-demand/overview">FastPix Video on Demand
      * Overview</a>.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -63,7 +63,7 @@ public class DirectUploadVideoMediaRequest {
      * These settings define how the uploaded video is handled, including access control, resolution, DRM,
      * and optional metadata.
      * For a complete explanation of how media uploads and processing work, refer to the
-     * <a href="https://fastpix.com/docs/video-on-demand-api/overview">FastPix Video on Demand
+     * <a href="https://fastpix.com/docs/video-on-demand/overview">FastPix Video on Demand
      * Overview</a>.
      */
     public Optional<PushMediaSettings> pushMediaSettings() {
@@ -89,7 +89,7 @@ public class DirectUploadVideoMediaRequest {
      * These settings define how the uploaded video is handled, including access control, resolution, DRM,
      * and optional metadata.
      * For a complete explanation of how media uploads and processing work, refer to the
-     * <a href="https://fastpix.com/docs/video-on-demand-api/overview">FastPix Video on Demand
+     * <a href="https://fastpix.com/docs/video-on-demand/overview">FastPix Video on Demand
      * Overview</a>.
      */
     public DirectUploadVideoMediaRequest withPushMediaSettings(@Nullable PushMediaSettings pushMediaSettings) {
@@ -149,7 +149,7 @@ public class DirectUploadVideoMediaRequest {
          * These settings define how the uploaded video is handled, including access control, resolution, DRM,
          * and optional metadata.
          * For a complete explanation of how media uploads and processing work, refer to the
-         * <a href="https://fastpix.com/docs/video-on-demand-api/overview">FastPix Video on Demand
+         * <a href="https://fastpix.com/docs/video-on-demand/overview">FastPix Video on Demand
          * Overview</a>.
          */
         public Builder pushMediaSettings(@Nullable PushMediaSettings pushMediaSettings) {

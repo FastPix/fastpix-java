@@ -80,11 +80,11 @@ public class InputVideos {
      * <p>FastPix uses webhooks to tell your application about things that happen in the background, outside
      * of the API regular request flow. For instance, after the media file is created (but not yet
      * processed or encoded), FastPix sends a `POST` request to your specified webhook URL with the event
-     * <a href="https://fastpix.com/docs/vod-events/media-events#videomediacreated">video.media.created</a>.
+     * <a href="https://fastpix.com/docs/webhooks/media-events#videomediacreated">video.media.created</a>.
      * 
      * <p>After processing completes, monitor the events <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaready">video.media.ready</a> and <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediafailed">video.media.failed</a> to track
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaready">video.media.ready</a> and <a
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediafailed">video.media.failed</a> to track
      * the status of the media file.
      * 
      * <p>Related guide: <a href="https://fastpix.com/docs/upload-videos/upload-videos-from-a-url">Upload videos from
@@ -141,11 +141,11 @@ public class InputVideos {
      * <p>FastPix uses webhooks to tell your application about things that happen in the background, outside
      * of the API regular request flow. For instance, after the media file is created (but not yet
      * processed or encoded), FastPix sends a `POST` request to your specified webhook URL with the event
-     * <a href="https://fastpix.com/docs/vod-events/media-events#videomediacreated">video.media.created</a>.
+     * <a href="https://fastpix.com/docs/webhooks/media-events#videomediacreated">video.media.created</a>.
      * 
      * <p>After processing completes, monitor the events <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaready">video.media.ready</a> and <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediafailed">video.media.failed</a> to track
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaready">video.media.ready</a> and <a
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediafailed">video.media.failed</a> to track
      * the status of the media file.
      * 
      * <p>Related guide: <a href="https://fastpix.com/docs/upload-videos/upload-videos-from-a-url">Upload videos from
@@ -204,11 +204,11 @@ public class InputVideos {
      * <p>FastPix uses webhooks to tell your application about things that happen in the background, outside
      * of the API regular request flow. For instance, after the media file is created (but not yet
      * processed or encoded), FastPix sends a `POST` request to your specified webhook URL with the event
-     * <a href="https://fastpix.com/docs/vod-events/media-events#videomediacreated">video.media.created</a>.
+     * <a href="https://fastpix.com/docs/webhooks/media-events#videomediacreated">video.media.created</a>.
      * 
      * <p>After processing completes, monitor the events <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaready">video.media.ready</a> and <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediafailed">video.media.failed</a> to track
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaready">video.media.ready</a> and <a
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediafailed">video.media.failed</a> to track
      * the status of the media file.
      * 
      * <p>Related guide: <a href="https://fastpix.com/docs/upload-videos/upload-videos-from-a-url">Upload videos from
@@ -247,7 +247,7 @@ public class InputVideos {
      * file from your device and uploads it to the FastPix platform.
      * 
      * <p>(Refer to <a
-     * href="https://fastpix.com/docs/upload-videos/upload-videos-from-device#step-3-initiate-the-upload">Step 3:
+     * href="https://fastpix.com/docs/upload-videos/upload-videos-from-device#initiate-the-upload-session-web-only">Step 3:
      * Initiate the upload</a> for complete instructions.)
      * 
      * <p>4. Once uploaded, the media undergoes processing and is assigned a unique ID for tracking. Retain
@@ -299,7 +299,7 @@ public class InputVideos {
      * file from your device and uploads it to the FastPix platform.
      * 
      * <p>(Refer to <a
-     * href="https://fastpix.com/docs/upload-videos/upload-videos-from-device#step-3-initiate-the-upload">Step 3:
+     * href="https://fastpix.com/docs/upload-videos/upload-videos-from-device#initiate-the-upload-session-web-only">Step 3:
      * Initiate the upload</a> for complete instructions.)
      * 
      * <p>4. Once uploaded, the media undergoes processing and is assigned a unique ID for tracking. Retain
@@ -352,7 +352,7 @@ public class InputVideos {
      * file from your device and uploads it to the FastPix platform.
      * 
      * <p>(Refer to <a
-     * href="https://fastpix.com/docs/upload-videos/upload-videos-from-device#step-3-initiate-the-upload">Step 3:
+     * href="https://fastpix.com/docs/upload-videos/upload-videos-from-device#initiate-the-upload-session-web-only">Step 3:
      * Initiate the upload</a> for complete instructions.)
      * 
      * <p>4. Once uploaded, the media undergoes processing and is assigned a unique ID for tracking. Retain

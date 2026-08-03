@@ -40,20 +40,29 @@ public class TrackSubtitlesGenerateRequest {
     @JsonProperty("languageCode")
     private LanguageCode languageCode;
 
+    /**
+     * Title of the track.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private String title;
+
     @JsonCreator
     public TrackSubtitlesGenerateRequest(
             @JsonProperty("languageName") @Nullable String languageName,
             @JsonProperty("metadata") @Nullable Map<String, String> metadata,
-            @JsonProperty("languageCode") @Nullable LanguageCode languageCode) {
+            @JsonProperty("languageCode") @Nullable LanguageCode languageCode,
+            @JsonProperty("title") @Nullable String title) {
         this.languageName = Optional.ofNullable(languageName)
             .orElse(Builder._SINGLETON_VALUE_LanguageName.value());
         this.metadata = metadata;
         this.languageCode = Optional.ofNullable(languageCode)
             .orElse(Builder._SINGLETON_VALUE_LanguageCode.value());
+        this.title = title;
     }
     
     public TrackSubtitlesGenerateRequest() {
-        this(null, null, null);
+        this(null, null, null, null);
     }
 
     /**
@@ -77,6 +86,13 @@ public class TrackSubtitlesGenerateRequest {
      */
     public Optional<LanguageCode> languageCode() {
         return Optional.ofNullable(this.languageCode);
+    }
+
+    /**
+     * Title of the track.
+     */
+    public Optional<String> title() {
+        return Optional.ofNullable(this.title);
     }
 
     public static Builder builder() {
@@ -113,6 +129,15 @@ public class TrackSubtitlesGenerateRequest {
     }
 
 
+    /**
+     * Title of the track.
+     */
+    public TrackSubtitlesGenerateRequest withTitle(@Nullable String title) {
+        this.title = title;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -125,13 +150,14 @@ public class TrackSubtitlesGenerateRequest {
         return 
             Utils.enhancedDeepEquals(this.languageName, other.languageName) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.languageCode, other.languageCode);
+            Utils.enhancedDeepEquals(this.languageCode, other.languageCode) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            languageName, metadata, languageCode);
+            languageName, metadata, languageCode, title);
     }
     
     @Override
@@ -139,7 +165,8 @@ public class TrackSubtitlesGenerateRequest {
         return Utils.toString(TrackSubtitlesGenerateRequest.class,
                 "languageName", languageName,
                 "metadata", metadata,
-                "languageCode", languageCode);
+                "languageCode", languageCode,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -150,6 +177,8 @@ public class TrackSubtitlesGenerateRequest {
         private Map<String, String> metadata;
 
         private LanguageCode languageCode;
+
+        private String title;
 
         private Builder() {
           // force use of static builder() method
@@ -181,9 +210,17 @@ public class TrackSubtitlesGenerateRequest {
             return this;
         }
 
+        /**
+         * Title of the track.
+         */
+        public Builder title(@Nullable String title) {
+            this.title = title;
+            return this;
+        }
+
         public TrackSubtitlesGenerateRequest build() {
             return new TrackSubtitlesGenerateRequest(
-                languageName, metadata, languageCode);
+                languageName, metadata, languageCode, title);
         }
 
 

@@ -11,31 +11,31 @@ import io.fastpix.sdk.utils.Utils.JsonShape;
 import io.fastpix.sdk.utils.Utils.TypeReferenceWithShape;
 import io.fastpix.sdk.utils.Utils;
 
-@JsonDeserialize(using = GetMediaResponseTrack.TrackDeserializer.class)
-public class GetMediaResponseTrack {
+@JsonDeserialize(using = GetMediaDetailResponseTrack.TrackDeserializer.class)
+public class GetMediaDetailResponseTrack {
 
     private static final String VALUE_NAME = "value";
 
     @JsonValue
     private final TypedObject value;
 
-    private GetMediaResponseTrack(TypedObject value) {
+    private GetMediaDetailResponseTrack(TypedObject value) {
         this.value = value;
     }
 
-    public static GetMediaResponseTrack of(VideoTrack value) {
+    public static GetMediaDetailResponseTrack of(VideoTrack value) {
         Utils.checkNotNull(value, VALUE_NAME);
-        return new GetMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
+        return new GetMediaDetailResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
-    public static GetMediaResponseTrack of(AudioTrack value) {
+    public static GetMediaDetailResponseTrack of(AudioTrack value) {
         Utils.checkNotNull(value, VALUE_NAME);
-        return new GetMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
+        return new GetMediaDetailResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
-    public static GetMediaResponseTrack of(SubtitleTrack value) {
+    public static GetMediaDetailResponseTrack of(SubtitleTrack value) {
         Utils.checkNotNull(value, VALUE_NAME);
-        return new GetMediaResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
+        return new GetMediaDetailResponseTrack(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
     /**
@@ -97,7 +97,7 @@ public class GetMediaResponseTrack {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetMediaResponseTrack other = (GetMediaResponseTrack) o;
+        GetMediaDetailResponseTrack other = (GetMediaDetailResponseTrack) o;
         return Utils.enhancedDeepEquals(this.value.value(), other.value.value());
     }
     
@@ -107,10 +107,10 @@ public class GetMediaResponseTrack {
     }
     
     @SuppressWarnings("serial")
-    public static final class TrackDeserializer extends OneOfDeserializer<GetMediaResponseTrack> {
+    public static final class TrackDeserializer extends OneOfDeserializer<GetMediaDetailResponseTrack> {
 
         public TrackDeserializer() {
-            super(GetMediaResponseTrack.class, false,
+            super(GetMediaDetailResponseTrack.class, false,
                   TypeReferenceWithShape.of(new TypeReference<VideoTrack>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<AudioTrack>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<SubtitleTrack>() {}, JsonShape.DEFAULT));
@@ -119,7 +119,7 @@ public class GetMediaResponseTrack {
     
     @Override
     public String toString() {
-        return Utils.toString(GetMediaResponseTrack.class,
+        return Utils.toString(GetMediaDetailResponseTrack.class,
                 VALUE_NAME, value);
     }
 

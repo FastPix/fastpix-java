@@ -1,143 +1,257 @@
 package io.fastpix.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Nullable;
 import java.util.Optional;
+import io.fastpix.sdk.utils.Utils;
 
 /**
  * GetAllMediaResponseMp4Support
  *
- * <p>Determines the type of MP4 support for the media.
- * - **none**: Disables MP4 support.
- * - **capped_4k**: Enables MP4 downloads with resolutions up to 4K.
- * - **audioOnly**: Provides an MP4 stream containing only the audio.
- * - **audioOnly,capped_4k**: Enables both MP4 video downloads (up to 4K) and an audio-only stream.
- *
- * <p>Wrapper for an "open" enum that can handle unknown values from API responses
- * without runtime errors. Instances are immutable singletons with reference equality.
- * Use {@code asEnum()} for switch expressions.
+ * <p>One downloadable MP4 rendition generated for the media, along with its generation status.
  */
 public class GetAllMediaResponseMp4Support {
+    /**
+     * The MP4 rendition type. `capped_4k` is a downloadable MP4 video capped at 4K resolution,
+     * `audioOnly` is a downloadable m4a audio-only file.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("type")
+    private GetAllMediaResponseMp4SupportType type;
 
-    private static final String NONE_VALUE = "none";
-    private static final String CAPPED_4K_VALUE = "capped_4k";
-    private static final String AUDIO_ONLY_VALUE = "audioOnly";
-    private static final String AUDIO_ONLY_CAPPED_4K_VALUE = "audioOnly,capped_4k";
+    /**
+     * Generation status of this MP4 rendition.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("status")
+    private GetAllMediaResponseMp4SupportStatus status;
 
-    public static final GetAllMediaResponseMp4Support NONE = new GetAllMediaResponseMp4Support(NONE_VALUE);
-    public static final GetAllMediaResponseMp4Support CAPPED4K = new GetAllMediaResponseMp4Support(CAPPED_4K_VALUE);
-    public static final GetAllMediaResponseMp4Support AUDIO_ONLY = new GetAllMediaResponseMp4Support(AUDIO_ONLY_VALUE);
-    public static final GetAllMediaResponseMp4Support AUDIO_ONLY_CAPPED4K = new GetAllMediaResponseMp4Support(AUDIO_ONLY_CAPPED_4K_VALUE);
+    /**
+     * Pixel height of the rendition. Omitted for the `audioOnly` type.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("height")
+    private Long height;
 
-    // This map will grow whenever a Color gets created with a new
-    // unrecognized value (a potential memory leak if the user is not
-    // careful). Keep this field lower case to avoid clashing with
-    // generated member names which will always be upper cased (Java
-    // convention)
-    private static final Map<String, GetAllMediaResponseMp4Support> values = createValuesMap();
-    private static final Map<String, GetAllMediaResponseMp4SupportEnum> enums = createEnumsMap();
+    /**
+     * Pixel width of the rendition. Omitted for the `audioOnly` type.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("width")
+    private Long width;
 
-    private final String value;
+    /**
+     * File extension of the downloadable rendition.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("ext")
+    private GetAllMediaResponseMp4SupportExt ext;
 
-    private GetAllMediaResponseMp4Support(String value) {
-        this.value = value;
+    @JsonCreator
+    public GetAllMediaResponseMp4Support(
+            @JsonProperty("type") @Nullable GetAllMediaResponseMp4SupportType type,
+            @JsonProperty("status") @Nullable GetAllMediaResponseMp4SupportStatus status,
+            @JsonProperty("height") @Nullable Long height,
+            @JsonProperty("width") @Nullable Long width,
+            @JsonProperty("ext") @Nullable GetAllMediaResponseMp4SupportExt ext) {
+        this.type = type;
+        this.status = status;
+        this.height = height;
+        this.width = width;
+        this.ext = ext;
+    }
+
+    public GetAllMediaResponseMp4Support() {
+        this(null, null, null,
+            null, null);
     }
 
     /**
-     * Returns a GetAllMediaResponseMp4Support with the given value. For a specific value the 
-     * returned object will always be a singleton so reference equality 
-     * is satisfied when the values are the same.
-     * 
-     * @param value value to be wrapped as GetAllMediaResponseMp4Support
-     */ 
-    @JsonCreator
-    public static GetAllMediaResponseMp4Support of(String value) {
-        synchronized (GetAllMediaResponseMp4Support.class) {
-            return values.computeIfAbsent(value, GetAllMediaResponseMp4Support::new);
+     * The MP4 rendition type. `capped_4k` is a downloadable MP4 video capped at 4K resolution,
+     * `audioOnly` is a downloadable m4a audio-only file.
+     */
+    public Optional<GetAllMediaResponseMp4SupportType> type() {
+        return Optional.ofNullable(this.type);
+    }
+
+    /**
+     * Generation status of this MP4 rendition.
+     */
+    public Optional<GetAllMediaResponseMp4SupportStatus> status() {
+        return Optional.ofNullable(this.status);
+    }
+
+    /**
+     * Pixel height of the rendition. Omitted for the `audioOnly` type.
+     */
+    public Optional<Long> height() {
+        return Optional.ofNullable(this.height);
+    }
+
+    /**
+     * Pixel width of the rendition. Omitted for the `audioOnly` type.
+     */
+    public Optional<Long> width() {
+        return Optional.ofNullable(this.width);
+    }
+
+    /**
+     * File extension of the downloadable rendition.
+     */
+    public Optional<GetAllMediaResponseMp4SupportExt> ext() {
+        return Optional.ofNullable(this.ext);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
+    /**
+     * The MP4 rendition type. `capped_4k` is a downloadable MP4 video capped at 4K resolution,
+     * `audioOnly` is a downloadable m4a audio-only file.
+     */
+    public GetAllMediaResponseMp4Support withType(@Nullable GetAllMediaResponseMp4SupportType type) {
+        this.type = type;
+        return this;
+    }
+
+
+    /**
+     * Generation status of this MP4 rendition.
+     */
+    public GetAllMediaResponseMp4Support withStatus(@Nullable GetAllMediaResponseMp4SupportStatus status) {
+        this.status = status;
+        return this;
+    }
+
+
+    /**
+     * Pixel height of the rendition. Omitted for the `audioOnly` type.
+     */
+    public GetAllMediaResponseMp4Support withHeight(@Nullable Long height) {
+        this.height = height;
+        return this;
+    }
+
+
+    /**
+     * Pixel width of the rendition. Omitted for the `audioOnly` type.
+     */
+    public GetAllMediaResponseMp4Support withWidth(@Nullable Long width) {
+        this.width = width;
+        return this;
+    }
+
+
+    /**
+     * File extension of the downloadable rendition.
+     */
+    public GetAllMediaResponseMp4Support withExt(@Nullable GetAllMediaResponseMp4SupportExt ext) {
+        this.ext = ext;
+        return this;
+    }
+
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
         }
-    }
-
-    @JsonValue
-    public String value() {
-        return value;
-    }
-
-    public Optional<GetAllMediaResponseMp4SupportEnum> asEnum() {
-        return Optional.ofNullable(enums.getOrDefault(value, null));
-    }
-
-    public boolean isKnown() {
-        return asEnum().isPresent();
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        GetAllMediaResponseMp4Support other = (GetAllMediaResponseMp4Support) o;
+        return
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.height, other.height) &&
+            Utils.enhancedDeepEquals(this.width, other.width) &&
+            Utils.enhancedDeepEquals(this.ext, other.ext);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
-    }
-
-    @Override
-    public boolean equals(java.lang.Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        GetAllMediaResponseMp4Support other = (GetAllMediaResponseMp4Support) obj;
-        return Objects.equals(value, other.value);
+        return Utils.enhancedHash(
+            type, status, height,
+            width, ext);
     }
 
     @Override
     public String toString() {
-        return "GetAllMediaResponseMp4Support [value=" + value + "]";
+        return Utils.toString(GetAllMediaResponseMp4Support.class,
+                "type", type,
+                "status", status,
+                "height", height,
+                "width", width,
+                "ext", ext);
     }
 
-    // return an array just like an enum
-    public static GetAllMediaResponseMp4Support[] values() {
-        synchronized (GetAllMediaResponseMp4Support.class) {
-            return values.values().toArray(new GetAllMediaResponseMp4Support[] {});
-        }
-    }
+    @SuppressWarnings("UnusedReturnValue")
+    public static final class Builder {
 
-    private static final Map<String, GetAllMediaResponseMp4Support> createValuesMap() {
-        Map<String, GetAllMediaResponseMp4Support> map = new LinkedHashMap<>();
-        map.put(NONE_VALUE, NONE);
-        map.put(CAPPED_4K_VALUE, CAPPED4K);
-        map.put(AUDIO_ONLY_VALUE, AUDIO_ONLY);
-        map.put(AUDIO_ONLY_CAPPED_4K_VALUE, AUDIO_ONLY_CAPPED4K);
-        return map;
-    }
+        private GetAllMediaResponseMp4SupportType type;
 
-    private static final Map<String, GetAllMediaResponseMp4SupportEnum> createEnumsMap() {
-        Map<String, GetAllMediaResponseMp4SupportEnum> map = new HashMap<>();
-        map.put(NONE_VALUE, GetAllMediaResponseMp4SupportEnum.NONE);
-        map.put(CAPPED_4K_VALUE, GetAllMediaResponseMp4SupportEnum.CAPPED4K);
-        map.put(AUDIO_ONLY_VALUE, GetAllMediaResponseMp4SupportEnum.AUDIO_ONLY);
-        map.put(AUDIO_ONLY_CAPPED_4K_VALUE, GetAllMediaResponseMp4SupportEnum.AUDIO_ONLY_CAPPED4K);
-        return map;
-    }
-    
-    
-    public enum GetAllMediaResponseMp4SupportEnum {
+        private GetAllMediaResponseMp4SupportStatus status;
 
-        NONE(NONE_VALUE),
-        CAPPED4K(CAPPED_4K_VALUE),
-        AUDIO_ONLY(AUDIO_ONLY_VALUE),
-        AUDIO_ONLY_CAPPED4K(AUDIO_ONLY_CAPPED_4K_VALUE),;
+        private Long height;
 
-        private final String value;
+        private Long width;
 
-        private GetAllMediaResponseMp4SupportEnum(String value) {
-            this.value = value;
+        private GetAllMediaResponseMp4SupportExt ext;
+
+        private Builder() {
+          // force use of static builder() method
         }
 
-        public String value() {
-            return value;
+        /**
+         * The MP4 rendition type. `capped_4k` is a downloadable MP4 video capped at 4K resolution,
+         * `audioOnly` is a downloadable m4a audio-only file.
+         */
+        public Builder type(@Nullable GetAllMediaResponseMp4SupportType type) {
+            this.type = type;
+            return this;
+        }
+
+        /**
+         * Generation status of this MP4 rendition.
+         */
+        public Builder status(@Nullable GetAllMediaResponseMp4SupportStatus status) {
+            this.status = status;
+            return this;
+        }
+
+        /**
+         * Pixel height of the rendition. Omitted for the `audioOnly` type.
+         */
+        public Builder height(@Nullable Long height) {
+            this.height = height;
+            return this;
+        }
+
+        /**
+         * Pixel width of the rendition. Omitted for the `audioOnly` type.
+         */
+        public Builder width(@Nullable Long width) {
+            this.width = width;
+            return this;
+        }
+
+        /**
+         * File extension of the downloadable rendition.
+         */
+        public Builder ext(@Nullable GetAllMediaResponseMp4SupportExt ext) {
+            this.ext = ext;
+            return this;
+        }
+
+        public GetAllMediaResponseMp4Support build() {
+            return new GetAllMediaResponseMp4Support(
+                type, status, height,
+                width, ext);
         }
     }
 }
-

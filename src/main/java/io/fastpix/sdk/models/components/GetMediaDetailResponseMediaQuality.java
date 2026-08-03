@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetMediaResponseMediaQuality
+ * GetMediaDetailResponseMediaQuality
  *
  * <p>The quality tier applied to the media.
  *
@@ -17,41 +17,41 @@ import java.util.Optional;
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-public class GetMediaResponseMediaQuality {
+public class GetMediaDetailResponseMediaQuality {
 
     private static final String STANDARD_VALUE = "standard";
     private static final String PRO_VALUE = "pro";
     private static final String PREMIUM_VALUE = "premium";
 
-    public static final GetMediaResponseMediaQuality STANDARD = new GetMediaResponseMediaQuality(STANDARD_VALUE);
-    public static final GetMediaResponseMediaQuality PRO = new GetMediaResponseMediaQuality(PRO_VALUE);
-    public static final GetMediaResponseMediaQuality PREMIUM = new GetMediaResponseMediaQuality(PREMIUM_VALUE);
+    public static final GetMediaDetailResponseMediaQuality STANDARD = new GetMediaDetailResponseMediaQuality(STANDARD_VALUE);
+    public static final GetMediaDetailResponseMediaQuality PRO = new GetMediaDetailResponseMediaQuality(PRO_VALUE);
+    public static final GetMediaDetailResponseMediaQuality PREMIUM = new GetMediaDetailResponseMediaQuality(PREMIUM_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
     // careful). Keep this field lower case to avoid clashing with
     // generated member names which will always be upper cased (Java
     // convention)
-    private static final Map<String, GetMediaResponseMediaQuality> values = createValuesMap();
-    private static final Map<String, GetMediaResponseMediaQualityEnum> enums = createEnumsMap();
+    private static final Map<String, GetMediaDetailResponseMediaQuality> values = createValuesMap();
+    private static final Map<String, GetMediaDetailResponseMediaQualityEnum> enums = createEnumsMap();
 
     private final String value;
 
-    private GetMediaResponseMediaQuality(String value) {
+    private GetMediaDetailResponseMediaQuality(String value) {
         this.value = value;
     }
 
     /**
-     * Returns a GetMediaResponseMediaQuality with the given value. For a specific value the 
+     * Returns a GetMediaDetailResponseMediaQuality with the given value. For a specific value the 
      * returned object will always be a singleton so reference equality 
      * is satisfied when the values are the same.
      * 
-     * @param value value to be wrapped as GetMediaResponseMediaQuality
+     * @param value value to be wrapped as GetMediaDetailResponseMediaQuality
      */ 
     @JsonCreator
-    public static GetMediaResponseMediaQuality of(String value) {
-        synchronized (GetMediaResponseMediaQuality.class) {
-            return values.computeIfAbsent(value, GetMediaResponseMediaQuality::new);
+    public static GetMediaDetailResponseMediaQuality of(String value) {
+        synchronized (GetMediaDetailResponseMediaQuality.class) {
+            return values.computeIfAbsent(value, GetMediaDetailResponseMediaQuality::new);
         }
     }
 
@@ -60,7 +60,7 @@ public class GetMediaResponseMediaQuality {
         return value;
     }
 
-    public Optional<GetMediaResponseMediaQualityEnum> asEnum() {
+    public Optional<GetMediaDetailResponseMediaQualityEnum> asEnum() {
         return Optional.ofNullable(enums.getOrDefault(value, null));
     }
 
@@ -81,40 +81,40 @@ public class GetMediaResponseMediaQuality {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        GetMediaResponseMediaQuality other = (GetMediaResponseMediaQuality) obj;
+        GetMediaDetailResponseMediaQuality other = (GetMediaDetailResponseMediaQuality) obj;
         return Objects.equals(value, other.value);
     }
 
     @Override
     public String toString() {
-        return "GetMediaResponseMediaQuality [value=" + value + "]";
+        return "GetMediaDetailResponseMediaQuality [value=" + value + "]";
     }
 
     // return an array just like an enum
-    public static GetMediaResponseMediaQuality[] values() {
-        synchronized (GetMediaResponseMediaQuality.class) {
-            return values.values().toArray(new GetMediaResponseMediaQuality[] {});
+    public static GetMediaDetailResponseMediaQuality[] values() {
+        synchronized (GetMediaDetailResponseMediaQuality.class) {
+            return values.values().toArray(new GetMediaDetailResponseMediaQuality[] {});
         }
     }
 
-    private static final Map<String, GetMediaResponseMediaQuality> createValuesMap() {
-        Map<String, GetMediaResponseMediaQuality> map = new LinkedHashMap<>();
+    private static final Map<String, GetMediaDetailResponseMediaQuality> createValuesMap() {
+        Map<String, GetMediaDetailResponseMediaQuality> map = new LinkedHashMap<>();
         map.put(STANDARD_VALUE, STANDARD);
         map.put(PRO_VALUE, PRO);
         map.put(PREMIUM_VALUE, PREMIUM);
         return map;
     }
 
-    private static final Map<String, GetMediaResponseMediaQualityEnum> createEnumsMap() {
-        Map<String, GetMediaResponseMediaQualityEnum> map = new HashMap<>();
-        map.put(STANDARD_VALUE, GetMediaResponseMediaQualityEnum.STANDARD);
-        map.put(PRO_VALUE, GetMediaResponseMediaQualityEnum.PRO);
-        map.put(PREMIUM_VALUE, GetMediaResponseMediaQualityEnum.PREMIUM);
+    private static final Map<String, GetMediaDetailResponseMediaQualityEnum> createEnumsMap() {
+        Map<String, GetMediaDetailResponseMediaQualityEnum> map = new HashMap<>();
+        map.put(STANDARD_VALUE, GetMediaDetailResponseMediaQualityEnum.STANDARD);
+        map.put(PRO_VALUE, GetMediaDetailResponseMediaQualityEnum.PRO);
+        map.put(PREMIUM_VALUE, GetMediaDetailResponseMediaQualityEnum.PREMIUM);
         return map;
     }
     
     
-    public enum GetMediaResponseMediaQualityEnum {
+    public enum GetMediaDetailResponseMediaQualityEnum {
 
         STANDARD(STANDARD_VALUE),
         PRO(PRO_VALUE),
@@ -122,7 +122,7 @@ public class GetMediaResponseMediaQuality {
 
         private final String value;
 
-        private GetMediaResponseMediaQualityEnum(String value) {
+        private GetMediaDetailResponseMediaQualityEnum(String value) {
             this.value = value;
         }
 

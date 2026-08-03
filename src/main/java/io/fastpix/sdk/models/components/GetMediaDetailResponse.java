@@ -17,7 +17,7 @@ import io.fastpix.sdk.utils.Utils;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 
-public class GetMediaResponse {
+public class GetMediaDetailResponse {
     /**
      * A video thumbnail is a still image that acts as the preview image for your video.
      */
@@ -67,7 +67,7 @@ public class GetMediaResponse {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaQuality")
-    private GetMediaResponseMediaQuality mediaQuality;
+    private GetMediaDetailResponseMediaQuality mediaQuality;
 
     /**
      * The unique identifier of the user who created this media.
@@ -88,21 +88,21 @@ public class GetMediaResponse {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxResolution")
-    private GetMediaResponseMaxResolution maxResolution;
+    private GetMediaDetailResponseMaxResolution maxResolution;
 
     /**
      * The actual resolution of the uploaded media. This represents the native quality of the source media.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sourceResolution")
-    private GetMediaResponseSourceResolution sourceResolution;
+    private GetMediaDetailResponseSourceResolution sourceResolution;
 
     /**
      * Determines the media's status, which can be one of the possible values.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private GetMediaResponseStatus status;
+    private GetMediaDetailResponseStatus status;
 
     /**
      * Determines the type of MP4 support for the media.
@@ -113,7 +113,7 @@ public class GetMediaResponse {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mp4Support")
-    private GetMediaResponseMp4Support mp4Support;
+    private List<GetMediaDetailResponseMp4Support> mp4Support;
 
     /**
      * The sourceAccess parameter determines whether the original media file is accessible. Set to true to
@@ -135,7 +135,7 @@ public class GetMediaResponse {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tracks")
-    private List<GetMediaResponseTrack> tracks;
+    private List<GetMediaDetailResponseTrack> tracks;
 
     /**
      * List of generated subtitle tracks associated with the media.
@@ -229,24 +229,31 @@ public class GetMediaResponse {
     @JsonProperty("updatedAt")
     private OffsetDateTime updatedAt;
 
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("optimizeAudio")
+    private Boolean optimizeAudio;
+
     @JsonCreator
-    public GetMediaResponse(
+    public GetMediaDetailResponse(
             @JsonProperty("thumbnail") @Nullable JsonNullable<String> thumbnail,
             @JsonProperty("id") @Nullable String id,
             @JsonProperty("sourceMediaId") @Nullable String sourceMediaId,
             @JsonProperty("workspaceId") @Nullable String workspaceId,
             @JsonProperty("streamId") @Nullable String streamId,
             @JsonProperty("metadata") @Nullable JsonNullable<Map<String, String>> metadata,
-            @JsonProperty("mediaQuality") @Nullable GetMediaResponseMediaQuality mediaQuality,
+            @JsonProperty("mediaQuality") @Nullable GetMediaDetailResponseMediaQuality mediaQuality,
             @JsonProperty("creatorId") @Nullable String creatorId,
             @JsonProperty("title") @Nullable JsonNullable<String> title,
-            @JsonProperty("maxResolution") @Nullable GetMediaResponseMaxResolution maxResolution,
-            @JsonProperty("sourceResolution") @Nullable GetMediaResponseSourceResolution sourceResolution,
-            @JsonProperty("status") @Nullable GetMediaResponseStatus status,
-            @JsonProperty("mp4Support") @Nullable GetMediaResponseMp4Support mp4Support,
+            @JsonProperty("maxResolution") @Nullable GetMediaDetailResponseMaxResolution maxResolution,
+            @JsonProperty("sourceResolution") @Nullable GetMediaDetailResponseSourceResolution sourceResolution,
+            @JsonProperty("status") @Nullable GetMediaDetailResponseStatus status,
+            @JsonProperty("mp4Support") @Nullable List<GetMediaDetailResponseMp4Support> mp4Support,
             @JsonProperty("sourceAccess") @Nullable JsonNullable<Boolean> sourceAccess,
             @JsonProperty("playbackIds") @Nullable List<PlaybackId> playbackIds,
-            @JsonProperty("tracks") @Nullable List<GetMediaResponseTrack> tracks,
+            @JsonProperty("tracks") @Nullable List<GetMediaDetailResponseTrack> tracks,
             @JsonProperty("generatedSubtitles") @Nullable JsonNullable<List<TracksSubtitles>> generatedSubtitles,
             @JsonProperty("summary") @Nullable AiSummaryRecord summary,
             @JsonProperty("chapters") @Nullable AiResponseRecord chapters,
@@ -258,7 +265,8 @@ public class GetMediaResponse {
             @JsonProperty("frameRate") @Nullable String frameRate,
             @JsonProperty("aspectRatio") @Nullable JsonNullable<String> aspectRatio,
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
-            @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt) {
+            @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt,
+            @JsonProperty("optimizeAudio") @Nullable Boolean optimizeAudio) {
         this.thumbnail = Optional.ofNullable(thumbnail)
             .orElse(JsonNullable.undefined());
         this.id = id;
@@ -297,9 +305,10 @@ public class GetMediaResponse {
             .orElse(JsonNullable.undefined());
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.optimizeAudio = optimizeAudio;
     }
     
-    public GetMediaResponse() {
+    public GetMediaDetailResponse() {
         this(null, null, null,
             null, null, null,
             null, null, null,
@@ -309,7 +318,7 @@ public class GetMediaResponse {
             null, null, null,
             null, null, null,
             null, null, null,
-            null);
+            null, null);
     }
 
     /**
@@ -359,7 +368,7 @@ public class GetMediaResponse {
     /**
      * The quality tier applied to the media.
      */
-    public Optional<GetMediaResponseMediaQuality> mediaQuality() {
+    public Optional<GetMediaDetailResponseMediaQuality> mediaQuality() {
         return Optional.ofNullable(this.mediaQuality);
     }
 
@@ -380,21 +389,21 @@ public class GetMediaResponse {
     /**
      * The maximum resolution specified by the user for the media.
      */
-    public Optional<GetMediaResponseMaxResolution> maxResolution() {
+    public Optional<GetMediaDetailResponseMaxResolution> maxResolution() {
         return Optional.ofNullable(this.maxResolution);
     }
 
     /**
      * The actual resolution of the uploaded media. This represents the native quality of the source media.
      */
-    public Optional<GetMediaResponseSourceResolution> sourceResolution() {
+    public Optional<GetMediaDetailResponseSourceResolution> sourceResolution() {
         return Optional.ofNullable(this.sourceResolution);
     }
 
     /**
      * Determines the media's status, which can be one of the possible values.
      */
-    public Optional<GetMediaResponseStatus> status() {
+    public Optional<GetMediaDetailResponseStatus> status() {
         return Optional.ofNullable(this.status);
     }
 
@@ -405,7 +414,7 @@ public class GetMediaResponse {
      * - **audioOnly**: Provides an MP4 stream containing only the audio.
      * - **audioOnly,capped_4k**: Enables both MP4 video downloads (up to 4K) and an audio-only stream.
      */
-    public Optional<GetMediaResponseMp4Support> mp4Support() {
+    public Optional<List<GetMediaDetailResponseMp4Support>> mp4Support() {
         return Optional.ofNullable(this.mp4Support);
     }
 
@@ -427,7 +436,7 @@ public class GetMediaResponse {
     /**
      * A media consists of different media tracks, like video, audio, and subtitle, all combined.
      */
-    public Optional<List<GetMediaResponseTrack>> tracks() {
+    public Optional<List<GetMediaDetailResponseTrack>> tracks() {
         return Optional.ofNullable(this.tracks);
     }
 
@@ -524,6 +533,13 @@ public class GetMediaResponse {
         return Optional.ofNullable(this.updatedAt);
     }
 
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    public Optional<Boolean> optimizeAudio() {
+        return Optional.ofNullable(this.optimizeAudio);
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -532,7 +548,7 @@ public class GetMediaResponse {
     /**
      * A video thumbnail is a still image that acts as the preview image for your video.
      */
-    public GetMediaResponse withThumbnail(@Nullable String thumbnail) {
+    public GetMediaDetailResponse withThumbnail(@Nullable String thumbnail) {
         this.thumbnail = JsonNullable.of(thumbnail);
         return this;
     }
@@ -541,7 +557,7 @@ public class GetMediaResponse {
     /**
      * The unique identifier assigned to the media when created. The value must be a valid UUID.
      */
-    public GetMediaResponse withId(@Nullable String id) {
+    public GetMediaDetailResponse withId(@Nullable String id) {
         this.id = id;
         return this;
     }
@@ -550,7 +566,7 @@ public class GetMediaResponse {
     /**
      * The source media ID if this media was created from another media (for example, as a clip).
      */
-    public GetMediaResponse withSourceMediaId(@Nullable String sourceMediaId) {
+    public GetMediaDetailResponse withSourceMediaId(@Nullable String sourceMediaId) {
         this.sourceMediaId = sourceMediaId;
         return this;
     }
@@ -559,7 +575,7 @@ public class GetMediaResponse {
     /**
      * A unique identifier is generated by FastPix for the workspace.
      */
-    public GetMediaResponse withWorkspaceId(@Nullable String workspaceId) {
+    public GetMediaDetailResponse withWorkspaceId(@Nullable String workspaceId) {
         this.workspaceId = workspaceId;
         return this;
     }
@@ -568,7 +584,7 @@ public class GetMediaResponse {
     /**
      * The ID of the livestream for which the clips were created.
      */
-    public GetMediaResponse withStreamId(@Nullable String streamId) {
+    public GetMediaDetailResponse withStreamId(@Nullable String streamId) {
         this.streamId = streamId;
         return this;
     }
@@ -579,7 +595,7 @@ public class GetMediaResponse {
      * "key" : "value" pairs. Dynamic metadata allows you to define a key that allows any value pair. You
      * can have maximum of 255 characters and upto 10 entries are allowed.
      */
-    public GetMediaResponse withMetadata(@Nullable Map<String, String> metadata) {
+    public GetMediaDetailResponse withMetadata(@Nullable Map<String, String> metadata) {
         this.metadata = JsonNullable.of(metadata);
         return this;
     }
@@ -588,7 +604,7 @@ public class GetMediaResponse {
     /**
      * The quality tier applied to the media.
      */
-    public GetMediaResponse withMediaQuality(@Nullable GetMediaResponseMediaQuality mediaQuality) {
+    public GetMediaDetailResponse withMediaQuality(@Nullable GetMediaDetailResponseMediaQuality mediaQuality) {
         this.mediaQuality = mediaQuality;
         return this;
     }
@@ -597,7 +613,7 @@ public class GetMediaResponse {
     /**
      * The unique identifier of the user who created this media.
      */
-    public GetMediaResponse withCreatorId(@Nullable String creatorId) {
+    public GetMediaDetailResponse withCreatorId(@Nullable String creatorId) {
         this.creatorId = creatorId;
         return this;
     }
@@ -606,7 +622,7 @@ public class GetMediaResponse {
     /**
      * Title of the media file.
      */
-    public GetMediaResponse withTitle(@Nullable String title) {
+    public GetMediaDetailResponse withTitle(@Nullable String title) {
         this.title = JsonNullable.of(title);
         return this;
     }
@@ -615,7 +631,7 @@ public class GetMediaResponse {
     /**
      * The maximum resolution specified by the user for the media.
      */
-    public GetMediaResponse withMaxResolution(@Nullable GetMediaResponseMaxResolution maxResolution) {
+    public GetMediaDetailResponse withMaxResolution(@Nullable GetMediaDetailResponseMaxResolution maxResolution) {
         this.maxResolution = maxResolution;
         return this;
     }
@@ -624,7 +640,7 @@ public class GetMediaResponse {
     /**
      * The actual resolution of the uploaded media. This represents the native quality of the source media.
      */
-    public GetMediaResponse withSourceResolution(@Nullable GetMediaResponseSourceResolution sourceResolution) {
+    public GetMediaDetailResponse withSourceResolution(@Nullable GetMediaDetailResponseSourceResolution sourceResolution) {
         this.sourceResolution = sourceResolution;
         return this;
     }
@@ -633,7 +649,7 @@ public class GetMediaResponse {
     /**
      * Determines the media's status, which can be one of the possible values.
      */
-    public GetMediaResponse withStatus(@Nullable GetMediaResponseStatus status) {
+    public GetMediaDetailResponse withStatus(@Nullable GetMediaDetailResponseStatus status) {
         this.status = status;
         return this;
     }
@@ -646,7 +662,7 @@ public class GetMediaResponse {
      * - **audioOnly**: Provides an MP4 stream containing only the audio.
      * - **audioOnly,capped_4k**: Enables both MP4 video downloads (up to 4K) and an audio-only stream.
      */
-    public GetMediaResponse withMp4Support(@Nullable GetMediaResponseMp4Support mp4Support) {
+    public GetMediaDetailResponse withMp4Support(@Nullable List<GetMediaDetailResponseMp4Support> mp4Support) {
         this.mp4Support = mp4Support;
         return this;
     }
@@ -656,7 +672,7 @@ public class GetMediaResponse {
      * The sourceAccess parameter determines whether the original media file is accessible. Set to true to
      * enable access or false to restrict it.
      */
-    public GetMediaResponse withSourceAccess(@Nullable Boolean sourceAccess) {
+    public GetMediaDetailResponse withSourceAccess(@Nullable Boolean sourceAccess) {
         this.sourceAccess = JsonNullable.of(sourceAccess);
         return this;
     }
@@ -665,7 +681,7 @@ public class GetMediaResponse {
     /**
      * A collection of Playback ID objects utilized for crafting HLS playback URLs.
      */
-    public GetMediaResponse withPlaybackIds(@Nullable List<PlaybackId> playbackIds) {
+    public GetMediaDetailResponse withPlaybackIds(@Nullable List<PlaybackId> playbackIds) {
         this.playbackIds = playbackIds;
         return this;
     }
@@ -674,7 +690,7 @@ public class GetMediaResponse {
     /**
      * A media consists of different media tracks, like video, audio, and subtitle, all combined.
      */
-    public GetMediaResponse withTracks(@Nullable List<GetMediaResponseTrack> tracks) {
+    public GetMediaDetailResponse withTracks(@Nullable List<GetMediaDetailResponseTrack> tracks) {
         this.tracks = tracks;
         return this;
     }
@@ -683,7 +699,7 @@ public class GetMediaResponse {
     /**
      * List of generated subtitle tracks associated with the media.
      */
-    public GetMediaResponse withGeneratedSubtitles(@Nullable List<TracksSubtitles> generatedSubtitles) {
+    public GetMediaDetailResponse withGeneratedSubtitles(@Nullable List<TracksSubtitles> generatedSubtitles) {
         this.generatedSubtitles = JsonNullable.of(generatedSubtitles);
         return this;
     }
@@ -693,7 +709,7 @@ public class GetMediaResponse {
      * Represents an AI response record containing status and data for AI-generated features like summary,
      * chapters, named entities, or moderation.
      */
-    public GetMediaResponse withSummary(@Nullable AiSummaryRecord summary) {
+    public GetMediaDetailResponse withSummary(@Nullable AiSummaryRecord summary) {
         this.summary = summary;
         return this;
     }
@@ -703,7 +719,7 @@ public class GetMediaResponse {
      * Represents an AI response record containing status and data for AI-generated features like summary,
      * chapters, named entities, or moderation.
      */
-    public GetMediaResponse withChapters(@Nullable AiResponseRecord chapters) {
+    public GetMediaDetailResponse withChapters(@Nullable AiResponseRecord chapters) {
         this.chapters = chapters;
         return this;
     }
@@ -713,7 +729,7 @@ public class GetMediaResponse {
      * Represents an AI response record containing status and data for AI-generated features like summary,
      * chapters, named entities, or moderation.
      */
-    public GetMediaResponse withNamedEntities(@Nullable AiResponseRecord namedEntities) {
+    public GetMediaDetailResponse withNamedEntities(@Nullable AiResponseRecord namedEntities) {
         this.namedEntities = namedEntities;
         return this;
     }
@@ -723,7 +739,7 @@ public class GetMediaResponse {
      * Represents an AI response record containing status and data for AI-generated features like summary,
      * chapters, named entities, or moderation.
      */
-    public GetMediaResponse withModeration(@Nullable AiResponseRecord moderation) {
+    public GetMediaDetailResponse withModeration(@Nullable AiResponseRecord moderation) {
         this.moderation = moderation;
         return this;
     }
@@ -732,7 +748,7 @@ public class GetMediaResponse {
     /**
      * Indicates whether the media contains only audio (no video track).
      */
-    public GetMediaResponse withIsAudioOnly(@Nullable Boolean isAudioOnly) {
+    public GetMediaDetailResponse withIsAudioOnly(@Nullable Boolean isAudioOnly) {
         this.isAudioOnly = JsonNullable.of(isAudioOnly);
         return this;
     }
@@ -741,7 +757,7 @@ public class GetMediaResponse {
     /**
      * Indicates whether subtitles are available for the media.
      */
-    public GetMediaResponse withSubtitleAvailable(@Nullable Boolean subtitleAvailable) {
+    public GetMediaDetailResponse withSubtitleAvailable(@Nullable Boolean subtitleAvailable) {
         this.subtitleAvailable = JsonNullable.of(subtitleAvailable);
         return this;
     }
@@ -751,7 +767,7 @@ public class GetMediaResponse {
      * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
      * media.
      */
-    public GetMediaResponse withDuration(@Nullable String duration) {
+    public GetMediaDetailResponse withDuration(@Nullable String duration) {
         this.duration = duration;
         return this;
     }
@@ -762,7 +778,7 @@ public class GetMediaResponse {
      * frames available for a specific track. The indeterminable frame rate of the input file is indicated
      * by a value of -1.
      */
-    public GetMediaResponse withFrameRate(@Nullable String frameRate) {
+    public GetMediaDetailResponse withFrameRate(@Nullable String frameRate) {
         this.frameRate = frameRate;
         return this;
     }
@@ -772,7 +788,7 @@ public class GetMediaResponse {
      * The aspect ratio of a video is a value that describes the relative shape of a video based on its
      * width and height.
      */
-    public GetMediaResponse withAspectRatio(@Nullable String aspectRatio) {
+    public GetMediaDetailResponse withAspectRatio(@Nullable String aspectRatio) {
         this.aspectRatio = JsonNullable.of(aspectRatio);
         return this;
     }
@@ -781,7 +797,7 @@ public class GetMediaResponse {
     /**
      * Time the media was created, defined as a localDateTime (UTC Time).
      */
-    public GetMediaResponse withCreatedAt(@Nullable OffsetDateTime createdAt) {
+    public GetMediaDetailResponse withCreatedAt(@Nullable OffsetDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -790,8 +806,17 @@ public class GetMediaResponse {
     /**
      * Time the media was updated, defined as a localDateTime (UTC Time).
      */
-    public GetMediaResponse withUpdatedAt(@Nullable OffsetDateTime updatedAt) {
+    public GetMediaDetailResponse withUpdatedAt(@Nullable OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
+    }
+
+
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    public GetMediaDetailResponse withOptimizeAudio(@Nullable Boolean optimizeAudio) {
+        this.optimizeAudio = optimizeAudio;
         return this;
     }
 
@@ -804,7 +829,7 @@ public class GetMediaResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetMediaResponse other = (GetMediaResponse) o;
+        GetMediaDetailResponse other = (GetMediaDetailResponse) o;
         return 
             Utils.enhancedDeepEquals(this.thumbnail, other.thumbnail) &&
             Utils.enhancedDeepEquals(this.id, other.id) &&
@@ -833,7 +858,8 @@ public class GetMediaResponse {
             Utils.enhancedDeepEquals(this.frameRate, other.frameRate) &&
             Utils.enhancedDeepEquals(this.aspectRatio, other.aspectRatio) &&
             Utils.enhancedDeepEquals(this.createdAt, other.createdAt) &&
-            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt);
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.optimizeAudio, other.optimizeAudio);
     }
     
     @Override
@@ -848,12 +874,12 @@ public class GetMediaResponse {
             chapters, namedEntities, moderation,
             isAudioOnly, subtitleAvailable, duration,
             frameRate, aspectRatio, createdAt,
-            updatedAt);
+            updatedAt, optimizeAudio);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(GetMediaResponse.class,
+        return Utils.toString(GetMediaDetailResponse.class,
                 "thumbnail", thumbnail,
                 "id", id,
                 "sourceMediaId", sourceMediaId,
@@ -881,7 +907,8 @@ public class GetMediaResponse {
                 "frameRate", frameRate,
                 "aspectRatio", aspectRatio,
                 "createdAt", createdAt,
-                "updatedAt", updatedAt);
+                "updatedAt", updatedAt,
+                "optimizeAudio", optimizeAudio);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -899,25 +926,25 @@ public class GetMediaResponse {
 
         private JsonNullable<Map<String, String>> metadata;
 
-        private GetMediaResponseMediaQuality mediaQuality;
+        private GetMediaDetailResponseMediaQuality mediaQuality;
 
         private String creatorId;
 
         private JsonNullable<String> title;
 
-        private GetMediaResponseMaxResolution maxResolution;
+        private GetMediaDetailResponseMaxResolution maxResolution;
 
-        private GetMediaResponseSourceResolution sourceResolution;
+        private GetMediaDetailResponseSourceResolution sourceResolution;
 
-        private GetMediaResponseStatus status;
+        private GetMediaDetailResponseStatus status;
 
-        private GetMediaResponseMp4Support mp4Support;
+        private List<GetMediaDetailResponseMp4Support> mp4Support;
 
         private JsonNullable<Boolean> sourceAccess;
 
         private List<PlaybackId> playbackIds;
 
-        private List<GetMediaResponseTrack> tracks;
+        private List<GetMediaDetailResponseTrack> tracks;
 
         private JsonNullable<List<TracksSubtitles>> generatedSubtitles;
 
@@ -942,6 +969,8 @@ public class GetMediaResponse {
         private OffsetDateTime createdAt;
 
         private OffsetDateTime updatedAt;
+
+        private Boolean optimizeAudio;
 
         private Builder() {
           // force use of static builder() method
@@ -1000,7 +1029,7 @@ public class GetMediaResponse {
         /**
          * The quality tier applied to the media.
          */
-        public Builder mediaQuality(@Nullable GetMediaResponseMediaQuality mediaQuality) {
+        public Builder mediaQuality(@Nullable GetMediaDetailResponseMediaQuality mediaQuality) {
             this.mediaQuality = mediaQuality;
             return this;
         }
@@ -1024,7 +1053,7 @@ public class GetMediaResponse {
         /**
          * The maximum resolution specified by the user for the media.
          */
-        public Builder maxResolution(@Nullable GetMediaResponseMaxResolution maxResolution) {
+        public Builder maxResolution(@Nullable GetMediaDetailResponseMaxResolution maxResolution) {
             this.maxResolution = maxResolution;
             return this;
         }
@@ -1032,7 +1061,7 @@ public class GetMediaResponse {
         /**
          * The actual resolution of the uploaded media. This represents the native quality of the source media.
          */
-        public Builder sourceResolution(@Nullable GetMediaResponseSourceResolution sourceResolution) {
+        public Builder sourceResolution(@Nullable GetMediaDetailResponseSourceResolution sourceResolution) {
             this.sourceResolution = sourceResolution;
             return this;
         }
@@ -1040,7 +1069,7 @@ public class GetMediaResponse {
         /**
          * Determines the media's status, which can be one of the possible values.
          */
-        public Builder status(@Nullable GetMediaResponseStatus status) {
+        public Builder status(@Nullable GetMediaDetailResponseStatus status) {
             this.status = status;
             return this;
         }
@@ -1052,7 +1081,7 @@ public class GetMediaResponse {
          * - **audioOnly**: Provides an MP4 stream containing only the audio.
          * - **audioOnly,capped_4k**: Enables both MP4 video downloads (up to 4K) and an audio-only stream.
          */
-        public Builder mp4Support(@Nullable GetMediaResponseMp4Support mp4Support) {
+        public Builder mp4Support(@Nullable List<GetMediaDetailResponseMp4Support> mp4Support) {
             this.mp4Support = mp4Support;
             return this;
         }
@@ -1077,7 +1106,7 @@ public class GetMediaResponse {
         /**
          * A media consists of different media tracks, like video, audio, and subtitle, all combined.
          */
-        public Builder tracks(@Nullable List<GetMediaResponseTrack> tracks) {
+        public Builder tracks(@Nullable List<GetMediaDetailResponseTrack> tracks) {
             this.tracks = tracks;
             return this;
         }
@@ -1186,8 +1215,16 @@ public class GetMediaResponse {
             return this;
         }
 
-        public GetMediaResponse build() {
-            return new GetMediaResponse(
+        /**
+         * Whether the audio track of the media has been volume-normalized.
+         */
+        public Builder optimizeAudio(@Nullable Boolean optimizeAudio) {
+            this.optimizeAudio = optimizeAudio;
+            return this;
+        }
+
+        public GetMediaDetailResponse build() {
+            return new GetMediaDetailResponse(
                 thumbnail, id, sourceMediaId,
                 workspaceId, streamId, metadata,
                 mediaQuality, creatorId, title,
@@ -1197,20 +1234,20 @@ public class GetMediaResponse {
                 chapters, namedEntities, moderation,
                 isAudioOnly, subtitleAvailable, duration,
                 frameRate, aspectRatio, createdAt,
-                updatedAt);
+                updatedAt, optimizeAudio);
         }
 
 
-        private static final LazySingletonValue<GetMediaResponseMaxResolution> _SINGLETON_VALUE_MaxResolution =
+        private static final LazySingletonValue<GetMediaDetailResponseMaxResolution> _SINGLETON_VALUE_MaxResolution =
                 new LazySingletonValue<>(
                         "maxResolution",
                         "\"1080p\"",
-                        new TypeReference<GetMediaResponseMaxResolution>() {});
+                        new TypeReference<GetMediaDetailResponseMaxResolution>() {});
 
-        private static final LazySingletonValue<GetMediaResponseSourceResolution> _SINGLETON_VALUE_SourceResolution =
+        private static final LazySingletonValue<GetMediaDetailResponseSourceResolution> _SINGLETON_VALUE_SourceResolution =
                 new LazySingletonValue<>(
                         "sourceResolution",
                         "\"1080p\"",
-                        new TypeReference<GetMediaResponseSourceResolution>() {});
+                        new TypeReference<GetMediaDetailResponseSourceResolution>() {});
     }
 }

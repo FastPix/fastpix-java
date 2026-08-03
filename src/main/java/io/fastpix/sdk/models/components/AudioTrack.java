@@ -52,23 +52,32 @@ public class AudioTrack {
     @JsonProperty("languageCode")
     private String languageCode;
 
+    /**
+     * Title of the track.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private String title;
+
     @JsonCreator
     public AudioTrack(
             @JsonProperty("id") @Nullable String id,
             @JsonProperty("type") @Nullable AudioTrackType type,
             @JsonProperty("status") @Nullable String status,
             @JsonProperty("languageName") @Nullable String languageName,
-            @JsonProperty("languageCode") @Nullable String languageCode) {
+            @JsonProperty("languageCode") @Nullable String languageCode,
+            @JsonProperty("title") @Nullable String title) {
         this.id = id;
         this.type = type;
         this.status = status;
         this.languageName = languageName;
         this.languageCode = languageCode;
+        this.title = title;
     }
     
     public AudioTrack() {
         this(null, null, null,
-            null, null);
+            null, null, null);
     }
 
     /**
@@ -107,6 +116,13 @@ public class AudioTrack {
      */
     public Optional<String> languageCode() {
         return Optional.ofNullable(this.languageCode);
+    }
+
+    /**
+     * Title of the track.
+     */
+    public Optional<String> title() {
+        return Optional.ofNullable(this.title);
     }
 
     public static Builder builder() {
@@ -162,6 +178,15 @@ public class AudioTrack {
     }
 
 
+    /**
+     * Title of the track.
+     */
+    public AudioTrack withTitle(@Nullable String title) {
+        this.title = title;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -176,14 +201,15 @@ public class AudioTrack {
             Utils.enhancedDeepEquals(this.type, other.type) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.languageName, other.languageName) &&
-            Utils.enhancedDeepEquals(this.languageCode, other.languageCode);
+            Utils.enhancedDeepEquals(this.languageCode, other.languageCode) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             id, type, status,
-            languageName, languageCode);
+            languageName, languageCode, title);
     }
     
     @Override
@@ -193,7 +219,8 @@ public class AudioTrack {
                 "type", type,
                 "status", status,
                 "languageName", languageName,
-                "languageCode", languageCode);
+                "languageCode", languageCode,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -208,6 +235,8 @@ public class AudioTrack {
         private String languageName;
 
         private String languageCode;
+
+        private String title;
 
         private Builder() {
           // force use of static builder() method
@@ -256,10 +285,18 @@ public class AudioTrack {
             return this;
         }
 
+        /**
+         * Title of the track.
+         */
+        public Builder title(@Nullable String title) {
+            this.title = title;
+            return this;
+        }
+
         public AudioTrack build() {
             return new AudioTrack(
                 id, type, status,
-                languageName, languageCode);
+                languageName, languageCode, title);
         }
 
     }

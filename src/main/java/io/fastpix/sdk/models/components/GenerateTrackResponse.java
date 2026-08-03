@@ -52,23 +52,32 @@ public class GenerateTrackResponse {
     @JsonProperty("metadata")
     private Map<String, String> metadata;
 
+    /**
+     * Title of the track.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private String title;
+
     @JsonCreator
     public GenerateTrackResponse(
             @JsonProperty("id") @Nullable String id,
             @JsonProperty("type") @Nullable GenerateTrackResponseType type,
             @JsonProperty("languageCode") @Nullable GenerateTrackResponseLanguageCode languageCode,
             @JsonProperty("languageName") @Nullable String languageName,
-            @JsonProperty("metadata") @Nullable Map<String, String> metadata) {
+            @JsonProperty("metadata") @Nullable Map<String, String> metadata,
+            @JsonProperty("title") @Nullable String title) {
         this.id = id;
         this.type = type;
         this.languageCode = languageCode;
         this.languageName = languageName;
         this.metadata = metadata;
+        this.title = title;
     }
     
     public GenerateTrackResponse() {
         this(null, null, null,
-            null, null);
+            null, null, null);
     }
 
     /**
@@ -106,6 +115,13 @@ public class GenerateTrackResponse {
      */
     public Optional<Map<String, String>> metadata() {
         return Optional.ofNullable(this.metadata);
+    }
+
+    /**
+     * Title of the track.
+     */
+    public Optional<String> title() {
+        return Optional.ofNullable(this.title);
     }
 
     public static Builder builder() {
@@ -160,6 +176,15 @@ public class GenerateTrackResponse {
     }
 
 
+    /**
+     * Title of the track.
+     */
+    public GenerateTrackResponse withTitle(@Nullable String title) {
+        this.title = title;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -174,14 +199,15 @@ public class GenerateTrackResponse {
             Utils.enhancedDeepEquals(this.type, other.type) &&
             Utils.enhancedDeepEquals(this.languageCode, other.languageCode) &&
             Utils.enhancedDeepEquals(this.languageName, other.languageName) &&
-            Utils.enhancedDeepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             id, type, languageCode,
-            languageName, metadata);
+            languageName, metadata, title);
     }
     
     @Override
@@ -191,7 +217,8 @@ public class GenerateTrackResponse {
                 "type", type,
                 "languageCode", languageCode,
                 "languageName", languageName,
-                "metadata", metadata);
+                "metadata", metadata,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -206,6 +233,8 @@ public class GenerateTrackResponse {
         private String languageName;
 
         private Map<String, String> metadata;
+
+        private String title;
 
         private Builder() {
           // force use of static builder() method
@@ -253,10 +282,18 @@ public class GenerateTrackResponse {
             return this;
         }
 
+        /**
+         * Title of the track.
+         */
+        public Builder title(@Nullable String title) {
+            this.title = title;
+            return this;
+        }
+
         public GenerateTrackResponse build() {
             return new GenerateTrackResponse(
                 id, type, languageCode,
-                languageName, metadata);
+                languageName, metadata, title);
         }
 
     }

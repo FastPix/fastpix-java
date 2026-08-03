@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetMediaResponseStatus
+ * GetMediaDetailResponseStatus
  *
  * <p>Determines the media's status, which can be one of the possible values.
  *
@@ -17,7 +17,7 @@ import java.util.Optional;
  * without runtime errors. Instances are immutable singletons with reference equality.
  * Use {@code asEnum()} for switch expressions.
  */
-public class GetMediaResponseStatus {
+public class GetMediaDetailResponseStatus {
 
     private static final String CREATED_VALUE = "Created";
     private static final String DOWNLOADING_VALUE = "Downloading";
@@ -28,40 +28,40 @@ public class GetMediaResponseStatus {
     private static final String READY_VALUE = "Ready";
     private static final String FAILED_VALUE = "Failed";
 
-    public static final GetMediaResponseStatus CREATED = new GetMediaResponseStatus(CREATED_VALUE);
-    public static final GetMediaResponseStatus DOWNLOADING = new GetMediaResponseStatus(DOWNLOADING_VALUE);
-    public static final GetMediaResponseStatus DOWNLOADED = new GetMediaResponseStatus(DOWNLOADED_VALUE);
-    public static final GetMediaResponseStatus VALIDATING = new GetMediaResponseStatus(VALIDATING_VALUE);
-    public static final GetMediaResponseStatus IN_QUEUE = new GetMediaResponseStatus(IN_QUEUE_VALUE);
-    public static final GetMediaResponseStatus PROCESSING = new GetMediaResponseStatus(PROCESSING_VALUE);
-    public static final GetMediaResponseStatus READY = new GetMediaResponseStatus(READY_VALUE);
-    public static final GetMediaResponseStatus FAILED = new GetMediaResponseStatus(FAILED_VALUE);
+    public static final GetMediaDetailResponseStatus CREATED = new GetMediaDetailResponseStatus(CREATED_VALUE);
+    public static final GetMediaDetailResponseStatus DOWNLOADING = new GetMediaDetailResponseStatus(DOWNLOADING_VALUE);
+    public static final GetMediaDetailResponseStatus DOWNLOADED = new GetMediaDetailResponseStatus(DOWNLOADED_VALUE);
+    public static final GetMediaDetailResponseStatus VALIDATING = new GetMediaDetailResponseStatus(VALIDATING_VALUE);
+    public static final GetMediaDetailResponseStatus IN_QUEUE = new GetMediaDetailResponseStatus(IN_QUEUE_VALUE);
+    public static final GetMediaDetailResponseStatus PROCESSING = new GetMediaDetailResponseStatus(PROCESSING_VALUE);
+    public static final GetMediaDetailResponseStatus READY = new GetMediaDetailResponseStatus(READY_VALUE);
+    public static final GetMediaDetailResponseStatus FAILED = new GetMediaDetailResponseStatus(FAILED_VALUE);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
     // careful). Keep this field lower case to avoid clashing with
     // generated member names which will always be upper cased (Java
     // convention)
-    private static final Map<String, GetMediaResponseStatus> values = createValuesMap();
-    private static final Map<String, GetMediaResponseStatusEnum> enums = createEnumsMap();
+    private static final Map<String, GetMediaDetailResponseStatus> values = createValuesMap();
+    private static final Map<String, GetMediaDetailResponseStatusEnum> enums = createEnumsMap();
 
     private final String value;
 
-    private GetMediaResponseStatus(String value) {
+    private GetMediaDetailResponseStatus(String value) {
         this.value = value;
     }
 
     /**
-     * Returns a GetMediaResponseStatus with the given value. For a specific value the 
+     * Returns a GetMediaDetailResponseStatus with the given value. For a specific value the 
      * returned object will always be a singleton so reference equality 
      * is satisfied when the values are the same.
      * 
-     * @param value value to be wrapped as GetMediaResponseStatus
+     * @param value value to be wrapped as GetMediaDetailResponseStatus
      */ 
     @JsonCreator
-    public static GetMediaResponseStatus of(String value) {
-        synchronized (GetMediaResponseStatus.class) {
-            return values.computeIfAbsent(value, GetMediaResponseStatus::new);
+    public static GetMediaDetailResponseStatus of(String value) {
+        synchronized (GetMediaDetailResponseStatus.class) {
+            return values.computeIfAbsent(value, GetMediaDetailResponseStatus::new);
         }
     }
 
@@ -70,7 +70,7 @@ public class GetMediaResponseStatus {
         return value;
     }
 
-    public Optional<GetMediaResponseStatusEnum> asEnum() {
+    public Optional<GetMediaDetailResponseStatusEnum> asEnum() {
         return Optional.ofNullable(enums.getOrDefault(value, null));
     }
 
@@ -91,24 +91,24 @@ public class GetMediaResponseStatus {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        GetMediaResponseStatus other = (GetMediaResponseStatus) obj;
+        GetMediaDetailResponseStatus other = (GetMediaDetailResponseStatus) obj;
         return Objects.equals(value, other.value);
     }
 
     @Override
     public String toString() {
-        return "GetMediaResponseStatus [value=" + value + "]";
+        return "GetMediaDetailResponseStatus [value=" + value + "]";
     }
 
     // return an array just like an enum
-    public static GetMediaResponseStatus[] values() {
-        synchronized (GetMediaResponseStatus.class) {
-            return values.values().toArray(new GetMediaResponseStatus[] {});
+    public static GetMediaDetailResponseStatus[] values() {
+        synchronized (GetMediaDetailResponseStatus.class) {
+            return values.values().toArray(new GetMediaDetailResponseStatus[] {});
         }
     }
 
-    private static final Map<String, GetMediaResponseStatus> createValuesMap() {
-        Map<String, GetMediaResponseStatus> map = new LinkedHashMap<>();
+    private static final Map<String, GetMediaDetailResponseStatus> createValuesMap() {
+        Map<String, GetMediaDetailResponseStatus> map = new LinkedHashMap<>();
         map.put(CREATED_VALUE, CREATED);
         map.put(DOWNLOADING_VALUE, DOWNLOADING);
         map.put(DOWNLOADED_VALUE, DOWNLOADED);
@@ -120,21 +120,21 @@ public class GetMediaResponseStatus {
         return map;
     }
 
-    private static final Map<String, GetMediaResponseStatusEnum> createEnumsMap() {
-        Map<String, GetMediaResponseStatusEnum> map = new HashMap<>();
-        map.put(CREATED_VALUE, GetMediaResponseStatusEnum.CREATED);
-        map.put(DOWNLOADING_VALUE, GetMediaResponseStatusEnum.DOWNLOADING);
-        map.put(DOWNLOADED_VALUE, GetMediaResponseStatusEnum.DOWNLOADED);
-        map.put(VALIDATING_VALUE, GetMediaResponseStatusEnum.VALIDATING);
-        map.put(IN_QUEUE_VALUE, GetMediaResponseStatusEnum.IN_QUEUE);
-        map.put(PROCESSING_VALUE, GetMediaResponseStatusEnum.PROCESSING);
-        map.put(READY_VALUE, GetMediaResponseStatusEnum.READY);
-        map.put(FAILED_VALUE, GetMediaResponseStatusEnum.FAILED);
+    private static final Map<String, GetMediaDetailResponseStatusEnum> createEnumsMap() {
+        Map<String, GetMediaDetailResponseStatusEnum> map = new HashMap<>();
+        map.put(CREATED_VALUE, GetMediaDetailResponseStatusEnum.CREATED);
+        map.put(DOWNLOADING_VALUE, GetMediaDetailResponseStatusEnum.DOWNLOADING);
+        map.put(DOWNLOADED_VALUE, GetMediaDetailResponseStatusEnum.DOWNLOADED);
+        map.put(VALIDATING_VALUE, GetMediaDetailResponseStatusEnum.VALIDATING);
+        map.put(IN_QUEUE_VALUE, GetMediaDetailResponseStatusEnum.IN_QUEUE);
+        map.put(PROCESSING_VALUE, GetMediaDetailResponseStatusEnum.PROCESSING);
+        map.put(READY_VALUE, GetMediaDetailResponseStatusEnum.READY);
+        map.put(FAILED_VALUE, GetMediaDetailResponseStatusEnum.FAILED);
         return map;
     }
     
     
-    public enum GetMediaResponseStatusEnum {
+    public enum GetMediaDetailResponseStatusEnum {
 
         CREATED(CREATED_VALUE),
         DOWNLOADING(DOWNLOADING_VALUE),
@@ -147,7 +147,7 @@ public class GetMediaResponseStatus {
 
         private final String value;
 
-        private GetMediaResponseStatusEnum(String value) {
+        private GetMediaDetailResponseStatusEnum(String value) {
             this.value = value;
         }
 

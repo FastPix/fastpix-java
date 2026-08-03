@@ -49,23 +49,32 @@ public class AddTrackResponse {
     @JsonProperty("languageName")
     private String languageName;
 
+    /**
+     * Title of the track.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private String title;
+
     @JsonCreator
     public AddTrackResponse(
             @JsonProperty("id") @Nullable String id,
             @JsonProperty("type") @Nullable AddTrackResponseType type,
             @JsonProperty("url") @Nullable String url,
             @JsonProperty("languageCode") @Nullable String languageCode,
-            @JsonProperty("languageName") @Nullable String languageName) {
+            @JsonProperty("languageName") @Nullable String languageName,
+            @JsonProperty("title") @Nullable String title) {
         this.id = id;
         this.type = type;
         this.url = url;
         this.languageCode = languageCode;
         this.languageName = languageName;
+        this.title = title;
     }
     
     public AddTrackResponse() {
         this(null, null, null,
-            null, null);
+            null, null, null);
     }
 
     /**
@@ -101,6 +110,13 @@ public class AddTrackResponse {
      */
     public Optional<String> languageName() {
         return Optional.ofNullable(this.languageName);
+    }
+
+    /**
+     * Title of the track.
+     */
+    public Optional<String> title() {
+        return Optional.ofNullable(this.title);
     }
 
     public static Builder builder() {
@@ -153,6 +169,15 @@ public class AddTrackResponse {
     }
 
 
+    /**
+     * Title of the track.
+     */
+    public AddTrackResponse withTitle(@Nullable String title) {
+        this.title = title;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -167,14 +192,15 @@ public class AddTrackResponse {
             Utils.enhancedDeepEquals(this.type, other.type) &&
             Utils.enhancedDeepEquals(this.url, other.url) &&
             Utils.enhancedDeepEquals(this.languageCode, other.languageCode) &&
-            Utils.enhancedDeepEquals(this.languageName, other.languageName);
+            Utils.enhancedDeepEquals(this.languageName, other.languageName) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             id, type, url,
-            languageCode, languageName);
+            languageCode, languageName, title);
     }
     
     @Override
@@ -184,7 +210,8 @@ public class AddTrackResponse {
                 "type", type,
                 "url", url,
                 "languageCode", languageCode,
-                "languageName", languageName);
+                "languageName", languageName,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -199,6 +226,8 @@ public class AddTrackResponse {
         private String languageCode;
 
         private String languageName;
+
+        private String title;
 
         private Builder() {
           // force use of static builder() method
@@ -244,10 +273,18 @@ public class AddTrackResponse {
             return this;
         }
 
+        /**
+         * Title of the track.
+         */
+        public Builder title(@Nullable String title) {
+            this.title = title;
+            return this;
+        }
+
         public AddTrackResponse build() {
             return new AddTrackResponse(
                 id, type, url,
-                languageCode, languageName);
+                languageCode, languageName, title);
         }
 
     }

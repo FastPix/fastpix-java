@@ -12,17 +12,11 @@ import io.fastpix.sdk.utils.Utils;
 
 /**
  * UpdateTrackRequest
- * 
- * <p>Contains details about the track being added to the media file.
+ *
+ * <p>Contains details about the track being updated. The track's file ({@code url}) cannot be changed
+ * — only its language and title.
  */
 public class UpdateTrackRequest {
-    /**
-     * The direct URL of the track file. It must point to a valid audio or subtitle file.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("url")
-    private String url;
-
     /**
      * The BCP 47 language code representing the track’s language.
      */
@@ -37,28 +31,27 @@ public class UpdateTrackRequest {
     @JsonProperty("languageName")
     private String languageName;
 
+    /**
+     * Title of the track.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private String title;
+
     @JsonCreator
     public UpdateTrackRequest(
-            @JsonProperty("url") @Nullable String url,
             @JsonProperty("languageCode") @Nullable String languageCode,
-            @JsonProperty("languageName") @Nullable String languageName) {
-        this.url = Optional.ofNullable(url)
-            .orElse(Builder._SINGLETON_VALUE_Url.value());
+            @JsonProperty("languageName") @Nullable String languageName,
+            @JsonProperty("title") @Nullable String title) {
         this.languageCode = Optional.ofNullable(languageCode)
             .orElse(Builder._SINGLETON_VALUE_LanguageCode.value());
         this.languageName = Optional.ofNullable(languageName)
             .orElse(Builder._SINGLETON_VALUE_LanguageName.value());
-    }
-    
-    public UpdateTrackRequest() {
-        this(null, null, null);
+        this.title = title;
     }
 
-    /**
-     * The direct URL of the track file. It must point to a valid audio or subtitle file.
-     */
-    public Optional<String> url() {
-        return Optional.ofNullable(this.url);
+    public UpdateTrackRequest() {
+        this(null, null, null);
     }
 
     /**
@@ -75,17 +68,15 @@ public class UpdateTrackRequest {
         return Optional.ofNullable(this.languageName);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    /**
+     * Title of the track.
+     */
+    public Optional<String> title() {
+        return Optional.ofNullable(this.title);
     }
 
-
-    /**
-     * The direct URL of the track file. It must point to a valid audio or subtitle file.
-     */
-    public UpdateTrackRequest withUrl(@Nullable String url) {
-        this.url = url;
-        return this;
+    public static Builder builder() {
+        return new Builder();
     }
 
 
@@ -107,6 +98,15 @@ public class UpdateTrackRequest {
     }
 
 
+    /**
+     * Title of the track.
+     */
+    public UpdateTrackRequest withTitle(@Nullable String title) {
+        this.title = title;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -116,45 +116,37 @@ public class UpdateTrackRequest {
             return false;
         }
         UpdateTrackRequest other = (UpdateTrackRequest) o;
-        return 
-            Utils.enhancedDeepEquals(this.url, other.url) &&
+        return
             Utils.enhancedDeepEquals(this.languageCode, other.languageCode) &&
-            Utils.enhancedDeepEquals(this.languageName, other.languageName);
+            Utils.enhancedDeepEquals(this.languageName, other.languageName) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
-    
+
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            url, languageCode, languageName);
+            languageCode, languageName, title);
     }
-    
+
     @Override
     public String toString() {
         return Utils.toString(UpdateTrackRequest.class,
-                "url", url,
                 "languageCode", languageCode,
-                "languageName", languageName);
+                "languageName", languageName,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public static final class Builder {
 
-        private String url;
-
         private String languageCode;
 
         private String languageName;
 
+        private String title;
+
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * The direct URL of the track file. It must point to a valid audio or subtitle file.
-         */
-        public Builder url(@Nullable String url) {
-            this.url = url;
-            return this;
         }
 
         /**
@@ -173,17 +165,19 @@ public class UpdateTrackRequest {
             return this;
         }
 
-        public UpdateTrackRequest build() {
-            return new UpdateTrackRequest(
-                url, languageCode, languageName);
+        /**
+         * Title of the track.
+         */
+        public Builder title(@Nullable String title) {
+            this.title = title;
+            return this;
         }
 
+        public UpdateTrackRequest build() {
+            return new UpdateTrackRequest(
+                languageCode, languageName, title);
+        }
 
-        private static final LazySingletonValue<String> _SINGLETON_VALUE_Url =
-                new LazySingletonValue<>(
-                        "url",
-                        "\"http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/thrust.vtt\"",
-                        new TypeReference<String>() {});
 
         private static final LazySingletonValue<String> _SINGLETON_VALUE_LanguageCode =
                 new LazySingletonValue<>(

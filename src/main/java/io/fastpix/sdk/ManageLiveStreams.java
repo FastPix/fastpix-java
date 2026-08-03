@@ -47,7 +47,7 @@ public class ManageLiveStreams {
      * <p>Suppose a content creator is hosting a live concert and wants to display the number of live viewers
      * on their dashboard. This endpoint can be queried to show up-to-date viewer statistics.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @return The call builder
      */
@@ -71,7 +71,7 @@ public class ManageLiveStreams {
      * <p>Suppose a content creator is hosting a live concert and wants to display the number of live viewers
      * on their dashboard. This endpoint can be queried to show up-to-date viewer statistics.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId After creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @return The response from the API call
@@ -97,7 +97,7 @@ public class ManageLiveStreams {
      * <p>Suppose a content creator is hosting a live concert and wants to display the number of live viewers
      * on their dashboard. This endpoint can be queried to show up-to-date viewer statistics.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId After creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @param options additional options

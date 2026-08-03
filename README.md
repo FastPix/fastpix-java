@@ -300,7 +300,7 @@ Comprehensive Java SDK for FastPix platform integration with full API coverage.
 
 Upload, manage, and transform video content with comprehensive media management capabilities.
 
-For detailed documentation, see [FastPix Video on Demand Overview](https://fastpix.com/docs/video-on-demand-api/overview).
+For detailed documentation, see [FastPix Video on Demand Overview](https://fastpix.com/docs/video-on-demand/overview).
 
 #### Input Video
 - [Create from URL](docs/sdks/inputvideos/README.md#create) - Upload video content from external URL

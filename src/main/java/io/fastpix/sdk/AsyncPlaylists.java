@@ -69,7 +69,7 @@ public class AsyncPlaylists {
      * - **Smart:** Auto-populates the playlist at creation time based on the filter criteria (for example,
      * a video creation date range) that you provide in the request.
      * 
-     * <p>For more details, see <a href="https://fastpix.com/docs/playback-and-delivery/create-and-manage-playlists">Create and
+     * <p>For more details, see <a href="https://fastpix.com/docs/video-on-demand/create-and-manage-playlists">Create and
      * manage playlist</a>.
      * 
      * <p>#### How it works
@@ -102,7 +102,7 @@ public class AsyncPlaylists {
      * - **Smart:** Auto-populates the playlist at creation time based on the filter criteria (for example,
      * a video creation date range) that you provide in the request.
      * 
-     * <p>For more details, see <a href="https://fastpix.com/docs/playback-and-delivery/create-and-manage-playlists">Create and
+     * <p>For more details, see <a href="https://fastpix.com/docs/video-on-demand/create-and-manage-playlists">Create and
      * manage playlist</a>.
      * 
      * <p>#### How it works
@@ -136,7 +136,7 @@ public class AsyncPlaylists {
      * - **Smart:** Auto-populates the playlist at creation time based on the filter criteria (for example,
      * a video creation date range) that you provide in the request.
      * 
-     * <p>For more details, see <a href="https://fastpix.com/docs/playback-and-delivery/create-and-manage-playlists">Create and
+     * <p>For more details, see <a href="https://fastpix.com/docs/video-on-demand/create-and-manage-playlists">Create and
      * manage playlist</a>.
      * 
      * <p>#### How it works

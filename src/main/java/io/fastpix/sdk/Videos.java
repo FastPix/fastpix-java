@@ -90,7 +90,7 @@ public class Videos {
      * as top plays or final match highlights. You can use this endpoint to fetch all clips generated from
      * that livestream, display them in your dashboard, or use them for post-event editing and sharing.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-live-stream/clip-moments-from-a-live-stream">Instant live
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/clip-moments-from-a-live-stream">Instant live
      * clipping</a>
      * 
      * @return The call builder
@@ -120,7 +120,7 @@ public class Videos {
      * as top plays or final match highlights. You can use this endpoint to fetch all clips generated from
      * that livestream, display them in your dashboard, or use them for post-event editing and sharing.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-live-stream/clip-moments-from-a-live-stream">Instant live
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/clip-moments-from-a-live-stream">Instant live
      * clipping</a>
      * 
      * @param livestreamId The stream Id is unique identifier assigned to the live stream.
@@ -153,7 +153,7 @@ public class Videos {
      * as top plays or final match highlights. You can use this endpoint to fetch all clips generated from
      * that livestream, display them in your dashboard, or use them for post-event editing and sharing.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-live-stream/clip-moments-from-a-live-stream">Instant live
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/clip-moments-from-a-live-stream">Instant live
      * clipping</a>
      * 
      * @param livestreamId The stream Id is unique identifier assigned to the live stream.
@@ -193,7 +193,7 @@ public class Videos {
      * <p>3. The response returns the updated media data, confirming the changes.
      * 
      * <p>4. Monitor the <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> webhook
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> webhook
      * event to track the update status in your system.
      * 
      * <p>#### Example
@@ -223,7 +223,7 @@ public class Videos {
      * <p>3. The response returns the updated media data, confirming the changes.
      * 
      * <p>4. Monitor the <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> webhook
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> webhook
      * event to track the update status in your system.
      * 
      * <p>#### Example
@@ -256,7 +256,7 @@ public class Videos {
      * <p>3. The response returns the updated media data, confirming the changes.
      * 
      * <p>4. Monitor the <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> webhook
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> webhook
      * event to track the update status in your system.
      * 
      * <p>#### Example
@@ -295,7 +295,7 @@ public class Videos {
      * <p>Once deleted, the media can’t be retrieved or played back.
      * 
      * <p>3. Monitor the following webhook event: <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediadeleted">video.media.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediadeleted">video.media.deleted</a>
      * 
      * <p>#### Example
      * A user on a video-sharing platform decides to remove an old video from their profile, or suppose
@@ -326,7 +326,7 @@ public class Videos {
      * <p>Once deleted, the media can’t be retrieved or played back.
      * 
      * <p>3. Monitor the following webhook event: <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediadeleted">video.media.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediadeleted">video.media.deleted</a>
      * 
      * <p>#### Example
      * A user on a video-sharing platform decides to remove an old video from their profile, or suppose
@@ -359,7 +359,7 @@ public class Videos {
      * <p>Once deleted, the media can’t be retrieved or played back.
      * 
      * <p>3. Monitor the following webhook event: <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediadeleted">video.media.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediadeleted">video.media.deleted</a>
      * 
      * <p>#### Example
      * A user on a video-sharing platform decides to remove an old video from their profile, or suppose
@@ -395,7 +395,7 @@ public class Videos {
      * <p>#### Webhook Events
      * 
      * <p>Once the upload is cancelled, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediauploadcancelled">video.media.upload.cancelled</a>.
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediauploadcancelled">video.media.upload.cancelled</a>.
      * 
      * <p>#### Example
      * 
@@ -424,7 +424,7 @@ public class Videos {
      * <p>#### Webhook Events
      * 
      * <p>Once the upload is cancelled, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediauploadcancelled">video.media.upload.cancelled</a>.
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediauploadcancelled">video.media.upload.cancelled</a>.
      * 
      * <p>#### Example
      * 
@@ -455,7 +455,7 @@ public class Videos {
      * <p>#### Webhook Events
      * 
      * <p>Once the upload is cancelled, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediauploadcancelled">video.media.upload.cancelled</a>.
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediauploadcancelled">video.media.upload.cancelled</a>.
      * 
      * <p>#### Example
      * 
@@ -478,8 +478,8 @@ public class Videos {
      * Update audio / subtitle track
      * 
      * <p>This endpoint allows you to update an existing audio or subtitle track associated with a media file.
-     * When updating a track, you must provide the new track `url`, `languageName`, and `languageCode`,
-     * ensuring all three parameters are included in the request.
+     * When updating a track, you must provide the new `languageName` and `languageCode`, ensuring both
+     * parameters are included in the request. You can optionally provide a `title` for the track.
      * 
      * <p>#### How it works
      * 
@@ -495,13 +495,13 @@ public class Videos {
      * <p>After updating a track, your system must receive webhook notifications:
      * 
      * <p>1. After successfully updating a track, your system must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackupdated">video.media.track.updated</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackupdated">video.media.track.updated</a>.
      * 
      * <p>2. Once the new track is processed and ready, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackready">video.media.track.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackready">video.media.track.ready</a>.
      * 
      * <p>3. Once the media file is updated with the new track details, a <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * must be triggered.
      * 
      * <p>#### Example
@@ -512,8 +512,8 @@ public class Videos {
      * <p>- The original track file has errors and needs correction.
      * - You want to improve subtitle translations or replace an audio track with a better-quality version.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @return The call builder
      */
@@ -525,8 +525,8 @@ public class Videos {
      * Update audio / subtitle track
      * 
      * <p>This endpoint allows you to update an existing audio or subtitle track associated with a media file.
-     * When updating a track, you must provide the new track `url`, `languageName`, and `languageCode`,
-     * ensuring all three parameters are included in the request.
+     * When updating a track, you must provide the new `languageName` and `languageCode`, ensuring both
+     * parameters are included in the request. You can optionally provide a `title` for the track.
      * 
      * <p>#### How it works
      * 
@@ -542,13 +542,13 @@ public class Videos {
      * <p>After updating a track, your system must receive webhook notifications:
      * 
      * <p>1. After successfully updating a track, your system must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackupdated">video.media.track.updated</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackupdated">video.media.track.updated</a>.
      * 
      * <p>2. Once the new track is processed and ready, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackready">video.media.track.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackready">video.media.track.ready</a>.
      * 
      * <p>3. Once the media file is updated with the new track details, a <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * must be triggered.
      * 
      * <p>#### Example
@@ -559,8 +559,8 @@ public class Videos {
      * <p>- The original track file has errors and needs correction.
      * - You want to improve subtitle translations or replace an audio track with a better-quality version.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @param trackId The unique identifier assigned to the media when created. The value must be a valid UUID.
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -579,8 +579,8 @@ public class Videos {
      * Update audio / subtitle track
      * 
      * <p>This endpoint allows you to update an existing audio or subtitle track associated with a media file.
-     * When updating a track, you must provide the new track `url`, `languageName`, and `languageCode`,
-     * ensuring all three parameters are included in the request.
+     * When updating a track, you must provide the new `languageName` and `languageCode`, ensuring both
+     * parameters are included in the request. You can optionally provide a `title` for the track.
      * 
      * <p>#### How it works
      * 
@@ -596,13 +596,13 @@ public class Videos {
      * <p>After updating a track, your system must receive webhook notifications:
      * 
      * <p>1. After successfully updating a track, your system must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackupdated">video.media.track.updated</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackupdated">video.media.track.updated</a>.
      * 
      * <p>2. Once the new track is processed and ready, you must receive the webhook event <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackready">video.media.track.ready</a>.
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackready">video.media.track.ready</a>.
      * 
      * <p>3. Once the media file is updated with the new track details, a <a
-     * href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event
+     * href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event
      * must be triggered.
      * 
      * <p>#### Example
@@ -613,8 +613,8 @@ public class Videos {
      * <p>- The original track file has errors and needs correction.
      * - You want to improve subtitle translations or replace an audio track with a better-quality version.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle
-     * tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle
+     * tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
      * 
      * @param trackId The unique identifier assigned to the media when created. The value must be a valid UUID.
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -644,13 +644,13 @@ public class Videos {
      * 3. The response contains the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaichaptersready">video.mediaAI.chapters.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaichaptersready">video.mediaAI.chapters.ready</a>
      * webhook event to track and notify about the chapters generation.
      * 
      * <p>**Use case:** This is particularly useful when a user uploads a video and later decides to enable
      * chapters without re-uploading the entire video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/generate-video-chapters">Video chapters</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/generate-video-chapters">Video chapters</a>
      * 
      * @return The call builder
      */
@@ -670,13 +670,13 @@ public class Videos {
      * 3. The response contains the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaichaptersready">video.mediaAI.chapters.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaichaptersready">video.mediaAI.chapters.ready</a>
      * webhook event to track and notify about the chapters generation.
      * 
      * <p>**Use case:** This is particularly useful when a user uploads a video and later decides to enable
      * chapters without re-uploading the entire video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/generate-video-chapters">Video chapters</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/generate-video-chapters">Video chapters</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      *         
@@ -700,13 +700,13 @@ public class Videos {
      * 3. The response contains the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaichaptersready">video.mediaAI.chapters.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaichaptersready">video.mediaAI.chapters.ready</a>
      * webhook event to track and notify about the chapters generation.
      * 
      * <p>**Use case:** This is particularly useful when a user uploads a video and later decides to enable
      * chapters without re-uploading the entire video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/generate-video-chapters">Video chapters</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/generate-video-chapters">Video chapters</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      *         
@@ -753,7 +753,7 @@ public class Videos {
      * <p>#### Webhook events
      * 
      * <p>- <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediamp4supportready">video.media.mp4Support.ready</a>
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediamp4supportready">video.media.mp4Support.ready</a>
      * – Triggered when the MP4 support setting is successfully updated.
      * 
      * <p>#### Example
@@ -767,7 +767,7 @@ public class Videos {
      * setting "mp4Support": "audioOnly,capped_4k", both options are enabled. Users can download the MP4
      * video and also stream just the audio version of the media.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/playback-and-delivery/enable-mp4-support-for-offline-viewing">Use MP4
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-on-demand/enable-mp4-support-for-offline-viewing">Use MP4
      * support for offline viewing</a>
      * 
      * @return The call builder
@@ -805,7 +805,7 @@ public class Videos {
      * <p>#### Webhook events
      * 
      * <p>- <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediamp4supportready">video.media.mp4Support.ready</a>
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediamp4supportready">video.media.mp4Support.ready</a>
      * – Triggered when the MP4 support setting is successfully updated.
      * 
      * <p>#### Example
@@ -819,7 +819,7 @@ public class Videos {
      * setting "mp4Support": "audioOnly,capped_4k", both options are enabled. Users can download the MP4
      * video and also stream just the audio version of the media.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/playback-and-delivery/enable-mp4-support-for-offline-viewing">Use MP4
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-on-demand/enable-mp4-support-for-offline-viewing">Use MP4
      * support for offline viewing</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -861,7 +861,7 @@ public class Videos {
      * <p>#### Webhook events
      * 
      * <p>- <a
-     * href="https://fastpix.com/docs/vod-events/transform-media-events#videomediamp4supportready">video.media.mp4Support.ready</a>
+     * href="https://fastpix.com/docs/webhooks/transform-media-events#videomediamp4supportready">video.media.mp4Support.ready</a>
      * – Triggered when the MP4 support setting is successfully updated.
      * 
      * <p>#### Example
@@ -875,7 +875,7 @@ public class Videos {
      * setting "mp4Support": "audioOnly,capped_4k", both options are enabled. Users can download the MP4
      * video and also stream just the audio version of the media.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/playback-and-delivery/enable-mp4-support-for-offline-viewing">Use MP4
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-on-demand/enable-mp4-support-for-offline-viewing">Use MP4
      * support for offline viewing</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -1031,7 +1031,7 @@ public class Videos {
      * call this API with the sourceMediaId. The response provides a list of all associated clips, allowing
      * you to manage, edit, or repurpose them as needed.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-videos/clip-and-trim-videos">Create clips
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-on-demand/clip-and-trim-videos">Create clips
      * from existing media</a>
      * 
      * @return The call builder
@@ -1066,7 +1066,7 @@ public class Videos {
      * call this API with the sourceMediaId. The response provides a list of all associated clips, allowing
      * you to manage, edit, or repurpose them as needed.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-videos/clip-and-trim-videos">Create clips
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-on-demand/clip-and-trim-videos">Create clips
      * from existing media</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -1104,7 +1104,7 @@ public class Videos {
      * call this API with the sourceMediaId. The response provides a list of all associated clips, allowing
      * you to manage, edit, or repurpose them as needed.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-videos/clip-and-trim-videos">Create clips
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-on-demand/clip-and-trim-videos">Create clips
      * from existing media</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.

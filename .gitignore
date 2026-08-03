@@ -51,3 +51,4 @@ tests/examples/
 # Local working files (not part of the published SDK)
 /fixed 7.yaml
 /CLAUDE.md
+/fastpix-openai.yaml
