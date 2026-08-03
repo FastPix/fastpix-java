@@ -25,7 +25,7 @@ Thank you for taking the time to report a bug with the FastPix Java SDK. To help
 - **IDE:** [e.g., IntelliJ IDEA, Eclipse, VS Code, etc.] (Optional but helpful)
 
 ### SDK Information
-- **FastPix Java SDK Version:** [e.g., 1.0.3, 1.0.2, etc.]
+- **FastPix Java SDK Version:** [e.g., 1.0.4, 1.0.3, etc.]
 - **Java Runtime:** [e.g., OpenJDK, Oracle JDK, etc.]
 
 ## Reproduction Steps
@@ -36,12 +36,12 @@ Thank you for taking the time to report a bug with the FastPix Java SDK. To help
    <dependency>
        <groupId>com.fastpix</groupId>
        <artifactId>fastpix-java</artifactId>
-       <version>1.0.2</version>
+       <version>1.0.4</version>
    </dependency>
    ```
    ```gradle
    // Gradle
-   implementation 'com.fastpix:fastpix-java:1.0.2'
+   implementation 'com.fastpix:fastpix-java:1.0.4'
    ```
 
 2. **Code to Reproduce:**

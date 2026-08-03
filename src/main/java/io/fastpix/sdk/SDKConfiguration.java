@@ -19,7 +19,7 @@ public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "1.0.1";
-    public static final String SDK_VERSION = "1.0.3";
+    public static final String SDK_VERSION = "1.0.4";
     private static final String BASE_PACKAGE = "io.fastpix.sdk";
     public static final String USER_AGENT =
             String.format("fastpix-sdk/%s %s %s %s",
