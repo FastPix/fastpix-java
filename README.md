@@ -1,11 +1,25 @@
 # FastPix Java SDK
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.fastpix/sdk)](https://central.sonatype.com/artifact/io.fastpix/sdk)
+[![license](https://img.shields.io/github/license/FastPix/fastpix-java)](https://github.com/FastPix/fastpix-java/blob/main/LICENSE)
+[![Java 11+](https://img.shields.io/badge/Java-11%2B-007396?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+
 A robust, type-safe Java SDK designed for seamless integration with the FastPix API platform.
+
+The FastPix Java SDK is a type-safe Java client for the FastPix video API. From any Java 11+ application (Maven or Gradle) you can upload and manage videos, run live streams and simulcasts, create and secure playback IDs, manage playlists and signing keys, pull video analytics (views, metrics, dimensions, and errors), and drive in-video AI features such as subtitles, chapters, summaries, and content moderation - with both synchronous and asynchronous APIs.
+
+**Works with:** Java 11+ · Maven and Gradle · sync and async (CompletableFuture / Reactive Streams) · Spring Boot and any JVM app · Maven Central `io.fastpix:sdk`
+
+📖 **Docs:** https://fastpix.com/docs/language-sdks/java-sdk &nbsp;·&nbsp; 🚀 **Free account:** https://dashboard.fastpix.com
+
+<br />
 
 
 ## Introduction
 
 The FastPix Java SDK simplifies integration with the FastPix platform. It provides a clean, type-safe interface for secure and efficient communication with the FastPix API, enabling easy management of media uploads, live streaming, on‑demand content, playlists, video analytics, and signing keys for secure access and token management. It is intended for use with Java 11 and above.
+
+<br />
 
 ## Prerequisites
 
@@ -18,6 +32,8 @@ The FastPix Java SDK simplifies integration with the FastPix platform. It provid
 | Internet | `Required` | API communication and authentication |
 
 > Pro Tip: We recommend using Java 17+ for optimal performance and the latest language features.
+
+<br />
 
 ### Getting Started with FastPix
 
@@ -38,6 +54,8 @@ export FASTPIX_PASSWORD="your-secret-key"
 
 > Security Note: Never commit your credentials to version control. Use environment variables or secure credential management systems.
 
+<br />
+
 ## Table of Contents
 
 * [FastPix Java SDK](#fastpix-java-sdk)
@@ -50,7 +68,11 @@ export FASTPIX_PASSWORD="your-secret-key"
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Debugging](#debugging)
+  * [FAQ](#faq)
+  * [Which FastPix SDK should I use?](#which-fastpix-sdk-should-i-use)
   * [Development](#development)
+
+  <br />
 
 ## Setup
 
@@ -106,6 +128,8 @@ If you wish to build from source and publish the SDK artifact to your local Mave
 gradlew.bat publishToMavenLocal -Pskip.signing
 ```
 
+<br />
+
 ### Initialization
 
 Initialize the FastPix SDK with your credentials:
@@ -137,6 +161,20 @@ FastPixSDK sdk = FastPixSDK.builder()
         .build())
     .build();
 ```
+
+<br />
+
+### Verify Installation
+
+Run a simple API request to confirm your credentials and SDK configuration are working correctly.
+
+```java
+sdk.manageVideos()
+    .list()
+    .call();
+```
+
+<br />
 
 ## Example Usage
 
@@ -188,6 +226,8 @@ public class Application {
     }
 }
 ```
+
+<br />
 
 ## Asynchronous Support
 
@@ -291,6 +331,8 @@ public class Application {
 
 [comp-fut]: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
 [reactive-streams]: https://www.reactive-streams.org/
+
+<br />
 
 ## Available Resources and Operations
 
@@ -441,6 +483,8 @@ Enhance video content with AI-powered features including moderation, summarizati
 
 <!-- End Available Resources and Operations [operations] -->
 
+<br />
+
 ## Retries
 
 Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
@@ -569,6 +613,18 @@ public class Application {
 }
 ```
 
+<br />
+
+## Rate Limits
+
+The FastPix API enforces rate limits to help maintain platform stability.
+
+When a rate limit is exceeded, the API returns an HTTP `429 Too Many Requests` response.
+
+We recommend using the SDK retry functionality described in the Retries section to automatically handle temporary rate limiting and transient failures.
+
+<br />
+
 ## Error Handling
 
 [`FastpixException`](./src/main/java/models/errors/FastpixException.java) is the base class for all HTTP error responses. It has the following properties:
@@ -649,6 +705,8 @@ public class Application {
 }
 ```
 
+<br />
+
 ### Error Classes
 
 **Primary error:**
@@ -668,6 +726,8 @@ many more subclasses in the JDK platform).
 * Additional error classes may be defined for specific error scenarios.
 
 </details>
+
+<br />
 
 ## Server Selection
 
@@ -722,6 +782,8 @@ public class Application {
     }
 }
 ```
+
+<br />
 
 ## Custom HTTP Client
 
@@ -841,6 +903,8 @@ public class Application {
 
 </details>
 
+<br />
+
 ## Debugging
 
 ### Debug & Logging
@@ -895,6 +959,8 @@ Configure logging levels in your `logback.xml`:
 - **Streaming**: Stream initialization, item processing, closure
 - **Hooks**: Hook execution counts, operation IDs, exceptions
 
+<br />
+
 #### Legacy Debug Logging
 
 For backward compatibility, you can still use the legacy debug logging method:
@@ -929,7 +995,75 @@ Response body:
 
 Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this option does not log request/response bodies.
 
-# Development
+<br />
+
+## FAQ
+
+**How do I install the FastPix Java SDK?**
+
+Add `io.fastpix:sdk` to your build - `implementation 'io.fastpix:sdk:<version>'` for Gradle, or the equivalent `<dependency>` for Maven. See [Setup](#setup) and [Installation](#installation).
+
+**How do I authenticate the SDK?**
+
+FastPix uses Basic Auth: build a `Security` with your access token as `username` and secret key as `password`, then pass it to `FastPixSDK.builder()`. See [Initialization](#initialization).
+
+**How do I upload a video in Java?**
+
+Create media from a URL or a direct upload through `sdk.inputVideos()`. See [Example Usage](#example-usage) and [Available Resources and Operations](#available-resources-and-operations).
+
+**Does the SDK support async / reactive?**
+
+Yes - it provides asynchronous APIs using `CompletableFuture` and Reactive Streams `Publisher`, so it integrates with Reactor, RxJava, and other reactive libraries. See [Asynchronous Support](#asynchronous-support).
+
+**How do I start a live stream?**
+
+Use the Live API resources to create and manage streams, simulcasts, and live playback IDs. See [Available Resources and Operations](#available-resources-and-operations).
+
+**How do I get video analytics and metrics in Java?**
+
+The Video Data API exposes metrics, views, dimensions, and errors for quality-of-experience monitoring. See [Available Resources and Operations](#available-resources-and-operations).
+
+**How do I handle API errors?**
+
+Catch `FastpixException` (the base class for HTTP error responses); it exposes the message, status code, headers, and body. See [Error Handling](#error-handling).
+
+**How do I configure automatic retries?**
+
+Provide a `RetryConfig` per call or at SDK initialization to control the backoff strategy. See [Retries](#retries).
+
+**How do I use a custom HTTP client, proxy, or timeout?**
+
+Provide your own `HTTPClient` implementation (custom executors, SSL context, connection pools, hooks) or wrap the default. See [Custom HTTP Client](#custom-http-client).
+
+**How do I enable debug logging?**
+
+The SDK logs through SLF4j; you can also use `enableHTTPDebugLogging(true)`. See [Debugging](#debugging).
+
+**Which Java versions are supported?**
+
+Java 11 and above (JDK). See [Prerequisites](#prerequisites).
+
+<br />
+
+## Which FastPix SDK should I use?
+
+FastPix publishes a server SDK for every major backend language, each generated from the same API specification:
+
+| Language | Repo | Install |
+|---|---|---|
+| **Java** (this repo) | [fastpix-java](https://github.com/FastPix/fastpix-java) | `io.fastpix:sdk` (Maven/Gradle) |
+| Node.js / TypeScript | [node-sdk](https://github.com/FastPix/node-sdk) | `npm install @fastpix/fastpix-node` |
+| Python | [fastpix-python](https://github.com/FastPix/fastpix-python) | `pip install fastpix-python` |
+| PHP | [fastpix-php](https://github.com/FastPix/fastpix-php) | `composer require fastpix/sdk` |
+| Go | [fastpix-go](https://github.com/FastPix/fastpix-go) | `go get github.com/FastPix/fastpix-go` |
+| C# / .NET | [fastpix-sdk-csharp](https://github.com/FastPix/fastpix-sdk-csharp) | `dotnet add package Fastpix` |
+| Ruby | [fastpix-ruby](https://github.com/FastPix/fastpix-ruby) | `gem install fastpixapi` |
+
+To upload and play the media these SDKs create, use the FastPix browser libraries: [web-uploads-sdk](https://github.com/FastPix/web-uploads-sdk), [react-web-uploader](https://github.com/FastPix/react-web-uploader), and [web-player-component](https://github.com/FastPix/web-player-component). Browse everything in the [FastPix organization](https://github.com/orgs/FastPix/repositories).
+
+<br />
+
+## Development
 
 This Java SDK is programmatically generated from our API specifications. Any manual modifications to internal files will be overwritten during subsequent generation cycles.
 
@@ -940,3 +1074,10 @@ We value community contributions and feedback. Feel free to submit pull requests
 For comprehensive understanding of each API's functionality, including detailed request and response specifications, parameter descriptions, and additional examples, please refer to the [FastPix API Reference](https://fastpix.com/docs/product-os-api/overview).
 
 The API reference offers complete documentation for all available endpoints and features, enabling developers to integrate and leverage FastPix APIs effectively.
+
+## Support
+
+- Documentation: https://fastpix.com/docs
+- API Reference: https://fastpix.com/docs/platform-api/overview
+- GitHub Issues: https://github.com/FastPix/fastpix-java/issues
+- Dashboard: https://dashboard.fastpix.com
