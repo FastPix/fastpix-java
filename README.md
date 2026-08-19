@@ -58,7 +58,7 @@ export FASTPIX_PASSWORD="your-secret-key"
 
 ## Table of Contents
 
-* [FastPix Java SDK](#fastpix-java-sdk)
+  * [FastPix Java SDK](#fastpix-java-sdk)
   * [Setup](#setup)
   * [Example Usage](#example-usage)
   * [Asynchronous Support](#asynchronous-support)
