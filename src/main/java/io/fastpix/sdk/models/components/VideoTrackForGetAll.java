@@ -34,7 +34,7 @@ public class VideoTrackForGetAll {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("width")
-    private Double width;
+    private Long width;
 
     /**
      * Track height denotes the range of height applicable to a specific track. Currently, this setting can
@@ -42,10 +42,12 @@ public class VideoTrackForGetAll {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("height")
-    private Double height;
+    private Long height;
 
     /**
-     * The frame rate (frames per second) of the video track.
+     * Frame rate quantifies the speed at which frames are displayed per second. It represents the range of
+     * frames available for a specific track. The indeterminable frame rate of the input file is indicated
+     * by a value of -1.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("frameRate")
@@ -59,25 +61,34 @@ public class VideoTrackForGetAll {
     @JsonProperty("status")
     private String status;
 
+    /**
+     * Title of the track.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private String title;
+
     @JsonCreator
     public VideoTrackForGetAll(
             @JsonProperty("id") @Nullable String id,
             @JsonProperty("type") @Nullable String type,
-            @JsonProperty("width") @Nullable Double width,
-            @JsonProperty("height") @Nullable Double height,
+            @JsonProperty("width") @Nullable Long width,
+            @JsonProperty("height") @Nullable Long height,
             @JsonProperty("frameRate") @Nullable String frameRate,
-            @JsonProperty("status") @Nullable String status) {
+            @JsonProperty("status") @Nullable String status,
+            @JsonProperty("title") @Nullable String title) {
         this.id = id;
         this.type = type;
         this.width = width;
         this.height = height;
         this.frameRate = frameRate;
         this.status = status;
+        this.title = title;
     }
-
+    
     public VideoTrackForGetAll() {
         this(null, null, null,
-            null, null, null);
+            null, null, null, null);
     }
 
     /**
@@ -98,7 +109,7 @@ public class VideoTrackForGetAll {
      * Track width denotes the range of widths applicable to a specific track. Currently, this setting can
      * be modified only for video tracks
      */
-    public Optional<Double> width() {
+    public Optional<Long> width() {
         return Optional.ofNullable(this.width);
     }
 
@@ -106,12 +117,14 @@ public class VideoTrackForGetAll {
      * Track height denotes the range of height applicable to a specific track. Currently, this setting can
      * be modified only for video tracks.
      */
-    public Optional<Double> height() {
+    public Optional<Long> height() {
         return Optional.ofNullable(this.height);
     }
 
     /**
-     * The frame rate (frames per second) of the video track.
+     * Frame rate quantifies the speed at which frames are displayed per second. It represents the range of
+     * frames available for a specific track. The indeterminable frame rate of the input file is indicated
+     * by a value of -1.
      */
     public Optional<String> frameRate() {
         return Optional.ofNullable(this.frameRate);
@@ -123,6 +136,13 @@ public class VideoTrackForGetAll {
      */
     public Optional<String> status() {
         return Optional.ofNullable(this.status);
+    }
+
+    /**
+     * Title of the track.
+     */
+    public Optional<String> title() {
+        return Optional.ofNullable(this.title);
     }
 
     public static Builder builder() {
@@ -152,7 +172,7 @@ public class VideoTrackForGetAll {
      * Track width denotes the range of widths applicable to a specific track. Currently, this setting can
      * be modified only for video tracks
      */
-    public VideoTrackForGetAll withWidth(@Nullable Double width) {
+    public VideoTrackForGetAll withWidth(@Nullable Long width) {
         this.width = width;
         return this;
     }
@@ -162,14 +182,16 @@ public class VideoTrackForGetAll {
      * Track height denotes the range of height applicable to a specific track. Currently, this setting can
      * be modified only for video tracks.
      */
-    public VideoTrackForGetAll withHeight(@Nullable Double height) {
+    public VideoTrackForGetAll withHeight(@Nullable Long height) {
         this.height = height;
         return this;
     }
 
 
     /**
-     * The frame rate (frames per second) of the video track.
+     * Frame rate quantifies the speed at which frames are displayed per second. It represents the range of
+     * frames available for a specific track. The indeterminable frame rate of the input file is indicated
+     * by a value of -1.
      */
     public VideoTrackForGetAll withFrameRate(@Nullable String frameRate) {
         this.frameRate = frameRate;
@@ -183,6 +205,15 @@ public class VideoTrackForGetAll {
      */
     public VideoTrackForGetAll withStatus(@Nullable String status) {
         this.status = status;
+        return this;
+    }
+
+
+    /**
+     * Title of the track.
+     */
+    public VideoTrackForGetAll withTitle(@Nullable String title) {
+        this.title = title;
         return this;
     }
 
@@ -202,16 +233,17 @@ public class VideoTrackForGetAll {
             Utils.enhancedDeepEquals(this.width, other.width) &&
             Utils.enhancedDeepEquals(this.height, other.height) &&
             Utils.enhancedDeepEquals(this.frameRate, other.frameRate) &&
-            Utils.enhancedDeepEquals(this.status, other.status);
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
-
+    
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             id, type, width,
-            height, frameRate, status);
+            height, frameRate, status, title);
     }
-
+    
     @Override
     public String toString() {
         return Utils.toString(VideoTrackForGetAll.class,
@@ -220,7 +252,8 @@ public class VideoTrackForGetAll {
                 "width", width,
                 "height", height,
                 "frameRate", frameRate,
-                "status", status);
+                "status", status,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -230,13 +263,15 @@ public class VideoTrackForGetAll {
 
         private String type;
 
-        private Double width;
+        private Long width;
 
-        private Double height;
+        private Long height;
 
         private String frameRate;
 
         private String status;
+
+        private String title;
 
         private Builder() {
           // force use of static builder() method
@@ -262,7 +297,7 @@ public class VideoTrackForGetAll {
          * Track width denotes the range of widths applicable to a specific track. Currently, this setting can
          * be modified only for video tracks
          */
-        public Builder width(@Nullable Double width) {
+        public Builder width(@Nullable Long width) {
             this.width = width;
             return this;
         }
@@ -271,13 +306,15 @@ public class VideoTrackForGetAll {
          * Track height denotes the range of height applicable to a specific track. Currently, this setting can
          * be modified only for video tracks.
          */
-        public Builder height(@Nullable Double height) {
+        public Builder height(@Nullable Long height) {
             this.height = height;
             return this;
         }
 
         /**
-         * The frame rate (frames per second) of the video track.
+         * Frame rate quantifies the speed at which frames are displayed per second. It represents the range of
+         * frames available for a specific track. The indeterminable frame rate of the input file is indicated
+         * by a value of -1.
          */
         public Builder frameRate(@Nullable String frameRate) {
             this.frameRate = frameRate;
@@ -293,10 +330,18 @@ public class VideoTrackForGetAll {
             return this;
         }
 
+        /**
+         * Title of the track.
+         */
+        public Builder title(@Nullable String title) {
+            this.title = title;
+            return this;
+        }
+
         public VideoTrackForGetAll build() {
             return new VideoTrackForGetAll(
                 id, type, width,
-                height, frameRate, status);
+                height, frameRate, status, title);
         }
 
     }

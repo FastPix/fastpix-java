@@ -53,7 +53,7 @@ public class Errors {
      * * **count:** The number of occurrences of the specific error.
      * * **code:** The error code associated with the specific error.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/working-with-video-data/troubleshoot-playback-errors">Troubleshoot errors</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/troubleshoot-playback-errors">Troubleshoot errors</a>
      * 
      * @return The call builder
      */
@@ -81,7 +81,7 @@ public class Errors {
      * * **count:** The number of occurrences of the specific error.
      * * **code:** The error code associated with the specific error.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/working-with-video-data/troubleshoot-playback-errors">Troubleshoot errors</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/troubleshoot-playback-errors">Troubleshoot errors</a>
      * 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
@@ -111,7 +111,7 @@ public class Errors {
      * * **count:** The number of occurrences of the specific error.
      * * **code:** The error code associated with the specific error.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/working-with-video-data/troubleshoot-playback-errors">Troubleshoot errors</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/troubleshoot-playback-errors">Troubleshoot errors</a>
      * 
      * @param timespan This parameter specifies the time span between which the video views list must be retrieved by. You can provide either from and to unix epoch timestamps or time duration. The scope of duration is between 60 minutes to 30 days.
      *         

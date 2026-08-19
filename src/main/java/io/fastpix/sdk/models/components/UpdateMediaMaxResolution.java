@@ -24,14 +24,12 @@ public class UpdateMediaMaxResolution {
     private static final String RESOLUTION_1080P = "1080p";
     private static final String RESOLUTION_720P = "720p";
     private static final String RESOLUTION_480P = "480p";
-    private static final String RESOLUTION_360P = "360p";
 
     public static final UpdateMediaMaxResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new UpdateMediaMaxResolution(RESOLUTION_2160P);
     public static final UpdateMediaMaxResolution ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP = new UpdateMediaMaxResolution(RESOLUTION_1440P);
     public static final UpdateMediaMaxResolution ONE_THOUSAND_AND_EIGHTYP = new UpdateMediaMaxResolution(RESOLUTION_1080P);
     public static final UpdateMediaMaxResolution SEVEN_HUNDRED_AND_TWENTYP = new UpdateMediaMaxResolution(RESOLUTION_720P);
     public static final UpdateMediaMaxResolution FOUR_HUNDRED_AND_EIGHTYP = new UpdateMediaMaxResolution(RESOLUTION_480P);
-    public static final UpdateMediaMaxResolution THREE_HUNDRED_AND_SIXTYP = new UpdateMediaMaxResolution(RESOLUTION_360P);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -110,7 +108,6 @@ public class UpdateMediaMaxResolution {
         map.put(RESOLUTION_1080P, ONE_THOUSAND_AND_EIGHTYP);
         map.put(RESOLUTION_720P, SEVEN_HUNDRED_AND_TWENTYP);
         map.put(RESOLUTION_480P, FOUR_HUNDRED_AND_EIGHTYP);
-        map.put(RESOLUTION_360P, THREE_HUNDRED_AND_SIXTYP);
         return map;
     }
 
@@ -121,7 +118,6 @@ public class UpdateMediaMaxResolution {
         map.put(RESOLUTION_1080P, UpdateMediaMaxResolutionEnum.ONE_THOUSAND_AND_EIGHTYP);
         map.put(RESOLUTION_720P, UpdateMediaMaxResolutionEnum.SEVEN_HUNDRED_AND_TWENTYP);
         map.put(RESOLUTION_480P, UpdateMediaMaxResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
-        map.put(RESOLUTION_360P, UpdateMediaMaxResolutionEnum.THREE_HUNDRED_AND_SIXTYP);
         return map;
     }
     
@@ -132,8 +128,7 @@ public class UpdateMediaMaxResolution {
         ONE_THOUSAND_FOUR_HUNDRED_AND_FORTYP(RESOLUTION_1440P),
         ONE_THOUSAND_AND_EIGHTYP(RESOLUTION_1080P),
         SEVEN_HUNDRED_AND_TWENTYP(RESOLUTION_720P),
-        FOUR_HUNDRED_AND_EIGHTYP(RESOLUTION_480P),
-        THREE_HUNDRED_AND_SIXTYP(RESOLUTION_360P),;
+        FOUR_HUNDRED_AND_EIGHTYP(RESOLUTION_480P),;
 
         private final String value;
 

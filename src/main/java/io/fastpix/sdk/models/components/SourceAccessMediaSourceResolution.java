@@ -25,6 +25,8 @@ public class SourceAccessMediaSourceResolution {
     private static final String VALUE_720 = "720";
     private static final String VALUE_480P = "480p";
     private static final String VALUE_480 = "480";
+    private static final String VALUE_360P = "360p";
+    private static final String VALUE_360 = "360";
 
     public static final SourceAccessMediaSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new SourceAccessMediaSourceResolution(VALUE_2160P);
     public static final SourceAccessMediaSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY = new SourceAccessMediaSourceResolution(VALUE_2160);
@@ -36,6 +38,8 @@ public class SourceAccessMediaSourceResolution {
     public static final SourceAccessMediaSourceResolution SEVEN_HUNDRED_AND_TWENTY = new SourceAccessMediaSourceResolution(VALUE_720);
     public static final SourceAccessMediaSourceResolution FOUR_HUNDRED_AND_EIGHTYP = new SourceAccessMediaSourceResolution(VALUE_480P);
     public static final SourceAccessMediaSourceResolution FOUR_HUNDRED_AND_EIGHTY = new SourceAccessMediaSourceResolution(VALUE_480);
+    public static final SourceAccessMediaSourceResolution THREE_HUNDRED_AND_SIXTYP = new SourceAccessMediaSourceResolution(VALUE_360P);
+    public static final SourceAccessMediaSourceResolution THREE_HUNDRED_AND_SIXTY = new SourceAccessMediaSourceResolution(VALUE_360);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -119,6 +123,8 @@ public class SourceAccessMediaSourceResolution {
         map.put(VALUE_720, SEVEN_HUNDRED_AND_TWENTY);
         map.put(VALUE_480P, FOUR_HUNDRED_AND_EIGHTYP);
         map.put(VALUE_480, FOUR_HUNDRED_AND_EIGHTY);
+        map.put(VALUE_360P, THREE_HUNDRED_AND_SIXTYP);
+        map.put(VALUE_360, THREE_HUNDRED_AND_SIXTY);
         return map;
     }
 
@@ -134,6 +140,8 @@ public class SourceAccessMediaSourceResolution {
         map.put(VALUE_720, SourceAccessMediaSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTY);
         map.put(VALUE_480P, SourceAccessMediaSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
         map.put(VALUE_480, SourceAccessMediaSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTY);
+        map.put(VALUE_360P, SourceAccessMediaSourceResolutionEnum.THREE_HUNDRED_AND_SIXTYP);
+        map.put(VALUE_360, SourceAccessMediaSourceResolutionEnum.THREE_HUNDRED_AND_SIXTY);
         return map;
     }
 
@@ -149,7 +157,9 @@ public class SourceAccessMediaSourceResolution {
         SEVEN_HUNDRED_AND_TWENTYP(VALUE_720P),
         SEVEN_HUNDRED_AND_TWENTY(VALUE_720),
         FOUR_HUNDRED_AND_EIGHTYP(VALUE_480P),
-        FOUR_HUNDRED_AND_EIGHTY(VALUE_480),;
+        FOUR_HUNDRED_AND_EIGHTY(VALUE_480),
+        THREE_HUNDRED_AND_SIXTYP(VALUE_360P),
+        THREE_HUNDRED_AND_SIXTY(VALUE_360),;
 
         private final String value;
 

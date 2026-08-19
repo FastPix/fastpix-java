@@ -64,7 +64,7 @@ Add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.fastpix:sdk:1.0.3'
+    implementation 'io.fastpix:sdk:1.0.4'
 }
 ```
 
@@ -76,7 +76,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.fastpix</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 </dependency>
 ```
 
@@ -300,7 +300,7 @@ Comprehensive Java SDK for FastPix platform integration with full API coverage.
 
 Upload, manage, and transform video content with comprehensive media management capabilities.
 
-For detailed documentation, see [FastPix Video on Demand Overview](https://fastpix.com/docs/video-on-demand-api/overview).
+For detailed documentation, see [FastPix Video on Demand Overview](https://fastpix.com/docs/video-on-demand/overview).
 
 #### Input Video
 - [Create from URL](docs/sdks/inputvideos/README.md#create) - Upload video content from external URL

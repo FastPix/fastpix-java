@@ -102,6 +102,13 @@ public class LiveMediaClips {
     private List<LiveMediaClipsTrack> tracks;
 
     /**
+     * List of generated subtitle tracks associated with the media.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("generatedSubtitles")
+    private JsonNullable<List<TracksSubtitles>> generatedSubtitles;
+
+    /**
      * Indicates whether the media contains only audio (no video track).
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -145,6 +152,20 @@ public class LiveMediaClips {
     @JsonProperty("updatedAt")
     private OffsetDateTime updatedAt;
 
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("optimizeAudio")
+    private Boolean optimizeAudio;
+
+    /**
+     * A list of MP4 renditions generated for the media when MP4 support is requested. Each entry represents one downloadable rendition (for example, a capped-4K video file or an audio-only m4a file) along with its generation status. Omitted when no MP4 support has been requested.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("mp4Support")
+    private List<LiveMediaClipsMp4Support> mp4Support;
+
     @JsonCreator
     public LiveMediaClips(
             @JsonProperty("thumbnail") @Nullable JsonNullable<String> thumbnail,
@@ -159,12 +180,15 @@ public class LiveMediaClips {
             @JsonProperty("sourceAccess") @Nullable Boolean sourceAccess,
             @JsonProperty("playbackIds") @Nullable List<PlaybackId> playbackIds,
             @JsonProperty("tracks") @Nullable List<LiveMediaClipsTrack> tracks,
+            @JsonProperty("generatedSubtitles") @Nullable JsonNullable<List<TracksSubtitles>> generatedSubtitles,
             @JsonProperty("isAudioOnly") @Nullable JsonNullable<Boolean> isAudioOnly,
             @JsonProperty("subtitleAvailable") @Nullable JsonNullable<Boolean> subtitleAvailable,
             @JsonProperty("duration") @Nullable String duration,
             @JsonProperty("aspectRatio") @Nullable JsonNullable<String> aspectRatio,
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
-            @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt) {
+            @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt,
+            @JsonProperty("optimizeAudio") @Nullable Boolean optimizeAudio,
+            @JsonProperty("mp4Support") @Nullable List<LiveMediaClipsMp4Support> mp4Support) {
         this.thumbnail = Optional.ofNullable(thumbnail)
             .orElse(JsonNullable.undefined());
         this.id = id;
@@ -181,6 +205,8 @@ public class LiveMediaClips {
         this.sourceAccess = sourceAccess;
         this.playbackIds = playbackIds;
         this.tracks = tracks;
+        this.generatedSubtitles = Optional.ofNullable(generatedSubtitles)
+            .orElse(JsonNullable.undefined());
         this.isAudioOnly = Optional.ofNullable(isAudioOnly)
             .orElse(JsonNullable.undefined());
         this.subtitleAvailable = Optional.ofNullable(subtitleAvailable)
@@ -190,6 +216,8 @@ public class LiveMediaClips {
             .orElse(JsonNullable.undefined());
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.optimizeAudio = optimizeAudio;
+        this.mp4Support = mp4Support;
     }
     
     public LiveMediaClips() {
@@ -198,7 +226,8 @@ public class LiveMediaClips {
             null, null, null,
             null, null, null,
             null, null, null,
-            null, null, null);
+            null, null, null, null, null,
+            null);
     }
 
     /**
@@ -287,6 +316,13 @@ public class LiveMediaClips {
     }
 
     /**
+     * List of generated subtitle tracks associated with the media.
+     */
+    public JsonNullable<List<TracksSubtitles>> generatedSubtitles() {
+        return this.generatedSubtitles;
+    }
+
+    /**
      * Indicates whether the media contains only audio (no video track).
      */
     @JsonIgnore
@@ -329,6 +365,20 @@ public class LiveMediaClips {
      */
     public Optional<OffsetDateTime> updatedAt() {
         return Optional.ofNullable(this.updatedAt);
+    }
+
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    public Optional<Boolean> optimizeAudio() {
+        return Optional.ofNullable(this.optimizeAudio);
+    }
+
+    /**
+     * A list of MP4 renditions generated for the media when MP4 support is requested. Each entry represents one downloadable rendition (for example, a capped-4K video file or an audio-only m4a file) along with its generation status. Omitted when no MP4 support has been requested.
+     */
+    public Optional<List<LiveMediaClipsMp4Support>> mp4Support() {
+        return Optional.ofNullable(this.mp4Support);
     }
 
     public static Builder builder() {
@@ -446,6 +496,15 @@ public class LiveMediaClips {
 
 
     /**
+     * List of generated subtitle tracks associated with the media.
+     */
+    public LiveMediaClips withGeneratedSubtitles(@Nullable List<TracksSubtitles> generatedSubtitles) {
+        this.generatedSubtitles = JsonNullable.of(generatedSubtitles);
+        return this;
+    }
+
+
+    /**
      * Indicates whether the media contains only audio (no video track).
      */
     public LiveMediaClips withIsAudioOnly(@Nullable Boolean isAudioOnly) {
@@ -501,6 +560,24 @@ public class LiveMediaClips {
     }
 
 
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    public LiveMediaClips withOptimizeAudio(@Nullable Boolean optimizeAudio) {
+        this.optimizeAudio = optimizeAudio;
+        return this;
+    }
+
+
+    /**
+     * A list of MP4 renditions generated for the media when MP4 support is requested. Each entry represents one downloadable rendition (for example, a capped-4K video file or an audio-only m4a file) along with its generation status. Omitted when no MP4 support has been requested.
+     */
+    public LiveMediaClips withMp4Support(@Nullable List<LiveMediaClipsMp4Support> mp4Support) {
+        this.mp4Support = mp4Support;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -523,12 +600,15 @@ public class LiveMediaClips {
             Utils.enhancedDeepEquals(this.sourceAccess, other.sourceAccess) &&
             Utils.enhancedDeepEquals(this.playbackIds, other.playbackIds) &&
             Utils.enhancedDeepEquals(this.tracks, other.tracks) &&
+            Utils.enhancedDeepEquals(this.generatedSubtitles, other.generatedSubtitles) &&
             Utils.enhancedDeepEquals(this.isAudioOnly, other.isAudioOnly) &&
             Utils.enhancedDeepEquals(this.subtitleAvailable, other.subtitleAvailable) &&
             Utils.enhancedDeepEquals(this.duration, other.duration) &&
             Utils.enhancedDeepEquals(this.aspectRatio, other.aspectRatio) &&
             Utils.enhancedDeepEquals(this.createdAt, other.createdAt) &&
-            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt);
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.optimizeAudio, other.optimizeAudio) &&
+            Utils.enhancedDeepEquals(this.mp4Support, other.mp4Support);
     }
     
     @Override
@@ -538,8 +618,9 @@ public class LiveMediaClips {
             streamId, creatorId, title,
             maxResolution, sourceResolution, status,
             sourceAccess, playbackIds, tracks,
-            isAudioOnly, subtitleAvailable, duration,
-            aspectRatio, createdAt, updatedAt);
+            generatedSubtitles, isAudioOnly, subtitleAvailable,
+            duration, aspectRatio, createdAt,
+            updatedAt, optimizeAudio, mp4Support);
     }
     
     @Override
@@ -557,12 +638,15 @@ public class LiveMediaClips {
                 "sourceAccess", sourceAccess,
                 "playbackIds", playbackIds,
                 "tracks", tracks,
+                "generatedSubtitles", generatedSubtitles,
                 "isAudioOnly", isAudioOnly,
                 "subtitleAvailable", subtitleAvailable,
                 "duration", duration,
                 "aspectRatio", aspectRatio,
                 "createdAt", createdAt,
-                "updatedAt", updatedAt);
+                "updatedAt", updatedAt,
+                "optimizeAudio", optimizeAudio,
+                "mp4Support", mp4Support);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -592,6 +676,8 @@ public class LiveMediaClips {
 
         private List<LiveMediaClipsTrack> tracks;
 
+        private JsonNullable<List<TracksSubtitles>> generatedSubtitles;
+
         private JsonNullable<Boolean> isAudioOnly;
 
         private JsonNullable<Boolean> subtitleAvailable;
@@ -603,6 +689,10 @@ public class LiveMediaClips {
         private OffsetDateTime createdAt;
 
         private OffsetDateTime updatedAt;
+
+        private Boolean optimizeAudio;
+
+        private List<LiveMediaClipsMp4Support> mp4Support;
 
         private Builder() {
           // force use of static builder() method
@@ -706,6 +796,14 @@ public class LiveMediaClips {
         }
 
         /**
+         * List of generated subtitle tracks associated with the media.
+         */
+        public Builder generatedSubtitles(@Nullable List<TracksSubtitles> generatedSubtitles) {
+            this.generatedSubtitles = JsonNullable.of(generatedSubtitles);
+            return this;
+        }
+
+        /**
          * Indicates whether the media contains only audio (no video track).
          */
         public Builder isAudioOnly(@Nullable Boolean isAudioOnly) {
@@ -755,14 +853,31 @@ public class LiveMediaClips {
             return this;
         }
 
+        /**
+         * Whether the audio track of the media has been volume-normalized.
+         */
+        public Builder optimizeAudio(@Nullable Boolean optimizeAudio) {
+            this.optimizeAudio = optimizeAudio;
+            return this;
+        }
+
+        /**
+         * A list of MP4 renditions generated for the media when MP4 support is requested. Each entry represents one downloadable rendition (for example, a capped-4K video file or an audio-only m4a file) along with its generation status. Omitted when no MP4 support has been requested.
+         */
+        public Builder mp4Support(@Nullable List<LiveMediaClipsMp4Support> mp4Support) {
+            this.mp4Support = mp4Support;
+            return this;
+        }
+
         public LiveMediaClips build() {
             return new LiveMediaClips(
                 thumbnail, id, workspaceId,
                 streamId, creatorId, title,
                 maxResolution, sourceResolution, status,
                 sourceAccess, playbackIds, tracks,
-                isAudioOnly, subtitleAvailable, duration,
-                aspectRatio, createdAt, updatedAt);
+                generatedSubtitles, isAudioOnly, subtitleAvailable,
+                duration, aspectRatio, createdAt,
+                updatedAt, optimizeAudio, mp4Support);
         }
 
 

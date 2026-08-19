@@ -16,7 +16,7 @@ The viewer count is an **approximate value**, optimized for performance. It prov
 
 Suppose a content creator is hosting a live concert and wants to display the number of live viewers on their dashboard. This endpoint can be queried to show up-to-date viewer statistics.
 
-Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
 
 > **Note:** In the examples below, `package hello.world;` is used for demonstration purposes. When creating your own Java files, ensure the package name matches your directory structure (e.g., if your file is at `src/main/java/com/example/MyApp.java`, use `package com.example;`).
 

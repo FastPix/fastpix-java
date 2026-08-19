@@ -81,8 +81,8 @@ public class AsyncViews {
      * information helps optimize content for widely used platforms and troubleshoot playback issues on
      * less common devices.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Audience metrics</a>, <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#1-views-dashboard">Views dashboard</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Audience metrics</a>, <a
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#1-views-dashboard">Views dashboard</a>
      * 
      * @return The async call builder
      */
@@ -127,8 +127,8 @@ public class AsyncViews {
      * information helps optimize content for widely used platforms and troubleshoot playback issues on
      * less common devices.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Audience metrics</a>, <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#1-views-dashboard">Views dashboard</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Audience metrics</a>, <a
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#1-views-dashboard">Views dashboard</a>
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return {@code CompletableFuture<ListVideoViewsResponse>} - The async response
@@ -174,8 +174,8 @@ public class AsyncViews {
      * information helps optimize content for widely used platforms and troubleshoot playback issues on
      * less common devices.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Audience metrics</a>, <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#1-views-dashboard">Views dashboard</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Audience metrics</a>, <a
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#1-views-dashboard">Views dashboard</a>
      * 
      * @param request The request object containing all the parameters for the API call.
      * @param options additional options
@@ -208,7 +208,7 @@ public class AsyncViews {
      * playback errors, and session length. This data allows the developer to pinpoint issues (such as poor
      * connectivity or a browser-specific problem) and take steps to improve the user experience.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/what-video-data-do-we-capture#/">What Video
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/what-video-data-do-we-capture">What Video
      * Data do we capture?</a>
      * 
      * @return The async call builder
@@ -234,7 +234,7 @@ public class AsyncViews {
      * playback errors, and session length. This data allows the developer to pinpoint issues (such as poor
      * connectivity or a browser-specific problem) and take steps to improve the user experience.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/what-video-data-do-we-capture#/">What Video
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/what-video-data-do-we-capture">What Video
      * Data do we capture?</a>
      * 
      * @param viewId Pass View Id
@@ -261,7 +261,7 @@ public class AsyncViews {
      * playback errors, and session length. This data allows the developer to pinpoint issues (such as poor
      * connectivity or a browser-specific problem) and take steps to improve the user experience.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/what-video-data-do-we-capture#/">What Video
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/what-video-data-do-we-capture">What Video
      * Data do we capture?</a>
      * 
      * @param viewId Pass View Id
@@ -300,7 +300,7 @@ public class AsyncViews {
      * 
      * <p>5. You receive a response containing the list of top video views matching the specified criteria.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/working-with-video-data/identify-top-performing-content">Get
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/identify-top-performing-content">Get
      * top-performing content</a>
      * 
      * @return The async call builder
@@ -330,7 +330,7 @@ public class AsyncViews {
      * 
      * <p>5. You receive a response containing the list of top video views matching the specified criteria.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/working-with-video-data/identify-top-performing-content">Get
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/identify-top-performing-content">Get
      * top-performing content</a>
      * 
      * @return {@code CompletableFuture<ListByTopContentResponse>} - The async response
@@ -362,7 +362,7 @@ public class AsyncViews {
      * 
      * <p>5. You receive a response containing the list of top video views matching the specified criteria.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/working-with-video-data/identify-top-performing-content">Get
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/identify-top-performing-content">Get
      * top-performing content</a>
      * 
      * @param timespan This parameter specifies the time span between which the video views list must be retrieved by. You can provide either from and to unix epoch timestamps or time duration. The scope of duration is between 60 minutes to 30 days.

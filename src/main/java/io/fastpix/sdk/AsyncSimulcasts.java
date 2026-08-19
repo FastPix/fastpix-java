@@ -42,7 +42,7 @@ public class AsyncSimulcasts {
      * disabled, the simulcast can no longer be modified.
      * 
      * <p>Webhook event: <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamsimulcast_targetupdated">video.live_stream.simulcast_target.updated</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamsimulcast_targetupdated">video.live_stream.simulcast_target.updated</a>
      * 
      * <p>#### Example
      * When a `PATCH` request is made to this endpoint, the API updates the status of the simulcast. This
@@ -63,7 +63,7 @@ public class AsyncSimulcasts {
      * disabled, the simulcast can no longer be modified.
      * 
      * <p>Webhook event: <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamsimulcast_targetupdated">video.live_stream.simulcast_target.updated</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamsimulcast_targetupdated">video.live_stream.simulcast_target.updated</a>
      * 
      * <p>#### Example
      * When a `PATCH` request is made to this endpoint, the API updates the status of the simulcast. This
@@ -91,7 +91,7 @@ public class AsyncSimulcasts {
      * disabled, the simulcast can no longer be modified.
      * 
      * <p>Webhook event: <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamsimulcast_targetupdated">video.live_stream.simulcast_target.updated</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamsimulcast_targetupdated">video.live_stream.simulcast_target.updated</a>
      * 
      * <p>#### Example
      * When a `PATCH` request is made to this endpoint, the API updates the status of the simulcast. This

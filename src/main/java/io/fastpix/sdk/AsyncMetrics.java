@@ -93,7 +93,7 @@ public class AsyncMetrics {
      * <p>* **totalPlayTime:** Total time spent playing the video, represented in milliseconds.
      * * **field:** The grouping field value based on the groupBy parameter.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Understand data
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Understand data
      * definitions</a>
      * 
      * @return The async call builder
@@ -141,7 +141,7 @@ public class AsyncMetrics {
      * <p>* **totalPlayTime:** Total time spent playing the video, represented in milliseconds.
      * * **field:** The grouping field value based on the groupBy parameter.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Understand data
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Understand data
      * definitions</a>
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -190,7 +190,7 @@ public class AsyncMetrics {
      * <p>* **totalPlayTime:** Total time spent playing the video, represented in milliseconds.
      * * **field:** The grouping field value based on the groupBy parameter.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Understand data
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Understand data
      * definitions</a>
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -236,7 +236,7 @@ public class AsyncMetrics {
      * metric across the entire dataset for the given timespan. This value is not affected by specific
      * filters.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Understand data
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Understand data
      * definitions</a>
      * 
      * @return The async call builder
@@ -274,7 +274,7 @@ public class AsyncMetrics {
      * metric across the entire dataset for the given timespan. This value is not affected by specific
      * filters.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Understand data
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Understand data
      * definitions</a>
      * 
      * @param metricId Pass metric Id
@@ -316,7 +316,7 @@ public class AsyncMetrics {
      * metric across the entire dataset for the given timespan. This value is not affected by specific
      * filters.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/concepts/audience-metrics">Understand data
+     * <p>Related guide: <a href="https://fastpix.com/docs/video-data/audience-metrics">Understand data
      * definitions</a>
      * 
      * @param metricId Pass metric Id
@@ -458,7 +458,7 @@ public class AsyncMetrics {
      * selected dimensions.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#compare-metrics">Compare metrics in
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#compare-metrics">Compare metrics in
      * dashboard</a>
      * 
      * @return The async call builder
@@ -497,7 +497,7 @@ public class AsyncMetrics {
      * selected dimensions.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#compare-metrics">Compare metrics in
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#compare-metrics">Compare metrics in
      * dashboard</a>
      * 
      * @return {@code CompletableFuture<ListComparisonValuesResponse>} - The async response
@@ -538,7 +538,7 @@ public class AsyncMetrics {
      * selected dimensions.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#compare-metrics">Compare metrics in
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#compare-metrics">Compare metrics in
      * dashboard</a>
      * 
      * @param timespan This parameter specifies the time span between which the video views list must be retrieved by. You can provide either from and to unix epoch timestamps or time duration. The scope of duration is between 60 minutes to 30 days.

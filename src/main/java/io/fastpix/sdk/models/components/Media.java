@@ -98,7 +98,7 @@ public class Media {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mp4Support")
-    private MediaMp4Support mp4Support;
+    private List<MediaMp4Support> mp4Support;
 
     /**
      * The sourceAccess parameter determines whether the original media file is accessible. Set to true to
@@ -205,6 +205,13 @@ public class Media {
     @JsonProperty("updatedAt")
     private OffsetDateTime updatedAt;
 
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("optimizeAudio")
+    private Boolean optimizeAudio;
+
     @JsonCreator
     public Media(
             @JsonProperty("thumbnail") @Nullable JsonNullable<String> thumbnail,
@@ -217,7 +224,7 @@ public class Media {
             @JsonProperty("maxResolution") @Nullable MediaMaxResolution maxResolution,
             @JsonProperty("sourceResolution") @Nullable MediaSourceResolution sourceResolution,
             @JsonProperty("status") @Nullable MediaStatus status,
-            @JsonProperty("mp4Support") @Nullable MediaMp4Support mp4Support,
+            @JsonProperty("mp4Support") @Nullable List<MediaMp4Support> mp4Support,
             @JsonProperty("sourceAccess") @Nullable JsonNullable<Boolean> sourceAccess,
             @JsonProperty("playbackIds") @Nullable List<PlaybackId> playbackIds,
             @JsonProperty("tracks") @Nullable List<MediaTrack> tracks,
@@ -231,7 +238,8 @@ public class Media {
             @JsonProperty("duration") @Nullable String duration,
             @JsonProperty("aspectRatio") @Nullable JsonNullable<String> aspectRatio,
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
-            @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt) {
+            @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt,
+            @JsonProperty("optimizeAudio") @Nullable Boolean optimizeAudio) {
         this.thumbnail = Optional.ofNullable(thumbnail)
             .orElse(JsonNullable.undefined());
         this.id = id;
@@ -267,6 +275,7 @@ public class Media {
             .orElse(JsonNullable.undefined());
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.optimizeAudio = optimizeAudio;
     }
     
     public Media() {
@@ -278,7 +287,7 @@ public class Media {
             null, null, null,
             null, null, null,
             null, null, null,
-            null);
+            null, null);
     }
 
     /**
@@ -360,7 +369,7 @@ public class Media {
      * - **audioOnly**: Provides an MP4 stream containing only the audio.
      * - **audioOnly,capped_4k**: Enables both MP4 video downloads (up to 4K) and an audio-only stream.
      */
-    public Optional<MediaMp4Support> mp4Support() {
+    public Optional<List<MediaMp4Support>> mp4Support() {
         return Optional.ofNullable(this.mp4Support);
     }
 
@@ -470,6 +479,13 @@ public class Media {
         return Optional.ofNullable(this.updatedAt);
     }
 
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    public Optional<Boolean> optimizeAudio() {
+        return Optional.ofNullable(this.optimizeAudio);
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -574,7 +590,7 @@ public class Media {
      * - **audioOnly**: Provides an MP4 stream containing only the audio.
      * - **audioOnly,capped_4k**: Enables both MP4 video downloads (up to 4K) and an audio-only stream.
      */
-    public Media withMp4Support(@Nullable MediaMp4Support mp4Support) {
+    public Media withMp4Support(@Nullable List<MediaMp4Support> mp4Support) {
         this.mp4Support = mp4Support;
         return this;
     }
@@ -713,6 +729,15 @@ public class Media {
     }
 
 
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    public Media withOptimizeAudio(@Nullable Boolean optimizeAudio) {
+        this.optimizeAudio = optimizeAudio;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -747,7 +772,8 @@ public class Media {
             Utils.enhancedDeepEquals(this.duration, other.duration) &&
             Utils.enhancedDeepEquals(this.aspectRatio, other.aspectRatio) &&
             Utils.enhancedDeepEquals(this.createdAt, other.createdAt) &&
-            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt);
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.optimizeAudio, other.optimizeAudio);
     }
     
     @Override
@@ -761,7 +787,7 @@ public class Media {
             summary, chapters, namedEntities,
             moderation, isAudioOnly, subtitleAvailable,
             duration, aspectRatio, createdAt,
-            updatedAt);
+            updatedAt, optimizeAudio);
     }
     
     @Override
@@ -791,7 +817,8 @@ public class Media {
                 "duration", duration,
                 "aspectRatio", aspectRatio,
                 "createdAt", createdAt,
-                "updatedAt", updatedAt);
+                "updatedAt", updatedAt,
+                "optimizeAudio", optimizeAudio);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -817,7 +844,7 @@ public class Media {
 
         private MediaStatus status;
 
-        private MediaMp4Support mp4Support;
+        private List<MediaMp4Support> mp4Support;
 
         private JsonNullable<Boolean> sourceAccess;
 
@@ -846,6 +873,8 @@ public class Media {
         private OffsetDateTime createdAt;
 
         private OffsetDateTime updatedAt;
+
+        private Boolean optimizeAudio;
 
         private Builder() {
           // force use of static builder() method
@@ -940,7 +969,7 @@ public class Media {
          * - **audioOnly**: Provides an MP4 stream containing only the audio.
          * - **audioOnly,capped_4k**: Enables both MP4 video downloads (up to 4K) and an audio-only stream.
          */
-        public Builder mp4Support(@Nullable MediaMp4Support mp4Support) {
+        public Builder mp4Support(@Nullable List<MediaMp4Support> mp4Support) {
             this.mp4Support = mp4Support;
             return this;
         }
@@ -1064,6 +1093,14 @@ public class Media {
             return this;
         }
 
+        /**
+         * Whether the audio track of the media has been volume-normalized.
+         */
+        public Builder optimizeAudio(@Nullable Boolean optimizeAudio) {
+            this.optimizeAudio = optimizeAudio;
+            return this;
+        }
+
         public Media build() {
             return new Media(
                 thumbnail, id, workspaceId,
@@ -1074,7 +1111,7 @@ public class Media {
                 summary, chapters, namedEntities,
                 moderation, isAudioOnly, subtitleAvailable,
                 duration, aspectRatio, createdAt,
-                updatedAt);
+                updatedAt, optimizeAudio);
         }
 
 

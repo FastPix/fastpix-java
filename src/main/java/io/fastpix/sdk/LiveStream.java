@@ -52,7 +52,7 @@ public class LiveStream {
      * 
      * <p>Provide the `streamId` in the request to terminate active connections and remove the stream from the
      * workspace. You can further look for <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamdeleted">video.live_stream.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamdeleted">video.live_stream.deleted</a>
      * webhook to notify your system about the status.
      * 
      * <p>#### Example
@@ -60,7 +60,7 @@ public class LiveStream {
      * <p>For an online concert platform, a trial stream was mistakenly made public. The event manager deletes
      * the stream before the concert begins to avoid confusion among viewers.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @return The call builder
      */
@@ -77,7 +77,7 @@ public class LiveStream {
      * 
      * <p>Provide the `streamId` in the request to terminate active connections and remove the stream from the
      * workspace. You can further look for <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamdeleted">video.live_stream.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamdeleted">video.live_stream.deleted</a>
      * webhook to notify your system about the status.
      * 
      * <p>#### Example
@@ -85,7 +85,7 @@ public class LiveStream {
      * <p>For an online concert platform, a trial stream was mistakenly made public. The event manager deletes
      * the stream before the concert begins to avoid confusion among viewers.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @return The response from the API call
@@ -104,7 +104,7 @@ public class LiveStream {
      * 
      * <p>Provide the `streamId` in the request to terminate active connections and remove the stream from the
      * workspace. You can further look for <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamdeleted">video.live_stream.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamdeleted">video.live_stream.deleted</a>
      * webhook to notify your system about the status.
      * 
      * <p>#### Example
@@ -112,7 +112,7 @@ public class LiveStream {
      * <p>For an online concert platform, a trial stream was mistakenly made public. The event manager deletes
      * the stream before the concert begins to avoid confusion among viewers.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @param options additional options
@@ -143,7 +143,7 @@ public class LiveStream {
      * <p>A creator disables a livestream to pause it temporarily. Later, they decide to continue the session.
      * By calling this endpoint with the stream's ID, they can re-enable and restart the same livestream.
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @return The call builder
      */
@@ -168,7 +168,7 @@ public class LiveStream {
      * <p>A creator disables a livestream to pause it temporarily. Later, they decide to continue the session.
      * By calling this endpoint with the stream's ID, they can re-enable and restart the same livestream.
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @return The response from the API call
@@ -195,7 +195,7 @@ public class LiveStream {
      * <p>A creator disables a livestream to pause it temporarily. Later, they decide to continue the session.
      * By calling this endpoint with the stream's ID, they can re-enable and restart the same livestream.
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @param options additional options
@@ -224,7 +224,7 @@ public class LiveStream {
      * again. By calling this endpoint, the stream is transitioned to a `disabled` state, ensuring it's
      * permanently stopped (unless re-enabled on a paid plan).
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @return The call builder
      */
@@ -247,7 +247,7 @@ public class LiveStream {
      * again. By calling this endpoint, the stream is transitioned to a `disabled` state, ensuring it's
      * permanently stopped (unless re-enabled on a paid plan).
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId After creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @return The response from the API call
@@ -272,7 +272,7 @@ public class LiveStream {
      * again. By calling this endpoint, the stream is transitioned to a `disabled` state, ensuring it's
      * permanently stopped (unless re-enabled on a paid plan).
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId After creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @param options additional options
@@ -303,7 +303,7 @@ public class LiveStream {
      * streaming. This endpoint ensures the livestream status is changed from `active` to `idle`,
      * indicating it's officially completed.
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @return The call builder
      */
@@ -328,7 +328,7 @@ public class LiveStream {
      * streaming. This endpoint ensures the livestream status is changed from `active` to `idle`,
      * indicating it's officially completed.
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @return The response from the API call
@@ -355,7 +355,7 @@ public class LiveStream {
      * streaming. This endpoint ensures the livestream status is changed from `active` to `idle`,
      * indicating it's officially completed.
      * 
-     * <p>Related guide <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @param options additional options

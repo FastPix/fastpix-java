@@ -194,6 +194,20 @@ public class SourceAccessMedia {
     @JsonProperty("updatedAt")
     private OffsetDateTime updatedAt;
 
+    /**
+     * A list of MP4 renditions generated for the media when MP4 support is requested. Each entry represents one downloadable rendition (for example, a capped-4K video file or an audio-only m4a file) along with its generation status. Omitted when no MP4 support has been requested.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("mp4Support")
+    private List<SourceAccessMediaMp4Support> mp4Support;
+
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("optimizeAudio")
+    private Boolean optimizeAudio;
+
     @JsonCreator
     public SourceAccessMedia(
             @JsonProperty("thumbnail") @Nullable JsonNullable<String> thumbnail,
@@ -219,7 +233,9 @@ public class SourceAccessMedia {
             @JsonProperty("duration") @Nullable String duration,
             @JsonProperty("aspectRatio") @Nullable JsonNullable<String> aspectRatio,
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
-            @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt) {
+            @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt,
+            @JsonProperty("mp4Support") @Nullable List<SourceAccessMediaMp4Support> mp4Support,
+            @JsonProperty("optimizeAudio") @Nullable Boolean optimizeAudio) {
         this.thumbnail = Optional.ofNullable(thumbnail)
             .orElse(JsonNullable.undefined());
         this.id = id;
@@ -254,6 +270,8 @@ public class SourceAccessMedia {
             .orElse(JsonNullable.undefined());
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.mp4Support = mp4Support;
+        this.optimizeAudio = optimizeAudio;
     }
     
     public SourceAccessMedia() {
@@ -264,7 +282,7 @@ public class SourceAccessMedia {
             null, null, null,
             null, null, null,
             null, null, null,
-            null, null, null);
+            null, null, null, null, null);
     }
 
     /**
@@ -443,6 +461,20 @@ public class SourceAccessMedia {
      */
     public Optional<OffsetDateTime> updatedAt() {
         return Optional.ofNullable(this.updatedAt);
+    }
+
+    /**
+     * A list of MP4 renditions generated for the media when MP4 support is requested. Each entry represents one downloadable rendition (for example, a capped-4K video file or an audio-only m4a file) along with its generation status. Omitted when no MP4 support has been requested.
+     */
+    public Optional<List<SourceAccessMediaMp4Support>> mp4Support() {
+        return Optional.ofNullable(this.mp4Support);
+    }
+
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    public Optional<Boolean> optimizeAudio() {
+        return Optional.ofNullable(this.optimizeAudio);
     }
 
     public static Builder builder() {
@@ -675,6 +707,24 @@ public class SourceAccessMedia {
     }
 
 
+    /**
+     * A list of MP4 renditions generated for the media when MP4 support is requested. Each entry represents one downloadable rendition (for example, a capped-4K video file or an audio-only m4a file) along with its generation status. Omitted when no MP4 support has been requested.
+     */
+    public SourceAccessMedia withMp4Support(@Nullable List<SourceAccessMediaMp4Support> mp4Support) {
+        this.mp4Support = mp4Support;
+        return this;
+    }
+
+
+    /**
+     * Whether the audio track of the media has been volume-normalized.
+     */
+    public SourceAccessMedia withOptimizeAudio(@Nullable Boolean optimizeAudio) {
+        this.optimizeAudio = optimizeAudio;
+        return this;
+    }
+
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -708,7 +758,9 @@ public class SourceAccessMedia {
             Utils.enhancedDeepEquals(this.duration, other.duration) &&
             Utils.enhancedDeepEquals(this.aspectRatio, other.aspectRatio) &&
             Utils.enhancedDeepEquals(this.createdAt, other.createdAt) &&
-            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt);
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.mp4Support, other.mp4Support) &&
+            Utils.enhancedDeepEquals(this.optimizeAudio, other.optimizeAudio);
     }
     
     @Override
@@ -721,7 +773,7 @@ public class SourceAccessMedia {
             tracks, generatedSubtitles, summary,
             chapters, namedEntities, moderation,
             isAudioOnly, subtitleAvailable, duration,
-            aspectRatio, createdAt, updatedAt);
+            aspectRatio, createdAt, updatedAt, mp4Support, optimizeAudio);
     }
     
     @Override
@@ -750,7 +802,9 @@ public class SourceAccessMedia {
                 "duration", duration,
                 "aspectRatio", aspectRatio,
                 "createdAt", createdAt,
-                "updatedAt", updatedAt);
+                "updatedAt", updatedAt,
+                "mp4Support", mp4Support,
+                "optimizeAudio", optimizeAudio);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -803,6 +857,10 @@ public class SourceAccessMedia {
         private OffsetDateTime createdAt;
 
         private OffsetDateTime updatedAt;
+
+        private List<SourceAccessMediaMp4Support> mp4Support;
+
+        private Boolean optimizeAudio;
 
         private Builder() {
           // force use of static builder() method
@@ -1009,6 +1067,22 @@ public class SourceAccessMedia {
             return this;
         }
 
+        /**
+         * A list of MP4 renditions generated for the media when MP4 support is requested. Each entry represents one downloadable rendition (for example, a capped-4K video file or an audio-only m4a file) along with its generation status. Omitted when no MP4 support has been requested.
+         */
+        public Builder mp4Support(@Nullable List<SourceAccessMediaMp4Support> mp4Support) {
+            this.mp4Support = mp4Support;
+            return this;
+        }
+
+        /**
+         * Whether the audio track of the media has been volume-normalized.
+         */
+        public Builder optimizeAudio(@Nullable Boolean optimizeAudio) {
+            this.optimizeAudio = optimizeAudio;
+            return this;
+        }
+
         public SourceAccessMedia build() {
             return new SourceAccessMedia(
                 thumbnail, id, workspaceId,
@@ -1018,7 +1092,7 @@ public class SourceAccessMedia {
                 tracks, generatedSubtitles, summary,
                 chapters, namedEntities, moderation,
                 isAudioOnly, subtitleAvailable, duration,
-                aspectRatio, createdAt, updatedAt);
+                aspectRatio, createdAt, updatedAt, mp4Support, optimizeAudio);
         }
 
 
