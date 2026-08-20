@@ -165,18 +165,6 @@ FastPixSDK sdk = FastPixSDK.builder()
 
 <br />
 
-### Verify Installation
-
-Run a simple API request to confirm your credentials and SDK configuration are working correctly.
-
-```java
-sdk.manageVideos()
-    .list()
-    .call();
-```
-
-<br />
-
 ## Example Usage
 
 > **Note:** In the examples below, `package hello.world;` is used for demonstration purposes. When creating your own Java files, ensure the package name matches your directory structure (e.g., if your file is at `src/main/java/com/example/MyApp.java`, use `package com.example;`).
