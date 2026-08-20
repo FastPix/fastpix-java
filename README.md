@@ -571,7 +571,7 @@ public class Application {
 
 ## Error Handling
 
-[`FastpixException`](./src/main/java/models/errors/FastpixException.java) is the base class for all HTTP error responses. It has the following properties:
+[`FastpixException`](./src/main/java/io/fastpix/sdk/models/errors/FastpixException.java) is the base class for all HTTP error responses. It has the following properties:
 
 | Method           | Type                        | Description                                                              |
 | ---------------- | --------------------------- | ------------------------------------------------------------------------ |
@@ -652,8 +652,7 @@ public class Application {
 ### Error Classes
 
 **Primary error:**
-* [`FastpixException`](./src/main/java/models/errors/FastpixException.java): The base class for HTTP error responses.
-
+* - [`FastpixException`](https://github.com/FastPix/fastpix-java/blob/main/src/main/java/io/fastpix/sdk/models/errors/FastpixException.java): The base class for HTTP error responses.
 <details><summary>Less common errors</summary>
 
 <br />
@@ -663,7 +662,7 @@ public class Application {
 `IOException` include `java.net.ConnectException`, `java.net.SocketTimeoutException`, `EOFException` (there are
 many more subclasses in the JDK platform).
 
-**Inherit from [`FastpixException`](./src/main/java/models/errors/FastpixException.java)**:
+**Inherit from [`FastpixException`](./src/main/java/io/fastpix/sdk/models/errors/FastpixException.java)**:
 
 * Additional error classes may be defined for specific error scenarios.
 
