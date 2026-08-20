@@ -4,6 +4,76 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.4]
+
+### ⚠️ Breaking changes
+
+This release regenerates the SDK models against the latest FastPix API
+specification. The following changes are **source-incompatible** — code
+written against `1.0.3` may need edits before it compiles:
+
+| Change | Action required |
+|---|---|
+| `mp4Support` is now a list of rendition objects instead of a single enum value | Read the renditions you need from the list (see below) |
+| `GetMediaResponse` and its nested types renamed to `GetMediaDetailResponse*` | Update imports and any explicit type declarations |
+| `UpdateTrackRequest.url` removed | Remove `.url(...)` builder calls; a track's file can no longer be changed after creation |
+| `UpdateMediaMaxResolution` no longer accepts `360p` | Use `480p` or higher when updating a media's max resolution |
+| `VideoTrack.width()` / `.height()` return `Optional<Long>` instead of `Optional<Double>` | Change the receiving variable's type |
+
+### Changed
+
+- **SDK version bump: `1.0.3` → `1.0.4`.** The `version` property, the
+  `SDK_VERSION` runtime constant, and the installation documentation now
+  report `1.0.4`.
+
+- **`mp4Support` now describes individual MP4 renditions.** Previously a single
+  enum value, it is now a list of objects — each with a `type`
+  (`capped_4k` or `audioOnly`), a generation `status`, the rendition's `height`
+  and `width` in pixels, and its file `ext`. Height and width are omitted for
+  the `audioOnly` type. Corresponding `Mp4SupportType`, `Mp4SupportStatus`, and
+  `Mp4SupportExt` enums are generated for each model that carries the field:
+  `Media`, `UpdateMedia`, `LiveMediaClips`, `SourceAccessMedia`,
+  `GetAllMediaResponse`, and `GetMediaDetailResponse`.
+
+- **`GetMediaResponse` renamed to `GetMediaDetailResponse`**, along with its
+  nested `MaxResolution`, `MediaQuality`, `SourceResolution`, `Status`,
+  `Track`, and `Mp4Support*` types. `GetMediaResponseBody.data()` now returns
+  `Optional<GetMediaDetailResponse>`. The operation name and the wire format
+  are unchanged; this is a type-name change only.
+
+- **`UpdateTrackRequest` replaces `url` with `title`.** A track's underlying
+  file can no longer be changed after creation — only its language and title.
+
+- **`VideoTrack` `width` and `height` are now `Long`** rather than `Double`,
+  matching the integer pixel dimensions the API returns.
+
+### Added
+
+- `360p` and `360` added to the `sourceResolution` enums across all media
+  models, so media ingested at 360p is now reported accurately instead of
+  falling through to the unrecognised-value path.
+- `title` added to the audio, video, and subtitle track models
+  (`AudioTrack`, `VideoTrack`, `VideoTrackForGetAll`, `SubtitleTrack`,
+  `TrackSubtitlesGenerateRequest`, `AddTrackRequest`/`Response`,
+  `UpdateTrackRequest`/`Response`, `GenerateTrackResponse`).
+
+### Removed
+
+- `360p` removed from `UpdateMediaMaxResolution`; the API no longer accepts it
+  as a max resolution on update.
+
+### Docs
+
+- FastPix documentation links updated to their current paths throughout the
+  javadoc and `docs/`: `video-on-demand-api/` → `video-on-demand/`,
+  `edit-and-transform-live-stream/` → `live-streaming/`,
+  `edit-and-transform-videos/` → `video-on-demand/`, and `vod-events/` →
+  `webhooks/`.
+- Regenerated `docs/` model and SDK reference pages and the README usage
+  snippets to match the updated models.
+
+---
+
 ## [1.0.3]
 
 ### Changed

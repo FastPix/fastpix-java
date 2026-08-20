@@ -29,6 +29,8 @@ public class GetAllMediaResponseSourceResolution {
     private static final String RESOLUTION_720 = "720";
     private static final String RESOLUTION_480P = "480p";
     private static final String RESOLUTION_480 = "480";
+    private static final String RESOLUTION_360P = "360p";
+    private static final String RESOLUTION_360 = "360";
 
     public static final GetAllMediaResponseSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new GetAllMediaResponseSourceResolution(RESOLUTION_2160P);
     public static final GetAllMediaResponseSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY = new GetAllMediaResponseSourceResolution(RESOLUTION_2160);
@@ -40,6 +42,8 @@ public class GetAllMediaResponseSourceResolution {
     public static final GetAllMediaResponseSourceResolution SEVEN_HUNDRED_AND_TWENTY = new GetAllMediaResponseSourceResolution(RESOLUTION_720);
     public static final GetAllMediaResponseSourceResolution FOUR_HUNDRED_AND_EIGHTYP = new GetAllMediaResponseSourceResolution(RESOLUTION_480P);
     public static final GetAllMediaResponseSourceResolution FOUR_HUNDRED_AND_EIGHTY = new GetAllMediaResponseSourceResolution(RESOLUTION_480);
+    public static final GetAllMediaResponseSourceResolution THREE_HUNDRED_AND_SIXTYP = new GetAllMediaResponseSourceResolution(RESOLUTION_360P);
+    public static final GetAllMediaResponseSourceResolution THREE_HUNDRED_AND_SIXTY = new GetAllMediaResponseSourceResolution(RESOLUTION_360);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -123,6 +127,8 @@ public class GetAllMediaResponseSourceResolution {
         map.put(RESOLUTION_720, SEVEN_HUNDRED_AND_TWENTY);
         map.put(RESOLUTION_480P, FOUR_HUNDRED_AND_EIGHTYP);
         map.put(RESOLUTION_480, FOUR_HUNDRED_AND_EIGHTY);
+        map.put(RESOLUTION_360P, THREE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_360, THREE_HUNDRED_AND_SIXTY);
         return map;
     }
 
@@ -138,6 +144,8 @@ public class GetAllMediaResponseSourceResolution {
         map.put(RESOLUTION_720, GetAllMediaResponseSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTY);
         map.put(RESOLUTION_480P, GetAllMediaResponseSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
         map.put(RESOLUTION_480, GetAllMediaResponseSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTY);
+        map.put(RESOLUTION_360P, GetAllMediaResponseSourceResolutionEnum.THREE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_360, GetAllMediaResponseSourceResolutionEnum.THREE_HUNDRED_AND_SIXTY);
         return map;
     }
     
@@ -153,7 +161,9 @@ public class GetAllMediaResponseSourceResolution {
         SEVEN_HUNDRED_AND_TWENTYP(RESOLUTION_720P),
         SEVEN_HUNDRED_AND_TWENTY(RESOLUTION_720),
         FOUR_HUNDRED_AND_EIGHTYP(RESOLUTION_480P),
-        FOUR_HUNDRED_AND_EIGHTY(RESOLUTION_480),;
+        FOUR_HUNDRED_AND_EIGHTY(RESOLUTION_480),
+        THREE_HUNDRED_AND_SIXTYP(RESOLUTION_360P),
+        THREE_HUNDRED_AND_SIXTY(RESOLUTION_360),;
 
         private final String value;
 

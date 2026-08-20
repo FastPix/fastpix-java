@@ -29,6 +29,8 @@ public class LiveMediaClipsSourceResolution {
     private static final String RESOLUTION_720 = "720";
     private static final String RESOLUTION_480P = "480p";
     private static final String RESOLUTION_480 = "480";
+    private static final String RESOLUTION_360P = "360p";
+    private static final String RESOLUTION_360 = "360";
 
     public static final LiveMediaClipsSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTYP = new LiveMediaClipsSourceResolution(RESOLUTION_2160P);
     public static final LiveMediaClipsSourceResolution TWO_THOUSAND_ONE_HUNDRED_AND_SIXTY = new LiveMediaClipsSourceResolution(RESOLUTION_2160);
@@ -40,6 +42,8 @@ public class LiveMediaClipsSourceResolution {
     public static final LiveMediaClipsSourceResolution SEVEN_HUNDRED_AND_TWENTY = new LiveMediaClipsSourceResolution(RESOLUTION_720);
     public static final LiveMediaClipsSourceResolution FOUR_HUNDRED_AND_EIGHTYP = new LiveMediaClipsSourceResolution(RESOLUTION_480P);
     public static final LiveMediaClipsSourceResolution FOUR_HUNDRED_AND_EIGHTY = new LiveMediaClipsSourceResolution(RESOLUTION_480);
+    public static final LiveMediaClipsSourceResolution THREE_HUNDRED_AND_SIXTYP = new LiveMediaClipsSourceResolution(RESOLUTION_360P);
+    public static final LiveMediaClipsSourceResolution THREE_HUNDRED_AND_SIXTY = new LiveMediaClipsSourceResolution(RESOLUTION_360);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -123,6 +127,8 @@ public class LiveMediaClipsSourceResolution {
         map.put(RESOLUTION_720, SEVEN_HUNDRED_AND_TWENTY);
         map.put(RESOLUTION_480P, FOUR_HUNDRED_AND_EIGHTYP);
         map.put(RESOLUTION_480, FOUR_HUNDRED_AND_EIGHTY);
+        map.put(RESOLUTION_360P, THREE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_360, THREE_HUNDRED_AND_SIXTY);
         return map;
     }
 
@@ -138,6 +144,8 @@ public class LiveMediaClipsSourceResolution {
         map.put(RESOLUTION_720, LiveMediaClipsSourceResolutionEnum.SEVEN_HUNDRED_AND_TWENTY);
         map.put(RESOLUTION_480P, LiveMediaClipsSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTYP);
         map.put(RESOLUTION_480, LiveMediaClipsSourceResolutionEnum.FOUR_HUNDRED_AND_EIGHTY);
+        map.put(RESOLUTION_360P, LiveMediaClipsSourceResolutionEnum.THREE_HUNDRED_AND_SIXTYP);
+        map.put(RESOLUTION_360, LiveMediaClipsSourceResolutionEnum.THREE_HUNDRED_AND_SIXTY);
         return map;
     }
     
@@ -153,7 +161,9 @@ public class LiveMediaClipsSourceResolution {
         SEVEN_HUNDRED_AND_TWENTYP(RESOLUTION_720P),
         SEVEN_HUNDRED_AND_TWENTY(RESOLUTION_720),
         FOUR_HUNDRED_AND_EIGHTYP(RESOLUTION_480P),
-        FOUR_HUNDRED_AND_EIGHTY(RESOLUTION_480),;
+        FOUR_HUNDRED_AND_EIGHTY(RESOLUTION_480),
+        THREE_HUNDRED_AND_SIXTYP(RESOLUTION_360P),
+        THREE_HUNDRED_AND_SIXTY(RESOLUTION_360),;
 
         private final String value;
 

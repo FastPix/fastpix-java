@@ -53,8 +53,8 @@ public class AsyncDimensions {
      * filter results based on specific criteria. For example, you can filter views by `browser_name`,
      * `os_name`, `device_type`, and more.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/concepts/what-video-data-do-we-capture#/">What Video
-     * Data do we capture?</a> ,   <a href="https://fastpix.com/docs/working-with-video-data/pass-custom-metadata-to-metrics">Use
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-data/what-video-data-do-we-capture">What Video
+     * Data do we capture?</a> ,   <a href="https://fastpix.com/docs/video-data/pass-custom-metadata-to-metrics">Use
      * passable dimensions</a>
      * 
      * @return The async call builder
@@ -75,8 +75,8 @@ public class AsyncDimensions {
      * filter results based on specific criteria. For example, you can filter views by `browser_name`,
      * `os_name`, `device_type`, and more.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/concepts/what-video-data-do-we-capture#/">What Video
-     * Data do we capture?</a> ,   <a href="https://fastpix.com/docs/working-with-video-data/pass-custom-metadata-to-metrics">Use
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-data/what-video-data-do-we-capture">What Video
+     * Data do we capture?</a> ,   <a href="https://fastpix.com/docs/video-data/pass-custom-metadata-to-metrics">Use
      * passable dimensions</a>
      * 
      * @return {@code CompletableFuture<ListDimensionsResponse>} - The async response
@@ -97,8 +97,8 @@ public class AsyncDimensions {
      * filter results based on specific criteria. For example, you can filter views by `browser_name`,
      * `os_name`, `device_type`, and more.
      * 
-     * <p>Related guides: <a href="https://fastpix.com/docs/concepts/what-video-data-do-we-capture#/">What Video
-     * Data do we capture?</a> ,   <a href="https://fastpix.com/docs/working-with-video-data/pass-custom-metadata-to-metrics">Use
+     * <p>Related guides: <a href="https://fastpix.com/docs/video-data/what-video-data-do-we-capture">What Video
+     * Data do we capture?</a> ,   <a href="https://fastpix.com/docs/video-data/pass-custom-metadata-to-metrics">Use
      * passable dimensions</a>
      * 
      * @param options additional options
@@ -121,7 +121,7 @@ public class AsyncDimensions {
      * number of video views for each value. For example, it can list all `browser_name` (dimension) and
      * show how many views occurred for all available browsers like Chrome, Safari (filter values).
      * 
-     * <p>In order to use the <a href="https://fastpix.com/docs/working-with-video-data/use-custom-dimensions">Custom
+     * <p>In order to use the <a href="https://fastpix.com/docs/video-data/use-custom-dimensions">Custom
      * Dimensions</a>, you must enable them in the dashboard under settings option based on the plan you
      * have opted for.
      * 
@@ -133,7 +133,7 @@ public class AsyncDimensions {
      * optimizations or troubleshooting is necessary.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#filters-and-timeframes">Filters and
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#filters-and-timeframes">Filters and
      * timespan</a>
      * 
      * @return The async call builder
@@ -149,7 +149,7 @@ public class AsyncDimensions {
      * number of video views for each value. For example, it can list all `browser_name` (dimension) and
      * show how many views occurred for all available browsers like Chrome, Safari (filter values).
      * 
-     * <p>In order to use the <a href="https://fastpix.com/docs/working-with-video-data/use-custom-dimensions">Custom
+     * <p>In order to use the <a href="https://fastpix.com/docs/video-data/use-custom-dimensions">Custom
      * Dimensions</a>, you must enable them in the dashboard under settings option based on the plan you
      * have opted for.
      * 
@@ -161,7 +161,7 @@ public class AsyncDimensions {
      * optimizations or troubleshooting is necessary.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#filters-and-timeframes">Filters and
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#filters-and-timeframes">Filters and
      * timespan</a>
      * 
      * @param dimensionsId Pass Dimensions Id
@@ -181,7 +181,7 @@ public class AsyncDimensions {
      * number of video views for each value. For example, it can list all `browser_name` (dimension) and
      * show how many views occurred for all available browsers like Chrome, Safari (filter values).
      * 
-     * <p>In order to use the <a href="https://fastpix.com/docs/working-with-video-data/use-custom-dimensions">Custom
+     * <p>In order to use the <a href="https://fastpix.com/docs/video-data/use-custom-dimensions">Custom
      * Dimensions</a>, you must enable them in the dashboard under settings option based on the plan you
      * have opted for.
      * 
@@ -193,7 +193,7 @@ public class AsyncDimensions {
      * optimizations or troubleshooting is necessary.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/working-with-video-data/explore-the-dashboard#filters-and-timeframes">Filters and
+     * href="https://fastpix.com/docs/video-data/explore-the-dashboard#filters-and-timeframes">Filters and
      * timespan</a>
      * 
      * @param dimensionsId Pass Dimensions Id

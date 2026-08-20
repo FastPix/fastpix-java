@@ -5,5 +5,5 @@
 
 | Field                                | Type                                 | Required                             | Description                          | Example                              |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `mediaId`                            | *Optional\<String>*                  | :heavy_minus_sign:                   | N/A                                  | c695988b-ff84-42ae-bb21-10f284fedb0e |
+| `mediaId`                            | *Optional\<String>*                  | :heavy_minus_sign:                   | N/A                                  | your-media-id |
 | `isChaptersEnabled`                  | *Optional\<Boolean>*                 | :heavy_minus_sign:                   | N/A                                  | true                                 |

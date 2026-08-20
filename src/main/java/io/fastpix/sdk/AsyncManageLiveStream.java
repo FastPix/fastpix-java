@@ -49,7 +49,7 @@ public class AsyncManageLiveStream {
      * <p>Suppose a news agency is broadcasting a live event and wants to track the configurations set for the
      * live stream while also checking the stream's status.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @return The async call builder
      */
@@ -68,7 +68,7 @@ public class AsyncManageLiveStream {
      * <p>Suppose a news agency is broadcasting a live event and wants to track the configurations set for the
      * live stream while also checking the stream's status.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @return {@code CompletableFuture<GetLiveStreamByIdResponse>} - The async response
@@ -88,7 +88,7 @@ public class AsyncManageLiveStream {
      * <p>Suppose a news agency is broadcasting a live event and wants to track the configurations set for the
      * live stream while also checking the stream's status.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId Upon creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @param options additional options
@@ -115,7 +115,7 @@ public class AsyncManageLiveStream {
      * 
      * <p>The updated stream parameters and the `streamId` needs to be shared in the request, and FastPix
      * returns the updated stream details. After the update, <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamupdated">video.live_stream.updated</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamupdated">video.live_stream.updated</a>
      * webhook event notifies your system.
      * 
      * <p>#### Example
@@ -125,7 +125,7 @@ public class AsyncManageLiveStream {
      * organizers need to update the stream title to reflect the next day"s session while keeping the same
      * stream ID for continuity.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @return The async call builder
      */
@@ -143,7 +143,7 @@ public class AsyncManageLiveStream {
      * 
      * <p>The updated stream parameters and the `streamId` needs to be shared in the request, and FastPix
      * returns the updated stream details. After the update, <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamupdated">video.live_stream.updated</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamupdated">video.live_stream.updated</a>
      * webhook event notifies your system.
      * 
      * <p>#### Example
@@ -153,7 +153,7 @@ public class AsyncManageLiveStream {
      * organizers need to update the stream title to reflect the next day"s session while keeping the same
      * stream ID for continuity.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId After creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @param body 
@@ -173,7 +173,7 @@ public class AsyncManageLiveStream {
      * 
      * <p>The updated stream parameters and the `streamId` needs to be shared in the request, and FastPix
      * returns the updated stream details. After the update, <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamupdated">video.live_stream.updated</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamupdated">video.live_stream.updated</a>
      * webhook event notifies your system.
      * 
      * <p>#### Example
@@ -183,7 +183,7 @@ public class AsyncManageLiveStream {
      * organizers need to update the stream title to reflect the next day"s session while keeping the same
      * stream ID for continuity.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">Manage streams</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">Manage streams</a>
      * 
      * @param streamId After creating a new live stream, FastPix assigns a unique identifier to the stream.
      * @param body 

@@ -39,8 +39,8 @@ public class Streams {
     /**
      * Create a new stream
      * 
-     * <p>Creates a new <a href="https://fastpix.com/docs/get-started/live-quickstart">RTMPS</a> or <a
-     * href="https://fastpix.com/docs/broadcast/live-stream-with-srt">SRT</a> live stream in FastPix. When
+     * <p>Creates a new <a href="https://fastpix.com/docs/live-streaming/quickstart">RTMPS</a> or <a
+     * href="https://fastpix.com/docs/live-streaming/live-stream-with-srt">SRT</a> live stream in FastPix. When
      * you create a stream, FastPix generates a unique `streamKey` and `srtSecret` that you can use with
      * broadcasting software such as OBS to connect to FastPix RTMPS or SRT servers. Use SRT for live
      * streaming in unstable network conditions, as it provides error correction and encryption for a more
@@ -61,7 +61,7 @@ public class Streams {
      * 
      * <p>3. After the live stream is created, FastPix sends a `POST` request to your specified webhook
      * endpoint with the event <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamcreated">video.live_stream.created</a>.
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamcreated">video.live_stream.created</a>.
      * 
      * <p>**Example:**
      * 
@@ -69,7 +69,7 @@ public class Streams {
      * The API creates a new stream, provides the necessary stream key, and sets it to "private" so that
      * only specific viewers can access it.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">How to live stream</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">How to live stream</a>
      * 
      * @return The call builder
      */
@@ -80,8 +80,8 @@ public class Streams {
     /**
      * Create a new stream
      * 
-     * <p>Creates a new <a href="https://fastpix.com/docs/get-started/live-quickstart">RTMPS</a> or <a
-     * href="https://fastpix.com/docs/broadcast/live-stream-with-srt">SRT</a> live stream in FastPix. When
+     * <p>Creates a new <a href="https://fastpix.com/docs/live-streaming/quickstart">RTMPS</a> or <a
+     * href="https://fastpix.com/docs/live-streaming/live-stream-with-srt">SRT</a> live stream in FastPix. When
      * you create a stream, FastPix generates a unique `streamKey` and `srtSecret` that you can use with
      * broadcasting software such as OBS to connect to FastPix RTMPS or SRT servers. Use SRT for live
      * streaming in unstable network conditions, as it provides error correction and encryption for a more
@@ -102,7 +102,7 @@ public class Streams {
      * 
      * <p>3. After the live stream is created, FastPix sends a `POST` request to your specified webhook
      * endpoint with the event <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamcreated">video.live_stream.created</a>.
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamcreated">video.live_stream.created</a>.
      * 
      * <p>**Example:**
      * 
@@ -110,7 +110,7 @@ public class Streams {
      * The API creates a new stream, provides the necessary stream key, and sets it to "private" so that
      * only specific viewers can access it.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">How to live stream</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">How to live stream</a>
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
@@ -123,8 +123,8 @@ public class Streams {
     /**
      * Create a new stream
      * 
-     * <p>Creates a new <a href="https://fastpix.com/docs/get-started/live-quickstart">RTMPS</a> or <a
-     * href="https://fastpix.com/docs/broadcast/live-stream-with-srt">SRT</a> live stream in FastPix. When
+     * <p>Creates a new <a href="https://fastpix.com/docs/live-streaming/quickstart">RTMPS</a> or <a
+     * href="https://fastpix.com/docs/live-streaming/live-stream-with-srt">SRT</a> live stream in FastPix. When
      * you create a stream, FastPix generates a unique `streamKey` and `srtSecret` that you can use with
      * broadcasting software such as OBS to connect to FastPix RTMPS or SRT servers. Use SRT for live
      * streaming in unstable network conditions, as it provides error correction and encryption for a more
@@ -145,7 +145,7 @@ public class Streams {
      * 
      * <p>3. After the live stream is created, FastPix sends a `POST` request to your specified webhook
      * endpoint with the event <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamcreated">video.live_stream.created</a>.
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamcreated">video.live_stream.created</a>.
      * 
      * <p>**Example:**
      * 
@@ -153,7 +153,7 @@ public class Streams {
      * The API creates a new stream, provides the necessary stream key, and sets it to "private" so that
      * only specific viewers can access it.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">How to live stream</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">How to live stream</a>
      * 
      * @param request The request object containing all the parameters for the API call.
      * @param options additional options

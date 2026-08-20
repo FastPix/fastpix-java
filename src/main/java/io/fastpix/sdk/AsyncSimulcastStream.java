@@ -58,7 +58,7 @@ public class AsyncSimulcastStream {
      * YouTube and Facebook Live. They first create the primary live stream in FastPix, ensuring it's in
      * the idle state. Then, they use the API to create a simulcast target for YouTube.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-live-stream/simulcast-to-multiple-platforms">Simulcast to
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/simulcast-to-multiple-platforms">Simulcast to
      * 3rd party platforms</a>
      * 
      * @return The async call builder
@@ -91,7 +91,7 @@ public class AsyncSimulcastStream {
      * YouTube and Facebook Live. They first create the primary live stream in FastPix, ensuring it's in
      * the idle state. Then, they use the API to create a simulcast target for YouTube.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-live-stream/simulcast-to-multiple-platforms">Simulcast to
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/simulcast-to-multiple-platforms">Simulcast to
      * 3rd party platforms</a>
      * 
      * @param streamId After creating a new live stream, FastPix assigns a unique identifier to the stream.
@@ -126,7 +126,7 @@ public class AsyncSimulcastStream {
      * YouTube and Facebook Live. They first create the primary live stream in FastPix, ensuring it's in
      * the idle state. Then, they use the API to create a simulcast target for YouTube.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/edit-and-transform-live-stream/simulcast-to-multiple-platforms">Simulcast to
+     * <p>Related guide: <a href="https://fastpix.com/docs/live-streaming/simulcast-to-multiple-platforms">Simulcast to
      * 3rd party platforms</a>
      * 
      * @param streamId After creating a new live stream, FastPix assigns a unique identifier to the stream.

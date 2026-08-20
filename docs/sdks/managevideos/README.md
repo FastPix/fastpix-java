@@ -182,17 +182,17 @@ This endpoint allows you to add an audio or subtitle track to an existing media 
 
 #### Webhook events
 
-1. After successfully adding a track, your system must receive the webhook event <a href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackcreated">video.media.track.created</a>.
+1. After successfully adding a track, your system must receive the webhook event <a href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackcreated">video.media.track.created</a>.
 
-2. Once the track is processed and ready, you must receive the webhook event <a href="https://fastpix.com/docs/vod-events/transform-media-events#videomediatrackready">video.media.track.ready</a>.
+2. Once the track is processed and ready, you must receive the webhook event <a href="https://fastpix.com/docs/webhooks/transform-media-events#videomediatrackready">video.media.track.ready</a>.
 
-3. Finally, an update event <a href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> must notify your system about the media's updated status.
+3. Finally, an update event <a href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> must notify your system about the media's updated status.
 
 
 #### Example
 Suppose you have a video uploaded to the FastPix platform, and you want to add an Italian audio track to it. By calling this API, you can attach an external audio file (https://static.fastpix.com/music-1.mp3) to the media file. Similarly, if you need to add subtitles in different languages, you can specify type: `subtitle` with the corresponding subtitle `url`, `languageCode` and `languageName`.
 
-Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
 
 
 ### Example Usage
@@ -273,7 +273,7 @@ This endpoint allows you to delete an existing audio or subtitle track from a me
 
 1. After successfully deleting a track, your system must receive the webhook event **video.media.track.deleted**.
 
-2. Once the media file is updated to reflect the track removal, a <a href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event must be triggered.
+2. Once the media file is updated to reflect the track removal, a <a href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event must be triggered.
 
 
 #### Example
@@ -283,7 +283,7 @@ Suppose you uploaded an audio track in Italian for a video but later realize it'
   - The content owner requests the removal of a specific subtitle or audio track.
   - A new version of the track gets uploaded to replace the existing one.
 
-Related guides: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-subtitles-to-a-video">Add own subtitle tracks</a>, <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/add-audio-to-a-video">Add own audio tracks</a>
+Related guides: <a href="https://fastpix.com/docs/video-on-demand/add-subtitles-to-a-video">Add own subtitle tracks</a>, <a href="https://fastpix.com/docs/video-on-demand/add-audio-to-a-video">Add own audio tracks</a>
 
 
 ### Example Usage
@@ -357,11 +357,11 @@ This endpoint allows you to generate subtitles for an existing audio track in a 
 
 #### Webhook Events
 
-1. After the subtitle track is generated and ready, you receive the webhook event <a href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasubtitlegeneratedready">video.media.subtitle.generated.ready</a>.
+1. After the subtitle track is generated and ready, you receive the webhook event <a href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasubtitlegenerated">video.media.subtitle.generated</a>.
 
-2. Finally the <a href="https://fastpix.com/docs/vod-events/media-events#videomediaupdated">video.media.updated</a> event notifies your system about the media’s updated status.
+2. Finally the <a href="https://fastpix.com/docs/webhooks/media-events#videomediaupdated">video.media.updated</a> event notifies your system about the media’s updated status.
 
-</br> Related guide: <a href="https://fastpix.com/docs/manage-audio-and-subtitle-tracks/generate-subtitles-automatically">Add auto-generated subtitles</a>
+</br> Related guide: <a href="https://fastpix.com/docs/video-on-demand/generate-subtitles-automatically">Add auto-generated subtitles</a>
 
 
 ### Example Usage
@@ -508,7 +508,7 @@ This endpoint allows you to update the `sourceAccess` setting of an existing med
 2. Include the updated `sourceAccess` parameter in the request body.
 
 3. You receive a response confirming the update to the media’s source access status.
-4. Webhook events: <a href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasourceready">video.media.source.ready</a>, <a href="https://fastpix.com/docs/vod-events/transform-media-events#videomediasourcedeleted">video.media.source.deleted</a>
+4. Webhook events: <a href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasourceready">video.media.source.ready</a>, <a href="https://fastpix.com/docs/webhooks/transform-media-events#videomediasourcedeleted">video.media.source.deleted</a>
 
 
 ### Example Usage

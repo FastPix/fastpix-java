@@ -24,7 +24,7 @@ public class CreateMediaRequest {
      * 
      * <p>Repeat this process for **AudioInput** or **SubtitleInput** as needed. For a complete explanation of
      * how media uploads from URL and processing work, refer to the
-     * <a href="https://fastpix.com/docs/video-on-demand-api/overview">FastPix Video on Demand
+     * <a href="https://fastpix.com/docs/video-on-demand/overview">FastPix Video on Demand
      * Overview</a>.
      */
     @JsonProperty("inputs")
@@ -200,7 +200,7 @@ public class CreateMediaRequest {
      * 
      * <p>Repeat this process for **AudioInput** or **SubtitleInput** as needed. For a complete explanation of
      * how media uploads from URL and processing work, refer to the
-     * <a href="https://fastpix.com/docs/video-on-demand-api/overview">FastPix Video on Demand
+     * <a href="https://fastpix.com/docs/video-on-demand/overview">FastPix Video on Demand
      * Overview</a>.
      */
     public List<Input> inputs() {
@@ -327,7 +327,7 @@ public class CreateMediaRequest {
      * 
      * <p>Repeat this process for **AudioInput** or **SubtitleInput** as needed. For a complete explanation of
      * how media uploads from URL and processing work, refer to the
-     * <a href="https://fastpix.com/docs/video-on-demand-api/overview">FastPix Video on Demand
+     * <a href="https://fastpix.com/docs/video-on-demand/overview">FastPix Video on Demand
      * Overview</a>.
      */
     public CreateMediaRequest withInputs(@Nonnull List<Input> inputs) {
@@ -586,7 +586,7 @@ public class CreateMediaRequest {
          * 
          * <p>Repeat this process for **AudioInput** or **SubtitleInput** as needed. For a complete explanation of
          * how media uploads from URL and processing work, refer to the
-         * <a href="https://fastpix.com/docs/video-on-demand-api/overview">FastPix Video on Demand
+         * <a href="https://fastpix.com/docs/video-on-demand/overview">FastPix Video on Demand
          * Overview</a>.
          */
         public Builder inputs(@Nonnull List<Input> inputs) {

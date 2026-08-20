@@ -9,7 +9,7 @@
 
 ## create
 
-Creates a new <a href="https://fastpix.com/docs/get-started/live-quickstart">RTMPS</a> or <a href="https://fastpix.com/docs/broadcast/live-stream-with-srt">SRT</a> live stream in FastPix. When you create a stream, FastPix generates a unique `streamKey` and `srtSecret` that you can use with broadcasting software such as OBS to connect to FastPix RTMPS or SRT servers. Use SRT for live streaming in unstable network conditions, as it provides error correction and encryption for a more reliable and secure broadcast.
+Creates a new <a href="https://fastpix.com/docs/live-streaming/quickstart">RTMPS</a> or <a href="https://fastpix.com/docs/live-streaming/live-stream-with-srt">SRT</a> live stream in FastPix. When you create a stream, FastPix generates a unique `streamKey` and `srtSecret` that you can use with broadcasting software such as OBS to connect to FastPix RTMPS or SRT servers. Use SRT for live streaming in unstable network conditions, as it provides error correction and encryption for a more reliable and secure broadcast.
 
 Leverage SRT for live streaming in environments with unstable networks, taking advantage of its error correction and encryption features for a resilient and secure broadcast. 
 
@@ -19,7 +19,7 @@ Leverage SRT for live streaming in environments with unstable networks, taking a
 
 2. FastPix returns the stream details for both RTMPS and SRT configurations. These keys and IDs from the stream details are essential for connecting the broadcasting software to FastPix’s servers and transmitting the live stream to viewers.
 
-3. After the live stream is created, FastPix sends a `POST` request to your specified webhook endpoint with the event <a href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamcreated">video.live_stream.created</a>.
+3. After the live stream is created, FastPix sends a `POST` request to your specified webhook endpoint with the event <a href="https://fastpix.com/docs/webhooks/live-events#videolive_streamcreated">video.live_stream.created</a>.
 
 
 **Example:**
@@ -28,7 +28,7 @@ Leverage SRT for live streaming in environments with unstable networks, taking a
   Imagine a gaming platform that allows users to live stream gameplay directly from their dashboard. The API creates a new stream, provides the necessary stream key, and sets it to "private" so that only specific viewers can access it. 
 
 
-Related guide: <a href="https://fastpix.com/docs/manage-live-streams/create-and-manage-live-streams">How to live stream</a>
+Related guide: <a href="https://fastpix.com/docs/live-streaming/create-and-manage-live-streams">How to live stream</a>
 
 > **Note:** In the examples below, `package hello.world;` is used for demonstration purposes. When creating your own Java files, ensure the package name matches your directory structure (e.g., if your file is at `src/main/java/com/example/MyApp.java`, use `package com.example;`).
 

@@ -49,13 +49,13 @@ public class AsyncAiFeatures {
      * 4. The response includes the updated media data and confirmation of the changes applied.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaisummaryready">video.mediaAI.summary.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaisummaryready">video.mediaAI.summary.ready</a>
      * webhook event to track and notify about the summary generation.
      * 
      * <p>**Use case**: This is particularly useful when a user uploads a video and later chooses to generate
      * a summary without needing to re-upload the video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/generate-a-video-summary">Video summary</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/generate-a-video-summary">Video summary</a>
      * 
      * @return The async call builder
      */
@@ -78,13 +78,13 @@ public class AsyncAiFeatures {
      * 4. The response includes the updated media data and confirmation of the changes applied.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaisummaryready">video.mediaAI.summary.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaisummaryready">video.mediaAI.summary.ready</a>
      * webhook event to track and notify about the summary generation.
      * 
      * <p>**Use case**: This is particularly useful when a user uploads a video and later chooses to generate
      * a summary without needing to re-upload the video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/generate-a-video-summary">Video summary</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/generate-a-video-summary">Video summary</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      *         
@@ -110,13 +110,13 @@ public class AsyncAiFeatures {
      * 4. The response includes the updated media data and confirmation of the changes applied.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaisummaryready">video.mediaAI.summary.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaisummaryready">video.mediaAI.summary.ready</a>
      * webhook event to track and notify about the summary generation.
      * 
      * <p>**Use case**: This is particularly useful when a user uploads a video and later chooses to generate
      * a summary without needing to re-upload the video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/generate-a-video-summary">Video summary</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/generate-a-video-summary">Video summary</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      *         

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
 import java.util.Optional;
-import io.fastpix.sdk.models.components.GetMediaResponse;
+import io.fastpix.sdk.models.components.GetMediaDetailResponse;
 import io.fastpix.sdk.utils.Utils;
 
 /**
@@ -25,12 +25,12 @@ public class GetMediaResponseBody {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("data")
-    private GetMediaResponse data;
+    private GetMediaDetailResponse data;
 
     @JsonCreator
     public GetMediaResponseBody(
             @JsonProperty("success") @Nullable Boolean success,
-            @JsonProperty("data") @Nullable GetMediaResponse data) {
+            @JsonProperty("data") @Nullable GetMediaDetailResponse data) {
         this.success = success;
         this.data = data;
     }
@@ -46,7 +46,7 @@ public class GetMediaResponseBody {
         return Optional.ofNullable(this.success);
     }
 
-    public Optional<GetMediaResponse> data() {
+    public Optional<GetMediaDetailResponse> data() {
         return Optional.ofNullable(this.data);
     }
 
@@ -64,7 +64,7 @@ public class GetMediaResponseBody {
     }
 
 
-    public GetMediaResponseBody withData(@Nullable GetMediaResponse data) {
+    public GetMediaResponseBody withData(@Nullable GetMediaDetailResponse data) {
         this.data = data;
         return this;
     }
@@ -102,7 +102,7 @@ public class GetMediaResponseBody {
 
         private Boolean success;
 
-        private GetMediaResponse data;
+        private GetMediaDetailResponse data;
 
         private Builder() {
           // force use of static builder() method
@@ -116,7 +116,7 @@ public class GetMediaResponseBody {
             return this;
         }
 
-        public Builder data(@Nullable GetMediaResponse data) {
+        public Builder data(@Nullable GetMediaDetailResponse data) {
             this.data = data;
             return this;
         }

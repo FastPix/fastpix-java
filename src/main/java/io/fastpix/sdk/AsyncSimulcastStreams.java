@@ -46,7 +46,7 @@ public class AsyncSimulcastStreams {
      * resume streaming to the same platform.
      * 
      * <p>Webhook event: <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamsimulcast_targetdeleted">video.live_stream.simulcast_target.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamsimulcast_targetdeleted">video.live_stream.simulcast_target.deleted</a>
      * 
      * <p>#### Example
      * A broadcaster may need to stop simulcasting to one platform while keeping the stream active on
@@ -71,7 +71,7 @@ public class AsyncSimulcastStreams {
      * resume streaming to the same platform.
      * 
      * <p>Webhook event: <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamsimulcast_targetdeleted">video.live_stream.simulcast_target.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamsimulcast_targetdeleted">video.live_stream.simulcast_target.deleted</a>
      * 
      * <p>#### Example
      * A broadcaster may need to stop simulcasting to one platform while keeping the stream active on
@@ -98,7 +98,7 @@ public class AsyncSimulcastStreams {
      * resume streaming to the same platform.
      * 
      * <p>Webhook event: <a
-     * href="https://fastpix.com/docs/live-stream-events/live-events#videolive_streamsimulcast_targetdeleted">video.live_stream.simulcast_target.deleted</a>
+     * href="https://fastpix.com/docs/webhooks/live-events#videolive_streamsimulcast_targetdeleted">video.live_stream.simulcast_target.deleted</a>
      * 
      * <p>#### Example
      * A broadcaster may need to stop simulcasting to one platform while keeping the stream active on

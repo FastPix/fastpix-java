@@ -56,13 +56,13 @@ public class InVideoAiFeatures {
      * 3. Receive a response containing the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaainamedentitiesready">video.mediaAI.named-entities.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaainamedentitiesready">video.mediaAI.named-entities.ready</a>
      * webhook event to track and notify about the named entities extraction.
      * 
      * <p>**Use case:** If a user uploads a video and later decides to enable named entity extraction without
      * re-uploading the entire video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/extract-named-entities-from-a-video">Named entities</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/extract-named-entities-from-a-video">Named entities</a>
      * 
      * @return The call builder
      */
@@ -89,13 +89,13 @@ public class InVideoAiFeatures {
      * 3. Receive a response containing the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaainamedentitiesready">video.mediaAI.named-entities.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaainamedentitiesready">video.mediaAI.named-entities.ready</a>
      * webhook event to track and notify about the named entities extraction.
      * 
      * <p>**Use case:** If a user uploads a video and later decides to enable named entity extraction without
      * re-uploading the entire video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/extract-named-entities-from-a-video">Named entities</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/extract-named-entities-from-a-video">Named entities</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      *         
@@ -126,13 +126,13 @@ public class InVideoAiFeatures {
      * 3. Receive a response containing the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaainamedentitiesready">video.mediaAI.named-entities.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaainamedentitiesready">video.mediaAI.named-entities.ready</a>
      * webhook event to track and notify about the named entities extraction.
      * 
      * <p>**Use case:** If a user uploads a video and later decides to enable named entity extraction without
      * re-uploading the entire video.
      * 
-     * <p>Related guide: <a href="https://fastpix.com/docs/video-intelligence/extract-named-entities-from-a-video">Named entities</a>
+     * <p>Related guide: <a href="https://fastpix.com/docs/in-video-ai/extract-named-entities-from-a-video">Named entities</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
      *         
@@ -164,14 +164,14 @@ public class InVideoAiFeatures {
      * 4. The response contains the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaimoderationready">video.mediaAI.moderation.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaimoderationready">video.mediaAI.moderation.ready</a>
      * webhook event to track and notify about the detected moderation results.
      * 
      * <p>**Use case:** This is particularly useful when a user uploads a video and later decides to enable
      * moderation detection without the need to re-upload it.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/video-intelligence/detect-nsfw-content-and-profanity">Moderate
+     * href="https://fastpix.com/docs/in-video-ai/detect-nsfw-content-and-profanity">Moderate
      * NSFW &amp; Profanity</a>
      * 
      * @return The call builder
@@ -194,14 +194,14 @@ public class InVideoAiFeatures {
      * 4. The response contains the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaimoderationready">video.mediaAI.moderation.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaimoderationready">video.mediaAI.moderation.ready</a>
      * webhook event to track and notify about the detected moderation results.
      * 
      * <p>**Use case:** This is particularly useful when a user uploads a video and later decides to enable
      * moderation detection without the need to re-upload it.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/video-intelligence/detect-nsfw-content-and-profanity">Moderate
+     * href="https://fastpix.com/docs/in-video-ai/detect-nsfw-content-and-profanity">Moderate
      * NSFW &amp; Profanity</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
@@ -228,14 +228,14 @@ public class InVideoAiFeatures {
      * 4. The response contains the updated media data, confirming the changes made.
      * 
      * <p>You can use the <a
-     * href="https://fastpix.com/docs/ai-events/in-video-ai-events#videomediaaimoderationready">video.mediaAI.moderation.ready</a>
+     * href="https://fastpix.com/docs/webhooks/in-video-ai-events#videomediaaimoderationready">video.mediaAI.moderation.ready</a>
      * webhook event to track and notify about the detected moderation results.
      * 
      * <p>**Use case:** This is particularly useful when a user uploads a video and later decides to enable
      * moderation detection without the need to re-upload it.
      * 
      * <p>Related guide: <a
-     * href="https://fastpix.com/docs/video-intelligence/detect-nsfw-content-and-profanity">Moderate
+     * href="https://fastpix.com/docs/in-video-ai/detect-nsfw-content-and-profanity">Moderate
      * NSFW &amp; Profanity</a>
      * 
      * @param mediaId The unique identifier assigned to the media when created. The value must be a valid UUID.
