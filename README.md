@@ -652,7 +652,7 @@ public class Application {
 ### Error Classes
 
 **Primary error:**
-* - [`FastpixException`](https://github.com/FastPix/fastpix-java/blob/main/src/main/java/io/fastpix/sdk/models/errors/FastpixException.java): The base class for HTTP error responses.
+*  [`FastpixException`](https://github.com/FastPix/fastpix-java/blob/main/src/main/java/io/fastpix/sdk/models/errors/FastpixException.java): The base class for HTTP error responses.
 <details><summary>Less common errors</summary>
 
 <br />
