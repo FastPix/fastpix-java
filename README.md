@@ -21,7 +21,7 @@ The FastPix Java SDK simplifies integration with the FastPix platform. It provid
 
 <br />
 
-## Prerequisites
+## Before you begin
 
 ### Environment and Version Support
 
@@ -58,9 +58,10 @@ export FASTPIX_PASSWORD="your-secret-key"
 
 ## Table of Contents
 
-  * [FastPix Java SDK](#fastpix-java-sdk)
+* [FastPix Java SDK](#fastpix-java-sdk)
   * [Setup](#setup)
   * [Example Usage](#example-usage)
+  * [Verify your integration](#verify-your-integration)
   * [Asynchronous Support](#asynchronous-support)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
@@ -228,6 +229,33 @@ public class Application {
 ```
 
 <br />
+
+### Verify your integration
+
+Run the example above to verify that your FastPix Java SDK integration is working.
+
+A successful response includes:
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "..."
+  }
+}
+```
+The `data.id value` is the unique media ID assigned to the uploaded media.
+
+If the request fails, check that:
+
+- Your FastPix access token and secret key are correct.
+- Your credentials belong to the same FastPix workspace.
+- Your environment variables are set correctly.
+- The io.fastpix:sdk dependency is declared in your Maven or Gradle build and resolved on the classpath.
+- You have an active internet connection.
+
+> Security:
+> Never commit your access token or secret key to version control. Use environment variables or a secure credential-management system.
 
 ## Asynchronous Support
 
@@ -615,15 +643,6 @@ public class Application {
 
 <br />
 
-## Rate Limits
-
-The FastPix API enforces rate limits to help maintain platform stability.
-
-When a rate limit is exceeded, the API returns an HTTP `429 Too Many Requests` response.
-
-We recommend using the SDK retry functionality described in the Retries section to automatically handle temporary rate limiting and transient failures.
-
-<br />
 
 ## Error Handling
 
@@ -1041,7 +1060,7 @@ The SDK logs through SLF4j; you can also use `enableHTTPDebugLogging(true)`. See
 
 **Which Java versions are supported?**
 
-Java 11 and above (JDK). See [Prerequisites](#prerequisites).
+Java 11 and above (JDK). See [Before you begin](#before-you-begin).
 
 <br />
 
