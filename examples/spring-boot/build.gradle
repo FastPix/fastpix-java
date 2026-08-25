@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.fastpix'
+version = '1.0.4'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenLocal()   // resolves io.fastpix:sdk if you've published it locally
+    mavenCentral() // io.fastpix:sdk is also released here
+}
+
+def springBootVersion = '3.2.0'
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation 'io.fastpix:sdk:1.0.4'
+}
+
+// Run the app with `./gradlew bootRun` (reads FASTPIX_* from the environment).
+tasks.register('bootRun', JavaExec) {
+    group = 'application'
+    description = 'Run the FastPix Spring Boot example'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.fastpix.example.spring.Application'
+}

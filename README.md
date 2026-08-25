@@ -140,6 +140,8 @@ FastPixSDK sdk = FastPixSDK.builder()
 
 ## Example Usage
 
+> For runnable, end-to-end flows (direct upload, webhook verification, playlists, live streaming, a Spring Boot app, and more), see the [`examples/`](examples) directory.
+
 > **Note:** In the examples below, `package hello.world;` is used for demonstration purposes. When creating your own Java files, ensure the package name matches your directory structure (e.g., if your file is at `src/main/java/com/example/MyApp.java`, use `package com.example;`).
 
 ```java

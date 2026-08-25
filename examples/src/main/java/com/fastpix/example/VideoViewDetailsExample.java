@@ -16,13 +16,16 @@ public class VideoViewDetailsExample {
 
         FastPixSDK sdk = FastPixSDK.builder()
                 .security(Security.builder()
-                    .username("your-access-token")
-                    .password("your-secret-key")
+                    .username(System.getenv("FASTPIX_USERNAME"))
+                    .password(System.getenv("FASTPIX_PASSWORD"))
                     .build())
             .build();
 
+        // Replace with a real view id from your workspace (Dashboard > Views).
+        String viewId = "REPLACE_WITH_A_REAL_VIEW_ID";
+
         GetVideoViewDetailsResponse res = sdk.views().getDetails()
-                .viewId("view-id")
+                .viewId(viewId)
                 .call();
 
         if (res.object().isPresent()) {
