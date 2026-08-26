@@ -6,16 +6,10 @@ usage and parameter reference, see [`docs/sdks/`](../docs/sdks).
 
 ## Setup
 
-The examples resolve the SDK from Maven Central (`io.fastpix:sdk`). If you're
-working against a local build of the SDK, publish it first:
-
-```bash
-cd ..
-./gradlew publishToMavenLocal
-```
-
-Then set your credentials from the [FastPix Dashboard](https://dashboard.fastpix.com)
-(Access Token = username, Secret Key = password):
+Set your credentials from the [FastPix Dashboard](https://dashboard.fastpix.com)
+(Access Token = username, Secret Key = password) — every example that calls the
+API reads them from the environment, so export both before running (an example
+started without them stops immediately with a reminder):
 
 ```bash
 export FASTPIX_USERNAME="your-access-token"
@@ -24,6 +18,9 @@ export FASTPIX_PASSWORD="your-secret-key"
 
 You can also copy [`.env.example`](.env.example) to `.env` and load it in your
 shell (`set -a; . ./.env; set +a`).
+
+The SDK (`io.fastpix:sdk`) is pulled from Maven Central automatically — there's
+nothing else to install or build first.
 
 ## Running
 

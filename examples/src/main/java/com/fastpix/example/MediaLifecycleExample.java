@@ -31,6 +31,11 @@ public class MediaLifecycleExample {
             "https://static.fastpix.io/sample.mp4";
 
     public static void main(String[] args) throws Exception {
+        if (System.getenv("FASTPIX_USERNAME") == null || System.getenv("FASTPIX_PASSWORD") == null) {
+            System.err.println("Set FASTPIX_USERNAME and FASTPIX_PASSWORD before running (see examples/README.md).");
+            System.exit(1);
+        }
+
         FastPixSDK sdk = FastPixSDK.builder()
                 .security(Security.builder()
                         .username(System.getenv("FASTPIX_USERNAME"))

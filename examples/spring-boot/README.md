@@ -10,16 +10,8 @@ A minimal Spring Boot integration with two endpoints:
 
 ## Setup
 
-The app resolves the SDK from Maven Central (`io.fastpix:sdk`). If you're working
-against a local SDK build, publish it first from the repo root:
-
-```bash
-cd ../..
-./gradlew publishToMavenLocal
-```
-
 Set your credentials (Access Token = username, Secret Key = password) and your
-webhook signing secret:
+webhook signing secret — the app reads them from the environment:
 
 ```bash
 export FASTPIX_USERNAME="your-access-token"
@@ -29,9 +21,15 @@ export FASTPIX_WEBHOOK_SECRET="your-webhook-signing-secret"
 
 (Or copy [`.env.example`](.env.example) to `.env` and load it.)
 
+The SDK (`io.fastpix:sdk`) is pulled from Maven Central automatically — there's
+nothing else to install or build first.
+
 ## Run
 
+From this directory (`examples/spring-boot`):
+
 ```bash
+cd examples/spring-boot
 ./gradlew bootRun
 ```
 
