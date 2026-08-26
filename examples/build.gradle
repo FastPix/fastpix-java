@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.fastpix'
+version = '1.0.4'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenLocal()  // the SDK is resolved from your local Maven repo
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.fastpix:sdk:1.0.4'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// One `run<ExampleName>` task per example class, e.g. `./gradlew runDirectUpload`.
+// Each reads FASTPIX_* from the environment it inherits.
+fileTree("src/main/java/com/fastpix/example").matching { include "*Example.java" }.each { f ->
+    def name = f.name - ".java"
+    tasks.register("run${name - 'Example'}", JavaExec) {
+        group = "examples"
+        description = "Run ${name}"
+        classpath = sourceSets.main.runtimeClasspath
+        mainClass = "com.fastpix.example.${name}"
+    }
+}
