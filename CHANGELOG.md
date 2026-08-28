@@ -23,6 +23,22 @@ All notable changes to this project will be documented in this file.
   `SDK_VERSION` runtime constant, and the installation documentation now
   report `1.0.5`.
 
+### Fixed
+
+- **`jackson-databind` is now a compile-scope dependency.** It was declared as
+  `implementation`, which published it at `runtime` scope, so it was absent from
+  consumers' compile classpath. The SDK exposes Jackson types through public
+  signatures — `JSON.getMapper()` returns an `ObjectMapper`, and the generated
+  `asJson()` accessors return `JsonNode` — so the README's own example failed to
+  compile for anyone who depended on `io.fastpix:sdk` alone:
+
+  ```
+  error: package com.fasterxml.jackson.databind does not exist
+  ```
+
+  Projects that worked around this by declaring `jackson-databind` themselves can
+  drop that line, though keeping it is harmless.
+
 ### Added
 
 - A **License** section in the README stating the Apache 2.0 terms.

@@ -104,7 +104,10 @@ afterEvaluate {
 
 dependencies {
     api "com.fasterxml.jackson.core:jackson-annotations:2.18.2"
-    implementation "com.fasterxml.jackson.core:jackson-databind:2.18.2"
+    // `api`, not `implementation`: ObjectMapper and JsonNode appear in public
+    // signatures (JSON.getMapper(), the generated asJson() accessors), so
+    // consumers need jackson-databind on their compile classpath.
+    api "com.fasterxml.jackson.core:jackson-databind:2.18.2"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2"
 
