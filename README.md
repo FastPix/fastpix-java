@@ -1,15 +1,47 @@
 # FastPix Java SDK
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.fastpix/sdk)](https://central.sonatype.com/artifact/io.fastpix/sdk)
+[![license](https://img.shields.io/github/license/FastPix/fastpix-java)](https://github.com/FastPix/fastpix-java/blob/main/LICENSE)
+[![Java 11+](https://img.shields.io/badge/Java-11%2B-007396?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+
 A robust, type-safe Java SDK designed for seamless integration with the FastPix API platform.
 
+The FastPix Java SDK is a type-safe Java client for the FastPix video API. From any Java 11+ application (Maven or Gradle) you can upload and manage videos, run live streams and simulcasts, create and secure playback IDs, manage playlists and signing keys, pull video analytics (views, metrics, dimensions, and errors), and drive in-video AI features such as subtitles, chapters, summaries, and content moderation - with both synchronous and asynchronous APIs.
 
-## Introduction
+**Works with:** Java 11+ · Maven and Gradle · sync and async (CompletableFuture / Reactive Streams) · Spring Boot and any JVM app · Maven Central `io.fastpix:sdk`
 
-The FastPix Java SDK simplifies integration with the FastPix platform. It provides a clean, type-safe interface for secure and efficient communication with the FastPix API, enabling easy management of media uploads, live streaming, on‑demand content, playlists, video analytics, and signing keys for secure access and token management. It is intended for use with Java 11 and above.
+📖 **Docs:** https://fastpix.com/docs/language-sdks/java-sdk &nbsp;·&nbsp; 🚀 **Free account:** https://dashboard.fastpix.com
 
-## Prerequisites
+<br />
 
-### Environment and Version Support
+## Start here
+
+If you are using the FastPix Java SDK for the first time, follow these steps in order:
+
+1. [Check your Java version](#check-your-java-version)
+2. [Add the SDK to your project](#add-the-sdk-to-your-project)
+3. [Configure authentication](#configure-authentication)
+4. [Initialize the FastPix client](#initialize-the-fastpix-client)
+5. [Create your first media](#create-your-first-media)
+6. [Verify your integration](#verify-your-integration)
+7. [Understand the media workflow](#understand-the-media-workflow)
+
+Do not skip the verification steps. If a build, dependency, or authentication problem occurs, fix it before continuing to the next API operation.
+
+---
+
+### Before you begin
+
+To use the SDK, make sure you have:
+
+- Java 11 or later (JDK).
+- Maven or Gradle.
+- Internet access.
+- A FastPix account.
+- A FastPix Access Token.
+- A FastPix Secret Key.
+
+#### Environment and Version Support
 
 | Requirement | Version | Description |
 |---|---:|---|
@@ -19,16 +51,16 @@ The FastPix Java SDK simplifies integration with the FastPix platform. It provid
 
 > Pro Tip: We recommend using Java 17+ for optimal performance and the latest language features.
 
-### Getting Started with FastPix
+FastPix uses Basic Authentication:
 
-To get started with the FastPix Java SDK, ensure you have the following:
+| SDK value | FastPix credential |
+|---|---|
+| `username` | Access Token |
+| `password` | Secret Key |
 
-- The FastPix APIs are authenticated using a **Username** and a **Password**. You must generate these credentials to use the SDK.
-- Follow the steps in the [Authentication with Basic Auth](https://fastpix.com/docs/getting-started/activate-your-account) guide to obtain your credentials.
+Follow the steps in the [Authentication with Basic Auth](https://fastpix.com/docs/getting-started/activate-your-account) guide to obtain your credentials.
 
-### Environment Variables (Optional)
-
-Configure your FastPix credentials using environment variables for enhanced security and convenience:
+Optionally, store your credentials as environment variables:
 
 ```bash
 # Set your FastPix credentials
@@ -38,26 +70,41 @@ export FASTPIX_PASSWORD="your-secret-key"
 
 > Security Note: Never commit your credentials to version control. Use environment variables or secure credential management systems.
 
-## Table of Contents
+---
 
-* [FastPix Java SDK](#fastpix-java-sdk)
-  * [Setup](#setup)
-  * [Example Usage](#example-usage)
-  * [Asynchronous Support](#asynchronous-support)
-  * [Available Resources and Operations](#available-resources-and-operations)
-  * [Retries](#retries)
-  * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
-  * [Custom HTTP Client](#custom-http-client)
-  * [Debugging](#debugging)
-  * [Development](#development)
-  * [License](#license)
+## Check your Java version
 
-## Setup
+Confirm your Java version before you add the SDK:
 
-### Installation
+```bash
+java -version
+```
 
-Install the FastPix Java SDK using your preferred build tool:
+The output is similar to:
+
+```text
+openjdk version "17.0.8" 2023-07-18
+```
+
+If your version is earlier than Java 11, install a supported JDK before continuing.
+
+Confirm your build tool is available:
+
+```bash
+mvn -version
+```
+
+or:
+
+```bash
+gradle -version
+```
+
+<br />
+
+## Add the SDK to your project
+
+Install the FastPix Java SDK using your preferred build tool.
 
 #### Gradle
 
@@ -81,7 +128,7 @@ Add the dependency to your `pom.xml`:
 </dependency>
 ```
 
-### Building from Source
+#### Build from source (optional)
 
 After cloning the git repository to your file system, you can build the SDK artifact from source to the `build` directory by running:
 
@@ -107,7 +154,28 @@ If you wish to build from source and publish the SDK artifact to your local Mave
 gradlew.bat publishToMavenLocal -Pskip.signing
 ```
 
-### Initialization
+<br />
+
+## Configure authentication
+
+FastPix uses Basic Authentication. Set your Access Token and Secret Key as environment variables so they stay out of your source code:
+
+```bash
+export FASTPIX_USERNAME="your-access-token"
+export FASTPIX_PASSWORD="your-secret-key"
+```
+
+Confirm both variables are set, without printing their values.
+
+**On Unix/Linux/macOS:**
+```bash
+[ -n "$FASTPIX_USERNAME" ] && echo "Access Token: set" || echo "Access Token: missing"
+[ -n "$FASTPIX_PASSWORD" ] && echo "Secret Key: set" || echo "Secret Key: missing"
+```
+
+<br />
+
+## Initialize the FastPix client
 
 Initialize the FastPix SDK with your credentials:
 
@@ -139,7 +207,15 @@ FastPixSDK sdk = FastPixSDK.builder()
     .build();
 ```
 
-## Example Usage
+### What this code does
+
+`FastPixSDK.builder()` creates the top-level SDK client, and the `Security` object holds the credentials used to authenticate API requests. Building the client does not call the API. A request happens only when you call an operation, such as `sdk.inputVideos().create().request(req).call()`.
+
+<br />
+
+## Create your first media
+
+The easiest way to verify your integration is to create media from a publicly accessible video URL. FastPix provides a sample video at `https://static.fastpix.com/fp-sample-video.mp4`.
 
 > For runnable, end-to-end flows (direct upload, webhook verification, playlists, live streaming, a Spring Boot app, and more), see the [`examples/`](examples) directory.
 
@@ -160,16 +236,13 @@ import io.fastpix.sdk.models.operations.CreateMediaResponse;
 import io.fastpix.sdk.utils.JSON;
 
 public class Application {
-
     public static void main(String[] args) throws Exception {
-
         FastPixSDK sdk = FastPixSDK.builder()
                 .security(Security.builder()
                     .username("your-access-token")
                     .password("your-secret-key")
                     .build())
             .build();
-
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
@@ -178,11 +251,9 @@ public class Application {
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
                 .build();
-
         CreateMediaResponse res = sdk.inputVideos().create()
                 .request(req)
                 .call();
-
         if (res.createMediaSuccessResponse().isPresent()) {
             var mapper = JSON.getMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -191,6 +262,71 @@ public class Application {
     }
 }
 ```
+
+Compile and run `Application` with your build tool or IDE. For a Maven project with the [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/), run:
+
+```bash
+mvn -q compile exec:java -Dexec.mainClass="hello.world.Application"
+```
+
+<br />
+
+### Verify your integration
+
+Run the example above to verify that your FastPix Java SDK integration is working.
+
+A successful response includes:
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "..."
+  }
+}
+```
+
+The `data.id value` is the unique media ID assigned to the uploaded media.
+
+If the request fails, check that:
+
+- Your FastPix access token and secret key are correct.
+- Your credentials belong to the same FastPix workspace.
+- Your environment variables are set correctly.
+- The io.fastpix:sdk dependency is declared in your Maven or Gradle build and resolved on the classpath.
+- You have an active internet connection.
+
+> Security:
+> Never commit your access token or secret key to version control. Use environment variables or a secure credential-management system.
+
+<br />
+
+## Understand the media workflow
+
+Creating media is usually the first operation in an on-demand video workflow. You carry the media ID from one call to the next.
+
+<Image alt="FastPix media workflow: create media returns a media ID, retrieve the media, check status until ready, create a playback ID, then play the video." border={false} src="https://static.fastpix.com/java-media-workflow.png" />
+
+A playback ID is created separately, only when you need playback access.
+
+<br />
+
+## Next steps
+
+After verifying your integration, you can use the SDK to:
+
+- Manage media: list, retrieve, update, and delete media.
+- Create playback IDs: generate playback access for your media.
+- Manage live streams: create and manage live streaming sessions.
+- Create playlists: organize media into playlists.
+- Manage signing keys: create and manage keys for secure playback.
+- Analyze video performance: retrieve metrics, views, dimensions, and errors.
+- Use in-video AI: generate subtitles, summaries, chapters, and named entities.
+- Manage media tracks: add, update, and delete audio or subtitle tracks.
+
+See [Available Resources and Operations](#available-resources-and-operations) for the complete list.
+
+<br />
 
 ## Asynchronous Support
 
@@ -214,11 +350,13 @@ Asynchronous operations provide several key benefits:
 The SDK returns [Reactive Streams `Publisher<T>`][reactive-streams] instances for operations dealing with streams involving multiple I/O interactions. We use Reactive Streams instead of JDK Flow API to provide broader compatibility with the reactive ecosystem, as most reactive libraries natively support Reactive Streams.
 
 **Why Reactive Streams over JDK Flow?**
+
 - **Broader ecosystem compatibility**: Most reactive libraries (Project Reactor, RxJava, Akka Streams, etc.) natively support Reactive Streams
 - **Industry standard**: Reactive Streams is the de facto standard for reactive programming in Java
 - **Better interoperability**: Seamless integration without additional adapters for most use cases
 
 **Integration with Popular Libraries:**
+
 - **Project Reactor**: Use `Flux.from(publisher)` to convert to Reactor types
 - **RxJava**: Use `Flowable.fromPublisher(publisher)` for RxJava integration
 - **Akka Streams**: Use `Source.fromPublisher(publisher)` for Akka Streams integration
@@ -226,7 +364,9 @@ The SDK returns [Reactive Streams `Publisher<T>`][reactive-streams] instances fo
 - **Mutiny**: Use `Multi.createFrom().publisher(publisher)` for Quarkus Mutiny integration
 
 **For JDK Flow API Integration:**
+
 If you need JDK Flow API compatibility (e.g., for Quarkus/Mutiny 2), you can use adapters:
+
 ```java
 // Convert Reactive Streams Publisher to Flow Publisher
 Flow.Publisher<T> flowPublisher = FlowAdapters.toFlowPublisher(reactiveStreamsPublisher);
@@ -257,9 +397,7 @@ import io.fastpix.sdk.models.operations.async.CreateMediaResponse;
 import io.fastpix.sdk.utils.JSON;
 
 public class Application {
-
     public static void main(String[] args) {
-
         AsyncFastPixSDK sdk = FastPixSDK.builder()
                 .security(Security.builder()
                     .username("your-access-token")
@@ -267,7 +405,6 @@ public class Application {
                     .build())
             .build()
             .async();
-
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
@@ -276,11 +413,9 @@ public class Application {
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
                 .build();
-
         CompletableFuture<CreateMediaResponse> resFut = sdk.inputVideos().create()
                 .request(req)
                 .call();
-
         resFut.thenAccept(res -> {
             if (res.createMediaSuccessResponse().isPresent()) {
                 var mapper = JSON.getMapper();
@@ -294,6 +429,8 @@ public class Application {
 
 [comp-fut]: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
 [reactive-streams]: https://www.reactive-streams.org/
+
+<br />
 
 ## Available Resources and Operations
 
@@ -416,33 +553,29 @@ Enhance video content with AI-powered features including moderation, summarizati
 - [Enable Moderation](docs/sdks/invideoaifeatures/README.md#updatemoderation) - Activate content moderation and safety checks
 
 #### Media Clips
-
 - [Get Media Clips](docs/sdks/videos/README.md#getmediaclips) - Retrieve all clips associated with a source media
 - [List Live Clips](docs/sdks/videos/README.md#listliveclips) - Get all clips of a live stream
 
 #### Subtitles
-
 - [Generate Subtitles](docs/sdks/managevideos/README.md#generatesubtitles) - Create automatic subtitles for media
 
 #### Media Tracks
-
 - [Add Track](docs/sdks/managevideos/README.md#addtrack) - Add audio or subtitle tracks to media
 - [Update Track](docs/sdks/videos/README.md#updatetrack) - Modify existing audio or subtitle tracks
 - [Delete Track](docs/sdks/managevideos/README.md#deletetrack) - Remove audio or subtitle tracks
 
 #### Access Control
-
 - [Update Source Access](docs/sdks/managevideos/README.md#updatesourceaccess) - Control access permissions for media source
 
 #### Format Support
-
 - [Update MP4 Support](docs/sdks/videos/README.md#updatemp4support) - Configure MP4 download capabilities
 
 #### Video Summary
-
 - [Get Summary](docs/sdks/managevideos/README.md#getsummary) - Retrieve AI-generated video summary
 
 <!-- End Available Resources and Operations [operations] -->
+
+<br />
 
 ## Retries
 
@@ -468,16 +601,13 @@ import io.fastpix.sdk.utils.RetryConfig;
 import io.fastpix.sdk.utils.JSON;
 
 public class Application {
-
     public static void main(String[] args) throws Exception {
-
         FastPixSDK sdk = FastPixSDK.builder()
                 .security(Security.builder()
                     .username("your-access-token")
                     .password("your-secret-key")
                     .build())
             .build();
-
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
@@ -486,7 +616,6 @@ public class Application {
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
                 .build();
-
         CreateMediaResponse res = sdk.inputVideos().create()
                 .request(req)
                 .retryConfig(RetryConfig.builder()
@@ -500,7 +629,6 @@ public class Application {
                         .build())
                     .build())
                 .call();
-
         if (res.createMediaSuccessResponse().isPresent()) {
             var mapper = JSON.getMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -530,9 +658,7 @@ import io.fastpix.sdk.utils.RetryConfig;
 import io.fastpix.sdk.utils.JSON;
 
 public class Application {
-
     public static void main(String[] args) throws Exception {
-
         FastPixSDK sdk = FastPixSDK.builder()
                 .retryConfig(RetryConfig.builder()
                     .backoff(BackoffStrategy.builder()
@@ -549,7 +675,6 @@ public class Application {
                     .password("your-secret-key")
                     .build())
             .build();
-
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
@@ -558,11 +683,9 @@ public class Application {
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
                 .build();
-
         CreateMediaResponse res = sdk.inputVideos().create()
                 .request(req)
                 .call();
-
         if (res.createMediaSuccessResponse().isPresent()) {
             var mapper = JSON.getMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -572,9 +695,11 @@ public class Application {
 }
 ```
 
+<br />
+
 ## Error Handling
 
-[`FastpixException`](./src/main/java/io/fastpix/sdk/models/errors/FastpixException.java) is the base class for all HTTP error responses. It has the following properties:
+[`FastpixException`](https://github.com/FastPix/fastpix-java/blob/main/src/main/java/io/fastpix/sdk/models/errors/FastpixException.java) is the base class for all HTTP error responses. It has the following properties:
 
 | Method           | Type                        | Description                                                              |
 | ---------------- | --------------------------- | ------------------------------------------------------------------------ |
@@ -603,9 +728,7 @@ import io.fastpix.sdk.models.operations.CreateMediaResponse;
 import io.fastpix.sdk.utils.JSON;
 
 public class Application {
-
     public static void main(String[] args) throws Exception {
-
         FastPixSDK sdk = FastPixSDK.builder()
                 .security(Security.builder()
                     .username("your-access-token")
@@ -613,7 +736,6 @@ public class Application {
                     .build())
             .build();
         try {
-
             CreateMediaRequest req = CreateMediaRequest.builder()
                     .inputs(List.of(
                         Input.of(PullVideoInput.builder()
@@ -622,22 +744,18 @@ public class Application {
                     .metadata(Map.ofEntries(
                         Map.entry("key1", "value1")))
                     .build();
-
             CreateMediaResponse res = sdk.inputVideos().create()
                     .request(req)
                     .call();
-
             if (res.createMediaSuccessResponse().isPresent()) {
                 var mapper = JSON.getMapper();
                 mapper.enable(SerializationFeature.INDENT_OUTPUT);
                 System.out.println(mapper.writeValueAsString(res.createMediaSuccessResponse().get()));
             }
         } catch (FastpixException ex) { // all SDK exceptions inherit from FastpixException
-
             // ex.toString() provides a detailed error message including
             // HTTP status code, headers, and error payload (if any)
             System.out.println(ex);
-
             // Base exception fields
             var rawResponse = ex.rawResponse();
             var headers = ex.headers();
@@ -652,10 +770,13 @@ public class Application {
 }
 ```
 
+<br />
+
 ### Error Classes
 
 **Primary error:**
-*  [`FastpixException`](https://github.com/FastPix/fastpix-java/blob/main/src/main/java/io/fastpix/sdk/models/errors/FastpixException.java): The base class for HTTP error responses.
+* [`FastpixException`](https://github.com/FastPix/fastpix-java/blob/main/src/main/java/io/fastpix/sdk/models/errors/FastpixException.java): The base class for HTTP error responses.
+
 <details><summary>Less common errors</summary>
 
 <br />
@@ -665,11 +786,12 @@ public class Application {
 `IOException` include `java.net.ConnectException`, `java.net.SocketTimeoutException`, `EOFException` (there are
 many more subclasses in the JDK platform).
 
-**Inherit from [`FastpixException`](./src/main/java/io/fastpix/sdk/models/errors/FastpixException.java)**:
-
+**Inherit from [`FastpixException`](https://github.com/FastPix/fastpix-java/blob/main/src/main/java/io/fastpix/sdk/models/errors/FastpixException.java)**:
 * Additional error classes may be defined for specific error scenarios.
 
 </details>
+
+<br />
 
 ## Server Selection
 
@@ -692,9 +814,7 @@ import io.fastpix.sdk.models.operations.CreateMediaResponse;
 import io.fastpix.sdk.utils.JSON;
 
 public class Application {
-
     public static void main(String[] args) throws Exception {
-
         FastPixSDK sdk = FastPixSDK.builder()
                 .serverURL("https://api.fastpix.com/v1/")
                 .security(Security.builder()
@@ -702,7 +822,6 @@ public class Application {
                     .password("your-secret-key")
                     .build())
             .build();
-
         CreateMediaRequest req = CreateMediaRequest.builder()
                 .inputs(List.of(
                     Input.of(PullVideoInput.builder()
@@ -711,11 +830,9 @@ public class Application {
                 .metadata(Map.ofEntries(
                     Map.entry("key1", "value1")))
                 .build();
-
         CreateMediaResponse res = sdk.inputVideos().create()
                 .request(req)
                 .call();
-
         if (res.createMediaSuccessResponse().isPresent()) {
             var mapper = JSON.getMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -724,6 +841,8 @@ public class Application {
     }
 }
 ```
+
+<br />
 
 ## Custom HTTP Client
 
@@ -747,7 +866,6 @@ import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.utils.HTTPClient;
 import io.fastpix.sdk.utils.FastpixHTTPClient;
 import io.fastpix.sdk.utils.Utils;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
@@ -781,7 +899,6 @@ public class Application {
                 }
             }
         };
-
         FastPixSDK sdk = FastPixSDK.builder()
             .client(httpClient)
             .build();
@@ -800,7 +917,6 @@ import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.utils.HTTPClient;
 import io.fastpix.sdk.utils.Blob;
 import io.fastpix.sdk.utils.ResponseWithBody;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -820,12 +936,10 @@ public class Application {
                 .connectTimeout(Duration.ofSeconds(30))
                 // .sslContext(customSslContext) // Add custom SSL context if needed
                 .build();
-
             @Override
             public HttpResponse<InputStream> send(HttpRequest request) throws IOException, URISyntaxException, InterruptedException {
                 return client.send(request, HttpResponse.BodyHandlers.ofInputStream());
             }
-
             @Override
             public CompletableFuture<HttpResponse<Blob>> sendAsync(HttpRequest request) {
                 // Convert response to HttpResponse<Blob> for async operations
@@ -833,7 +947,6 @@ public class Application {
                     .thenApply(resp -> new ResponseWithBody<>(resp, Blob::from));
             }
         };
-
         FastPixSDK sdk = FastPixSDK.builder()
             .client(customHttpClient)
             .build();
@@ -842,6 +955,8 @@ public class Application {
 ```
 
 </details>
+
+<br />
 
 ## Debugging
 
@@ -874,7 +989,6 @@ Configure logging levels in your `logback.xml`:
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-
     <!-- SDK-wide logging -->
     <logger name="io.fastpix.sdk" level="DEBUG"/>
     
@@ -897,6 +1011,8 @@ Configure logging levels in your `logback.xml`:
 - **Streaming**: Stream initialization, item processing, closure
 - **Hooks**: Hook execution counts, operation IDs, exceptions
 
+<br />
+
 #### Legacy Debug Logging
 
 For backward compatibility, you can still use the legacy debug logging method:
@@ -911,6 +1027,7 @@ FastPixSDK sdk = FastPixSDK.builder()
 > Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
 
 Example output:
+
 ```
 Sending request: http://localhost:35123/bearer#global GET
 Request headers: {Accept=[application/json], Authorization=[******], Client-Level-Header=[added by client], Idempotency-Key=[some-key], x-fastpix-user-agent=[fastpix-sdk/java 0.0.1 internal 0.1.0 io.fastpix.sdk]}
@@ -931,7 +1048,64 @@ Response body:
 
 Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this option does not log request/response bodies.
 
-# Development
+<br />
+
+## FAQ
+
+**How do I install the FastPix Java SDK?**
+Add `io.fastpix:sdk` to your build - `implementation 'io.fastpix:sdk:<version>'` for Gradle, or the equivalent `<dependency>` for Maven. See [Add the SDK to your project](#add-the-sdk-to-your-project).
+
+**How do I authenticate the SDK?**
+FastPix uses Basic Auth: build a `Security` with your access token as `username` and secret key as `password`, then pass it to `FastPixSDK.builder()`. See [Configure authentication](#configure-authentication).
+
+**How do I upload a video in Java?**
+Create media from a URL or a direct upload through `sdk.inputVideos()`. See [Create your first media](#create-your-first-media) and [Available Resources and Operations](#available-resources-and-operations).
+
+**Does the SDK support async / reactive?**
+Yes - it provides asynchronous APIs using `CompletableFuture` and Reactive Streams `Publisher`, so it integrates with Reactor, RxJava, and other reactive libraries. See [Asynchronous Support](#asynchronous-support).
+
+**How do I start a live stream?**
+Use the Live API resources to create and manage streams, simulcasts, and live playback IDs. See [Available Resources and Operations](#available-resources-and-operations).
+
+**How do I get video analytics and metrics in Java?**
+The Video Data API exposes metrics, views, dimensions, and errors for quality-of-experience monitoring. See [Available Resources and Operations](#available-resources-and-operations).
+
+**How do I handle API errors?**
+Catch `FastpixException` (the base class for HTTP error responses); it exposes the message, status code, headers, and body. See [Error Handling](#error-handling).
+
+**How do I configure automatic retries?**
+Provide a `RetryConfig` per call or at SDK initialization to control the backoff strategy. See [Retries](#retries).
+
+**How do I use a custom HTTP client, proxy, or timeout?**
+Provide your own `HTTPClient` implementation (custom executors, SSL context, connection pools, hooks) or wrap the default. See [Custom HTTP Client](#custom-http-client).
+
+**How do I enable debug logging?**
+The SDK logs through SLF4j; you can also use `enableHTTPDebugLogging(true)`. See [Debugging](#debugging).
+
+**Which Java versions are supported?**
+Java 11 and above (JDK). See [Before you begin](#before-you-begin).
+
+<br />
+
+## Which FastPix SDK should I use?
+
+FastPix publishes a server SDK for every major backend language, each generated from the same API specification:
+
+| Language | Repo | Install |
+|---|---|---|
+| **Java** (this repo) | [fastpix-java](https://github.com/FastPix/fastpix-java) | `io.fastpix:sdk` (Maven/Gradle) |
+| Node.js / TypeScript | [node-sdk](https://github.com/FastPix/node-sdk) | `npm install @fastpix/fastpix-node` |
+| Python | [fastpix-python](https://github.com/FastPix/fastpix-python) | `pip install fastpix-python` |
+| PHP | [fastpix-php](https://github.com/FastPix/fastpix-php) | `composer require fastpix/sdk` |
+| Go | [fastpix-go](https://github.com/FastPix/fastpix-go) | `go get github.com/FastPix/fastpix-go` |
+| C# / .NET | [fastpix-sdk-csharp](https://github.com/FastPix/fastpix-sdk-csharp) | `dotnet add package Fastpix` |
+| Ruby | [fastpix-ruby](https://github.com/FastPix/fastpix-ruby) | `gem install fastpixapi` |
+
+To upload and play the media these SDKs create, use the FastPix browser libraries: [web-uploads-sdk](https://github.com/FastPix/web-uploads-sdk), [react-web-uploader](https://github.com/FastPix/react-web-uploader), and [web-player-component](https://github.com/FastPix/web-player-component). Browse everything in the [FastPix organization](https://github.com/orgs/FastPix/repositories).
+
+<br />
+
+## Development
 
 This Java SDK is programmatically generated from our API specifications. Any manual modifications to internal files will be overwritten during subsequent generation cycles.
 
@@ -943,22 +1117,9 @@ For comprehensive understanding of each API's functionality, including detailed 
 
 The API reference offers complete documentation for all available endpoints and features, enabling developers to integrate and leverage FastPix APIs effectively.
 
-# License
+## Support
 
-This SDK is licensed under the [Apache License 2.0](LICENSE).
-
-```
-Copyright 2025 FastPix
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
+- Documentation: https://fastpix.com/docs
+- API Reference: https://fastpix.com/docs/platform-api/overview
+- GitHub Issues: https://github.com/FastPix/fastpix-java/issues
+- Dashboard: https://dashboard.fastpix.com
