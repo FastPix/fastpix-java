@@ -16,9 +16,9 @@ repositories {
 }
 
 dependencies {
+    // jackson-databind arrives transitively at compile scope from the SDK,
+    // which exposes ObjectMapper and JsonNode in its public API.
     implementation 'io.fastpix:sdk:1.0.5'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
     runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
