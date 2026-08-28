@@ -6,6 +6,10 @@
 // Override deprecated direct task property access (compileJava.options, compileTestJava.options)
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
+    // The SDK supports Java 11, but the build itself runs on a newer JDK so the
+    // Spring Boot 3.2 subprojects can compile. `release` makes javac reject any
+    // API added after Java 11, which -source/-target alone do not catch.
+    options.release = 11
     if (!name.contains("Test")) {
         options.compilerArgs += '-Xlint:unchecked'
     }
@@ -63,3 +67,11 @@ afterEvaluate {
     }
 }
 
+
+// Bundle the Apache 2.0 license text into every published jar (jar, sources,
+// javadoc) so the license travels with the artifact, per Apache 2.0 §4(a).
+tasks.withType(Jar).configureEach {
+    from(rootProject.file("LICENSE")) {
+        into("META-INF")
+    }
+}

@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.5]
+
+### Changed
+
+- **License corrected to Apache 2.0 in the published POM.** The `LICENSE` file
+  in this repository has been Apache License 2.0 since January 2026, but the
+  Maven POM continued to declare `MIT License`. Artifacts up to and including
+  `1.0.4` on Maven Central carry the incorrect MIT declaration and cannot be
+  amended, since Maven Central releases are immutable. Consumers who rely on
+  POM metadata for license scanning should read the license from `1.0.5` or
+  later.
+
+- **The license text is now bundled in every published jar** at
+  `META-INF/LICENSE`, so the license travels with the artifact.
+
+- **SDK version bump: `1.0.4` → `1.0.5`.** The `version` property, the
+  `SDK_VERSION` runtime constant, and the installation documentation now
+  report `1.0.5`.
+
+### Fixed
+
+- **`jackson-databind` is now a compile-scope dependency.** It was declared as
+  `implementation`, which published it at `runtime` scope, so it was absent from
+  consumers' compile classpath. The SDK exposes Jackson types through public
+  signatures — `JSON.getMapper()` returns an `ObjectMapper`, and the generated
+  `asJson()` accessors return `JsonNode` — so the README's own example failed to
+  compile for anyone who depended on `io.fastpix:sdk` alone:
+
+  ```
+  error: package com.fasterxml.jackson.databind does not exist
+  ```
+
+  Projects that worked around this by declaring `jackson-databind` themselves can
+  drop that line, though keeping it is harmless.
+
+### Added
+
+- A **License** section in the README stating the Apache 2.0 terms.
+
+---
+
 ## [1.0.4]
 
 ### ⚠️ Breaking changes

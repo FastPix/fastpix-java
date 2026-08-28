@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  workflow_dispatch:
 
 jobs:
   build-and-publish:
@@ -13,46 +14,106 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 11
+      # JDK 17 is required to build the Spring Boot 3.2 subprojects. The SDK
+      # itself still compiles against the Java 11 API and emits Java 11
+      # bytecode, enforced by `options.release = 11` in build-extras.gradle.
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '11'
+          java-version: '17'
           cache: 'gradle'
 
-      - name: Import GPG key
+      # A tag of v1.2.3 must publish 1.2.3. Catching a mismatch here is cheaper
+      # than discovering it after an immutable release has landed on Central.
+      - name: Verify tag matches the project version
+        if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          PROJECT_VERSION="$(./gradlew -q properties --property version | awk '/^version:/ {print $2}')"
+          echo "tag=$TAG_VERSION project=$PROJECT_VERSION"
+          if [ "$TAG_VERSION" != "$PROJECT_VERSION" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match project version $PROJECT_VERSION"
+            exit 1
+          fi
+
+      # The Portal answers both wrong and missing credentials with the same
+      # "Invalid token" error, and only at the very end of a publish. Checking
+      # first fails in seconds with a message that says what to fix.
+      - name: Verify Maven Central credentials
+        env:
+          CENTRAL_USERNAME: ${{ secrets.CPP_USER_TOKEN_USERNAME }}
+          CENTRAL_PASSWORD: ${{ secrets.CPP_USER_TOKEN_PASSWORD }}
+        run: |
+          if [ -z "$CENTRAL_USERNAME" ] || [ -z "$CENTRAL_PASSWORD" ]; then
+            echo "::error::CPP_USER_TOKEN_USERNAME or CPP_USER_TOKEN_PASSWORD is empty or not set in this repository's secrets."
+            exit 1
+          fi
+          if [ "$CENTRAL_USERNAME" != "$(printf '%s' "$CENTRAL_USERNAME" | tr -d '[:space:]')" ] \
+            || [ "$CENTRAL_PASSWORD" != "$(printf '%s' "$CENTRAL_PASSWORD" | tr -d '[:space:]')" ]; then
+            echo "::warning::A credential secret contains whitespace. A trailing newline pasted into the secret will be sent verbatim and rejected."
+          fi
+          TOKEN="$(printf '%s:%s' "$CENTRAL_USERNAME" "$CENTRAL_PASSWORD" | base64 -w0)"
+          STATUS="$(curl -s -o /dev/null -w '%{http_code}' \
+            -H "Authorization: Bearer $TOKEN" \
+            'https://central.sonatype.com/api/v1/publisher/published?namespace=io.fastpix&name=sdk&version=1.0.4')"
+          if [ "$STATUS" = "401" ]; then
+            echo "::error::The Central Portal rejected these credentials. They must be a user token generated at https://central.sonatype.com/account, not a Sonatype JIRA or legacy OSSRH login. Generate a token and update both secrets."
+            exit 1
+          fi
+          echo "Central Portal accepted the credentials (HTTP $STATUS)."
+
+      # Central rejects a deployment when it cannot find the public half of the
+      # signing key, which is what failed the 1.0.5 attempt. Sending the key is
+      # idempotent, so this runs on every release and costs a few seconds.
+      - name: Publish the signing key to keyservers
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          printf '%s\n' "$GPG_PRIVATE_KEY" | gpg --batch --import
+          FPR="$(gpg --list-secret-keys --with-colons | awk -F: '$1 == "fpr" { print $10; exit }')"
+          if [ -z "$FPR" ]; then
+            echo "::error::GPG_PRIVATE_KEY could not be imported, so no key could be published."
+            exit 1
+          fi
+          echo "Signing key fingerprint: $FPR"
+          gpg --armor --export "$FPR" > public-key.asc
 
-      - name: Build and publish to local Maven repo
+          gpg --batch --keyserver keyserver.ubuntu.com --send-keys "$FPR" \
+            || echo "::warning::Upload to keyserver.ubuntu.com failed."
+          curl -sS -X POST -H 'Content-Type: application/json' \
+            --data "$(jq -Rs '{keytext: .}' < public-key.asc)" \
+            https://keys.openpgp.org/vks/v1/upload > /dev/null \
+            || echo "::warning::Upload to keys.openpgp.org failed."
+
+          # Central looks the key up the moment the bundle lands, so wait for it
+          # to become resolvable rather than racing keyserver propagation.
+          for i in $(seq 1 18); do
+            if curl -sf -o /dev/null "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x$FPR" \
+              || curl -sf -o /dev/null "https://keys.openpgp.org/vks/v1/by-fingerprint/$FPR"; then
+              echo "Key is resolvable on a supported keyserver."
+              exit 0
+            fi
+            echo "Waiting for key propagation ($i/18)."
+            sleep 10
+          done
+          echo "::error::The signing key did not become resolvable. Central will reject the signatures."
+          exit 1
+
+      - name: Build and test
+        run: ./gradlew clean build
+
+      # The vanniktech maven-publish plugin signs the artifacts, assembles the
+      # Central Portal bundle and uploads it. It reads every credential below
+      # from ORG_GRADLE_PROJECT_* environment variables.
+      - name: Publish to Maven Central
         env:
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
-          ORG_GRADLE_PROJECT_signingPassphrase: ${{ secrets.GPG_PASSPHRASE }}
-        run: ./gradlew clean build publishToMavenLocal
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.CPP_USER_TOKEN_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.CPP_USER_TOKEN_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSPHRASE }}
+        run: ./gradlew publishToMavenCentral --no-configuration-cache
 
       - name: List build outputs
-        run: |
-          find build -type f
-          find ~/.m2/repository/io/fastpix/sdk/0.1.0 -type f || true
-
-      - name: Prepare artifacts for upload
-        run: |
-          mkdir -p upload
-          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0.jar upload/
-          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0.pom upload/
-          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0-sources.jar upload/ || true
-          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0-javadoc.jar upload/ || true
-
-      - name: Upload to Central Publishing Portal
-        env:
-          CPP_USER_TOKEN_USERNAME: ${{ secrets.CPP_USER_TOKEN_USERNAME }}
-          CPP_USER_TOKEN_PASSWORD: ${{ secrets.CPP_USER_TOKEN_PASSWORD }}
-        run: |
-          curl -u "$CPP_USER_TOKEN_USERNAME:$CPP_USER_TOKEN_PASSWORD" \
-            -F "file=@upload/sdk-0.1.0.jar" \
-            -F "file=@upload/sdk-0.1.0.pom" \
-            -F "file=@upload/sdk-0.1.0-sources.jar" \
-            -F "file=@upload/sdk-0.1.0-javadoc.jar" \
-            https://central.sonatype.com/api/v1/publish
+        if: always()
+        run: find build/libs -type f
