@@ -112,7 +112,7 @@ Add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.fastpix:sdk:1.0.4'
+    implementation 'io.fastpix:sdk:1.0.5'
 }
 ```
 
@@ -124,40 +124,20 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.fastpix</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
-
-> **Note:** The examples in this README pretty-print API responses with Jackson (`JSON.getMapper()` and `SerializationFeature`). The SDK declares `jackson-databind` at `runtime` scope, so to compile these examples add it to your build at compile scope:
->
-> Maven:
->
-> ```xml
-> <dependency>
->     <groupId>com.fasterxml.jackson.core</groupId>
->     <artifactId>jackson-databind</artifactId>
->     <version>2.18.2</version>
-> </dependency>
-> ```
->
-> Gradle:
->
-> ```groovy
-> implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-> ```
 
 #### Build from source (optional)
 
 After cloning the git repository to your file system, you can build the SDK artifact from source to the `build` directory by running:
 
 **On Unix/Linux/macOS:**
-
 ```bash
 ./gradlew build
 ```
 
 **On Windows:**
-
 ```bash
 gradlew.bat build
 ```
@@ -165,13 +145,11 @@ gradlew.bat build
 If you wish to build from source and publish the SDK artifact to your local Maven repository, use:
 
 **On Unix/Linux/macOS:**
-
 ```bash
 ./gradlew publishToMavenLocal -Pskip.signing
 ```
 
 **On Windows:**
-
 ```bash
 gradlew.bat publishToMavenLocal -Pskip.signing
 ```
@@ -190,7 +168,6 @@ export FASTPIX_PASSWORD="your-secret-key"
 Confirm both variables are set, without printing their values.
 
 **On Unix/Linux/macOS:**
-
 ```bash
 [ -n "$FASTPIX_USERNAME" ] && echo "Access Token: set" || echo "Access Token: missing"
 [ -n "$FASTPIX_PASSWORD" ] && echo "Secret Key: set" || echo "Secret Key: missing"
@@ -206,6 +183,7 @@ Initialize the FastPix SDK with your credentials:
 // Import required classes from the FastPix SDK
 import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.Security;
+
 FastPixSDK sdk = FastPixSDK.builder()
     .security(Security.builder()
         .username("your-access-token")
@@ -220,6 +198,7 @@ Or using environment variables:
 // Import required classes from the FastPix SDK
 import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.Security;
+
 FastPixSDK sdk = FastPixSDK.builder()
     .security(Security.builder()
         .username(System.getenv("FASTPIX_USERNAME")) // Your Access Token
@@ -243,6 +222,7 @@ The easiest way to verify your integration is to create media from a publicly ac
 ```java
 // Package declaration - adjust to match your project's directory structure
 package hello.world;
+
 // Import required classes from the FastPix SDK
 import java.lang.Exception;
 import java.util.List;
@@ -252,6 +232,7 @@ import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.*;
 import io.fastpix.sdk.models.operations.CreateMediaResponse;
 import io.fastpix.sdk.utils.JSON;
+
 public class Application {
     public static void main(String[] args) throws Exception {
         FastPixSDK sdk = FastPixSDK.builder()
@@ -387,6 +368,7 @@ If you need JDK Flow API compatibility (e.g., for Quarkus/Mutiny 2), you can use
 ```java
 // Convert Reactive Streams Publisher to Flow Publisher
 Flow.Publisher<T> flowPublisher = FlowAdapters.toFlowPublisher(reactiveStreamsPublisher);
+
 // Convert Flow Publisher to Reactive Streams Publisher
 Publisher<T> reactiveStreamsPublisher = FlowAdapters.toPublisher(flowPublisher);
 ```
@@ -400,6 +382,7 @@ For standard single-response operations, the SDK returns `CompletableFuture<T>` 
 ```java
 // Package declaration - adjust to match your project's directory structure
 package hello.world;
+
 // Import required classes from the FastPix SDK
 import java.util.List;
 import java.util.Map;
@@ -410,6 +393,7 @@ import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.*;
 import io.fastpix.sdk.models.operations.async.CreateMediaResponse;
 import io.fastpix.sdk.utils.JSON;
+
 public class Application {
     public static void main(String[] args) {
         AsyncFastPixSDK sdk = FastPixSDK.builder()
@@ -600,6 +584,7 @@ To change the default retry strategy for a single API call, you can provide a `R
 ```java
 // Package declaration - adjust to match your project's directory structure
 package hello.world;
+
 // Import required classes from the FastPix SDK
 import java.lang.Exception;
 import java.util.List;
@@ -612,6 +597,7 @@ import io.fastpix.sdk.models.operations.CreateMediaResponse;
 import io.fastpix.sdk.utils.BackoffStrategy;
 import io.fastpix.sdk.utils.RetryConfig;
 import io.fastpix.sdk.utils.JSON;
+
 public class Application {
     public static void main(String[] args) throws Exception {
         FastPixSDK sdk = FastPixSDK.builder()
@@ -655,6 +641,7 @@ If you'd like to override the default retry strategy for all operations that sup
 ```java
 // Package declaration - adjust to match your project's directory structure
 package hello.world;
+
 // Import required classes from the FastPix SDK
 import java.lang.Exception;
 import java.util.List;
@@ -667,6 +654,7 @@ import io.fastpix.sdk.models.operations.CreateMediaResponse;
 import io.fastpix.sdk.utils.BackoffStrategy;
 import io.fastpix.sdk.utils.RetryConfig;
 import io.fastpix.sdk.utils.JSON;
+
 public class Application {
     public static void main(String[] args) throws Exception {
         FastPixSDK sdk = FastPixSDK.builder()
@@ -725,6 +713,7 @@ public class Application {
 ```java
 // Package declaration - adjust to match your project's directory structure
 package hello.world;
+
 // Import required classes from the FastPix SDK
 import java.io.UncheckedIOException;
 import java.lang.Exception;
@@ -735,6 +724,7 @@ import io.fastpix.sdk.models.components.*;
 import io.fastpix.sdk.models.errors.FastpixException;
 import io.fastpix.sdk.models.operations.CreateMediaResponse;
 import io.fastpix.sdk.utils.JSON;
+
 public class Application {
     public static void main(String[] args) throws Exception {
         FastPixSDK sdk = FastPixSDK.builder()
@@ -810,6 +800,7 @@ The default server can be overridden globally using the `.serverURL(String serve
 ```java
 // Package declaration - adjust to match your project's directory structure
 package hello.world;
+
 // Import required classes from the FastPix SDK
 import java.lang.Exception;
 import java.util.List;
@@ -819,6 +810,7 @@ import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.*;
 import io.fastpix.sdk.models.operations.CreateMediaResponse;
 import io.fastpix.sdk.utils.JSON;
+
 public class Application {
     public static void main(String[] args) throws Exception {
         FastPixSDK sdk = FastPixSDK.builder()
@@ -878,6 +870,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.io.InputStream;
 import java.time.Duration;
+
 public class Application {
     public static void main(String[] args) {
         // Create a custom HTTP client with hooks
@@ -931,6 +924,7 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.util.concurrent.Executors;
 import java.util.concurrent.CompletableFuture;
+
 public class Application {
     public static void main(String[] args) {
         // Custom HTTP client with custom configuration
