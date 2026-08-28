@@ -63,6 +63,43 @@ jobs:
           fi
           echo "Central Portal accepted the credentials (HTTP $STATUS)."
 
+      # Central rejects a deployment when it cannot find the public half of the
+      # signing key, which is what failed the 1.0.5 attempt. Sending the key is
+      # idempotent, so this runs on every release and costs a few seconds.
+      - name: Publish the signing key to keyservers
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          printf '%s\n' "$GPG_PRIVATE_KEY" | gpg --batch --import
+          FPR="$(gpg --list-secret-keys --with-colons | awk -F: '$1 == "fpr" { print $10; exit }')"
+          if [ -z "$FPR" ]; then
+            echo "::error::GPG_PRIVATE_KEY could not be imported, so no key could be published."
+            exit 1
+          fi
+          echo "Signing key fingerprint: $FPR"
+          gpg --armor --export "$FPR" > public-key.asc
+
+          gpg --batch --keyserver keyserver.ubuntu.com --send-keys "$FPR" \
+            || echo "::warning::Upload to keyserver.ubuntu.com failed."
+          curl -sS -X POST -H 'Content-Type: application/json' \
+            --data "$(jq -Rs '{keytext: .}' < public-key.asc)" \
+            https://keys.openpgp.org/vks/v1/upload > /dev/null \
+            || echo "::warning::Upload to keys.openpgp.org failed."
+
+          # Central looks the key up the moment the bundle lands, so wait for it
+          # to become resolvable rather than racing keyserver propagation.
+          for i in $(seq 1 18); do
+            if curl -sf -o /dev/null "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x$FPR" \
+              || curl -sf -o /dev/null "https://keys.openpgp.org/vks/v1/by-fingerprint/$FPR"; then
+              echo "Key is resolvable on a supported keyserver."
+              exit 0
+            fi
+            echo "Waiting for key propagation ($i/18)."
+            sleep 10
+          done
+          echo "::error::The signing key did not become resolvable. Central will reject the signatures."
+          exit 1
+
       - name: Build and test
         run: ./gradlew clean build
 
