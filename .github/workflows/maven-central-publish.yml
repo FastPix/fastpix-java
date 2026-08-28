@@ -37,6 +37,32 @@ jobs:
             exit 1
           fi
 
+      # The Portal answers both wrong and missing credentials with the same
+      # "Invalid token" error, and only at the very end of a publish. Checking
+      # first fails in seconds with a message that says what to fix.
+      - name: Verify Maven Central credentials
+        env:
+          CENTRAL_USERNAME: ${{ secrets.CPP_USER_TOKEN_USERNAME }}
+          CENTRAL_PASSWORD: ${{ secrets.CPP_USER_TOKEN_PASSWORD }}
+        run: |
+          if [ -z "$CENTRAL_USERNAME" ] || [ -z "$CENTRAL_PASSWORD" ]; then
+            echo "::error::CPP_USER_TOKEN_USERNAME or CPP_USER_TOKEN_PASSWORD is empty or not set in this repository's secrets."
+            exit 1
+          fi
+          if [ "$CENTRAL_USERNAME" != "$(printf '%s' "$CENTRAL_USERNAME" | tr -d '[:space:]')" ] \
+            || [ "$CENTRAL_PASSWORD" != "$(printf '%s' "$CENTRAL_PASSWORD" | tr -d '[:space:]')" ]; then
+            echo "::warning::A credential secret contains whitespace. A trailing newline pasted into the secret will be sent verbatim and rejected."
+          fi
+          TOKEN="$(printf '%s:%s' "$CENTRAL_USERNAME" "$CENTRAL_PASSWORD" | base64 -w0)"
+          STATUS="$(curl -s -o /dev/null -w '%{http_code}' \
+            -H "Authorization: Bearer $TOKEN" \
+            'https://central.sonatype.com/api/v1/publisher/published?namespace=io.fastpix&name=sdk&version=1.0.4')"
+          if [ "$STATUS" = "401" ]; then
+            echo "::error::The Central Portal rejected these credentials. They must be a user token generated at https://central.sonatype.com/account, not a Sonatype JIRA or legacy OSSRH login. Generate a token and update both secrets."
+            exit 1
+          fi
+          echo "Central Portal accepted the credentials (HTTP $STATUS)."
+
       - name: Build and test
         run: ./gradlew clean build
 
