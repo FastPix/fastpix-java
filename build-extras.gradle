@@ -63,3 +63,11 @@ afterEvaluate {
     }
 }
 
+
+// Bundle the Apache 2.0 license text into every published jar (jar, sources,
+// javadoc) so the license travels with the artifact, per Apache 2.0 §4(a).
+tasks.withType(Jar).configureEach {
+    from(rootProject.file("LICENSE")) {
+        into("META-INF")
+    }
+}

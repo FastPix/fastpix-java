@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  workflow_dispatch:
 
 jobs:
   build-and-publish:
@@ -20,39 +21,33 @@ jobs:
           java-version: '11'
           cache: 'gradle'
 
-      - name: Import GPG key
+      # A tag of v1.2.3 must publish 1.2.3. Catching a mismatch here is cheaper
+      # than discovering it after an immutable release has landed on Central.
+      - name: Verify tag matches the project version
+        if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          PROJECT_VERSION="$(./gradlew -q properties --property version | awk '/^version:/ {print $2}')"
+          echo "tag=$TAG_VERSION project=$PROJECT_VERSION"
+          if [ "$TAG_VERSION" != "$PROJECT_VERSION" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match project version $PROJECT_VERSION"
+            exit 1
+          fi
 
-      - name: Build and publish to local Maven repo
+      - name: Build and test
+        run: ./gradlew clean build
+
+      # The vanniktech maven-publish plugin signs the artifacts, assembles the
+      # Central Portal bundle and uploads it. It reads every credential below
+      # from ORG_GRADLE_PROJECT_* environment variables.
+      - name: Publish to Maven Central
         env:
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
-          ORG_GRADLE_PROJECT_signingPassphrase: ${{ secrets.GPG_PASSPHRASE }}
-        run: ./gradlew clean build publishToMavenLocal
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.CPP_USER_TOKEN_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.CPP_USER_TOKEN_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSPHRASE }}
+        run: ./gradlew publishToMavenCentral --no-configuration-cache
 
       - name: List build outputs
-        run: |
-          find build -type f
-          find ~/.m2/repository/io/fastpix/sdk/0.1.0 -type f || true
-
-      - name: Prepare artifacts for upload
-        run: |
-          mkdir -p upload
-          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0.jar upload/
-          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0.pom upload/
-          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0-sources.jar upload/ || true
-          cp ~/.m2/repository/io/fastpix/sdk/0.1.0/sdk-0.1.0-javadoc.jar upload/ || true
-
-      - name: Upload to Central Publishing Portal
-        env:
-          CPP_USER_TOKEN_USERNAME: ${{ secrets.CPP_USER_TOKEN_USERNAME }}
-          CPP_USER_TOKEN_PASSWORD: ${{ secrets.CPP_USER_TOKEN_PASSWORD }}
-        run: |
-          curl -u "$CPP_USER_TOKEN_USERNAME:$CPP_USER_TOKEN_PASSWORD" \
-            -F "file=@upload/sdk-0.1.0.jar" \
-            -F "file=@upload/sdk-0.1.0.pom" \
-            -F "file=@upload/sdk-0.1.0-sources.jar" \
-            -F "file=@upload/sdk-0.1.0-javadoc.jar" \
-            https://central.sonatype.com/api/v1/publish
+        if: always()
+        run: find build/libs -type f

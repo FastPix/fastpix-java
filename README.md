@@ -51,6 +51,7 @@ export FASTPIX_PASSWORD="your-secret-key"
   * [Custom HTTP Client](#custom-http-client)
   * [Debugging](#debugging)
   * [Development](#development)
+  * [License](#license)
 
 ## Setup
 
@@ -64,7 +65,7 @@ Add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.fastpix:sdk:1.0.4'
+    implementation 'io.fastpix:sdk:1.0.5'
 }
 ```
 
@@ -76,7 +77,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.fastpix</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 
@@ -941,3 +942,23 @@ We value community contributions and feedback. Feel free to submit pull requests
 For comprehensive understanding of each API's functionality, including detailed request and response specifications, parameter descriptions, and additional examples, please refer to the [FastPix API Reference](https://fastpix.com/docs/product-os-api/overview).
 
 The API reference offers complete documentation for all available endpoints and features, enabling developers to integrate and leverage FastPix APIs effectively.
+
+# License
+
+This SDK is licensed under the [Apache License 2.0](LICENSE).
+
+```
+Copyright 2025 FastPix
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```

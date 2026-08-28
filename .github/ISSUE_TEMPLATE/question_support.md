@@ -54,7 +54,7 @@ public class Example {
 ### Environment
 - **Java Version:** [e.g., Java 11, Java 17, Java 21]
 - **Operating System:** [e.g., Windows 10, macOS 12.0, Ubuntu 20.04, etc.]
-- **FastPix Java SDK Version:** [e.g., 1.0.4, 1.0.3]
+- **FastPix Java SDK Version:** [e.g., 1.0.5, 1.0.4]
 - **Build Tool:** [e.g., Maven, Gradle]
 - **IDE:** [e.g., IntelliJ IDEA, Eclipse, VS Code, etc.]
 
