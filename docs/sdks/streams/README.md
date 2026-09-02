@@ -64,6 +64,7 @@ public class Application {
                 .inputMediaSettings(InputMediaSettings.builder()
                     .metadata(Map.ofEntries(
                         Map.entry("livestream_name", "fastpix_livestream")))
+                    .enableRecording(true)
                     .build())
                 .build();
 
