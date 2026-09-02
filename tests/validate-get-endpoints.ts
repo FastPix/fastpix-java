@@ -12,9 +12,6 @@
  * - Generates two markdown reports in `tests/`:
  *   - `GET_ENDPOINTS_OPENAPI_RESPONSE_VALIDATION_REPORT.md`
  *   - `GET_ENDPOINTS_OPENAPI_RESPONSE_FIX_SUGGESTIONS.md`
- * - Updates `tests/README.md` by replacing the block between markers:
- *   - `<!-- BEGIN GET_ENDPOINTS_CONSOLIDATED -->`
- *   - `<!-- END GET_ENDPOINTS_CONSOLIDATED -->`
  *
  * Requirements:
  * - FASTPIX_USERNAME / FASTPIX_PASSWORD env vars (Basic Auth)
@@ -755,7 +752,6 @@ function writeReport(results: EndpointResult[]) {
   const skipped = 0;
 
   const reportPath = join(__dirname, "GET_ENDPOINTS_OPENAPI_RESPONSE_VALIDATION_REPORT.md");
-  const readmePath = join(__dirname, "README.md");
   const generatedAt = new Date().toISOString();
 
   const lines: string[] = [];
@@ -854,55 +850,6 @@ function writeReport(results: EndpointResult[]) {
 
   writeFileSync(reportPath, lines.join("\n"));
   writeFixSuggestions(results);
-
-  // Also update tests/README.md with the consolidated report section so it always stays in sync.
-  try {
-    if (existsSync(readmePath)) {
-      const begin = "<!-- BEGIN GET_ENDPOINTS_CONSOLIDATED -->";
-      const end = "<!-- END GET_ENDPOINTS_CONSOLIDATED -->";
-
-      const consolidated: string[] = [];
-      consolidated.push(`Last generated: ${generatedAt}`);
-      consolidated.push("");
-      consolidated.push(`- **Total GET endpoints**: ${total}`);
-      consolidated.push(`- **PASS**: ${passed}`);
-      consolidated.push(`- **FAIL**: ${failed}`);
-      consolidated.push(`- **SKIP**: ${skipped}`);
-      consolidated.push("");
-      consolidated.push("| Endpoint | OperationId | OpenAPI valid | SDK parse | Missing in SDK (present in API) | Missing in API (present in SDK) | Empty arrays omitted by SDK | Status |");
-      consolidated.push("|---|---|---:|---:|---|---|---|---|");
-      for (const r of results) {
-        const openapiCol = r.openapiValid ? "✅" : "❌";
-        const sdkCol = r.sdkParseOk ? "✅" : "❌";
-        const missSdk = r.missingInSDK.length ? r.missingInSDK.map((p) => `\`${p}\``).join(", ") : "None";
-        const missApi = r.missingInAPI.length ? r.missingInAPI.map((p) => `\`${p}\``).join(", ") : "None";
-        const emptyOmitted = r.emptyArraysOmittedInSDK.length ? r.emptyArraysOmittedInSDK.map((p) => `\`${p}\``).join(", ") : "None";
-        const status = r.status === "PASS" ? "✅ PASS" : "❌ FAIL";
-        consolidated.push(`| \`${r.endpoint}\` | \`${r.operationId}\` | ${openapiCol} | ${sdkCol} | ${missSdk} | ${missApi} | ${emptyOmitted} | ${status} |`);
-      }
-      consolidated.push("");
-      consolidated.push("#### Missing fields (full lists)");
-      consolidated.push("");
-      for (const r of results) {
-        consolidated.push(`- **${r.operationId}** (\`${r.endpoint}\`)`);
-        consolidated.push(`  - **Missing in SDK (present in API)**: ${r.missingInSDK.length ? r.missingInSDK.map((p) => `\`${p}\``).join(", ") : "None"}`);
-        consolidated.push(`  - **Missing in API (present in SDK)**: ${r.missingInAPI.length ? r.missingInAPI.map((p) => `\`${p}\``).join(", ") : "None"}`);
-        consolidated.push(`  - **Empty arrays omitted by SDK**: ${r.emptyArraysOmittedInSDK.length ? r.emptyArraysOmittedInSDK.map((p) => `\`${p}\``).join(", ") : "None"}`);
-        consolidated.push(`  - **Empty arrays omitted by API**: ${r.emptyArraysOmittedInAPI.length ? r.emptyArraysOmittedInAPI.map((p) => `\`${p}\``).join(", ") : "None"}`);
-      }
-      consolidated.push("");
-      consolidated.push(`Full details: \`tests/GET_ENDPOINTS_OPENAPI_RESPONSE_VALIDATION_REPORT.md\``);
-
-      const readme = readFileSync(readmePath, "utf-8");
-      if (readme.includes(begin) && readme.includes(end)) {
-        const block = `${begin}\n${consolidated.join("\n")}\n${end}`;
-        const updated = readme.replace(new RegExp(`${begin}[\\s\\S]*?${end}`), block);
-        writeFileSync(readmePath, updated);
-      }
-    }
-  } catch {
-    // ignore README update failures
-  }
 
   // eslint-disable-next-line no-console
   console.log(`Report generated: ${reportPath}`);

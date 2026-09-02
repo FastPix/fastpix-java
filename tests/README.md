@@ -69,7 +69,6 @@ against the OpenAPI schema.
   each via fetch + the SDK, diffs the two, and writes:
   - `GET_ENDPOINTS_OPENAPI_RESPONSE_VALIDATION_REPORT.md`
   - `GET_ENDPOINTS_OPENAPI_RESPONSE_FIX_SUGGESTIONS.md`
-  - the consolidated summary block in this `README.md`
 - `validate-non-get-endpoints.ts` — runs the mutating lifecycle and writes
   `NON_GET_ENDPOINTS_VALIDATION_REPORT.md`.
 - `java-harness.ts` — resolves the SDK classpath, compiles the harness once, and
@@ -107,6 +106,3 @@ npm run fixtures:teardown     # deletes them and restores the fixture file
 
 Never commit the filled file. Endpoints without a fixture fall back to a
 placeholder UUID, which typically yields a 404 or 422.
-
-<!-- BEGIN GET_ENDPOINTS_CONSOLIDATED -->
-<!-- END GET_ENDPOINTS_CONSOLIDATED -->
