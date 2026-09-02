@@ -97,10 +97,16 @@ once per process (lazily, cached), mirroring the Go harness's compile-once model
 
 ## Fixtures
 
-`get-endpoints-fixtures.json` contains real IDs for GET endpoints that require
-path parameters. Update it with working IDs from your FastPix account for
-accurate testing. If a fixture is missing, the GET driver falls back to a
-placeholder UUID, which typically yields a 404.
+`get-endpoints-fixtures.json` ships with placeholder IDs. Fill it for a run with
+
+```bash
+npm run fixtures:setup        # creates temp resources on the account, writes their IDs
+npm run validate:get-endpoints
+npm run fixtures:teardown     # deletes them and restores the fixture file
+```
+
+Never commit the filled file. Endpoints without a fixture fall back to a
+placeholder UUID, which typically yields a 404 or 422.
 
 <!-- BEGIN GET_ENDPOINTS_CONSOLIDATED -->
 <!-- END GET_ENDPOINTS_CONSOLIDATED -->
