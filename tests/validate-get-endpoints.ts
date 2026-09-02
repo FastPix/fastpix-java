@@ -247,7 +247,7 @@ function resolveSpecPath(): string {
   // then the known spec filenames at the repo root (parent of tests/).
   const candidates = [
     process.env.FASTPIX_OPENAPI_SPEC,
-    join(__dirname, "../fixed 7.yaml"),
+    join(__dirname, "../openapi.yaml"),
     join(__dirname, "../fastpix.yaml"),
     join(__dirname, "../../fastpix.yaml"),
     join(__dirname, "../fixed.yaml"),
