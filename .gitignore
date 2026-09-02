@@ -40,6 +40,7 @@ node_modules/
 tests/artifacts*/
 tests/*_REPORT.md
 tests/*_FIX_SUGGESTIONS.md
+tests/.fixture-resources.json
 
 # Local example runners and credentials, never commit
 tests/examples/

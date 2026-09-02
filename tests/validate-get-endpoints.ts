@@ -28,7 +28,7 @@ import { spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import yaml from "js-yaml";
+import { load as loadYaml } from "js-yaml";
 import { invokeJavaSDK, type JavaSDKResult } from "./java-harness.js";
 
 const require = createRequire(import.meta.url);
@@ -265,7 +265,7 @@ function resolveSpecPath(): string {
 
 function loadOpenAPISpec(): any {
   const specPath = resolveSpecPath();
-  return yaml.load(readFileSync(specPath, "utf-8"));
+  return loadYaml(readFileSync(specPath, "utf-8"));
 }
 
 function extractGetEndpoints(spec: any): EndpointInfo[] {

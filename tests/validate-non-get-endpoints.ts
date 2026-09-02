@@ -34,7 +34,7 @@ import { spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import yaml from "js-yaml";
+import { load as loadYaml } from "js-yaml";
 
 const require = createRequire(import.meta.url);
 const openapiResponseValidatorMod = require("openapi-response-validator");
@@ -208,7 +208,7 @@ function resolveSpecPath(): string {
 }
 
 function loadOpenAPISpec(): any {
-  return yaml.load(readFileSync(resolveSpecPath(), "utf-8"));
+  return loadYaml(readFileSync(resolveSpecPath(), "utf-8"));
 }
 
 function extractNonGetEndpoints(spec: any): Map<string, EndpointInfo> {
