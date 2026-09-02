@@ -191,12 +191,11 @@ public class GetMediaDetailResponse {
     private JsonNullable<Boolean> subtitleAvailable;
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private String duration;
+    private Double duration;
 
     /**
      * Frame rate quantifies the speed at which frames are displayed per second. It represents the range of
@@ -261,7 +260,7 @@ public class GetMediaDetailResponse {
             @JsonProperty("moderation") @Nullable AiResponseRecord moderation,
             @JsonProperty("isAudioOnly") @Nullable JsonNullable<Boolean> isAudioOnly,
             @JsonProperty("subtitleAvailable") @Nullable JsonNullable<Boolean> subtitleAvailable,
-            @JsonProperty("duration") @Nullable String duration,
+            @JsonProperty("duration") @Nullable Double duration,
             @JsonProperty("frameRate") @Nullable String frameRate,
             @JsonProperty("aspectRatio") @Nullable JsonNullable<String> aspectRatio,
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
@@ -495,10 +494,9 @@ public class GetMediaDetailResponse {
     }
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
-    public Optional<String> duration() {
+    public Optional<Double> duration() {
         return Optional.ofNullable(this.duration);
     }
 
@@ -764,10 +762,9 @@ public class GetMediaDetailResponse {
 
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
-    public GetMediaDetailResponse withDuration(@Nullable String duration) {
+    public GetMediaDetailResponse withDuration(@Nullable Double duration) {
         this.duration = duration;
         return this;
     }
@@ -960,7 +957,7 @@ public class GetMediaDetailResponse {
 
         private JsonNullable<Boolean> subtitleAvailable;
 
-        private String duration;
+        private Double duration;
 
         private String frameRate;
 
@@ -1172,10 +1169,9 @@ public class GetMediaDetailResponse {
         }
 
         /**
-         * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-         * media.
+         * Duration of the media in seconds.
          */
-        public Builder duration(@Nullable String duration) {
+        public Builder duration(@Nullable Double duration) {
             this.duration = duration;
             return this;
         }

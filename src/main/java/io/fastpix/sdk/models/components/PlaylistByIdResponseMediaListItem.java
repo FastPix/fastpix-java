@@ -27,11 +27,11 @@ public class PlaylistByIdResponseMediaListItem {
     private JsonNullable<String> creatorId;
 
     /**
-     * Duration of the media in hh:mm:ss format.
+     * Duration of the media in seconds.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private String duration;
+    private Double duration;
 
     /**
      * unique id of the particular media.
@@ -72,7 +72,7 @@ public class PlaylistByIdResponseMediaListItem {
     public PlaylistByIdResponseMediaListItem(
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
             @JsonProperty("creatorId") @Nullable JsonNullable<String> creatorId,
-            @JsonProperty("duration") @Nullable String duration,
+            @JsonProperty("duration") @Nullable Double duration,
             @JsonProperty("id") @Nullable String id,
             @JsonProperty("sourceResolution") @Nullable String sourceResolution,
             @JsonProperty("status") @Nullable String status,
@@ -111,9 +111,9 @@ public class PlaylistByIdResponseMediaListItem {
     }
 
     /**
-     * Duration of the media in hh:mm:ss format.
+     * Duration of the media in seconds.
      */
-    public Optional<String> duration() {
+    public Optional<Double> duration() {
         return Optional.ofNullable(this.duration);
     }
 
@@ -176,9 +176,9 @@ public class PlaylistByIdResponseMediaListItem {
 
 
     /**
-     * Duration of the media in hh:mm:ss format.
+     * Duration of the media in seconds.
      */
-    public PlaylistByIdResponseMediaListItem withDuration(@Nullable String duration) {
+    public PlaylistByIdResponseMediaListItem withDuration(@Nullable Double duration) {
         this.duration = duration;
         return this;
     }
@@ -277,7 +277,7 @@ public class PlaylistByIdResponseMediaListItem {
 
         private JsonNullable<String> creatorId;
 
-        private String duration;
+        private Double duration;
 
         private String id;
 
@@ -310,9 +310,9 @@ public class PlaylistByIdResponseMediaListItem {
         }
 
         /**
-         * Duration of the media in hh:mm:ss format.
+         * Duration of the media in seconds.
          */
-        public Builder duration(@Nullable String duration) {
+        public Builder duration(@Nullable Double duration) {
             this.duration = duration;
             return this;
         }

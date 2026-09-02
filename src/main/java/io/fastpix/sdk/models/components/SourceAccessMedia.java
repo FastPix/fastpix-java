@@ -165,12 +165,11 @@ public class SourceAccessMedia {
     private JsonNullable<Boolean> subtitleAvailable;
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private String duration;
+    private Double duration;
 
     /**
      * The aspect ratio of a video describes its shape based on the relationship between its width and
@@ -230,7 +229,7 @@ public class SourceAccessMedia {
             @JsonProperty("moderation") @Nullable AiResponseRecord moderation,
             @JsonProperty("isAudioOnly") @Nullable JsonNullable<Boolean> isAudioOnly,
             @JsonProperty("subtitleAvailable") @Nullable JsonNullable<Boolean> subtitleAvailable,
-            @JsonProperty("duration") @Nullable String duration,
+            @JsonProperty("duration") @Nullable Double duration,
             @JsonProperty("aspectRatio") @Nullable JsonNullable<String> aspectRatio,
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
             @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt,
@@ -434,10 +433,9 @@ public class SourceAccessMedia {
     }
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
-    public Optional<String> duration() {
+    public Optional<Double> duration() {
         return Optional.ofNullable(this.duration);
     }
 
@@ -670,10 +668,9 @@ public class SourceAccessMedia {
 
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
-    public SourceAccessMedia withDuration(@Nullable String duration) {
+    public SourceAccessMedia withDuration(@Nullable Double duration) {
         this.duration = duration;
         return this;
     }
@@ -850,7 +847,7 @@ public class SourceAccessMedia {
 
         private JsonNullable<Boolean> subtitleAvailable;
 
-        private String duration;
+        private Double duration;
 
         private JsonNullable<String> aspectRatio;
 
@@ -1034,10 +1031,9 @@ public class SourceAccessMedia {
         }
 
         /**
-         * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-         * media.
+         * Duration of the media in seconds.
          */
-        public Builder duration(@Nullable String duration) {
+        public Builder duration(@Nullable Double duration) {
             this.duration = duration;
             return this;
         }
