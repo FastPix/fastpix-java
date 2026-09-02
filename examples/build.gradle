@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.fastpix'
-version = '1.0.5'
+version = '1.1.0'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -18,7 +18,7 @@ repositories {
 dependencies {
     // jackson-databind arrives transitively at compile scope from the SDK,
     // which exposes ObjectMapper and JsonNode in its public API.
-    implementation 'io.fastpix:sdk:1.0.5'
+    implementation 'io.fastpix:sdk:1.1.0'
     runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'

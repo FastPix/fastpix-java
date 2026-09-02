@@ -4,6 +4,38 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.1.0]
+
+### Breaking
+
+- Media `duration` is now a `Double` (seconds) instead of an `"HH:MM:SS"` string,
+  matching the updated API. Affects `manageVideos().get`, `manageVideos().list`,
+  `videos().updateMedia`, `manageVideos().updateSourceAccess`,
+  `videos().updateMp4Support`, `videos().listLiveClips`, `videos().getMediaClips`,
+  and every playlist operation that returns `mediaList`. Code reading `duration()` as
+  `Optional<String>` no longer compiles.
+
+### Added
+
+- `enableRecording` on live stream creation (`InputMediaSettings`, the API
+  defaults it to true).
+- `accessRestrictions` (domain and user-agent allow/deny policies) on live
+  playback ID create/get responses, `PlaybackIdRequest`, `PlaybackSettings`,
+  and the `playbackIds` items of live stream responses.
+- `livePlayback().updateDomainRestrictions` for
+  `PATCH /live/streams/{streamId}/playback-ids/{playbackId}/domains`.
+- `livePlayback().updateUserAgentRestrictions` for
+  `PATCH /live/streams/{streamId}/playback-ids/{playbackId}/user-agents`.
+- Async variants of both on `livePlayback().async()`.
+- Offline model contract tests and mocked endpoint tests under `src/test`.
+
+### Fixed
+
+- Async operation paths were audited for missing error propagation and
+  mismatched response types; none were found.
+
+---
+
 ## [1.0.5]
 
 ### Changed
