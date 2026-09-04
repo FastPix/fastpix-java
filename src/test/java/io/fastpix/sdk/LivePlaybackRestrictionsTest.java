@@ -20,11 +20,13 @@ import com.sun.net.httpserver.HttpServer;
 
 import io.fastpix.sdk.models.components.Security;
 import io.fastpix.sdk.models.errors.APIException;
+import io.fastpix.sdk.models.errors.AsyncAPIException;
 import io.fastpix.sdk.models.errors.FastpixException;
 import io.fastpix.sdk.models.operations.UpdateLiveStreamDomainRestrictionsRequestBody;
 import io.fastpix.sdk.models.operations.UpdateLiveStreamDomainRestrictionsResponse;
 import io.fastpix.sdk.models.operations.UpdateLiveStreamUserAgentRestrictionsRequestBody;
 import io.fastpix.sdk.utils.JSON;
+import io.fastpix.sdk.utils.RetryConfig;
 
 /** Drives the live playback restriction operations against a local HTTP server and checks the wire request. */
 class LivePlaybackRestrictionsTest {
@@ -58,6 +60,7 @@ class LivePlaybackRestrictionsTest {
         sdk = FastPixSDK.builder()
                 .serverURL("http://localhost:" + server.getAddress().getPort() + "/v1/")
                 .security(Security.builder().username("user").password("pass").build())
+                .retryConfig(RetryConfig.noRetries())
                 .build();
     }
 
@@ -102,5 +105,14 @@ class LivePlaybackRestrictionsTest {
         ExecutionException async = assertThrows(ExecutionException.class, () -> sdk.livePlayback().async()
                 .updateUserAgentRestrictions("s1", "p1", UpdateLiveStreamUserAgentRestrictionsRequestBody.builder().build()).get());
         assertTrue(async.getCause() instanceof FastpixException);
+    }
+
+    @Test
+    void asyncServerErrorFailsTheFuture() {
+        status = 500;
+        ExecutionException async = assertThrows(ExecutionException.class, () -> sdk.livePlayback().async()
+                .updateDomainRestrictions("s1", "p1", UpdateLiveStreamDomainRestrictionsRequestBody.builder().build()).get());
+        assertTrue(async.getCause() instanceof AsyncAPIException);
+        assertEquals(500, ((AsyncAPIException) async.getCause()).code());
     }
 }

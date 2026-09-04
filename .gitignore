@@ -52,4 +52,5 @@ tests/.env
 
 # Local working files (not part of the published SDK)
 /CLAUDE.md
-/*.yaml
+/openapi.yaml
+/spec_sync_check.*
