@@ -40,15 +40,17 @@ node_modules/
 tests/artifacts*/
 tests/*_REPORT.md
 tests/*_FIX_SUGGESTIONS.md
+tests/.fixture-resources.json
 
-# Local example runners — contain real credentials, never commit
+# Local example runners and credentials, never commit
 tests/examples/
+tests/.env
 
 # Local example helper script + its machine-specific classpath cache
 /run-example.sh
 /.example-classpath
 
 # Local working files (not part of the published SDK)
-/fixed 7.yaml
 /CLAUDE.md
-/fastpix-openai.yaml
+/openapi.yaml
+/spec_sync_check.*

@@ -23,7 +23,10 @@ import io.fastpix.sdk.models.components.CreateLiveStreamRequest;
 import io.fastpix.sdk.models.components.PlaybackSettings;
 import io.fastpix.sdk.models.components.InputMediaSettings;
 import io.fastpix.sdk.models.components.PatchLiveStreamRequest;
+import io.fastpix.sdk.models.components.PlaybackIdAccessRestrictions;
+import io.fastpix.sdk.models.components.PlaybackIdDomains;
 import io.fastpix.sdk.models.components.PlaybackIdRequest;
+import io.fastpix.sdk.models.components.PolicyAction;
 import io.fastpix.sdk.models.components.SimulcastRequest;
 import io.fastpix.sdk.models.components.SimulcastUpdateRequest;
 import io.fastpix.sdk.models.components.UpdateTrackRequest;
@@ -48,6 +51,8 @@ import io.fastpix.sdk.models.operations.UpdateMediaSummaryRequestBody;
 import io.fastpix.sdk.models.operations.UpdateMediaModerationRequestBody;
 import io.fastpix.sdk.models.operations.UpdateMediaNamedEntitiesRequestBody;
 import io.fastpix.sdk.models.operations.UpdateDomainRestrictionsRequestBody;
+import io.fastpix.sdk.models.operations.UpdateLiveStreamDomainRestrictionsRequestBody;
+import io.fastpix.sdk.models.operations.UpdateLiveStreamUserAgentRestrictionsRequestBody;
 import io.fastpix.sdk.models.operations.UpdateUserAgentRestrictionsRequestBody;
 
 import io.fastpix.sdk.models.operations.ListVideoViewsRequest;
@@ -209,7 +214,8 @@ final class Dispatch {
                 return sdk.streams().create(CreateLiveStreamRequest.builder()
                         .playbackSettings(PlaybackSettings.builder().build())
                         .inputMediaSettings(InputMediaSettings.builder()
-                                .metadata(Map.of("name", "sdk-validate")).build())
+                                .metadata(Map.of("name", "sdk-validate"))
+                                .enableRecording(true).build())
                         .build());
             case "create-media-playback-id":
                 return sdk.playback().createId(str(req, "mediaId"),
@@ -225,7 +231,13 @@ final class Dispatch {
                 return sdk.manageVideos().generateSubtitles(str(req, "mediaId"), str(req, "trackId"),
                         TrackSubtitlesGenerateRequest.builder().build());
             case "create-playbackId-of-stream":
-                return sdk.livePlayback().createPlaybackId(str(req, "streamId"), PlaybackIdRequest.builder().build());
+                return sdk.livePlayback().createPlaybackId(str(req, "streamId"), PlaybackIdRequest.builder()
+                        .accessRestrictions(PlaybackIdAccessRestrictions.builder()
+                                .domains(PlaybackIdDomains.builder()
+                                        .defaultPolicy(PolicyAction.DENY)
+                                        .allow(List.of("example.com")).build())
+                                .build())
+                        .build());
             case "create-simulcast-of-stream":
                 return sdk.simulcastStream().create(str(req, "streamId"), SimulcastRequest.builder()
                         .url("rtmp://example.com/live")
@@ -269,6 +281,12 @@ final class Dispatch {
             case "update-user-agent-restrictions":
                 return sdk.playback().updateUserAgentRestrictions(str(req, "mediaId"), str(req, "playbackId"),
                         UpdateUserAgentRestrictionsRequestBody.builder().allow(List.of("Mozilla")).build());
+            case "update-live-stream-domain-restrictions":
+                return sdk.livePlayback().updateDomainRestrictions(str(req, "streamId"), str(req, "playbackId"),
+                        UpdateLiveStreamDomainRestrictionsRequestBody.builder().allow(List.of("example.com")).build());
+            case "update-live-stream-user-agent-restrictions":
+                return sdk.livePlayback().updateUserAgentRestrictions(str(req, "streamId"), str(req, "playbackId"),
+                        UpdateLiveStreamUserAgentRestrictionsRequestBody.builder().allow(List.of("Mozilla")).build());
             case "update-a-playlist":
                 return sdk.playlists().update(str(req, "playlistId"), UpdatePlaylistRequest.builder()
                         .name("SDK Validate Updated").description("updated by validator").build());

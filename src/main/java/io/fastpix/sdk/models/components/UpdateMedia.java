@@ -165,12 +165,11 @@ public class UpdateMedia {
     private Boolean subtitleAvailable;
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private String duration;
+    private Double duration;
 
     /**
      * The aspect ratio of a video is a value that describes the relative shape of a video based on its
@@ -230,7 +229,7 @@ public class UpdateMedia {
             @JsonProperty("moderation") @Nullable AiResponseRecord moderation,
             @JsonProperty("isAudioOnly") @Nullable JsonNullable<Boolean> isAudioOnly,
             @JsonProperty("subtitleAvailable") @Nullable Boolean subtitleAvailable,
-            @JsonProperty("duration") @Nullable String duration,
+            @JsonProperty("duration") @Nullable Double duration,
             @JsonProperty("aspectRatio") @Nullable String aspectRatio,
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
             @JsonProperty("updatedAt") @Nullable OffsetDateTime updatedAt,
@@ -431,10 +430,9 @@ public class UpdateMedia {
     }
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
-    public Optional<String> duration() {
+    public Optional<Double> duration() {
         return Optional.ofNullable(this.duration);
     }
 
@@ -667,10 +665,9 @@ public class UpdateMedia {
 
 
     /**
-     * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-     * media.
+     * Duration of the media in seconds.
      */
-    public UpdateMedia withDuration(@Nullable String duration) {
+    public UpdateMedia withDuration(@Nullable Double duration) {
         this.duration = duration;
         return this;
     }
@@ -847,7 +844,7 @@ public class UpdateMedia {
 
         private Boolean subtitleAvailable;
 
-        private String duration;
+        private Double duration;
 
         private String aspectRatio;
 
@@ -1031,10 +1028,9 @@ public class UpdateMedia {
         }
 
         /**
-         * The length of the media in seconds, with a maximum allowed duration of 12 hours per individual
-         * media.
+         * Duration of the media in seconds.
          */
-        public Builder duration(@Nullable String duration) {
+        public Builder duration(@Nullable Double duration) {
             this.duration = duration;
             return this;
         }

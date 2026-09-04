@@ -846,53 +846,46 @@ public final class Utils {
         T apply(S value) throws Exception;
     }
     
-    // The anonymous Iterable wraps a stateful anonymous Iterator whose pending-value field is null
-    // before the first load, so the lambda-conversion and Optional-null findings are suppressed to
-    // keep this lazy iteration behavior unchanged.
-    @SuppressWarnings({"java:S1604", "java:S2789"})
+    // The stateful Iterator's pending-value field is null before the first load, so the
+    // Optional-null finding is suppressed to keep this lazy iteration behavior unchanged.
+    @SuppressWarnings("java:S2789")
     private static <T> Iterable<T> iterable(Callable<Optional<T>> first, Function<T, Optional<T>> next) {
-        return new Iterable<T>() {
+        return () -> new Iterator<T>() {
+
+            private boolean pending = true;
+
+            private Optional<T> nxt;
 
             @Override
-            public Iterator<T> iterator() {
-                return new Iterator<T>() {
+            public boolean hasNext() {
+                load();
+                return nxt.isPresent();
+            }
 
-                    private boolean pending = true;
+            @Override
+            public T next() {
+                load();
+                if (!nxt.isPresent()) {
+                    throw new NoSuchElementException();
+                } else {
+                    pending = true;
+                    return nxt.get();
+                }
+            }
 
-                    private Optional<T> nxt;
-
-                    @Override
-                    public boolean hasNext() {
-                        load();
-                        return nxt.isPresent();
+            private void load() {
+                try {
+                    if (pending) {
+                        if (nxt == null) {
+                            nxt = first.call();
+                        } else if (nxt.isPresent()) {
+                            nxt = next.apply(nxt.get());
+                        } 
+                        pending = false;
                     }
-
-                    @Override
-                    public T next() {
-                        load();
-                        if (!nxt.isPresent()) {
-                            throw new NoSuchElementException();
-                        } else {
-                            pending = true;
-                            return nxt.get();
-                        }
-                    }
-
-                    private void load() {
-                        try {
-                            if (pending) {
-                                if (nxt == null) {
-                                    nxt = first.call();
-                                } else if (nxt.isPresent()) {
-                                    nxt = next.apply(nxt.get());
-                                } 
-                                pending = false;
-                            }
-                        } catch (Exception e) {
-                            Exceptions.rethrow(e);
-                        }
-                    }
-                };
+                } catch (Exception e) {
+                    Exceptions.rethrow(e);
+                }
             }
         };
     }
@@ -1274,17 +1267,17 @@ public final class Utils {
     // ordering behavior cohesive; the cognitive-complexity finding is suppressed.
     @SuppressWarnings("java:S3776")
     private static String sortMapString(String input, String regex, String delim) {
+        Pattern delimPattern = Pattern.compile(Pattern.quote(delim));
         return Pattern.compile(regex).matcher(input).replaceAll(m -> {
-            String escapedDelim = Pattern.quote(delim);
             String result = m.group();
             for (int i = 1; i <= m.groupCount(); i++) {
                 final String match = m.group(i);
                 String[] pairs;
                 if (match.contains("=")) {
-                    pairs = match.split(escapedDelim);
+                    pairs = delimPattern.split(match);
                     sortByDelimitedKey(pairs, "=");
                 } else {
-                    String[] values = match.split(escapedDelim);
+                    String[] values = delimPattern.split(match);
                     if (values.length == 1) {
                         pairs = values;
                     } else {

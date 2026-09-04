@@ -65,7 +65,7 @@ Add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.fastpix:sdk:1.0.5'
+    implementation 'io.fastpix:sdk:1.1.0'
 }
 ```
 
@@ -77,7 +77,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.fastpix</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.0.5</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -369,6 +369,8 @@ For detailed documentation, see [FastPix Live Stream Overview](https://fastpix.c
 - [Create Playback ID](docs/sdks/liveplayback/README.md#createplaybackid) - Generate secure live playback access
 - [Delete Playback ID](docs/sdks/liveplayback/README.md#deleteplaybackid) - Revoke live playback access
 - [Get Playback ID](docs/sdks/liveplaybacks/README.md#getplaybackiddetails) - Retrieve live playback configuration
+- [Update Domain Restrictions](docs/sdks/liveplayback/README.md#updatedomainrestrictions) - Allow or deny playback by domain
+- [Update User-Agent Restrictions](docs/sdks/liveplayback/README.md#updateuseragentrestrictions) - Allow or deny playback by user agent
 
 #### Simulcast Stream
 - [Create Simulcast](docs/sdks/simulcaststream/README.md#create) - Set up multi-platform streaming

@@ -1,0 +1,174 @@
+package io.fastpix.sdk.models.operations;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Nullable;
+import java.util.List;
+import java.util.Optional;
+import io.fastpix.sdk.utils.Utils;
+
+
+public class UpdateLiveStreamDomainRestrictionsData {
+    /**
+     * Specify the fallback behavior for domains that are not listed in the allow or deny lists.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("defaultPolicy")
+    private String defaultPolicy;
+
+    /**
+     * List of domains explicitly allowed to play the media.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("allow")
+    private List<String> allow;
+
+    /**
+     * List of domains explicitly denied from accessing the media.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("deny")
+    private List<String> deny;
+
+    @JsonCreator
+    public UpdateLiveStreamDomainRestrictionsData(
+            @JsonProperty("defaultPolicy") @Nullable String defaultPolicy,
+            @JsonProperty("allow") @Nullable List<String> allow,
+            @JsonProperty("deny") @Nullable List<String> deny) {
+        this.defaultPolicy = defaultPolicy;
+        this.allow = allow;
+        this.deny = deny;
+    }
+    
+    public UpdateLiveStreamDomainRestrictionsData() {
+        this(null, null, null);
+    }
+
+    /**
+     * Specify the fallback behavior for domains that are not listed in the allow or deny lists.
+     */
+    public Optional<String> defaultPolicy() {
+        return Optional.ofNullable(this.defaultPolicy);
+    }
+
+    /**
+     * List of domains explicitly allowed to play the media.
+     */
+    public Optional<List<String>> allow() {
+        return Optional.ofNullable(this.allow);
+    }
+
+    /**
+     * List of domains explicitly denied from accessing the media.
+     */
+    public Optional<List<String>> deny() {
+        return Optional.ofNullable(this.deny);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
+    /**
+     * Specify the fallback behavior for domains that are not listed in the allow or deny lists.
+     */
+    public UpdateLiveStreamDomainRestrictionsData withDefaultPolicy(@Nullable String defaultPolicy) {
+        this.defaultPolicy = defaultPolicy;
+        return this;
+    }
+
+
+    /**
+     * List of domains explicitly allowed to play the media.
+     */
+    public UpdateLiveStreamDomainRestrictionsData withAllow(@Nullable List<String> allow) {
+        this.allow = allow;
+        return this;
+    }
+
+
+    /**
+     * List of domains explicitly denied from accessing the media.
+     */
+    public UpdateLiveStreamDomainRestrictionsData withDeny(@Nullable List<String> deny) {
+        this.deny = deny;
+        return this;
+    }
+
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UpdateLiveStreamDomainRestrictionsData other = (UpdateLiveStreamDomainRestrictionsData) o;
+        return 
+            Utils.enhancedDeepEquals(this.defaultPolicy, other.defaultPolicy) &&
+            Utils.enhancedDeepEquals(this.allow, other.allow) &&
+            Utils.enhancedDeepEquals(this.deny, other.deny);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Utils.enhancedHash(
+            defaultPolicy, allow, deny);
+    }
+    
+    @Override
+    public String toString() {
+        return Utils.toString(UpdateLiveStreamDomainRestrictionsData.class,
+                "defaultPolicy", defaultPolicy,
+                "allow", allow,
+                "deny", deny);
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public static final class Builder {
+
+        private String defaultPolicy;
+
+        private List<String> allow;
+
+        private List<String> deny;
+
+        private Builder() {
+          // force use of static builder() method
+        }
+
+        /**
+         * Specify the fallback behavior for domains that are not listed in the allow or deny lists.
+         */
+        public Builder defaultPolicy(@Nullable String defaultPolicy) {
+            this.defaultPolicy = defaultPolicy;
+            return this;
+        }
+
+        /**
+         * List of domains explicitly allowed to play the media.
+         */
+        public Builder allow(@Nullable List<String> allow) {
+            this.allow = allow;
+            return this;
+        }
+
+        /**
+         * List of domains explicitly denied from accessing the media.
+         */
+        public Builder deny(@Nullable List<String> deny) {
+            this.deny = deny;
+            return this;
+        }
+
+        public UpdateLiveStreamDomainRestrictionsData build() {
+            return new UpdateLiveStreamDomainRestrictionsData(
+                defaultPolicy, allow, deny);
+        }
+
+    }
+}
