@@ -12,6 +12,18 @@ The FastPix Java SDK is a type-safe Java client for the FastPix video API. From 
 
 📖 **Docs:** https://fastpix.com/docs/language-sdks/java-sdk &nbsp;·&nbsp; 🚀 **Free account:** https://dashboard.fastpix.com
 
+## Jump to
+
+Skip straight to a section without scrolling:
+
+| Get started | Reference | Advanced & more |
+|---|---|---|
+| [Start here](#start-here) | [Available resources & operations](#available-resources-and-operations) | [Async support](#asynchronous-support) |
+| [Before you begin](#before-you-begin) | [Error handling](#error-handling) | [Retries](#retries) |
+| [Add the SDK](#add-the-sdk-to-your-project) | [Server selection](#server-selection) | [Custom HTTP client](#custom-http-client) |
+| [Create your first media](#create-your-first-media) | [FAQ](#faq) | [Debugging](#debugging) |
+| [Media workflow](#understand-the-media-workflow) | [Which SDK?](#which-fastpix-sdk-should-i-use) | [Examples](https://github.com/FastPix/fastpix-java/tree/main/examples) |
+
 <br />
 
 ## Start here
