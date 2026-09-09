@@ -283,11 +283,15 @@ public class Application {
 
         resFut.thenAccept(res -> {
             if (res.createMediaSuccessResponse().isPresent()) {
-                var mapper = JSON.getMapper();
-                mapper.enable(SerializationFeature.INDENT_OUTPUT);
-                System.out.println(mapper.writeValueAsString(res.createMediaSuccessResponse().get()));
+                try {
+                    var mapper = JSON.getMapper();
+                    mapper.enable(SerializationFeature.INDENT_OUTPUT);
+                    System.out.println(mapper.writeValueAsString(res.createMediaSuccessResponse().get()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        });
+        }).join();
     }
 }
 ```
@@ -643,10 +647,10 @@ public class Application {
             // Base exception fields
             var rawResponse = ex.rawResponse();
             var headers = ex.headers();
-            var contentType = headers.getOrDefault("Content-Type", List.of()).stream().findFirst();
+            var contentType = headers.get("Content-Type").stream().findFirst();
             int statusCode = ex.code();
             Optional<byte[]> responseBody = ex.body();
-            String bodyAsString = ex.bodyAsString();
+            Optional<String> bodyAsString = ex.bodyAsString();
         } catch (UncheckedIOException ex) {
             // handle IO error (connection, timeout, etc)
         }

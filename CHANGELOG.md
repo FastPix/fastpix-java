@@ -34,6 +34,15 @@ All notable changes to this project will be documented in this file.
 - Async operation paths were audited for missing error propagation and
   mismatched response types; none were found.
 
+### Docs
+
+- Fixed README and per-service usage snippets that did not compile as written:
+  added the missing `SerializationFeature` (and `JSON`) imports, changed the
+  error-handling snippet to use `Headers.get(...)` and an `Optional<String>`
+  body, and made the async snippet handle the checked serialization exception.
+- Examples now read an optional `FASTPIX_BASE_URL` to override the API base URL,
+  defaulting to the server when it is unset.
+
 ---
 
 ## [1.0.5]
@@ -85,13 +94,13 @@ This release regenerates the SDK models against the latest FastPix API
 specification. The following changes are **source-incompatible** — code
 written against `1.0.3` may need edits before it compiles:
 
-| Change | Action required |
-|---|---|
-| `mp4Support` is now a list of rendition objects instead of a single enum value | Read the renditions you need from the list (see below) |
-| `GetMediaResponse` and its nested types renamed to `GetMediaDetailResponse*` | Update imports and any explicit type declarations |
-| `UpdateTrackRequest.url` removed | Remove `.url(...)` builder calls; a track's file can no longer be changed after creation |
-| `UpdateMediaMaxResolution` no longer accepts `360p` | Use `480p` or higher when updating a media's max resolution |
-| `VideoTrack.width()` / `.height()` return `Optional<Long>` instead of `Optional<Double>` | Change the receiving variable's type |
+| Change                                                                                   | Action required                                                                          |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `mp4Support` is now a list of rendition objects instead of a single enum value           | Read the renditions you need from the list (see below)                                   |
+| `GetMediaResponse` and its nested types renamed to `GetMediaDetailResponse*`             | Update imports and any explicit type declarations                                        |
+| `UpdateTrackRequest.url` removed                                                         | Remove `.url(...)` builder calls; a track's file can no longer be changed after creation |
+| `UpdateMediaMaxResolution` no longer accepts `360p`                                      | Use `480p` or higher when updating a media's max resolution                              |
+| `VideoTrack.width()` / `.height()` return `Optional<Long>` instead of `Optional<Double>` | Change the receiving variable's type                                                     |
 
 ### Changed
 
@@ -195,12 +204,12 @@ written against `1.0.3` may need edits before it compiles:
 
 FastPix hosts and documentation links are moving to the `.com` TLD. This release updates every reference the SDK ships:
 
-| Old (`.io`) | New (`.com`) |
-|---|---|
-| `api.fastpix.io` | `api.fastpix.com` |
-| `stream.fastpix.io` | `stream.fastpix.com` |
-| `images.fastpix.io` | `images.fastpix.com` |
-| `static.fastpix.io` | `static.fastpix.com` |
+| Old (`.io`)           | New (`.com`)           |
+| --------------------- | ---------------------- |
+| `api.fastpix.io`      | `api.fastpix.com`      |
+| `stream.fastpix.io`   | `stream.fastpix.com`   |
+| `images.fastpix.io`   | `images.fastpix.com`   |
+| `static.fastpix.io`   | `static.fastpix.com`   |
 | `docs.fastpix.io/...` | `fastpix.com/docs/...` |
 
 The `.io` hosts continue to serve traffic during the transition, but **they are slated for deprecation soon** — please update any hard-coded references in your application. We recommend upgrading to this release (or later).
@@ -227,6 +236,7 @@ What this means for users of `io.fastpix:sdk`:
 ## [1.0.1]
 
 ### Added
+
 - `ViewEventMapper` utility class (`io.fastpix.sdk.utils`) that maps a `Views` response into a flat JSON structure matching the FastPix API response format: `{ "success": true, "data": { ...all 122 fields..., "events": [...] } }`.
 - `EventDeserializer` (inner class of `ViewEventMapper`) — a custom `JsonDeserializer<Event>` that correctly reads the API's abbreviated wire-format keys for player events (`"pt"` → `playerPlayheadTime`, `"e"` → `eventName`, `"vt"` → `viewerTime`, `"d"` → `eventDetails`), resolving silent null deserialization caused by the mismatch between the auto-generated `Event` model's snake_case `@JsonProperty` names and the API's actual wire format.
 - `expandDetails()` method to expand abbreviated `eventDetails` field keys (`"host"` → `hostName`, `"br"` → `bitrate`, `"h"` → `height`, `"cd"` → `codec`, `"w"` → `width`, `"txt"` → `text`, `"u"` → `url`, `"err"` → `error`, `"t"` → `type`) with correct integer/double type handling.
@@ -235,10 +245,12 @@ What this means for users of `io.fastpix:sdk`:
 - `VideoViewDetailsExample` in `test-example` — demonstrates calling `sdk.views().getDetails()` and printing the event-mapped response via `ViewEventMapper.map(v)`.
 
 ### Changed
+
 - `SDKHooks.initialize(Hooks)` now calls `ViewEventMapper.registerEventDeserializer()` during SDK construction (`FastPixSDK.builder().build()`), ensuring the custom `Event` deserializer is active before any API response is deserialized.
 - `test-example/build.gradle` updated: `mainClass` changed to `VideoViewDetailsExample`, SDK dependency bumped to `1.0.1`.
 
 ### Fixed
+
 - Player events (`events` array in `GetVideoViewDetails` response) were silently returning all-null fields due to a mismatch between the SDK `Event` model's `@JsonProperty` snake_case names and the API's abbreviated camelCase wire format. Fixed via a custom `EventDeserializer` registered at SDK initialization.
 - `fps` field in `variantChanged` event details serialized as `24.0` (double) instead of `24` (integer) due to Java's ternary-operator long→double promotion when assigning to `Object`. Fixed by using explicit `if/else` with `Long.valueOf()`.
 - Several numeric fields (`playbackScore`, `stabilityScore`, `renderQualityScore`, `averageBitrate`, `avgRequestLatency`, `bufferFrequency`, etc.) serialized with unnecessary `.0` suffix. Fixed by `numVal()` coercing whole-number doubles to `Long` before serialization.
@@ -248,12 +260,12 @@ What this means for users of `io.fastpix:sdk`:
 
 ---
 
-## [1.0.0] 
+## [1.0.0]
 
 **Major Version Release**
 
-
 ### Fixed
+
 - Fixed missing request parameters in Java API method signatures.
 - Improved Java type safety with accurate generic type parameters and Optional handling.
 - Improved Maven/Gradle publishing configuration with consistent artifact naming and POM metadata.
@@ -261,6 +273,7 @@ What this means for users of `io.fastpix:sdk`:
 ## [0.1.1]
 
 ### Added
+
 - Complete API coverage for Media, Live Streaming, Video Data, and Signing Keys
 - Java 11+ support with comprehensive type safety
 - Media upload, management, and processing capabilities
@@ -280,6 +293,7 @@ What this means for users of `io.fastpix:sdk`:
 - Full API specification compliance
 
 ### Changed
+
 - Reorganized package structure for better maintainability
 - Updated dependencies to modern Java libraries (Jackson, SLF4j, Reactive Streams)
 - Improved API design with better error handling
@@ -288,6 +302,7 @@ What this means for users of `io.fastpix:sdk`:
 - Updated minimum Java version requirement to 11+ for better compatibility and performance
 
 ### Fixed
+
 - Direct upload metadata handling
 - Response object access patterns
 - Type mismatches in method parameters
@@ -301,6 +316,7 @@ What this means for users of `io.fastpix:sdk`:
 ## [0.0.1]
 
 ### Added
+
 - Initial release of FastPix Java SDK
 - Synchronous client support with Java HTTP Client
 - Media API integration with upload, management, and processing

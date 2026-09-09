@@ -99,6 +99,7 @@ package hello.world;
 // Import required classes from the FastPix SDK
 import java.lang.Exception;
 import java.util.Map;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.PatchLiveStreamRequest;
 import io.fastpix.sdk.models.components.Security;

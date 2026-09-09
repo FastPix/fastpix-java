@@ -119,9 +119,11 @@ package hello.world;
 
 // Import required classes from the FastPix SDK
 import java.lang.Exception;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.Security;
 import io.fastpix.sdk.models.operations.ListPlaybackIdsResponse;
+import io.fastpix.sdk.utils.JSON;
 
 public class Application {
 
