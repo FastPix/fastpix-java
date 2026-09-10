@@ -472,7 +472,7 @@ public class OneOfDeserializer<T> extends StdDeserializer<T> {
                 matches = integerMatches;
             }
         } else if (allDateTime(matches)) {
-            matches = json.contains("T") ? filter(matches, OffsetDateTime.class) : filter(matches, LocalDate.class);
+            matches = filter(matches, json.contains("T") ? OffsetDateTime.class : LocalDate.class);
         }
 
         // Apply smart scoring using natural ordering if still multiple candidates

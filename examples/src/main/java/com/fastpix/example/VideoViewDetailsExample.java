@@ -24,6 +24,7 @@ public class VideoViewDetailsExample {
                     .username(System.getenv("FASTPIX_USERNAME"))
                     .password(System.getenv("FASTPIX_PASSWORD"))
                     .build())
+            .serverURL(System.getenv("FASTPIX_BASE_URL") != null ? System.getenv("FASTPIX_BASE_URL") : FastPixSDK.SERVERS[0])
             .build();
 
         // Replace with a real view id from your workspace (Dashboard > Views).

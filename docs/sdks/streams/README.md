@@ -42,6 +42,7 @@ package hello.world;
 // Import required classes from the FastPix SDK
 import java.lang.Exception;
 import java.util.Map;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.*;
 import io.fastpix.sdk.models.operations.CreateNewStreamResponse;
@@ -64,6 +65,7 @@ public class Application {
                 .inputMediaSettings(InputMediaSettings.builder()
                     .metadata(Map.ofEntries(
                         Map.entry("livestream_name", "fastpix_livestream")))
+                    .enableRecording(true)
                     .build())
                 .build();
 
@@ -84,7 +86,7 @@ public class Application {
 
 | Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `request`                                                                 | [CreateLiveStreamRequest](../../models/shared/CreateLiveStreamRequest.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
+| `request`                                                                 | [CreateLiveStreamRequest](../../models/components/CreateLiveStreamRequest.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
 
 ### Response
 

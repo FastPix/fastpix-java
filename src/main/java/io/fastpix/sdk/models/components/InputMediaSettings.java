@@ -54,13 +54,21 @@ public class InputMediaSettings {
     @JsonProperty("enableDvrMode")
     private Boolean enableDvrMode;
 
+    /**
+     * Controls whether the livestream is recorded to a VOD asset (Live-to-VOD). Defaults to true.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("enableRecording")
+    private Boolean enableRecording;
+
     @JsonCreator
     public InputMediaSettings(
             @JsonProperty("maxResolution") @Nullable CreateLiveStreamRequestMaxResolution maxResolution,
             @JsonProperty("reconnectWindow") @Nullable Long reconnectWindow,
             @JsonProperty("mediaPolicy") @Nullable BasicAccessPolicy mediaPolicy,
             @JsonProperty("metadata") @Nullable Map<String, String> metadata,
-            @JsonProperty("enableDvrMode") @Nullable Boolean enableDvrMode) {
+            @JsonProperty("enableDvrMode") @Nullable Boolean enableDvrMode,
+            @JsonProperty("enableRecording") @Nullable Boolean enableRecording) {
         this.maxResolution = Optional.ofNullable(maxResolution)
             .orElse(Builder._SINGLETON_VALUE_MaxResolution.value());
         this.reconnectWindow = Optional.ofNullable(reconnectWindow)
@@ -69,11 +77,12 @@ public class InputMediaSettings {
             .orElse(Builder._SINGLETON_VALUE_MediaPolicy.value());
         this.metadata = metadata;
         this.enableDvrMode = enableDvrMode;
+        this.enableRecording = enableRecording;
     }
     
     public InputMediaSettings() {
         this(null, null, null,
-            null, null);
+            null, null, null);
     }
 
     /**
@@ -111,6 +120,13 @@ public class InputMediaSettings {
      */
     public Optional<Boolean> enableDvrMode() {
         return Optional.ofNullable(this.enableDvrMode);
+    }
+
+    /**
+     * Controls whether the livestream is recorded to a VOD asset (Live-to-VOD). Defaults to true.
+     */
+    public Optional<Boolean> enableRecording() {
+        return Optional.ofNullable(this.enableRecording);
     }
 
     public static Builder builder() {
@@ -165,6 +181,14 @@ public class InputMediaSettings {
     }
 
 
+    /**
+     * Controls whether the livestream is recorded to a VOD asset (Live-to-VOD). Defaults to true.
+     */
+    public InputMediaSettings withEnableRecording(@Nullable Boolean enableRecording) {
+        this.enableRecording = enableRecording;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -179,14 +203,15 @@ public class InputMediaSettings {
             Utils.enhancedDeepEquals(this.reconnectWindow, other.reconnectWindow) &&
             Utils.enhancedDeepEquals(this.mediaPolicy, other.mediaPolicy) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.enableDvrMode, other.enableDvrMode);
+            Utils.enhancedDeepEquals(this.enableDvrMode, other.enableDvrMode) &&
+            Utils.enhancedDeepEquals(this.enableRecording, other.enableRecording);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             maxResolution, reconnectWindow, mediaPolicy,
-            metadata, enableDvrMode);
+            metadata, enableDvrMode, enableRecording);
     }
     
     @Override
@@ -196,7 +221,8 @@ public class InputMediaSettings {
                 "reconnectWindow", reconnectWindow,
                 "mediaPolicy", mediaPolicy,
                 "metadata", metadata,
-                "enableDvrMode", enableDvrMode);
+                "enableDvrMode", enableDvrMode,
+                "enableRecording", enableRecording);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -211,6 +237,8 @@ public class InputMediaSettings {
         private Map<String, String> metadata;
 
         private Boolean enableDvrMode;
+
+        private Boolean enableRecording;
 
         private Builder() {
           // force use of static builder() method
@@ -258,10 +286,18 @@ public class InputMediaSettings {
             return this;
         }
 
+        /**
+         * Controls whether the livestream is recorded to a VOD asset (Live-to-VOD). Defaults to true.
+         */
+        public Builder enableRecording(@Nullable Boolean enableRecording) {
+            this.enableRecording = enableRecording;
+            return this;
+        }
+
         public InputMediaSettings build() {
             return new InputMediaSettings(
                 maxResolution, reconnectWindow, mediaPolicy,
-                metadata, enableDvrMode);
+                metadata, enableDvrMode, enableRecording);
         }
 
 

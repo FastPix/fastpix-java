@@ -1,0 +1,174 @@
+package io.fastpix.sdk.models.operations;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Nullable;
+import java.util.List;
+import java.util.Optional;
+import io.fastpix.sdk.utils.Utils;
+
+
+public class UpdateLiveStreamUserAgentRestrictionsData {
+    /**
+     * Specifies the default behavior for user agents not listed in the allow or deny lists.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("defaultPolicy")
+    private String defaultPolicy;
+
+    /**
+     * List of user-agent substrings explicitly allowed.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("allow")
+    private List<String> allow;
+
+    /**
+     * List of user-agent substrings explicitly denied.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("deny")
+    private List<String> deny;
+
+    @JsonCreator
+    public UpdateLiveStreamUserAgentRestrictionsData(
+            @JsonProperty("defaultPolicy") @Nullable String defaultPolicy,
+            @JsonProperty("allow") @Nullable List<String> allow,
+            @JsonProperty("deny") @Nullable List<String> deny) {
+        this.defaultPolicy = defaultPolicy;
+        this.allow = allow;
+        this.deny = deny;
+    }
+    
+    public UpdateLiveStreamUserAgentRestrictionsData() {
+        this(null, null, null);
+    }
+
+    /**
+     * Specifies the default behavior for user agents not listed in the allow or deny lists.
+     */
+    public Optional<String> defaultPolicy() {
+        return Optional.ofNullable(this.defaultPolicy);
+    }
+
+    /**
+     * List of user-agent substrings explicitly allowed.
+     */
+    public Optional<List<String>> allow() {
+        return Optional.ofNullable(this.allow);
+    }
+
+    /**
+     * List of user-agent substrings explicitly denied.
+     */
+    public Optional<List<String>> deny() {
+        return Optional.ofNullable(this.deny);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
+    /**
+     * Specifies the default behavior for user agents not listed in the allow or deny lists.
+     */
+    public UpdateLiveStreamUserAgentRestrictionsData withDefaultPolicy(@Nullable String defaultPolicy) {
+        this.defaultPolicy = defaultPolicy;
+        return this;
+    }
+
+
+    /**
+     * List of user-agent substrings explicitly allowed.
+     */
+    public UpdateLiveStreamUserAgentRestrictionsData withAllow(@Nullable List<String> allow) {
+        this.allow = allow;
+        return this;
+    }
+
+
+    /**
+     * List of user-agent substrings explicitly denied.
+     */
+    public UpdateLiveStreamUserAgentRestrictionsData withDeny(@Nullable List<String> deny) {
+        this.deny = deny;
+        return this;
+    }
+
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UpdateLiveStreamUserAgentRestrictionsData other = (UpdateLiveStreamUserAgentRestrictionsData) o;
+        return 
+            Utils.enhancedDeepEquals(this.defaultPolicy, other.defaultPolicy) &&
+            Utils.enhancedDeepEquals(this.allow, other.allow) &&
+            Utils.enhancedDeepEquals(this.deny, other.deny);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Utils.enhancedHash(
+            defaultPolicy, allow, deny);
+    }
+    
+    @Override
+    public String toString() {
+        return Utils.toString(UpdateLiveStreamUserAgentRestrictionsData.class,
+                "defaultPolicy", defaultPolicy,
+                "allow", allow,
+                "deny", deny);
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public static final class Builder {
+
+        private String defaultPolicy;
+
+        private List<String> allow;
+
+        private List<String> deny;
+
+        private Builder() {
+          // force use of static builder() method
+        }
+
+        /**
+         * Specifies the default behavior for user agents not listed in the allow or deny lists.
+         */
+        public Builder defaultPolicy(@Nullable String defaultPolicy) {
+            this.defaultPolicy = defaultPolicy;
+            return this;
+        }
+
+        /**
+         * List of user-agent substrings explicitly allowed.
+         */
+        public Builder allow(@Nullable List<String> allow) {
+            this.allow = allow;
+            return this;
+        }
+
+        /**
+         * List of user-agent substrings explicitly denied.
+         */
+        public Builder deny(@Nullable List<String> deny) {
+            this.deny = deny;
+            return this;
+        }
+
+        public UpdateLiveStreamUserAgentRestrictionsData build() {
+            return new UpdateLiveStreamUserAgentRestrictionsData(
+                defaultPolicy, allow, deny);
+        }
+
+    }
+}

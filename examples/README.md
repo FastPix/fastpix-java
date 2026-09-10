@@ -19,6 +19,10 @@ export FASTPIX_PASSWORD="your-secret-key"
 You can also copy [`.env.example`](.env.example) to `.env` and load it in your
 shell (`set -a; . ./.env; set +a`).
 
+Every example targets the production API by default. To point one at a different
+base URL, set `FASTPIX_BASE_URL`; when it is unset the
+examples use the SDK's default server.
+
 The SDK (`io.fastpix:sdk`) is pulled from Maven Central automatically — there's
 nothing else to install or build first.
 
@@ -39,19 +43,19 @@ reuse.
 
 ## Examples
 
-| Example | What it chains |
-| --- | --- |
-| [`DirectUploadExample`](src/main/java/com/fastpix/example/DirectUploadExample.java) | create signed upload URL → list uploads → cancel upload |
-| [`MediaLifecycleExample`](src/main/java/com/fastpix/example/MediaLifecycleExample.java) | create media → get → list → update → source-access → delete |
-| [`MediaTracksExample`](src/main/java/com/fastpix/example/MediaTracksExample.java) | add an audio track → add a subtitle track (on a ready media) |
-| [`PlaybackIdsExample`](src/main/java/com/fastpix/example/PlaybackIdsExample.java) | create playback id → domain & user-agent restrictions → delete |
-| [`PlaylistsExample`](src/main/java/com/fastpix/example/PlaylistsExample.java) | create → add/reorder/remove media → get/list → update → delete |
-| [`LiveStreamingExample`](src/main/java/com/fastpix/example/LiveStreamingExample.java) | create stream → playback id → update → disable/enable/complete → delete |
-| [`SimulcastingExample`](src/main/java/com/fastpix/example/SimulcastingExample.java) | create stream → add simulcast target → update → delete |
-| [`SigningKeysExample`](src/main/java/com/fastpix/example/SigningKeysExample.java) | create → list → get → delete a signing key |
-| [`AiFeaturesExample`](src/main/java/com/fastpix/example/AiFeaturesExample.java) | enable summary → chapters → moderation → named entities → read summary |
-| [`VideoViewDetailsExample`](src/main/java/com/fastpix/example/VideoViewDetailsExample.java) | fetch analytics for a single view |
-| [`VerifyWebhookExample`](src/main/java/com/fastpix/example/VerifyWebhookExample.java) | verify a `FastPix-Signature` webhook (offline, no API call) |
+| Example                                                                                     | What it chains                                                          |
+| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [`DirectUploadExample`](src/main/java/com/fastpix/example/DirectUploadExample.java)         | create signed upload URL → list uploads → cancel upload                 |
+| [`MediaLifecycleExample`](src/main/java/com/fastpix/example/MediaLifecycleExample.java)     | create media → get → list → update → source-access → delete             |
+| [`MediaTracksExample`](src/main/java/com/fastpix/example/MediaTracksExample.java)           | add an audio track → add a subtitle track (on a ready media)            |
+| [`PlaybackIdsExample`](src/main/java/com/fastpix/example/PlaybackIdsExample.java)           | create playback id → domain & user-agent restrictions → delete          |
+| [`PlaylistsExample`](src/main/java/com/fastpix/example/PlaylistsExample.java)               | create → add/reorder/remove media → get/list → update → delete          |
+| [`LiveStreamingExample`](src/main/java/com/fastpix/example/LiveStreamingExample.java)       | create stream → playback id → update → disable/enable/complete → delete |
+| [`SimulcastingExample`](src/main/java/com/fastpix/example/SimulcastingExample.java)         | create stream → add simulcast target → update → delete                  |
+| [`SigningKeysExample`](src/main/java/com/fastpix/example/SigningKeysExample.java)           | create → list → get → delete a signing key                              |
+| [`AiFeaturesExample`](src/main/java/com/fastpix/example/AiFeaturesExample.java)             | enable summary → chapters → moderation → named entities → read summary  |
+| [`VideoViewDetailsExample`](src/main/java/com/fastpix/example/VideoViewDetailsExample.java) | fetch analytics for a single view                                       |
+| [`VerifyWebhookExample`](src/main/java/com/fastpix/example/VerifyWebhookExample.java)       | verify a `FastPix-Signature` webhook (offline, no API call)             |
 
 ## Spring Boot project
 

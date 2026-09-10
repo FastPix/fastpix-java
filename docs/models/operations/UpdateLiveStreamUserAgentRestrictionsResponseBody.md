@@ -1,0 +1,11 @@
+# UpdateLiveStreamUserAgentRestrictionsResponseBody
+
+Successfully updated user-agent restrictions
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              | Example                                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `success`                                                                                                | *Optional\<Boolean>*                                                                                     | :heavy_minus_sign:                                                                                       | Shows the request status. Returns true for success and false for failure.                                | true                                                                                                     |
+| `data`                                                                                                   | [Optional\<UpdateLiveStreamUserAgentRestrictionsData>](../../models/operations/UpdateLiveStreamUserAgentRestrictionsData.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |                                                                                                          |

@@ -93,7 +93,7 @@ public class Application {
 
 | Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `request`                                                             | [CreatePlaylistRequest](../../models/shared/CreatePlaylistRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
+| `request`                                                             | [CreatePlaylistRequest](../../models/components/CreatePlaylistRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -391,6 +391,7 @@ package hello.world;
 // Import required classes from the FastPix SDK
 import java.lang.Exception;
 import java.util.List;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.fastpix.sdk.FastPixSDK;
 import io.fastpix.sdk.models.components.MediaIdsRequest;
 import io.fastpix.sdk.models.components.Security;
