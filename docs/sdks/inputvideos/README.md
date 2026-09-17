@@ -109,7 +109,7 @@ public class Application {
 
 | Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
 | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `request`                                                       | [CreateMediaRequest](../../models/shared/CreateMediaRequest.md) | :heavy_check_mark:                                              | The request object to use for the request.                      |
+| `request`                                                       | [CreateMediaRequest](../../models/components/CreateMediaRequest.md) | :heavy_check_mark:                                              | The request object to use for the request.                      |
 
 ### Response
 

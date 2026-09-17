@@ -124,7 +124,7 @@ Add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'io.fastpix:sdk:1.0.5'
+    implementation 'io.fastpix:sdk:1.1.0'
 }
 ```
 
@@ -136,7 +136,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.fastpix</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.0.5</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -430,11 +430,15 @@ public class Application {
                 .call();
         resFut.thenAccept(res -> {
             if (res.createMediaSuccessResponse().isPresent()) {
-                var mapper = JSON.getMapper();
-                mapper.enable(SerializationFeature.INDENT_OUTPUT);
-                System.out.println(mapper.writeValueAsString(res.createMediaSuccessResponse().get()));
+                try {
+                    var mapper = JSON.getMapper();
+                    mapper.enable(SerializationFeature.INDENT_OUTPUT);
+                    System.out.println(mapper.writeValueAsString(res.createMediaSuccessResponse().get()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        });
+        }).join();
     }
 }
 ```
@@ -518,6 +522,8 @@ For detailed documentation, see [FastPix Live Stream Overview](https://fastpix.c
 - [Create Playback ID](docs/sdks/liveplayback/README.md#createplaybackid) - Generate secure live playback access
 - [Delete Playback ID](docs/sdks/liveplayback/README.md#deleteplaybackid) - Revoke live playback access
 - [Get Playback ID](docs/sdks/liveplaybacks/README.md#getplaybackiddetails) - Retrieve live playback configuration
+- [Update Domain Restrictions](docs/sdks/liveplayback/README.md#updatedomainrestrictions) - Allow or deny playback by domain
+- [Update User-Agent Restrictions](docs/sdks/liveplayback/README.md#updateuseragentrestrictions) - Allow or deny playback by user agent
 
 #### Simulcast Stream
 - [Create Simulcast](docs/sdks/simulcaststream/README.md#create) - Set up multi-platform streaming
@@ -771,10 +777,10 @@ public class Application {
             // Base exception fields
             var rawResponse = ex.rawResponse();
             var headers = ex.headers();
-            var contentType = headers.getOrDefault("Content-Type", List.of()).stream().findFirst();
+            var contentType = headers.get("Content-Type").stream().findFirst();
             int statusCode = ex.code();
             Optional<byte[]> responseBody = ex.body();
-            String bodyAsString = ex.bodyAsString();
+            Optional<String> bodyAsString = ex.bodyAsString();
         } catch (UncheckedIOException ex) {
             // handle IO error (connection, timeout, etc)
         }
@@ -787,8 +793,7 @@ public class Application {
 ### Error Classes
 
 **Primary error:**
-* [`FastpixException`](https://github.com/FastPix/fastpix-java/blob/main/src/main/java/io/fastpix/sdk/models/errors/FastpixException.java): The base class for HTTP error responses.
-
+*  [`FastpixException`](./src/main/java/io/fastpix/sdk/models/errors/FastpixException.java): The base class for HTTP error responses.
 <details><summary>Less common errors</summary>
 
 <br />

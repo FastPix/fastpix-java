@@ -38,6 +38,7 @@ public class SimulcastingExample {
                         .username(System.getenv("FASTPIX_USERNAME"))
                         .password(System.getenv("FASTPIX_PASSWORD"))
                         .build())
+                .serverURL(System.getenv("FASTPIX_BASE_URL") != null ? System.getenv("FASTPIX_BASE_URL") : FastPixSDK.SERVERS[0])
                 .build();
 
         ObjectMapper mapper = JSON.getMapper().enable(SerializationFeature.INDENT_OUTPUT);

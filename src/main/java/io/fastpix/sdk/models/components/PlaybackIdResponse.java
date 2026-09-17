@@ -28,16 +28,25 @@ public class PlaybackIdResponse {
     @JsonProperty("accessPolicy")
     private String accessPolicy;
 
+    /**
+     * Domain and user-agent access restrictions applied to the playback ID.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("accessRestrictions")
+    private PlaybackIdAccessRestrictions accessRestrictions;
+
     @JsonCreator
     public PlaybackIdResponse(
             @JsonProperty("id") @Nullable String id,
-            @JsonProperty("accessPolicy") @Nullable String accessPolicy) {
+            @JsonProperty("accessPolicy") @Nullable String accessPolicy,
+            @JsonProperty("accessRestrictions") @Nullable PlaybackIdAccessRestrictions accessRestrictions) {
         this.id = id;
         this.accessPolicy = accessPolicy;
+        this.accessRestrictions = accessRestrictions;
     }
     
     public PlaybackIdResponse() {
-        this(null, null);
+        this(null, null, null);
     }
 
     /**
@@ -52,6 +61,13 @@ public class PlaybackIdResponse {
      */
     public Optional<String> accessPolicy() {
         return Optional.ofNullable(this.accessPolicy);
+    }
+
+    /**
+     * Domain and user-agent access restrictions applied to the playback ID.
+     */
+    public Optional<PlaybackIdAccessRestrictions> accessRestrictions() {
+        return Optional.ofNullable(this.accessRestrictions);
     }
 
     public static Builder builder() {
@@ -77,6 +93,14 @@ public class PlaybackIdResponse {
     }
 
 
+    /**
+     * Domain and user-agent access restrictions applied to the playback ID.
+     */
+    public PlaybackIdResponse withAccessRestrictions(@Nullable PlaybackIdAccessRestrictions accessRestrictions) {
+        this.accessRestrictions = accessRestrictions;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -88,20 +112,22 @@ public class PlaybackIdResponse {
         PlaybackIdResponse other = (PlaybackIdResponse) o;
         return 
             Utils.enhancedDeepEquals(this.id, other.id) &&
-            Utils.enhancedDeepEquals(this.accessPolicy, other.accessPolicy);
+            Utils.enhancedDeepEquals(this.accessPolicy, other.accessPolicy) &&
+            Utils.enhancedDeepEquals(this.accessRestrictions, other.accessRestrictions);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            id, accessPolicy);
+            id, accessPolicy, accessRestrictions);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PlaybackIdResponse.class,
                 "id", id,
-                "accessPolicy", accessPolicy);
+                "accessPolicy", accessPolicy,
+                "accessRestrictions", accessRestrictions);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -110,6 +136,8 @@ public class PlaybackIdResponse {
         private String id;
 
         private String accessPolicy;
+
+        private PlaybackIdAccessRestrictions accessRestrictions;
 
         private Builder() {
           // force use of static builder() method
@@ -131,9 +159,17 @@ public class PlaybackIdResponse {
             return this;
         }
 
+        /**
+         * Domain and user-agent access restrictions applied to the playback ID.
+         */
+        public Builder accessRestrictions(@Nullable PlaybackIdAccessRestrictions accessRestrictions) {
+            this.accessRestrictions = accessRestrictions;
+            return this;
+        }
+
         public PlaybackIdResponse build() {
             return new PlaybackIdResponse(
-                id, accessPolicy);
+                id, accessPolicy, accessRestrictions);
         }
 
     }

@@ -34,7 +34,7 @@ import { spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import yaml from "js-yaml";
+import { load as loadYaml } from "js-yaml";
 
 const require = createRequire(import.meta.url);
 const openapiResponseValidatorMod = require("openapi-response-validator");
@@ -197,7 +197,7 @@ async function waitForTrackReady(
 function resolveSpecPath(): string {
   const candidates = [
     process.env.FASTPIX_OPENAPI_SPEC,
-    join(__dirname, "../fixed 7.yaml"),
+    join(__dirname, "../openapi.yaml"),
     join(__dirname, "../fastpix.yaml"),
     join(__dirname, "../fixed.yaml"),
     join(__dirname, "../fastpix-openapi.yaml"),
@@ -208,7 +208,7 @@ function resolveSpecPath(): string {
 }
 
 function loadOpenAPISpec(): any {
-  return yaml.load(readFileSync(resolveSpecPath(), "utf-8"));
+  return loadYaml(readFileSync(resolveSpecPath(), "utf-8"));
 }
 
 function extractNonGetEndpoints(spec: any): Map<string, EndpointInfo> {
@@ -338,6 +338,8 @@ const STEPS: Step[] = [
   { operationId: "add-media-to-playlist", phase: "UPDATE", needs: ["playlistId", "mediaId"], request: (c) => ({ playlistId: c.playlistId, mediaId: c.mediaId }) },
   { operationId: "change-media-order-in-playlist", phase: "UPDATE", needs: ["playlistId", "mediaId"], request: (c) => ({ playlistId: c.playlistId, mediaId: c.mediaId }) },
   { operationId: "update-live-stream", phase: "UPDATE", needs: ["streamId"], request: (c) => ({ streamId: c.streamId }) },
+  { operationId: "update-live-stream-domain-restrictions", phase: "UPDATE", needs: ["streamId", "streamPlaybackId"], request: (c) => ({ streamId: c.streamId, playbackId: c.streamPlaybackId }) },
+  { operationId: "update-live-stream-user-agent-restrictions", phase: "UPDATE", needs: ["streamId", "streamPlaybackId"], request: (c) => ({ streamId: c.streamId, playbackId: c.streamPlaybackId }) },
   { operationId: "update-specific-simulcast-of-stream", phase: "UPDATE", needs: ["streamId", "simulcastId"], request: (c) => ({ streamId: c.streamId, simulcastId: c.simulcastId }) },
   // a freshly-created stream is already enabled, so disable first, then enable.
   { operationId: "disable-live-stream", phase: "UPDATE", needs: ["streamId"], request: (c) => ({ streamId: c.streamId }) },

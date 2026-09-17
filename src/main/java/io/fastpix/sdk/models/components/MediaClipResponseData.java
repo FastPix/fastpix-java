@@ -20,11 +20,11 @@ public class MediaClipResponseData {
     private String id;
 
     /**
-     * Duration of the media in HH:MM:SS format.
+     * Duration of the media in seconds.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private String duration;
+    private Double duration;
 
     /**
      * The current processing status of the media.
@@ -55,7 +55,7 @@ public class MediaClipResponseData {
     @JsonCreator
     public MediaClipResponseData(
             @JsonProperty("id") @Nullable String id,
-            @JsonProperty("duration") @Nullable String duration,
+            @JsonProperty("duration") @Nullable Double duration,
             @JsonProperty("status") @Nullable MediaClipResponseStatus status,
             @JsonProperty("thumbnail") @Nullable String thumbnail,
             @JsonProperty("createdAt") @Nullable OffsetDateTime createdAt,
@@ -81,9 +81,9 @@ public class MediaClipResponseData {
     }
 
     /**
-     * Duration of the media in HH:MM:SS format.
+     * Duration of the media in seconds.
      */
-    public Optional<String> duration() {
+    public Optional<Double> duration() {
         return Optional.ofNullable(this.duration);
     }
 
@@ -127,9 +127,9 @@ public class MediaClipResponseData {
 
 
     /**
-     * Duration of the media in HH:MM:SS format.
+     * Duration of the media in seconds.
      */
-    public MediaClipResponseData withDuration(@Nullable String duration) {
+    public MediaClipResponseData withDuration(@Nullable Double duration) {
         this.duration = duration;
         return this;
     }
@@ -209,7 +209,7 @@ public class MediaClipResponseData {
 
         private String id;
 
-        private String duration;
+        private Double duration;
 
         private MediaClipResponseStatus status;
 
@@ -232,9 +232,9 @@ public class MediaClipResponseData {
         }
 
         /**
-         * Duration of the media in HH:MM:SS format.
+         * Duration of the media in seconds.
          */
-        public Builder duration(@Nullable String duration) {
+        public Builder duration(@Nullable Double duration) {
             this.duration = duration;
             return this;
         }
